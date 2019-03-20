@@ -11,9 +11,11 @@ Step1_1::Step1_1(QWidget *parent) :
     ui(new Ui::Step1_1)
 {
     ui->setupUi(this);
+    int RowNum=10;
+    int ColumnNum=4;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
-        ui->qTableWidget->setColumnCount(4);//设置列数
-       ui->qTableWidget->setRowCount(10);//设置行数
+        ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
+       ui->qTableWidget->setRowCount(RowNum);//设置行数
        //table->setRowCount(RowCount+1);
         //ui->qTableWidget->setRowCount(row_count+1); ;//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
@@ -31,9 +33,9 @@ Step1_1::Step1_1(QWidget *parent) :
         ui->qTableWidget->setStyleSheet("selection-background-color:green");//设置选中颜色：粉色
         setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
-        for(int rows=0;rows<10;rows++)
+        for(int rows=0;rows<RowNum;rows++)
         {
-            for(int columns=0;columns<4;columns++)
+            for(int columns=0;columns<ColumnNum;columns++)
             {
                 if(columns==0)
                 {
@@ -53,12 +55,12 @@ Step1_1::Step1_1(QWidget *parent) :
                 }
             }
         }
-        for(int rows=0;rows<10;rows++)
+        for(int rows=0;rows<RowNum;rows++)
         {
-            for(int columns=0;columns<4;columns++)
+            for(int columns=0;columns<ColumnNum;columns++)
             {
-                ui->qTableWidget->setColumnWidth(columns,200);//hangkuan
-            ui->qTableWidget->setRowHeight(rows,35);//列宽
+                ui->qTableWidget->setColumnWidth(columns,755/ColumnNum);//hangkuan
+            ui->qTableWidget->setRowHeight(rows,395/RowNum);//列宽
                 //ui->qTableWidget->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
                 ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
                 ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(85,170,255));//设置前景颜色
@@ -86,7 +88,7 @@ Step1_1::Step1_1(QWidget *parent) :
         //HStrList.push_back(QString("other"));
         //设置行列数(只有列存在的前提下，才可以设置列标签)
         int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(10);//
+        ui->qTableWidget->setRowCount(RowNum);//
         ui->qTableWidget->setColumnCount(HlableCnt);
         //设置列标签
         ui->qTableWidget->setHorizontalHeaderLabels(HStrList);

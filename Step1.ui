@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1395</width>
+    <width>1544</width>
     <height>610</height>
    </rect>
   </property>
@@ -16,10 +16,10 @@
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>0</y>
-     <width>931</width>
-     <height>601</height>
+     <x>510</x>
+     <y>10</y>
+     <width>751</width>
+     <height>451</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -31,39 +31,30 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>463</width>
-     <height>601</height>
+     <x>10</x>
+     <y>10</y>
+     <width>481</width>
+     <height>451</height>
     </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-image: url(:/new/prefix1/qfd1.jpg);</string>
    </property>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>350</y>
-      <width>51</width>
-      <height>23</height>
+      <x>61</x>
+      <y>190</y>
+      <width>72</width>
+      <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei UI</family>
+      <pointsize>22</pointsize>
+      <stylestrategy>PreferAntialias</stylestrategy>
+     </font>
     </property>
     <property name="text">
      <string>VE</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>90</y>
-      <width>231</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Step1：点击按钮输入价值指标及期望</string>
     </property>
    </widget>
   </widget>

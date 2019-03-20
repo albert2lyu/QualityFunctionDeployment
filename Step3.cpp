@@ -10,7 +10,7 @@ Step3::Step3(QWidget *parent) :
     Step3_2_Page=new Step3_2(this);
     ui->stackedWidget->addWidget(Step3_1_Page);
     ui->stackedWidget->addWidget(Step3_2_Page);
-
+    setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
 }
 

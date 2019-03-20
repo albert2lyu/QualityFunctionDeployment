@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "Step1_1.h"
 #include "Step1_2.h"
+#include<QPainter>
+#include<QPen>
 namespace Ui {
 class Step1;
 }
@@ -14,6 +16,7 @@ class Step1 : public QWidget
 
 public:
     explicit Step1(QWidget *parent = 0);
+         void paintEvent(QPaintEvent *);
     ~Step1();
 private slots:
     void on_pushButton_clicked();
