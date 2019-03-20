@@ -24,12 +24,14 @@ protected:
     void mousePressEvent(QMouseEvent *);
     void mouseReleaseEvent(QMouseEvent *);
 
+
 private:
     QList<QString> listItems;
     QString backgroundColor;
     QString selectedColor;
     int rowHeight;
     int currentIndex;
+    int currentIndex2;
 
 signals:
     void currentItemChanged(const int &index);

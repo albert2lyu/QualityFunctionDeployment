@@ -8,6 +8,7 @@ QNavigationWidget::QNavigationWidget(QWidget *parent) : QWidget(parent)
     selectedColor = "#2CA7F8";
     rowHeight = 30;
     currentIndex = 0;
+    currentIndex2 = 0;
 
     setMouseTracking(true);
     setFixedWidth(150);
@@ -73,8 +74,19 @@ void QNavigationWidget::paintEvent(QPaintEvent *)
             painter.setPen("#202020");
             painter.fillPath(itemPath, QColor(backgroundColor));
         }
-
         painter.drawText(QRect(0, count * rowHeight, width(), rowHeight), Qt::AlignVCenter | Qt::AlignHCenter, str);
+        QString Str2;
+        if(currentIndex2==9)
+        {
+            Str2="Step10";
+        }
+        else{
+            Str2="Step";
+            Str2.append((char)(currentIndex2+49));
+        }
+        painter.fillRect(QRect(0, currentIndex2 * rowHeight, width(), rowHeight), QColor("#56cff2"));
+        painter.drawText(QRect(0, currentIndex2 * rowHeight, width(), rowHeight), Qt::AlignVCenter | Qt::AlignHCenter, Str2);
+
 
         ++count;
     }
@@ -82,10 +94,15 @@ void QNavigationWidget::paintEvent(QPaintEvent *)
 
 void QNavigationWidget::mouseMoveEvent(QMouseEvent *e)
 {
+    QPainter painter(this);
     if (e->y() / rowHeight < listItems.count()) {
-        // qDebug() << e->y() / rowHeight;
+        currentIndex2 = e->y() / rowHeight;
+
+        qDebug("%d",currentIndex2);
+        update();
     }
 }
+
 
 void QNavigationWidget::mousePressEvent(QMouseEvent *e)
 {
