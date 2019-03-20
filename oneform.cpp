@@ -12,7 +12,7 @@ OneForm::OneForm(QWidget *parent) :
     ui->stackedWidget->addWidget(TableOneForm_Page);
     ui->stackedWidget->addWidget(TableTwoForm_Page);
     //ui->stackedWidget->setCurrentWidget(TableOneForm_Page);
-    setStyleSheet(QString::fromUtf8("border:3px solid black"));
+    setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 
 OneForm::~OneForm()

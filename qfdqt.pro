@@ -37,7 +37,9 @@ SOURCES += \
     nineform.cpp \
     tenform.cpp \
     tableoneform.cpp \
-    tabletwoform.cpp
+    tabletwoform.cpp \
+    tablethree2form.cpp \
+    tablethreeform.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,10 +54,12 @@ HEADERS += \
     nineform.h \
     tenform.h \
     tableoneform.h \
-    tabletwoform.h
+    tabletwoform.h \
+    tablethree2form.h \
+    tablethreeform.h
 
 FORMS += \
-        mainwindow.ui \
+    mainwindow.ui \
     oneform.ui \
     twoform.ui \
     threeform.ui \
@@ -68,9 +72,25 @@ FORMS += \
     tenform.ui \
     tableoneform.ui \
     tabletwoform.ui \
+    tablethree2form.ui \
+    tablethreeform.ui
+
 
 RESOURCES += \
-    qttu.qrc
+    qttu.qrc \
+    tu.qrc
 CONFIG += \
     qaxcontainer #excel
+
+SUBDIRS += \
+    qfdqt.pro
+
+DISTFILES += \
+    qfdqt.pro.user \
+    qfd1.jpg \
+    qfdjt.jpg \
+    qfdjt2.jpg \
+    qfdjt3.jpg \
+    qfdjt4.jpg \
+    README.md
 

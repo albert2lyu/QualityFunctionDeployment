@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->addWidget(NineForm_Page);
     ui->stackedWidget->addWidget(TenForm_Page);
     //ui->stackedWidget->setCurrentWidget(OneForm_Page);
-    setStyleSheet(QString::fromUtf8("border:3px solid black"));
+    setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 
     MainWindow::~MainWindow()
@@ -145,6 +145,6 @@ void MainWindow::on_listWidget_clicked()
     {
         ui->stackedWidget->setCurrentWidget(TenForm_Page);
     }
-    setStyleSheet(QString::fromUtf8("border:3px solid black"));
+    setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 
