@@ -6,6 +6,11 @@ Step2::Step2(QWidget *parent) :
     ui(new Ui::Step2)
 {
     ui->setupUi(this);
+    //setStyleSheet(QString::fromUtf8("border:1px solid black"));
+    Step2_1_Page=new Step2_1(this);
+    Step2_2_Page=new Step2_2(this);
+    ui->stackedWidget->addWidget(Step2_1_Page);
+    ui->stackedWidget->addWidget(Step2_2_Page);
     setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 void Step2::paintEvent(QPaintEvent *)
@@ -30,7 +35,7 @@ void Step2::paintEvent(QPaintEvent *)
     painter.setFont(font);
 
     painter.drawText(left+135,up+45-5,"自相关性");
-    painter.drawText(left+115,up+80-5,"全局质量参数");
+   // painter.drawText(left+115,up+80-5,"全局质量参数");
     painter.drawText(left+130-5,up+145-5,"相关性矩阵");
     painter.drawText(left+105-5,up+210-5,"质量参数的重要度");
     painter.drawText(left+95-5,up+251-5,"质量参数的配置方案");
@@ -44,4 +49,15 @@ void Step2::paintEvent(QPaintEvent *)
 Step2::~Step2()
 {
     delete ui;
+}
+
+
+void Step2::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(Step2_1_Page);
+}
+
+void Step2::on_pushButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(Step2_2_Page);
 }
