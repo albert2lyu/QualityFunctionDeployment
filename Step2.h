@@ -1,11 +1,11 @@
 #ifndef Step2_H
 #define Step2_H
 
-#include"Step2_1.h"
-#include"Step2_2.h"
 #include <QWidget>
 #include<QPainter>
 #include<QPen>
+#include"Step2_1.h"
+#include"Step2_2.h"
 namespace Ui {
 class Step2;
 }

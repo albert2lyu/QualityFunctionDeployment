@@ -40,6 +40,8 @@ SOURCES += \
     Step1_2.cpp \
     Step3_2.cpp \
     Step3_1.cpp \
+    Step2_2.cpp \
+    Step2_1.cpp \
     qnavigationwidget.cpp
 
 HEADERS += \
@@ -58,7 +60,9 @@ HEADERS += \
     Step1_2.h \
     Step3_2.h \
     Step3_1.h \
-    qnavigationwidget.h
+    qnavigationwidget.h \
+    Step2_1.h \
+    Step2_2.h
 
 FORMS += \
     mainwindow.ui \
@@ -75,7 +79,9 @@ FORMS += \
     Step1_1.ui \
     Step1_2.ui \
     Step3_2.ui \
-    Step3_1.ui
+    Step3_1.ui \
+    step2_1.ui \
+    step2_2.ui
 
 
 RESOURCES += \
