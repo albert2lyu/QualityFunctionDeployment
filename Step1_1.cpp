@@ -148,7 +148,7 @@ void Step1_1::on_pushButton_2_clicked()
 //将表格数据写入文件
 void Step1_1::on_pushButton_3_clicked()
 {
-    QString fileName = QFileDialog::getSaveFileName(0,tr("保存文件"),
+    QString fileName = QFileDialog::getSaveFileName(nullptr,tr("保存文件"),
                                                 tr("/root/Projects/product/bin/config/未命名.xls"),
                                                 tr("file(*.txt *.xls);;Allfile(*.*)"));
     if(!fileName.isEmpty())
@@ -210,18 +210,18 @@ void Step1_1::on_pushButton_3_clicked()
             out.flush();
             qDebug("saveTable end:::");
             file.close();       //关闭文件
-            QMessageBox::information(0,tr("提示"),tr("导出成功!"));
+            QMessageBox::information(nullptr,tr("提示"),tr("导出成功!"));
         }
     }
     else
     {
-        QMessageBox::warning(0,tr("警告"),tr("文件名未指定!"),QMessageBox::Ok);
+        QMessageBox::warning(nullptr,tr("警告"),tr("文件名未指定!"),QMessageBox::Ok);
     }
 }
 //将文件数据导入表格
 void Step1_1::on_pushButton_4_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(0, tr("导入文件"),
+    QString fileName = QFileDialog::getOpenFileName(nullptr, tr("导入文件"),
                                                 tr("/root/Projects/product/bin/config"),
                                                 tr("file(*.txt *.xls);;Allfile(*.*)"));
     if(!fileName.isEmpty())
@@ -239,7 +239,7 @@ void Step1_1::on_pushButton_4_clicked()
         {
             if(!file.size())
             {
-                QMessageBox::warning(0,tr("警告"),tr("文件大小为空!"),QMessageBox::Ok);
+                QMessageBox::warning(nullptr,tr("警告"),tr("文件大小为空!"),QMessageBox::Ok);
             }
             else
             {
@@ -275,14 +275,14 @@ void Step1_1::on_pushButton_4_clicked()
                             ui->qTableWidget->setItem(row-2, col, item);
                         }
                     }
-                    QMessageBox::information(0,tr("提示"),tr("导入成功!"));
+                    QMessageBox::information(nullptr,tr("提示"),tr("导入成功!"));
                 }
             }
         }
     }
     else
     {
-        QMessageBox::warning(0,tr("警告"),tr("文件名未指定!"),QMessageBox::Ok);
+        QMessageBox::warning(nullptr,tr("警告"),tr("文件名未指定!"),QMessageBox::Ok);
     }
 }
 
