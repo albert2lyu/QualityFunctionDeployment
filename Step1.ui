@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1544</width>
-    <height>610</height>
+    <width>1445</width>
+    <height>965</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>10</y>
-     <width>751</width>
-     <height>451</height>
+     <x>725</x>
+     <y>0</y>
+     <width>720</width>
+     <height>480</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -31,32 +31,64 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>481</width>
-     <height>451</height>
+     <x>0</x>
+     <y>0</y>
+     <width>720</width>
+     <height>480</height>
     </rect>
    </property>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>61</x>
-      <y>190</y>
-      <width>72</width>
-      <height>61</height>
+      <x>4</x>
+      <y>163</y>
+      <width>95</width>
+      <height>77</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Microsoft YaHei UI</family>
-      <pointsize>22</pointsize>
+      <pointsize>9</pointsize>
       <stylestrategy>PreferAntialias</stylestrategy>
      </font>
     </property>
     <property name="text">
-     <string>VE</string>
+     <string>确定利益相关者</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>4</x>
+      <y>241</y>
+      <width>95</width>
+      <height>77</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei UI</family>
+      <pointsize>9</pointsize>
+      <stylestrategy>PreferAntialias</stylestrategy>
+     </font>
+    </property>
+    <property name="text">
+     <string>收集价值期望</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>485</y>
+     <width>1445</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="page_3"/>
+   <widget class="QWidget" name="page_4"/>
   </widget>
  </widget>
  <resources/>

@@ -28,7 +28,7 @@ Step2_2::Step2_2(QWidget *parent) :
         for(int columns=0;columns<ColumnNum;columns++)
         {
             ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-            ui->qTableWidget->setColumnWidth(columns,691/ColumnNum);
+            ui->qTableWidget->setColumnWidth(columns,660/ColumnNum);
             ui->qTableWidget->setRowHeight(rows,335/RowNum);
             ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);
             ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));

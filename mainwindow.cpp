@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     rightLayout = new QVBoxLayout(rightWidget);
     mainLayout = new QHBoxLayout(mainWidget);
     navigationWidget = new QNavigationWidget;
-    rightWidget->setFixedWidth(1450 - navigationWidget->width());
+    rightWidget->setFixedWidth(1620 - navigationWidget->width());
     navigationWidget->setRowHeight(40);
     navigationWidget->addItem("Step1");
     navigationWidget->addItem("Step2");

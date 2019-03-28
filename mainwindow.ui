@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1380</width>
-    <height>1000</height>
+    <width>1620</width>
+    <height>990</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -23,10 +23,10 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>17</y>
-      <width>1271</width>
-      <height>511</height>
+      <x>165</x>
+      <y>15</y>
+      <width>1445</width>
+      <height>965</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -36,7 +36,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page"/>
     <widget class="QWidget" name="page_2"/>
@@ -48,22 +48,6 @@
     <widget class="QWidget" name="page_8"/>
     <widget class="QWidget" name="page_9"/>
     <widget class="QWidget" name="page_10"/>
-   </widget>
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>533</y>
-      <width>1281</width>
-      <height>408</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-      <horstretch>0</horstretch>
-      <verstretch>1</verstretch>
-     </sizepolicy>
-    </property>
    </widget>
   </widget>
   <action name="actionsave_as">
