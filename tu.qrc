@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/new/prefix1"/>
-    <qresource prefix="/">
-        <file>1.xlsx</file>
-    </qresource>
-    <qresource prefix="/xlsx"/>
-    <qresource prefix="/xls"/>
-</RCC>
