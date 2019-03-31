@@ -6,6 +6,7 @@
 
 QT       += core gui
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = qfdqt
@@ -42,7 +43,9 @@ SOURCES += \
     Step3_1.cpp \
     Step2_2.cpp \
     Step2_1.cpp \
-    qnavigationwidget.cpp
+    qnavigationwidget.cpp \
+    step1data.cpp \
+    excelengine.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -62,7 +65,9 @@ HEADERS += \
     Step3_1.h \
     qnavigationwidget.h \
     Step2_1.h \
-    Step2_2.h
+    Step2_2.h \
+    step1data.h \
+    excelengine.h
 
 FORMS += \
     mainwindow.ui \
@@ -81,11 +86,11 @@ FORMS += \
     Step3_2.ui \
     Step3_1.ui \
     step2_1.ui \
-    step2_2.ui
+    step2_2.ui \
+    step1data.ui
 
 
 RESOURCES += \
-    qttu.qrc \
     tu.qrc
 CONFIG += \
     qaxcontainer #excel

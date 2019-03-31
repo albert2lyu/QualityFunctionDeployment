@@ -7,7 +7,10 @@
 #include <QString>
 #include <QDebug>
 #include <QTableWidget>
-
+#include <QPainter>
+#include<QAxObject>
+#include <QDesktopServices>
+#include<excelengine.h>
 namespace Ui {
 class Step1_1;
 }
@@ -17,7 +20,8 @@ class Step1_1 : public QWidget
     Q_OBJECT
 
 public:
-    explicit Step1_1(QWidget *parent = 0);
+    explicit Step1_1(QWidget *parent = nullptr);
+
     ~Step1_1();
 private slots:
     void on_pushButton_clicked();
@@ -27,6 +31,8 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
+    void on_pushButton_5_clicked();
+
 
 
 
