@@ -13,7 +13,7 @@ Step1_1::Step1_1(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    int RowNum=10;
+    int RowNum=6;
     int ColumnNum=4;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
@@ -32,7 +32,7 @@ Step1_1::Step1_1(QWidget *parent) :
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
         //ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);//设置表格选择方式：设置表格为整列选中
         ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
-        ui->qTableWidget->setStyleSheet("selection-background-color:green");//设置选中颜色：粉色
+        ui->qTableWidget->setStyleSheet("selection-background-color:black");//设置选中颜色：粉色
         setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
         for(int rows=0;rows<RowNum;rows++)
@@ -65,7 +65,7 @@ Step1_1::Step1_1(QWidget *parent) :
             ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
                 //ui->qTableWidget->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
                 ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
-                ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(85,170,255));//设置前景颜色
+                ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
                 ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
                 ui->qTableWidget->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
             }
@@ -83,10 +83,10 @@ Step1_1::Step1_1(QWidget *parent) :
 
         //设置列标签
         QStringList HStrList;
-        HStrList.push_back(QString("指标序号"));
-        HStrList.push_back(QString("价值指标"));
-        HStrList.push_back(QString("关系符号"));
+        HStrList.push_back(QString("价值指标名称"));
+        HStrList.push_back(QString("操作符"));
         HStrList.push_back(QString("期望值"));
+        HStrList.push_back(QString("利益相关者"));
         //HStrList.push_back(QString("other"));
         //设置行列数(只有列存在的前提下，才可以设置列标签)
         int HlableCnt = HStrList.count();

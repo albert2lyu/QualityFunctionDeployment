@@ -63,10 +63,16 @@ Step2::~Step2()
 
 void Step2::on_pushButton_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(Step2_1_Page);
+    ui->stackedWidget->setCurrentWidget(Step1_1_Page);
 }
 
 void Step2::on_pushButton_2_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(Step2_2_Page);
+    ui->stackedWidget->setCurrentWidget(Step1_2_Page);
 }
+
+void Step2::on_pushButton_3_clicked()
+{
+    ui->stackedWidget_2->setCurrentWidget(Step1Data_Page);
+}
+

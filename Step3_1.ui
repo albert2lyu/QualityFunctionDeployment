@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>751</width>
-    <height>442</height>
+    <width>745</width>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,102 +16,76 @@
   <widget class="QTableWidget" name="qTableWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>60</y>
-     <width>481</width>
-     <height>361</height>
+     <x>0</x>
+     <y>30</y>
+     <width>741</width>
+     <height>381</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>60</y>
-     <width>140</width>
+     <x>0</x>
+     <y>0</y>
+     <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>增加</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>100</y>
-     <width>140</width>
+     <x>70</x>
+     <y>0</y>
+     <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>删除</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>140</y>
-     <width>140</width>
+     <x>140</x>
+     <y>0</y>
+     <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>导出</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>180</y>
-     <width>140</width>
+     <x>210</x>
+     <y>0</y>
+     <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>导入</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>220</y>
-     <width>140</width>
+     <x>280</x>
+     <y>0</y>
+     <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>10</y>
-     <width>371</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>20</pointsize>
-     <stylestrategy>PreferAntialias</stylestrategy>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="text">
-    <string>竞争性矩阵</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <string>保存</string>
    </property>
   </widget>
  </widget>

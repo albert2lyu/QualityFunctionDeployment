@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "Step1_1.h"
 #include "Step1_2.h"
-#include "step1data.h"
+#include "Step1data.h"
 #include<QPainter>
 #include<QPen>
 namespace Ui {

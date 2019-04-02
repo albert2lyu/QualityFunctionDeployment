@@ -18,7 +18,6 @@ Step1::Step1(QWidget *parent) :
     //ui->stackedWidget->setCurrentWidget(Step1_1_Page);
    // setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
-
 void Step1::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -79,5 +78,4 @@ void Step1::on_pushButton_2_clicked()
 void Step1::on_pushButton_3_clicked()
 {
     ui->stackedWidget_2->setCurrentWidget(Step1Data_Page);
-    qDebug() << "a" << endl;
 }

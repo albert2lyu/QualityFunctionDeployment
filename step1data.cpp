@@ -1,5 +1,5 @@
-#include "step1data.h"
-#include "ui_step1data.h"
+#include "Step1data.h"
+#include "ui_Step1data.h"
 #include "Step1_1.h"
 #include<QPixmapCache>
 

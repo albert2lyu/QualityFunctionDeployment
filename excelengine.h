@@ -1,3 +1,5 @@
+#ifndef _EXCELENGINE_H_
+#define _EXCELENGINE_H_
 #include <QFile>
 #include <QMessageBox>
 #include <QString>
@@ -50,3 +52,4 @@ private:
     bool bIsANewFile;
     bool bIsSaveAlready;
 };
+#endif

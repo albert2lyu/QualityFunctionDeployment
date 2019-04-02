@@ -44,8 +44,24 @@ SOURCES += \
     Step2_2.cpp \
     Step2_1.cpp \
     qnavigationwidget.cpp \
-    step1data.cpp \
-    excelengine.cpp
+    Step1data.cpp \
+    excelengine.cpp \
+    Step4_1.cpp \
+    Step5_1.cpp \
+    Step6_1.cpp \
+    Step7_1.cpp \
+    Step9_1.cpp \
+    Step10_1.cpp \
+    Step8_1.cpp \
+    Step2Data.cpp \
+    Step3Data.cpp \
+    Step4Data.cpp \
+    Step5Data.cpp \
+    Step6Data.cpp \
+    Step7Data.cpp \
+    Step8Data.cpp \
+    Step9Data.cpp \
+    Step10Data.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -66,8 +82,24 @@ HEADERS += \
     qnavigationwidget.h \
     Step2_1.h \
     Step2_2.h \
-    step1data.h \
-    excelengine.h
+    Step1data.h \
+    excelengine.h \
+    Step5_1.h \
+    Step6_1.h \
+    Step7_1.h \
+    Step8_1.h \
+    Step9_1.h \
+    Step10_1.h \
+    Step4_1.h \
+    Step2Data.h \
+    Step3Data.h \
+    Step4Data.h \
+    Step5Data.h \
+    Step6Data.h \
+    Step7Data.h \
+    Step8Data.h \
+    Step9Data.h \
+    Step10Data.h
 
 FORMS += \
     mainwindow.ui \
@@ -85,13 +117,28 @@ FORMS += \
     Step1_2.ui \
     Step3_2.ui \
     Step3_1.ui \
-    step2_1.ui \
-    step2_2.ui \
-    step1data.ui
+    Step2_1.ui \
+    Step2_2.ui \
+    Step1data.ui \
+    Step4_1.ui \
+    Step5_1.ui \
+    Step6_1.ui \
+    Step7_1.ui \
+    Step8_1.ui \
+    Step9_1.ui \
+    Step10_1.ui \
+    Step2Data.ui \
+    Step3Data.ui \
+    Step4Data.ui \
+    Step5Data.ui \
+    Step6Data.ui \
+    Step7Data.ui \
+    Step8Data.ui \
+    Step9Data.ui \
+    Step10Data.ui
 
 
-RESOURCES += \
-    tu.qrc
+
 CONFIG += \
     qaxcontainer #excel
 

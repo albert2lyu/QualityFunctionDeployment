@@ -43,7 +43,7 @@
       <x>4</x>
       <y>163</y>
       <width>95</width>
-      <height>77</height>
+      <height>154</height>
      </rect>
     </property>
     <property name="font">
@@ -54,27 +54,7 @@
      </font>
     </property>
     <property name="text">
-     <string>确定利益相关者</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>4</x>
-      <y>241</y>
-      <width>95</width>
-      <height>77</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei UI</family>
-      <pointsize>9</pointsize>
-      <stylestrategy>PreferAntialias</stylestrategy>
-     </font>
-    </property>
-    <property name="text">
-     <string>收集价值期望</string>
+     <string>1</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">

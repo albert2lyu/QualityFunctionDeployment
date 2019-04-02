@@ -54,3 +54,17 @@ Step8::~Step8()
 {
     delete ui;
 }
+void Step8::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(Step1_1_Page);
+}
+
+void Step8::on_pushButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(Step1_2_Page);
+}
+
+void Step8::on_pushButton_3_clicked()
+{
+    ui->stackedWidget_2->setCurrentWidget(Step1Data_Page);
+}
