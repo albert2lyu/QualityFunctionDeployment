@@ -8,6 +8,10 @@ Step9::Step9(QWidget *parent) :
     ui->setupUi(this);
     Step9_1_Page = new Step9_1(this);//实例化窗口页面
     ui->stackedWidget->addWidget(Step9_1_Page);
+    Step9_2_Page = new Step9_2(this);//实例化窗口页面
+    ui->stackedWidget->addWidget(Step9_2_Page);
+    Step9_3_Page = new Step9_3(this);//实例化窗口页面
+    ui->stackedWidget->addWidget(Step9_3_Page);
     Step9Data_Page = new Step9Data(this);
     ui->stackedWidget_2->addWidget(Step9Data_Page);
   //  setStyleSheet(QString::fromUtf8("border:1px solid black"));
@@ -66,10 +70,14 @@ void Step9::on_pushButton_clicked()
 
 void Step9::on_pushButton_2_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(Step9_1_Page);
+    ui->stackedWidget->setCurrentWidget(Step9_2_Page);
 }
 
 void Step9::on_pushButton_3_clicked()
 {
     ui->stackedWidget_2->setCurrentWidget(Step9Data_Page);
+}
+void Step9::on_pushButton_4_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(Step9_3_Page);
 }

@@ -61,7 +61,11 @@ SOURCES += \
     Step7Data.cpp \
     Step8Data.cpp \
     Step9Data.cpp \
-    Step10Data.cpp
+    Step10Data.cpp \
+    Step6_2.cpp \
+    Step7_2.cpp \
+    Step9_2.cpp \
+    Step9_3.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -99,7 +103,11 @@ HEADERS += \
     Step7Data.h \
     Step8Data.h \
     Step9Data.h \
-    Step10Data.h
+    Step10Data.h \
+    Step6_2.h \
+    Step7_2.h \
+    Step9_2.h \
+    Step9_3.h
 
 FORMS += \
     mainwindow.ui \
@@ -135,7 +143,11 @@ FORMS += \
     Step7Data.ui \
     Step8Data.ui \
     Step9Data.ui \
-    Step10Data.ui
+    Step10Data.ui \
+    Step6_2.ui \
+    Step7_2.ui \
+    Step9_2.ui \
+    Step9_3.ui
 
 
 

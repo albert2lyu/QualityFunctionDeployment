@@ -8,6 +8,8 @@ Step4::Step4(QWidget *parent) :
     ui->setupUi(this);
     Step4_1_Page = new Step4_1(this);//实例化窗口页面
     ui->stackedWidget->addWidget(Step4_1_Page);
+   // Step4_2_Page = new Step4_2(this);//实例化窗口页面
+   // ui->stackedWidget->addWidget(Step4_2_Page);
     Step4Data_Page = new Step4Data(this);
     ui->stackedWidget_2->addWidget(Step4Data_Page);
    // setStyleSheet(QString::fromUtf8("border:1px solid black"));
