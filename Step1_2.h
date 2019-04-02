@@ -12,7 +12,7 @@ class Step1_2 : public QWidget
     Q_OBJECT
 
 public:
-    explicit Step1_2(QWidget *parent = 0);
+    explicit Step1_2(QWidget *parent = nullptr);
     ~Step1_2();
 
 private:

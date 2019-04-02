@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "Step1_1.h"
 #include "Step1_2.h"
-#include "Step1data.h"
+#include "Step1Data.h"
 #include<QPainter>
 #include<QPen>
 namespace Ui {
@@ -16,7 +16,7 @@ class Step1 : public QWidget
     Q_OBJECT
 
 public:
-    explicit Step1(QWidget *parent = 0);
+    explicit Step1(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
     ~Step1();
 private slots:

@@ -16,7 +16,7 @@ class Step7 : public QWidget
     Q_OBJECT
 
 public:
-    explicit Step7(QWidget *parent = 0);
+    explicit Step7(QWidget *parent = nullptr);
          void paintEvent(QPaintEvent *);
     ~Step7();
 private slots:

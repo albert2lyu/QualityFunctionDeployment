@@ -32,7 +32,7 @@ Step10_1::Step10_1(QWidget *parent) :
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
         //ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);//设置表格选择方式：设置表格为整列选中
         ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
-        ui->qTableWidget->setStyleSheet("selection-background-color:black");//设置选中颜色：粉色
+        ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
         setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
         for(int rows=0;rows<RowNum;rows++)
@@ -214,7 +214,7 @@ void Step10_1::on_pushButton_5_clicked()
   QFile file(filename);
        if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
        {
-        QMessageBox::critical(NULL,"提示","无法创建文件");
+        QMessageBox::critical(nullptr,"提示","无法创建文件");
         return;
 
         }

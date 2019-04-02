@@ -1,5 +1,5 @@
 #include "Step1data.h"
-#include "ui_Step1data.h"
+#include "ui_Step1Data.h"
 #include "Step1_1.h"
 #include<QPixmapCache>
 
@@ -28,7 +28,7 @@ Step1Data::Step1Data(QWidget *parent) :
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
         //ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);//设置表格选择方式：设置表格为整列选中
         ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
-        ui->qTableWidget->setStyleSheet("selection-background-color:green");//设置选中颜色：粉色
+        ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
         setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
         for(int rows=0;rows<RowNum;rows++)
@@ -111,8 +111,6 @@ Step1Data::~Step1Data()
     delete ui;
 }
 void Step1Data::on_pushButton_clicked(){
-
-
 
         //从Excel中将表格导入到TableWidget
        QExcelEngine excelEngine=*new QExcelEngine();

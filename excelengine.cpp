@@ -3,10 +3,10 @@
 
 QExcelEngine::QExcelEngine()
 {
-    pExcel     = NULL;
-    pWorkbooks = NULL;
-    pWorkbook  = NULL;
-    pWorksheet = NULL;
+    pExcel     = nullptr;
+    pWorkbooks = nullptr;
+    pWorkbook  = nullptr;
+    pWorksheet = nullptr;
 
     sXlsFile     = "";
     nRowCount    = 0;
@@ -19,7 +19,7 @@ QExcelEngine::QExcelEngine()
     bIsANewFile = false;
     bIsSaveAlready = false;
 
-    HRESULT r = OleInitialize(0);
+    HRESULT r = OleInitialize(nullptr);
     if (r != S_OK && r != S_FALSE)
     {
         qDebug("Qt: Could not initialize OLE (error %x)", (unsigned int)r);
@@ -28,10 +28,10 @@ QExcelEngine::QExcelEngine()
 
 QExcelEngine::QExcelEngine(QString xlsFile)
 {
-    pExcel     = NULL;
-    pWorkbooks = NULL;
-    pWorkbook  = NULL;
-    pWorksheet = NULL;
+    pExcel     = nullptr;
+    pWorkbooks = nullptr;
+    pWorkbook  = nullptr;
+    pWorksheet = nullptr;
 
     sXlsFile     = xlsFile;
     nRowCount    = 0;
@@ -304,7 +304,7 @@ void QExcelEngine::Close()
   */
 bool QExcelEngine::SaveDataFrTable(QTableWidget *tableWidget)
 {
-    if ( NULL == tableWidget )
+    if ( nullptr == tableWidget )
     {
         return false;
     }
@@ -319,7 +319,7 @@ bool QExcelEngine::SaveDataFrTable(QTableWidget *tableWidget)
     //获取表头写做第一行
     for (int i=0; i<tableC; i++)
     {
-        if ( tableWidget->horizontalHeaderItem(i) != NULL )
+        if ( tableWidget->horizontalHeaderItem(i) != nullptr )
         {
             this->SetCellData(1, i+1, tableWidget->horizontalHeaderItem(i)->text());
         }
@@ -330,7 +330,7 @@ bool QExcelEngine::SaveDataFrTable(QTableWidget *tableWidget)
     {
         for (int j=0; j<tableC; j++)
         {
-            if ( tableWidget->item(i,j) != NULL )
+            if ( tableWidget->item(i,j) != nullptr )
             {
                 this->SetCellData(i+2, j+1, tableWidget->item(i,j)->text());
             }

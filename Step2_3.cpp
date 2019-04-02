@@ -1,5 +1,5 @@
-#include "Step8_1.h"
-#include "ui_Step8_1.h"
+#include "Step2_3.h"
+#include "ui_Step2_3.h"
 //#include "excelengine.h"
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -7,14 +7,14 @@
 #include <QComboBox>
 #include <QFileDialog>
 
-Step8_1::Step8_1(QWidget *parent) :
+Step2_3::Step2_3(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Step8_1)
+    ui(new Ui::Step2_3)
 {
     ui->setupUi(this);
 
-    int RowNum=2;
-    int ColumnNum=5;
+    int RowNum=6;
+    int ColumnNum=6;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
        ui->qTableWidget->setRowCount(RowNum);//设置行数
@@ -83,10 +83,12 @@ Step8_1::Step8_1(QWidget *parent) :
 
         //设置列标签
         QStringList HStrList;
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
+        for(int xx=1;xx<=ColumnNum;xx++)
+        {
+            QString aa=QString::number(xx, 10);
+        HStrList.push_back(QString("指标")+aa);
+        }
+
         //HStrList.push_back(QString("other"));
         //设置行列数(只有列存在的前提下，才可以设置列标签)
         int HlableCnt = HStrList.count();
@@ -110,7 +112,7 @@ Step8_1::Step8_1(QWidget *parent) :
         //ui->qTableWidget->clearContents();//这个清空所有内容不包括标题头
     }
 
-Step8_1::~Step8_1()
+Step2_3::~Step2_3()
 {
     delete ui;
 }
@@ -125,7 +127,7 @@ Step8_1::~Step8_1()
 //    current->setBackgroundColor(Qt::blue);
 //}
 
-void Step8_1::on_pushButton_clicked()
+void Step2_3::on_pushButton_clicked()
 {
 //    QAbstractItemModel *model = ui->tableWidget->model();
 //     model->insertRow(model->rowCount());
@@ -141,14 +143,14 @@ void Step8_1::on_pushButton_clicked()
     ui->qTableWidget->selectRow(rows);
 }
 
-void Step8_1::on_pushButton_2_clicked()
+void Step2_3::on_pushButton_2_clicked()
 {
     QTableWidgetItem * item = ui->qTableWidget->currentItem();
     if(item==Q_NULLPTR)return;
     ui->qTableWidget->removeRow(item->row());
 }
 //将表格数据写入文件
-void Step8_1::on_pushButton_3_clicked()
+void Step2_3::on_pushButton_3_clicked()
 {
      QExcelEngine excelEngine=*new QExcelEngine();
 
@@ -175,7 +177,7 @@ void Step8_1::on_pushButton_3_clicked()
     QMessageBox::information(this, "excel提示", "导出成功");
 }
 //将文件数据导入表格
-void Step8_1::on_pushButton_4_clicked()
+void Step2_3::on_pushButton_4_clicked()
 {
     QMessageBox::StandardButton rb = QMessageBox::information(this, "warning", "从excel文件中导入数据将会覆盖之前所有内容，\n确定导入吗？",
                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
@@ -203,18 +205,18 @@ void Step8_1::on_pushButton_4_clicked()
 }
 
 
-void Step8_1::on_pushButton_5_clicked()
+void Step2_3::on_pushButton_5_clicked()
 {
 
    QExcelEngine excelEngine=*new QExcelEngine();
 
-  QString filename =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step8_1_temp" + "xls";
+  QString filename =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step2_2_temp" + "xls";
   if(filename.isEmpty())
       return;
   QFile file(filename);
        if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
        {
-        QMessageBox::critical(NULL,"提示","无法创建文件");
+        QMessageBox::critical(nullptr,"提示","无法创建文件");
         return;
 
         }

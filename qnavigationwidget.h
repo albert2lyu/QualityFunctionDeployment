@@ -9,7 +9,7 @@ class QNavigationWidget : public QWidget
     Q_OBJECT
 
 public:
-    QNavigationWidget(QWidget *parent=0);
+    QNavigationWidget(QWidget *parent=nullptr);
     ~QNavigationWidget();
 
     void addItem(const QString &title);

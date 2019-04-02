@@ -1,15 +1,15 @@
-#include "Step3_2.h"
-#include "ui_Step3_2.h"
+#include "Step3_3.h"
+#include "ui_Step3_3.h"
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QDebug>
 #include <QComboBox>
-Step3_2::Step3_2(QWidget *parent) :
+Step3_3::Step3_3(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Step3_2)
+    ui(new Ui::Step3_3)
 {
     ui->setupUi(this);
-    int RowNum=5;
+    int RowNum=3;
     int ColumnNum=3;
     setWindowTitle(tr("TableWidget"));
     ui->qTableWidget->setColumnCount(ColumnNum);
@@ -49,13 +49,13 @@ Step3_2::Step3_2(QWidget *parent) :
 }
 
 
-Step3_2::~Step3_2()
+Step3_3::~Step3_3()
 {
     delete ui;
 }
 
-void Step3_2::on_pushButton_clicked(){}
-void Step3_2::on_pushButton_2_clicked(){}
-void Step3_2::on_pushButton_3_clicked(){}
-void Step3_2::on_pushButton_4_clicked(){}
-void Step3_2::on_pushButton_5_clicked(){}
+void Step3_3::on_pushButton_clicked(){}
+void Step3_3::on_pushButton_2_clicked(){}
+void Step3_3::on_pushButton_3_clicked(){}
+void Step3_3::on_pushButton_4_clicked(){}
+void Step3_3::on_pushButton_5_clicked(){}

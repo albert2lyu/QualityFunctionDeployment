@@ -5,11 +5,11 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QT+=axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = qfdqt
+TARGET = QualityFunctionDeployment
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -65,7 +65,9 @@ SOURCES += \
     Step6_2.cpp \
     Step7_2.cpp \
     Step9_2.cpp \
-    Step9_3.cpp
+    Step9_3.cpp \
+    Step3_3.cpp \
+    Step2_3.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -107,7 +109,9 @@ HEADERS += \
     Step6_2.h \
     Step7_2.h \
     Step9_2.h \
-    Step9_3.h
+    Step9_3.h \
+    Step3_3.h \
+    Step2_3.h
 
 FORMS += \
     mainwindow.ui \
@@ -147,16 +151,16 @@ FORMS += \
     Step6_2.ui \
     Step7_2.ui \
     Step9_2.ui \
-    Step9_3.ui
+    Step9_3.ui \
+    Step3_3.ui \
+    Step2_3.ui
 
 
 
-CONFIG += \
-    qaxcontainer #excel
 CONFIG += C++ 11
 SUBDIRS += \
     qfdqt.pro
-
+QMAKE_CXXFLAGS += -std=c++0x
 DISTFILES += \
     qfdqt.pro.user \
     qfd1.jpg \
