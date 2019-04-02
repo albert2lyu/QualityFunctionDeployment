@@ -115,7 +115,4 @@ void QNavigationWidget::mousePressEvent(QMouseEvent *e)
     }
 }
 
-void QNavigationWidget::mouseReleaseEvent(QMouseEvent *e)
-{
 
-}

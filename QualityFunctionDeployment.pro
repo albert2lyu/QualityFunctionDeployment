@@ -44,7 +44,7 @@ SOURCES += \
     Step2_2.cpp \
     Step2_1.cpp \
     qnavigationwidget.cpp \
-    Step1data.cpp \
+    Step1Data.cpp \
     excelengine.cpp \
     Step4_1.cpp \
     Step5_1.cpp \
@@ -82,7 +82,7 @@ HEADERS += \
     qnavigationwidget.h \
     Step2_1.h \
     Step2_2.h \
-    Step1data.h \
+    Step1Data.h \
     excelengine.h \
     Step5_1.h \
     Step6_1.h \
@@ -119,7 +119,7 @@ FORMS += \
     Step3_1.ui \
     Step2_1.ui \
     Step2_2.ui \
-    Step1data.ui \
+    Step1Data.ui \
     Step4_1.ui \
     Step5_1.ui \
     Step6_1.ui \
@@ -141,7 +141,7 @@ FORMS += \
 
 CONFIG += \
     qaxcontainer #excel
-
+CONFIG += C++ 11
 SUBDIRS += \
     qfdqt.pro
 

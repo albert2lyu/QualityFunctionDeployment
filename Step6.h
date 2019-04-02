@@ -5,8 +5,7 @@
 #include<QPainter>
 #include<QPen>
 #include "Step6_1.h"
-#include "Step6_2.h"
-#include "Step6data.h"
+#include "Step6Data.h"
 namespace Ui {
 class Step6;
 }
@@ -26,7 +25,7 @@ private slots:
 private:
     Ui::Step6 *ui;
     Step6_1 *Step6_1_Page;//创建窗口页面指针
-    Step6_2 *Step6_2_Page;
+
     Step6Data *Step6Data_Page;
 };
 

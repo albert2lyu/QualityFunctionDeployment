@@ -5,8 +5,7 @@
 #include<QPainter>
 #include<QPen>
 #include "Step10_1.h"
-#include "Step10_2.h"
-#include "Step10data.h"
+#include "Step10Data.h"
 namespace Ui {
 class Step10;
 }
@@ -19,11 +18,13 @@ public:
     explicit Step10(QWidget *parent = 0);
          void paintEvent(QPaintEvent *);
     ~Step10();
-
+private slots:
+    void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
 private:
     Ui::Step10 *ui;
     Step10_1 *Step10_1_Page;//创建窗口页面指针
-    Step10_2 *Step10_2_Page;
     Step10Data *Step10Data_Page;
 };
 

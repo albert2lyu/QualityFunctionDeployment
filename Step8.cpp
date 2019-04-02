@@ -6,6 +6,10 @@ Step8::Step8(QWidget *parent) :
     ui(new Ui::Step8)
 {
     ui->setupUi(this);
+    Step8_1_Page = new Step8_1(this);//实例化窗口页面
+    ui->stackedWidget->addWidget(Step8_1_Page);
+    Step8Data_Page = new Step8Data(this);
+    ui->stackedWidget_2->addWidget(Step8Data_Page);
 //    setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 void Step8::paintEvent(QPaintEvent *)
@@ -34,6 +38,7 @@ void Step8::paintEvent(QPaintEvent *)
     font.setPointSize(9);
     // font.setBold(true);
     painter.setFont(font);
+        painter.drawText(QPoint(width*6/14-5,height*3/36+5),"Step6 确定相关性矩阵");
     painter.drawText(QPoint(width*5/14+5,height/6+5),"Step5 识别关于全局质量参数的约束");
     painter.drawText(QPoint(width*11/28+5,height*5/18+5),"Step4 生成全局质量参数");
     painter.drawText(QPoint(width*17/56+5,height*9/18+5),"Step7 确定价值指标与全局质量参数间的定量关系");
@@ -56,15 +61,15 @@ Step8::~Step8()
 }
 void Step8::on_pushButton_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(Step1_1_Page);
+    ui->stackedWidget->setCurrentWidget(Step8_1_Page);
 }
 
 void Step8::on_pushButton_2_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(Step1_2_Page);
+    ui->stackedWidget->setCurrentWidget(Step8_1_Page);
 }
 
 void Step8::on_pushButton_3_clicked()
 {
-    ui->stackedWidget_2->setCurrentWidget(Step1Data_Page);
+    ui->stackedWidget_2->setCurrentWidget(Step8Data_Page);
 }

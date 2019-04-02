@@ -14,7 +14,7 @@ Step4_1::Step4_1(QWidget *parent) :
     ui->setupUi(this);
 
     int RowNum=6;
-    int ColumnNum=4;
+    int ColumnNum=5;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
        ui->qTableWidget->setRowCount(RowNum);//设置行数
@@ -83,10 +83,11 @@ Step4_1::Step4_1(QWidget *parent) :
 
         //设置列标签
         QStringList HStrList;
-        HStrList.push_back(QString("价值指标名称"));
-        HStrList.push_back(QString("操作符"));
-        HStrList.push_back(QString("期望值"));
-        HStrList.push_back(QString("利益相关者"));
+        HStrList.push_back(QString("质量参数1"));
+        HStrList.push_back(QString("质量参数2"));
+        HStrList.push_back(QString("质量参数3"));
+        HStrList.push_back(QString("质量参数4"));
+        HStrList.push_back(QString("质量参数5"));
         //HStrList.push_back(QString("other"));
         //设置行列数(只有列存在的前提下，才可以设置列标签)
         int HlableCnt = HStrList.count();

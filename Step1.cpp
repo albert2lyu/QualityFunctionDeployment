@@ -44,6 +44,8 @@ void Step1::paintEvent(QPaintEvent *)
     font.setPointSize(9);
     // font.setBold(true);
     painter.setFont(font);
+  //  painter.drawText(QPoint(width*7/14-5,height/18+5),"Step6");
+    painter.drawText(QPoint(width*6/14-5,height*3/36+5),"Step6 确定相关性矩阵");
     painter.drawText(QPoint(width*5/14+5,height/6+5),"Step5 识别关于全局质量参数的约束");
     painter.drawText(QPoint(width*11/28+5,height*5/18+5),"Step4 生成全局质量参数");
     painter.drawText(QPoint(width*17/56+5,height*9/18+5),"Step7 确定价值指标与全局质量参数间的定量关系");
@@ -58,6 +60,7 @@ void Step1::paintEvent(QPaintEvent *)
     painter.drawText(QPoint(9+width/7,height*7/18+75),"相对重要性评级");
     painter.drawText(QPoint(37+width*11/14,height*7/18+45),"Step3");
     painter.drawText(QPoint(width*11/14-16,height*7/18+60),"基于竞争性分析确定价值");
+    painter.drawText(QPoint(width*11/14-10,height*7/18+75),"指标的最终重要性评级");
     painter.drawText(QPoint(width*11/14-10,height*7/18+75),"指标的最终重要性评级");
 
 }

@@ -9,8 +9,8 @@ Step3_2::Step3_2(QWidget *parent) :
     ui(new Ui::Step3_2)
 {
     ui->setupUi(this);
-    int RowNum=10;
-    int ColumnNum=5;
+    int RowNum=5;
+    int ColumnNum=3;
     setWindowTitle(tr("TableWidget"));
     ui->qTableWidget->setColumnCount(ColumnNum);
     ui->qTableWidget->setRowCount(RowNum);
@@ -37,11 +37,10 @@ Step3_2::Step3_2(QWidget *parent) :
     ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     QStringList HStrList;
-    HStrList.push_back(QString("价值期望名称"));
-    HStrList.push_back(QString("当前位次"));
-    HStrList.push_back(QString("期望位次"));
-    HStrList.push_back(QString("改进可能性"));
-    HStrList.push_back(QString("价值指标关键度"));
+    HStrList.push_back(QString("价值指标1"));
+    HStrList.push_back(QString("价值指标2"));
+    HStrList.push_back(QString("价值指标3"));
+
     ui->qTableWidget->setRowCount(RowNum);
     ui->qTableWidget->setColumnCount(ColumnNum);
     ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
