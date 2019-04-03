@@ -67,7 +67,8 @@ SOURCES += \
     Step9_2.cpp \
     Step9_3.cpp \
     Step3_3.cpp \
-    Step2_3.cpp
+    Step2_3.cpp \
+    sqlite.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -111,7 +112,8 @@ HEADERS += \
     Step9_2.h \
     Step9_3.h \
     Step3_3.h \
-    Step2_3.h
+    Step2_3.h \
+    sqlite.h
 
 FORMS += \
     mainwindow.ui \
@@ -169,4 +171,5 @@ DISTFILES += \
     qfdjt3.jpg \
     qfdjt4.jpg \
     README.md
+QT       += core gui sql
 

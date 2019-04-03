@@ -1,6 +1,6 @@
 #include "excelengine.h"
 #include "qt_windows.h"
-
+#include "sqlite.h"
 QExcelEngine::QExcelEngine()
 {
     pExcel     = nullptr;
@@ -340,6 +340,40 @@ bool QExcelEngine::SaveDataFrTable(QTableWidget *tableWidget)
     //保存
     Save();
 
+    return true;
+}
+///////////////////////////////////////////////////////////////
+/// \brief QExcelEngine::Step1SaveData Step1保存数据
+/// \param tableWidget
+/// \return
+///
+bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"Step1SaveData";
+    Sqlite sqlite;
+    sqlite.connect();//
+    //sqlite.createStep1Table();
+    if ( nullptr == tableWidget )
+    {
+        return false;
+    }
+    if ( !bIsOpen )
+    {
+        return false;
+    }
+
+    int tableR = tableWidget->rowCount();
+    int tableC = tableWidget->columnCount();
+    for (int i=0; i<tableR; i++)
+    {
+        for (int j=0; j<tableC; j++)
+        {
+            if ( tableWidget->item(i,j) != nullptr )
+            {
+                qDebug()<<tableWidget->item(i,j);
+            }
+        }
+    }
     return true;
 }
 

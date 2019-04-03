@@ -205,7 +205,7 @@ void Step1_1::on_pushButton_4_clicked()
 
 void Step1_1::on_pushButton_5_clicked()
 {
-
+   qDebug()<<"on_pushButton_5_clicked";
    QExcelEngine excelEngine=*new QExcelEngine();
 
   QString filename =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step1_1_temp" + "xls";
@@ -234,6 +234,8 @@ void Step1_1::on_pushButton_5_clicked()
   //打开数据库，并保存数据
   excelEngine.Open(filename, 1, false);
   excelEngine.SaveDataFrTable(ui->qTableWidget);
+  //Step1 save data
+  excelEngine.Step1SaveData(ui->qTableWidget);
   excelEngine.Close();
 
   QMessageBox::information(this, "excel提示", "保存成功");
