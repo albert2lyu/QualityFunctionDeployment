@@ -1,6 +1,7 @@
 #include "sqlite.h"
 #include <QtSql>
 #include <QString>
+#include "entity_step1.h"
 Sqlite::Sqlite()
 {
 
@@ -30,9 +31,16 @@ bool Sqlite::createStep1Table()
 }
 bool Sqlite::saveStep1Table(QString valueExpectation, QString valueOperator, QString expectations, QString stakeholders)
 {
-    qdebug()<<"saveStep1Table";
+    qDebug()<<"saveStep1Table";
     if(valueExpectation != NULL && valueOperator != NULL && expectations != NULL && stakeholders != NULL)
     {
+        /*
+            QSqlQuery deleteQuery ;
+            if(!deleteQuery.exec("delete from  'Step1'' "))
+            {
+                qDebug() << "Create createStep1Table Failed!";
+            }
+        */
             QSqlQuery query;
             query.prepare("INSERT INTO Step1 (价值期望名称, 操作符 ,期望值 ,利益相关者) VALUES (:valueExpectation, :valueOperator, :expectations, :stakeholders)");
             query.bindValue(":valueExpectation", valueExpectation.trimmed());
@@ -50,4 +58,21 @@ bool Sqlite::saveStep1Table(QString valueExpectation, QString valueOperator, QSt
     {
         return false;
     }
+}
+//QString valueExpectation, QString valueOperator, QString expectations, QString stakeholders
+bool Sqlite::queryStep1Data()
+{
+      QSqlQuery query;
+      query.exec("SELECT * FROM Step1");
+      vector<Entity_Step1>returnList;
+      while(query.next())
+      {
+          Entity_Step1 entity_Step1;
+          entity_Step1.valueExpectation = query.value(0).toString();
+          entity_Step1.valueOperator = query.value(1).toString();
+          entity_Step1.expectations = query.value(1).toString();
+          entity_Step1.stakeholders = query.value(1).toString();
+          returnList.push_back(currentSearch);
+      }
+      return returnList;
 }

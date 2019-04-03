@@ -7,22 +7,23 @@ Step1Data::Step1Data(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step1Data)
 {
+    qDebug()<<"Step1Data";
     ui->setupUi(this);
 
     int RowNum=10;
     int ColumnNum=4;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
-       ui->qTableWidget->setRowCount(RowNum);//设置行数
-       //table->setRowCount(RowCount+1);
+        ui->qTableWidget->setRowCount(RowNum);//设置行数
+        //table->setRowCount(RowCount+1);
         //ui->qTableWidget->setRowCount(row_count+1); ;//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
         QStringList m_Header;
-        m_Header<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
+        m_Header<<QString("价值期望名称")<<QString("操作符")<<QString("期望值")<<QString("利益相关者");
         ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
         ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
         //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
-       ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
+        ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
         //ui->tableWidget->setShowGrid(false);//隐藏栅格
         //ui->qTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//设置编辑方式：禁止编辑表格
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
@@ -76,13 +77,12 @@ Step1Data::Step1Data(QWidget *parent) :
 
         QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
         qDebug()<<"单元格内容："<<strText;//输出单元格内容
-
         //设置列标签
         QStringList HStrList;
-        HStrList.push_back(QString("指标序号"));
-        HStrList.push_back(QString("价值指标"));
-        HStrList.push_back(QString("关系符号"));
+        HStrList.push_back(QString("价值期望名称"));
+        HStrList.push_back(QString("操作符"));
         HStrList.push_back(QString("期望值"));
+        HStrList.push_back(QString("利益相关者"));
         //HStrList.push_back(QString("other"));
         //设置行列数(只有列存在的前提下，才可以设置列标签)
         int HlableCnt = HStrList.count();
@@ -91,7 +91,7 @@ Step1Data::Step1Data(QWidget *parent) :
         //设置列标签
         ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
-       //把QTableWidgetItem对象内容转换为QString
+        //把QTableWidgetItem对象内容转换为QString
         //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
 
         //具体单元格中添加ComboBox控件，下拉列表
@@ -110,18 +110,24 @@ Step1Data::~Step1Data()
 {
     delete ui;
 }
-void Step1Data::on_pushButton_clicked(){
-
-        //从Excel中将表格导入到TableWidget
-       QExcelEngine excelEngine=*new QExcelEngine();
+////////////
+/// \brief Step1Data::on_pushButton_clicked
+/// 从数据库中读取数据显示到界面中
+void Step1Data::on_pushButton_clicked()
+{
+         qDebug()<<"Step1Data on_pushButton_clicked";
+         //从Excel中将表格导入到TableWidget
+         QExcelEngine excelEngine=*new QExcelEngine();
          QString m_fileName =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step1_1_temp" + "xls";
-        bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
-        if(b == false)
-        {
-            QMessageBox::information(this, "excel提示", "文件打开失败");
-            return;
-        }
-        excelEngine.ReadDataToTable(ui->qTableWidget);
-        excelEngine.Close();
+         bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
+         if(b == false)
+         {
+             QMessageBox::information(this, "excel提示", "文件打开失败");
+             return;
+         }
+         excelEngine.ReadDataToTable(ui->qTableWidget);
+         ////从数据库中读取数据
+         ////excelEngine
+         excelEngine.Close();
 
 }

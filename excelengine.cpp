@@ -351,7 +351,7 @@ bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"Step1SaveData";
     Sqlite sqlite;
-    sqlite.connect();//
+    sqlite.connect();
     //sqlite.createStep1Table();
     if ( nullptr == tableWidget )
     {
@@ -364,17 +364,36 @@ bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
 
     int tableR = tableWidget->rowCount();
     int tableC = tableWidget->columnCount();
+    QString valueExpectation;
+    QString valueOperator;
+    QString expectations;
+    QString stakeholders;
     for (int i=0; i<tableR; i++)
     {
-        for (int j=0; j<tableC; j++)
-        {
-            if ( tableWidget->item(i,j) != nullptr )
-            {
-                qDebug()<<tableWidget->item(i,j);
-            }
-        }
+        //->data(Qt::DisplayRole).toString();
+        if (tableWidget->item(i,0) != nullptr)
+         valueExpectation = tableWidget->item(i,0)->data(Qt::DisplayRole).toString();
+        if (tableWidget->item(i,1) != nullptr)
+         valueOperator = tableWidget->item(i,1)->data(Qt::DisplayRole).toString();
+        if (tableWidget->item(i,2) != nullptr)
+         expectations = tableWidget->item(i,2)->data(Qt::DisplayRole).toString();
+        if (tableWidget->item(i,3) != nullptr)
+         stakeholders = tableWidget->item(i,3)->data(Qt::DisplayRole).toString();
+        sqlite.saveStep1Table(valueExpectation,valueOperator,expectations,stakeholders);
     }
     return true;
+}
+/////////////
+/// \brief QExcelEngine::Step1QueryData  Step1显示数据
+/// \return
+///
+bool QExcelEngine::Step1QueryData()
+{
+    qDebug()<<"Step1QueryData";
+    Sqlite sqlite;
+    sqlite.connect();
+    vector<Entity_Step1>returnList = sqlite.queryStep1Data();
+
 }
 
 /**

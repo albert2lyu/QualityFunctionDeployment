@@ -8,6 +8,7 @@ Step1_2::Step1_2(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step1_2)
 {
+    qDebug()<<"Step1_2";
     ui->setupUi(this);
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(4);//设置列数

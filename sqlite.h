@@ -10,7 +10,9 @@ public:
     Sqlite();
     bool connect();
     bool createStep1Table();
-    bool saveStep1Table();
+    bool saveStep1Table(QString valueExpectation, QString valueOperator, QString expectations, QString stakeholders);
+    bool queryStep1Data();
+
 };
 
 #endif // SQLITE_H

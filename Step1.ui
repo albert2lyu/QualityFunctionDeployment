@@ -54,7 +54,9 @@
      </font>
     </property>
     <property name="text">
-     <string>1</string>
+     <string>Step1
+确定利益相关者
+收集价值期望</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">

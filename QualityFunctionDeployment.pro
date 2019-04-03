@@ -68,7 +68,8 @@ SOURCES += \
     Step9_3.cpp \
     Step3_3.cpp \
     Step2_3.cpp \
-    sqlite.cpp
+    sqlite.cpp \
+    entity_step1.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -113,7 +114,8 @@ HEADERS += \
     Step9_3.h \
     Step3_3.h \
     Step2_3.h \
-    sqlite.h
+    sqlite.h \
+    entity_step1.h
 
 FORMS += \
     mainwindow.ui \

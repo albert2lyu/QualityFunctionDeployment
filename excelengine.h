@@ -32,6 +32,7 @@ public:
     int GetRowCount() const;
     int GetColumnCount() const;
     bool Step1SaveData(QTableWidget *tableWidget);
+    bool Step1QueryData();
 
 private:
     QAxObject *pExcel;
