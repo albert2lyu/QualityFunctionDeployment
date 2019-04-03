@@ -168,5 +168,8 @@ DISTFILES += \
     qfdjt2.jpg \
     qfdjt3.jpg \
     qfdjt4.jpg \
-    README.md
+    README.md \
+    QFD.db
+QMAKE_CXXFLAGS += -std=c++0x
+QT       += core gui sql
 

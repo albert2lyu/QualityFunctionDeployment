@@ -127,6 +127,7 @@ Step1_1::~Step1_1()
 
 void Step1_1::on_pushButton_clicked()
 {
+    qDebug()<<"on_pushButton_clicked";
 //    QAbstractItemModel *model = ui->tableWidget->model();
 //     model->insertRow(model->rowCount());
     int cols=ui->qTableWidget->columnCount();
@@ -143,6 +144,7 @@ void Step1_1::on_pushButton_clicked()
 
 void Step1_1::on_pushButton_2_clicked()
 {
+    qDebug()<<"on_pushButton_2_clicked";
     QTableWidgetItem * item = ui->qTableWidget->currentItem();
     if(item==Q_NULLPTR)return;
     ui->qTableWidget->removeRow(item->row());
@@ -150,6 +152,7 @@ void Step1_1::on_pushButton_2_clicked()
 //将表格数据写入文件
 void Step1_1::on_pushButton_3_clicked()
 {
+     qDebug()<<"on_pushButton_3_clicked";
      QExcelEngine excelEngine=*new QExcelEngine();
 
     QString filename="0";// = QFileDialog::getSaveFileName(this, tr("Save as..."), "../datafile", tr("EXCEL files (*.xls *.xlsx);;HTML-Files (*.txt);;"));
@@ -202,11 +205,11 @@ void Step1_1::on_pushButton_4_clicked()
 
 }
 
-
+//触发存储表格事件
 void Step1_1::on_pushButton_5_clicked()
 {
-
-   QExcelEngine excelEngine=*new QExcelEngine();
+  qDebug()<<"on_pushButton_5_clicked()";
+  QExcelEngine excelEngine=*new QExcelEngine();
 
   QString filename =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step1_1_temp" + "xls";
   if(filename.isEmpty())
@@ -234,11 +237,15 @@ void Step1_1::on_pushButton_5_clicked()
   //打开数据库，并保存数据
   excelEngine.Open(filename, 1, false);
   excelEngine.SaveDataFrTable(ui->qTableWidget);
+    //调用自己方法
+  excelEngine.SaveStep1Data(ui->qTableWidget);
+
   excelEngine.Close();
 
-  QMessageBox::information(this, "excel提示", "保存成功");
+  QMessageBox::information(this, "XXXX数据保存", "保存成功");
 
 }
+
 
 
 

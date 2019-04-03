@@ -342,6 +342,61 @@ bool QExcelEngine::SaveDataFrTable(QTableWidget *tableWidget)
 
     return true;
 }
+//SQLITE数据库连接
+bool QExcelEngine::connect(QString &dbName)
+{
+    if(dbName == NULL)
+    {
+        return false;
+    }
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(dbName.trimmed());
+    if(!db.open())
+    {
+        return false;
+    }
+    return true;
+}
+//
+//
+//Step1 表格存储价值指标名称，操作符，期望值，利益相关者
+bool QExcelEngine::SaveStep1Data(QTableWidget *tableWidget)
+{
+    qDebug()<<"SaveStep1Data()";
+    if(connect("QFD.db") == true)
+    {
+         qDebug()<<"connect success";
+    }
+    else
+    {
+        qDebug()<<"connect false";
+    }
+
+    /*
+    if ( nullptr == tableWidget )
+    {
+        return false;
+    }
+    if ( !bIsOpen )
+    {
+        return false;
+    }
+    int tableR = tableWidget->rowCount();
+    int tableC = tableWidget->columnCount();
+    for (int i=0; i<tableR; i++)
+    {
+        for (int j=0; j<tableC; j++)
+        {
+            if ( tableWidget->item(i,j) != nullptr )
+            {
+                qDebug()<<tableWidget->item(i,j)->text();
+                //this->SetCellData(i+2, j+1, tableWidget->item(i,j)->text());
+            }
+        }
+    }
+    */
+
+}
 
 /**
   *@brief 从指定的xls文件中把数据导入到tableWidget中

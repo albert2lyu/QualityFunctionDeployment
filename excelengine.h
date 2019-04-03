@@ -6,7 +6,10 @@
 #include <QDebug>
 #include <QTableWidget>
 #include <QAxObject>
-
+#include <QtSql>
+#include <QString>
+#include <string.h>
+#include <cstring>
 class QExcelEngine
 {
 public:
@@ -29,8 +32,10 @@ public:
     void Clear();
     bool IsOpen();
     bool IsValid();
-    int GetRowCount() const;
-    int GetColumnCount() const;
+    int  GetRowCount() const;
+    int  GetColumnCount() const;
+    bool SaveStep1Data(QTableWidget *tableWidge);
+    bool connect(QString &dbName);
 
 private:
     QAxObject *pExcel;
