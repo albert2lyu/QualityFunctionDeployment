@@ -116,6 +116,7 @@ Step1Data::~Step1Data()
 void Step1Data::on_pushButton_clicked()
 {
          qDebug()<<"Step1Data on_pushButton_clicked";
+         /*
          //从Excel中将表格导入到TableWidget
          QExcelEngine excelEngine=*new QExcelEngine();
          QString m_fileName =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step1_1_temp" + "xls";
@@ -126,8 +127,11 @@ void Step1Data::on_pushButton_clicked()
              return;
          }
          excelEngine.ReadDataToTable(ui->qTableWidget);
+         */
          ////从数据库中读取数据
-         ////excelEngine
+         QExcelEngine excelEngine=*new QExcelEngine();
+         excelEngine.Step1QueryData(ui->qTableWidget);
+         qDebug()<<"Step1Data on_pushButton_clicked322222222222222";
          excelEngine.Close();
 
 }

@@ -1,6 +1,7 @@
 #include "excelengine.h"
 #include "qt_windows.h"
 #include "sqlite.h"
+#include "entity_step1.h"
 QExcelEngine::QExcelEngine()
 {
     pExcel     = nullptr;
@@ -370,7 +371,6 @@ bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
     QString stakeholders;
     for (int i=0; i<tableR; i++)
     {
-        //->data(Qt::DisplayRole).toString();
         if (tableWidget->item(i,0) != nullptr)
          valueExpectation = tableWidget->item(i,0)->data(Qt::DisplayRole).toString();
         if (tableWidget->item(i,1) != nullptr)
@@ -387,13 +387,34 @@ bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
 /// \brief QExcelEngine::Step1QueryData  Step1显示数据
 /// \return
 ///
-bool QExcelEngine::Step1QueryData()
+bool QExcelEngine::Step1QueryData(QTableWidget *tableWidget)
 {
-    qDebug()<<"Step1QueryData";
+    qDebug()<<"Step1QueryData1111111111111";
     Sqlite sqlite;
     sqlite.connect();
     vector<Entity_Step1>returnList = sqlite.queryStep1Data();
+    qDebug()<<"Step1QueryData222222222222222";
+    //先把table的内容清空
+    int tableColumn = tableWidget->columnCount();
+    tableWidget->clear();
+    for (int n=0; n<tableColumn; n++)
+    {
+        tableWidget->removeColumn(0);
+    }
+    qDebug()<<"Step1QueryData33333333333333333";
+    tableWidget->setColumnCount(4); //设置列数
+    QStringList header;
+    header<<"价值期望名称"<<"操作符"<<"期望值"<<"利益相关者";
+    tableWidget->setHorizontalHeaderLabels(header);
 
+    for(int i =0;i<returnList.size();i++)
+    {
+        tableWidget->setItem(i,0,new QTableWidgetItem(returnList[i].valueExpectation));
+        tableWidget->setItem(i,1,new QTableWidgetItem(returnList[i].valueOperator));
+        tableWidget->setItem(i,2,new QTableWidgetItem(returnList[i].expectations));
+        tableWidget->setItem(i,3,new QTableWidgetItem(returnList[i].stakeholders));
+    }
+    return true;
 }
 
 /**

@@ -60,7 +60,7 @@ bool Sqlite::saveStep1Table(QString valueExpectation, QString valueOperator, QSt
     }
 }
 //QString valueExpectation, QString valueOperator, QString expectations, QString stakeholders
-bool Sqlite::queryStep1Data()
+vector<Entity_Step1> Sqlite::queryStep1Data()
 {
       QSqlQuery query;
       query.exec("SELECT * FROM Step1");
@@ -70,9 +70,9 @@ bool Sqlite::queryStep1Data()
           Entity_Step1 entity_Step1;
           entity_Step1.valueExpectation = query.value(0).toString();
           entity_Step1.valueOperator = query.value(1).toString();
-          entity_Step1.expectations = query.value(1).toString();
-          entity_Step1.stakeholders = query.value(1).toString();
-          returnList.push_back(currentSearch);
+          entity_Step1.expectations = query.value(2).toString();
+          entity_Step1.stakeholders = query.value(3).toString();
+          returnList.push_back(entity_Step1);
       }
       return returnList;
 }

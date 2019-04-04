@@ -2,6 +2,7 @@
 #define SQLITE_H
 
 #include <QString>
+#include "entity_step1.h"
 using namespace std;
 
 class Sqlite
@@ -11,7 +12,7 @@ public:
     bool connect();
     bool createStep1Table();
     bool saveStep1Table(QString valueExpectation, QString valueOperator, QString expectations, QString stakeholders);
-    bool queryStep1Data();
+    vector<Entity_Step1> queryStep1Data();
 
 };
 
