@@ -6,7 +6,7 @@
 
 QT       += core gui
 QT+=axcontainer
-
+QT += sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = QualityFunctionDeployment
@@ -165,13 +165,7 @@ CONFIG += C++ 11
 SUBDIRS += \
     qfdqt.pro
 QMAKE_CXXFLAGS += -std=c++0x
-DISTFILES += \
-    qfdqt.pro.user \
-    qfd1.jpg \
-    qfdjt.jpg \
-    qfdjt2.jpg \
-    qfdjt3.jpg \
-    qfdjt4.jpg \
+
     README.md
 QT       += core gui sql
 

@@ -57,6 +57,7 @@ void Step8::paintEvent(QPaintEvent *)
 }
 Step8::~Step8()
 {
+
     delete ui;
 }
 void Step8::on_pushButton_clicked()

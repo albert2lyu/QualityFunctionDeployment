@@ -45,7 +45,7 @@ QExcelEngine::QExcelEngine(QString xlsFile)
     bIsANewFile = false;
     bIsSaveAlready = false;
 
-    HRESULT r = OleInitialize(0);
+    HRESULT r = OleInitialize(nullptr);
     if (r != S_OK && r != S_FALSE)
     {
         qDebug("Qt: Could not initialize OLE (error %x)", (unsigned int)r);
@@ -77,7 +77,7 @@ bool QExcelEngine::Open(int nSheet, bool visible)
     nCurrSheet = nSheet;
     bIsVisible = visible;
 
-    if ( NULL == pExcel )
+    if ( nullptr == pExcel )
     {
         pExcel = new QAxObject("Excel.Application");        //连接Excel控件
         if ( pExcel )
@@ -158,7 +158,7 @@ bool QExcelEngine::Open2(int nSheet, bool visible)
     nCurrSheet = nSheet;
     bIsVisible = visible;
 
-    if ( NULL == pExcel )
+    if ( nullptr == pExcel )
     {
         pExcel = new QAxObject("Excel.Application");        //连接Excel控件
         if ( pExcel )
@@ -289,7 +289,7 @@ void QExcelEngine::Close()
         pWorkbook->dynamicCall("Close(bool)", true);
         pExcel->dynamicCall("Quit()");
         delete pExcel;
-        pExcel = NULL;
+        pExcel = nullptr;
         bIsOpen     = false;
         bIsValid    = false;
         bIsANewFile = false;
@@ -409,6 +409,7 @@ bool QExcelEngine::Step1QueryData(QTableWidget *tableWidget)
 
     for(int i =0;i<returnList.size();i++)
     {
+
         tableWidget->setItem(i,0,new QTableWidgetItem(returnList[i].valueExpectation));
         tableWidget->setItem(i,1,new QTableWidgetItem(returnList[i].valueOperator));
         tableWidget->setItem(i,2,new QTableWidgetItem(returnList[i].expectations));
@@ -425,7 +426,7 @@ bool QExcelEngine::Step1QueryData(QTableWidget *tableWidget)
   */
 bool QExcelEngine::ReadDataToTable(QTableWidget *tableWidget)
 {
-    if ( NULL == tableWidget )
+    if ( nullptr == tableWidget )
     {
         return false;
     }

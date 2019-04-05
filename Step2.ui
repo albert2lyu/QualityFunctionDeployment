@@ -40,7 +40,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>4</x>
+      <x>107</x>
       <y>163</y>
       <width>95</width>
       <height>154</height>
@@ -54,7 +54,9 @@
      </font>
     </property>
     <property name="text">
-     <string>1</string>
+     <string>Step2
+确定价值指标的
+相对重要性评级</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">

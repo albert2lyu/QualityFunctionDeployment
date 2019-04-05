@@ -40,10 +40,10 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>4</x>
-      <y>163</y>
-      <width>95</width>
-      <height>154</height>
+      <x>280</x>
+      <y>30</y>
+      <width>151</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -54,7 +54,7 @@
      </font>
     </property>
     <property name="text">
-     <string>1</string>
+     <string>Step6 确定相关性矩阵</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">

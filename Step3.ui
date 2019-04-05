@@ -40,9 +40,9 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>4</x>
+      <x>518</x>
       <y>163</y>
-      <width>95</width>
+      <width>198</width>
       <height>154</height>
      </rect>
     </property>
@@ -54,7 +54,9 @@
      </font>
     </property>
     <property name="text">
-     <string>1</string>
+     <string>Step3
+基于竞争性分析确定价值
+指标的最终重要性评级</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">

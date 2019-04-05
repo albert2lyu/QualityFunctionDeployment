@@ -40,10 +40,10 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>4</x>
-      <y>163</y>
-      <width>95</width>
-      <height>154</height>
+      <x>208</x>
+      <y>108</y>
+      <width>305</width>
+      <height>49</height>
      </rect>
     </property>
     <property name="font">
@@ -54,7 +54,7 @@
      </font>
     </property>
     <property name="text">
-     <string>1</string>
+     <string>Step4 生成全局质量参数</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">

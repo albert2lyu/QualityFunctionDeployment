@@ -213,7 +213,7 @@ void Step9_2::on_pushButton_5_clicked()
   QFile file(filename);
        if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
        {
-        QMessageBox::critical(NULL,"提示","无法创建文件");
+        QMessageBox::critical(nullptr,"提示","无法创建文件");
         return;
 
         }

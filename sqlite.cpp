@@ -32,7 +32,7 @@ bool Sqlite::createStep1Table()
 bool Sqlite::saveStep1Table(QString valueExpectation, QString valueOperator, QString expectations, QString stakeholders)
 {
     qDebug()<<"saveStep1Table";
-    if(valueExpectation != NULL && valueOperator != NULL && expectations != NULL && stakeholders != NULL)
+    if(valueExpectation != nullptr && valueOperator != nullptr && expectations != nullptr && stakeholders != nullptr)
     {
         /*
             QSqlQuery deleteQuery ;
