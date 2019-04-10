@@ -350,10 +350,11 @@ bool QExcelEngine::SaveDataFrTable(QTableWidget *tableWidget)
 ///
 bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
 {
-    qDebug()<<"Step1SaveData";
+    qDebug()<<"QExcelEngine::Step1SaveData";
     Sqlite sqlite;
     sqlite.connect();
     //sqlite.createStep1Table();
+    /*
     if ( nullptr == tableWidget )
     {
         return false;
@@ -362,9 +363,9 @@ bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
     {
         return false;
     }
+    */
 
     int tableR = tableWidget->rowCount();
-    int tableC = tableWidget->columnCount();
     QString valueExpectation;
     QString valueOperator;
     QString expectations;
@@ -389,11 +390,10 @@ bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
 ///
 bool QExcelEngine::Step1QueryData(QTableWidget *tableWidget)
 {
-    qDebug()<<"Step1QueryData1111111111111";
+    qDebug()<<"QExcelEngine::Step1QueryData";
     Sqlite sqlite;
     sqlite.connect();
     vector<Entity_Step1>returnList = sqlite.queryStep1Data();
-    qDebug()<<"Step1QueryData222222222222222";
     //先把table的内容清空
     int tableColumn = tableWidget->columnCount();
     tableWidget->clear();
@@ -401,7 +401,6 @@ bool QExcelEngine::Step1QueryData(QTableWidget *tableWidget)
     {
         tableWidget->removeColumn(0);
     }
-    qDebug()<<"Step1QueryData33333333333333333";
     tableWidget->setColumnCount(4); //设置列数
     QStringList header;
     header<<"价值期望名称"<<"操作符"<<"期望值"<<"利益相关者";
@@ -410,12 +409,86 @@ bool QExcelEngine::Step1QueryData(QTableWidget *tableWidget)
     for(int i =0;i<returnList.size();i++)
     {
 
-        tableWidget->setItem(i,0,new QTableWidgetItem(returnList[i].valueExpectation));
+        tableWidget->setItem(i,0,new QTableWidgetItem(returnList[i].valueIndexName));
         tableWidget->setItem(i,1,new QTableWidgetItem(returnList[i].valueOperator));
         tableWidget->setItem(i,2,new QTableWidgetItem(returnList[i].expectations));
         tableWidget->setItem(i,3,new QTableWidgetItem(returnList[i].stakeholders));
     }
     return true;
+}
+///////////////
+/// \brief QExcelEngine::Step2SaveData1
+/// \param tableWidget
+/// \return
+///
+bool QExcelEngine::Step2SaveData1(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step2SaveData1";
+    Sqlite sqlite;
+    sqlite.connect();
+    //sqlite.createStep2Table();//????待调
+    /*
+    //出现问题
+    if ( nullptr == tableWidget )
+    {
+        return false;
+    }
+    if ( !bIsOpen )
+    {
+        return false;
+    }
+    */
+    int tableR = tableWidget->rowCount();
+    //qDebug()<<"tableR:"<<tableR;
+    QString valueIndexName;
+    QString relativeImportanceRating;
+    for (int i=0; i<tableR; i++)
+    {
+        if (tableWidget->item(i,0) != nullptr)
+         valueIndexName = tableWidget->item(i,0)->data(Qt::DisplayRole).toString();
+        if (tableWidget->item(i,1) != nullptr)
+         relativeImportanceRating = tableWidget->item(i,1)->data(Qt::DisplayRole).toString();
+        sqlite.saveStep2Table(valueIndexName,relativeImportanceRating);
+    }
+    return true;
+}
+/////////////
+/// \brief QExcelEngine::Step2QueryData1
+/// \param tableWidget
+/// \return
+///
+bool QExcelEngine::Step2QueryData1(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step2QueryData1";
+    Sqlite sqlite;
+    sqlite.connect();
+    vector<Entity_Step2>returnList = sqlite.queryStep2Data();
+    //先把table的内容清空
+    int tableColumn = tableWidget->columnCount();
+    tableWidget->clear();
+    for (int n=0; n<tableColumn; n++)
+    {
+        tableWidget->removeColumn(0);
+    }
+    tableWidget->setColumnCount(2); //设置列数
+    QStringList header;
+    header<<"价值期望名称"<<"相对重要评级";
+    tableWidget->setHorizontalHeaderLabels(header);
+    for(int i =0;i<returnList.size();i++)
+    {
+
+        tableWidget->setItem(i,0,new QTableWidgetItem(returnList[i].valueExpectation));
+        tableWidget->setItem(i,1,new QTableWidgetItem(returnList[i].relativeImportanceRating));
+    }
+    return true;
+}
+bool QExcelEngine::Step2SaveData2(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step2QueryData1";
+    Sqlite sqlite = * new Sqlite();
+    sqlite.connect();
+    sqlite.createStep2_2Table();
+
 }
 
 /**

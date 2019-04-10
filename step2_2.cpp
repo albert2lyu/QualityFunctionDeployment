@@ -17,8 +17,8 @@ Step2_2::Step2_2(QWidget *parent) :
     int ColumnNum=2;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
-       ui->qTableWidget->setRowCount(RowNum);//设置行数
-       //table->setRowCount(RowCount+1);
+        ui->qTableWidget->setRowCount(RowNum);//设置行数
+        //table->setRowCount(RowCount+1);
         //ui->qTableWidget->setRowCount(row_count+1); ;//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
         QStringList m_Header;
@@ -26,7 +26,7 @@ Step2_2::Step2_2(QWidget *parent) :
         ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
         ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
         //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
-       ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
+        ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
         //ui->tableWidget->setShowGrid(false);//隐藏栅格
         //ui->qTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//设置编辑方式：禁止编辑表格
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
@@ -79,12 +79,11 @@ Step2_2::Step2_2(QWidget *parent) :
         //ui->qTableWidget->resizeRowsToContents();
 
         QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        qDebug()<<"单元格内容："<<strText;//输出单元格内容
-
+        //qDebug()<<"单元格内容："<<strText;//输出单元格内容
         //设置列标签
         QStringList HStrList;
-        HStrList.push_back(QString("价值指标名称"));
-        HStrList.push_back(QString("各个价值指标的相对重要程度"));
+        HStrList.push_back(QString("价值指标名称（废弃此页不要）"));
+        HStrList.push_back(QString("各个价值指标的相对重要程度（废弃此页不要）"));
         //HStrList.push_back(QString("other"));
         //设置行列数(只有列存在的前提下，才可以设置列标签)
         int HlableCnt = HStrList.count();

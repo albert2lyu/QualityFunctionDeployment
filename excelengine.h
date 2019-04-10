@@ -33,6 +33,9 @@ public:
     int GetColumnCount() const;
     bool Step1SaveData(QTableWidget *tableWidget);
     bool Step1QueryData(QTableWidget *tableWidget);
+    bool Step2SaveData1(QTableWidget *tableWidget);
+    bool Step2QueryData1(QTableWidget *tableWidget);
+    bool Step2SaveData2(QTableWidget *tableWidget);
 
 private:
     QAxObject *pExcel;

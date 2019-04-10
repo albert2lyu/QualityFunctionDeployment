@@ -79,7 +79,7 @@ Step2_1::Step2_1(QWidget *parent) :
         //ui->qTableWidget->resizeRowsToContents();
 
         QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        qDebug()<<"单元格内容："<<strText;//输出单元格内容
+        //qDebug()<<"单元格内容："<<strText;//输出单元格内容
 
         //设置列标签
         QStringList HStrList;
@@ -149,7 +149,7 @@ void Step2_1::on_pushButton_2_clicked()
 //将表格数据写入文件
 void Step2_1::on_pushButton_3_clicked()
 {
-     QExcelEngine excelEngine=*new QExcelEngine();
+    QExcelEngine excelEngine=*new QExcelEngine();
 
     QString filename="0";// = QFileDialog::getSaveFileName(this, tr("Save as..."), "../datafile", tr("EXCEL files (*.xls *.xlsx);;HTML-Files (*.txt);;"));
     if(filename.isEmpty())
@@ -204,38 +204,16 @@ void Step2_1::on_pushButton_4_clicked()
 
 void Step2_1::on_pushButton_5_clicked()
 {
+    qDebug()<<"Step2_1::on_pushButton_5_clicked";
+    QExcelEngine excelEngine=*new QExcelEngine();
+    //清空表格之前的所有内容
+    excelEngine.ClearAllData(" ");
+    excelEngine.Close();
+    //打开数据库，并保存数据
+    excelEngine.Step2SaveData1(ui->qTableWidget);
+    excelEngine.Close();
 
-   QExcelEngine excelEngine=*new QExcelEngine();
-
-  QString filename =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step1_1_temp" + "xls";
-  if(filename.isEmpty())
-      return;
-  QFile file(filename);
-       if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
-       {
-        QMessageBox::critical(nullptr,"提示","无法创建文件");
-        return;
-
-        }
-       QTextStream out(&file);
-       out.flush();
-       file.close();
-  bool b = excelEngine.Open(filename, 1, false); //flase为不显示窗体
-  if(b == false)
-  {
-      QMessageBox::information(this, "excel提示", "文件打开失败");
-      return;
-  }
-
-  //清空表格之前的所有内容
-  excelEngine.ClearAllData(" ");
-  excelEngine.Close();
-  //打开数据库，并保存数据
-  excelEngine.Open(filename, 1, false);
-  excelEngine.SaveDataFrTable(ui->qTableWidget);
-  excelEngine.Close();
-
-  QMessageBox::information(this, "excel提示", "保存成功");
+    QMessageBox::information(this, "xxxx提示", "保存成功");
 
 }
 
