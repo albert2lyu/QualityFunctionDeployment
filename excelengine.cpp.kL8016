@@ -463,6 +463,9 @@ bool QExcelEngine::Step2SaveData2(QTableWidget *tableWidget)
     qDebug()<<"QExcelEngine::Step2SaveData2";
     Sqlite sqlite = * new Sqlite();
     sqlite.connect();
+    //qDebug()<<tableWidget->horizontalHeaderItem(1)->data(Qt::DisplayRole).toString().toStdString().c_str();
+    //qDebug()<<"QExcelEngine::Step2QueryData1::horizontalHeader"<<tableWidget->horizontalHeader()->count();
+//    /qDebug()<<"QExcelEngine::Step2QueryData1::verticalHeader"<<tableWidget->verticalHeader()->count();
     for(int i = 0;i<tableWidget->horizontalHeader()->count();i++)
     {
         for(int j =0;j<tableWidget->verticalHeader()->count();j++)
@@ -470,10 +473,8 @@ bool QExcelEngine::Step2SaveData2(QTableWidget *tableWidget)
                 QString valueExpectationRow = tableWidget->horizontalHeaderItem(i)->data(Qt::DisplayRole).toString();
                 QString valueExpectationRank = tableWidget->verticalHeaderItem(j)->data(Qt::DisplayRole).toString();
                 QString relativeImportanceRating = tableWidget->item(i,j)->data(Qt::DisplayRole).toString();
-                if( valueExpectationRow!=nullptr && valueExpectationRank!=nullptr && relativeImportanceRating!=nullptr)
-                {
-                     sqlite.saveStep2_2Table(valueExpectationRow,valueExpectationRank,relativeImportanceRating);
-                }
+                qDebug()<<"valueExpectationRow"<<valueExpectationRow.toStdString().c_str()<<"valueExpectationRank"<<valueExpectationRank.toStdString().c_str()<<"relativeImportanceRating"<<relativeImportanceRating.toStdString().c_str();
+
         }
     }
 

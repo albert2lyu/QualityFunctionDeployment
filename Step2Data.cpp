@@ -67,8 +67,8 @@ Step2Data::Step2Data(QWidget *parent) :
         }
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
-        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        qDebug()<<"单元格内容："<<strText;//输出单元格内容
+        //QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
+        //qDebug()<<"单元格内容："<<strText;//输出单元格内容
 
         //设置列标签
         QStringList HStrList;

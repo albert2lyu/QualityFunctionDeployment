@@ -167,11 +167,12 @@ void Step2_3::on_pushButton_4_clicked()
 void Step2_3::on_pushButton_5_clicked()
 {
     qDebug()<<"Step2_3::on_pushButton_5_clicked";
-    QExcelEngine excelEngine=*new QExcelEngine();
+    QExcelEngine excelEngine = *new QExcelEngine();
     //清空表格之前的所有内容
     excelEngine.ClearAllData("");
     excelEngine.Close();
     //打开数据库，并保存数据
+    excelEngine.Step2SaveData2(ui->qTableWidget);
     QMessageBox::information(this, "excel提示", "保存成功");
 
 }

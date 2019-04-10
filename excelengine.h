@@ -37,6 +37,7 @@ public:
     bool Step2QueryData1(QTableWidget *tableWidget);
     bool Step2SaveData2(QTableWidget *tableWidget);
 
+
 private:
     QAxObject *pExcel;
     QAxObject *pWorkbooks;

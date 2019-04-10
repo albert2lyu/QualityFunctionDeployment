@@ -78,8 +78,8 @@ Step3_1::Step3_1(QWidget *parent) :
         //ui->qTableWidget->resizeColumnsToContents();
         //ui->qTableWidget->resizeRowsToContents();
 
-        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        qDebug()<<"单元格内容："<<strText;//输出单元格内容
+        //QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
+        //qDebug()<<"单元格内容："<<strText;//输出单元格内容
 
         //设置列标签
         QStringList HStrList;
