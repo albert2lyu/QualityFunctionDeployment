@@ -7,19 +7,26 @@ Step2Data::Step2Data(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step2Data)
 {
-    ui->setupUi(this);
+        ui->setupUi(this);
+        qDebug()<<"Step2Data:ui";
+        int RowNum=10;
+        int ColumnNum=4;
+        //设置列标签
 
-    int RowNum=10;
-    int ColumnNum=4;
-    setWindowTitle(tr("TableWidget"));//设置对话框的标题
+        QStringList HStrList;
+        HStrList.push_back(QString("价值期望名称"));
+        HStrList.push_back(QString("相对重要评级"));
+        int HlableCnt = HStrList.count();
+        ui->qTableWidget->setRowCount(RowNum);//
+        ui->qTableWidget->setColumnCount(HlableCnt);
+        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
+
+        setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
         ui->qTableWidget->setRowCount(RowNum);//设置行数
         //table->setRowCount(RowCount+1);
         //ui->qTableWidget->setRowCount(row_count+1); ;//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
-        QStringList m_Header;
-        m_Header<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
-        ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
         ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
         //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
         ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
@@ -67,21 +74,6 @@ Step2Data::Step2Data(QWidget *parent) :
         }
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
-        //QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        //qDebug()<<"单元格内容："<<strText;//输出单元格内容
-
-        //设置列标签
-        QStringList HStrList;
-        HStrList.push_back(QString("价值期望名称"));
-        HStrList.push_back(QString("相对重要评级"));
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
-        //设置列标签
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
-        QComboBox *comBox = new QComboBox();
-        comBox->addItem("");
-        comBox->addItem("");
 }
 
 Step2Data::~Step2Data()
@@ -93,7 +85,6 @@ void Step2Data::on_pushButton_clicked(){
     qDebug()<<"Step2Data:: on_pushButton_clicked";
     ////从数据库中读取数据
     QExcelEngine excelEngine=*new QExcelEngine();
-    //excelEngine.Step1QueryData(ui->qTableWidget);
     excelEngine.Step2QueryData1(ui->qTableWidget);
     excelEngine.Close();
 

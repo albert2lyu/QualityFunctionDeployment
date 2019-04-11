@@ -8,15 +8,12 @@ Step1::Step1(QWidget *parent) :
     ui(new Ui::Step1)
 {
     ui->setupUi(this);
-
     Step1_1_Page = new Step1_1(this);//实例化窗口页面
     Step1_2_Page = new Step1_2(this);
     ui->stackedWidget->addWidget(Step1_1_Page);
     ui->stackedWidget->addWidget(Step1_2_Page);
     Step1Data_Page = new Step1Data(this);
     ui->stackedWidget_2->addWidget(Step1Data_Page);
-    //ui->stackedWidget->setCurrentWidget(Step1_1_Page);
-   // setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 void Step1::paintEvent(QPaintEvent *)
 {

@@ -56,13 +56,6 @@ bool Sqlite::saveStep1Table(QString valueExpectation, QString valueOperator, QSt
     qDebug()<<"saveStep1Table";
     if(valueExpectation != nullptr && valueOperator != nullptr && expectations != nullptr && stakeholders != nullptr)
     {
-        /*
-            QSqlQuery deleteQuery ;
-            if(!deleteQuery.exec("delete from  'Step1'' "))
-            {
-                qDebug() << "Create createStep1Table Failed!";
-            }
-        */
             QSqlQuery query;
             query.prepare("INSERT INTO Step1 (价值期望名称, 操作符 ,期望值 ,利益相关者) VALUES (:valueExpectation, :valueOperator, :expectations, :stakeholders)");
             query.bindValue(":valueExpectation", valueExpectation.trimmed());
@@ -128,6 +121,7 @@ bool Sqlite::saveStep2_2Table(QString valueExpectationRow, QString valueExpectat
 
 vector<Entity_Step1> Sqlite::queryStep1Data()
 {
+      qDebug()<<"Sqlite::queryStep1Data";
       QSqlQuery query;
       query.exec("SELECT * FROM Step1");
       vector<Entity_Step1>returnList;
@@ -158,4 +152,18 @@ vector<Entity_Step2> Sqlite::queryStep2Data()
     }
     return returnList;
 }
+
+bool Sqlite::deleteStep2Table()
+{
+    qDebug()<<"Sqlite::deleteStep2Table";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step2");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+
 

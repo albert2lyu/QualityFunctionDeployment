@@ -12,23 +12,31 @@ Step2_3::Step2_3(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step2_3)
 {
-        qDebug()<<"Step2_3::ui*****************************************";
         ui->setupUi(this);
-        int RowNum=6;
-        int ColumnNum=6;
+        Sqlite sqlite = * new Sqlite();
+        sqlite.connect();
+        vector<Entity_Step1> returnlist = sqlite.queryStep1Data();
+        if( returnlist.size()!=0)
+        {
+            QStringList HStrList;
+            for(int i=0;i<returnlist.size();i++)
+            {
+                QString valueIndexName = returnlist[i].valueIndexName;
+                HStrList.push_back(valueIndexName);
+            }
+            int HlableCnt = HStrList.count();
+            ui->qTableWidget->setRowCount(HlableCnt);//
+            ui->qTableWidget->setColumnCount(HlableCnt);
+            ui->qTableWidget->setHorizontalHeaderLabels(HStrList);//设置列标签
+            ui->qTableWidget->setVerticalHeaderLabels(HStrList); //设置行标签
+        }
+        int RowNum = returnlist.size();
+        int ColumnNum = returnlist.size();
         setWindowTitle(tr("TableWidget"));//设置对话框的标题
-        ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
-        ui->qTableWidget->setRowCount(RowNum);//设置行数
-        //table->setRowCount(RowCount+1);
-        //ui->qTableWidget->setRowCount(row_count+1); ;//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
-        //QStringList m_Header;
-        //m_Header<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
-        //ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
         ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
         ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
-        //ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);//设置表格选择方式：设置表格为整列选中
         ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
         ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
         setStyleSheet(QString::fromUtf8("border:1px solid black"));
@@ -68,28 +76,7 @@ Step2_3::Step2_3(QWidget *parent) :
         }
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
-        //////////
-        /// \brief sqlite 根据第一步输入数据刻画矩阵
-        ///
-        Sqlite sqlite = * new Sqlite();
-        sqlite.connect();
-        vector<Entity_Step1> returnlist = sqlite.queryStep1Data();
-        QStringList HStrList;
-        for(int i=0;i<=returnlist.size();i++)
-        {
-            HStrList.push_back(returnlist[i].valueIndexName);
-        }
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(HlableCnt);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
-        //设置列标签
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
-        //设置行标签
-        ui->qTableWidget->setVerticalHeaderLabels(HStrList);
-        //QComboBox *comBox = new QComboBox();
-        //comBox->addItem("");
-        //comBox->addItem("");
-    }
+}
 
 Step2_3::~Step2_3()
 {
@@ -170,10 +157,10 @@ void Step2_3::on_pushButton_5_clicked()
     QExcelEngine excelEngine = *new QExcelEngine();
     //清空表格之前的所有内容
     excelEngine.ClearAllData("");
-    excelEngine.Close();
     //打开数据库，并保存数据
     excelEngine.Step2SaveData2(ui->qTableWidget);
     QMessageBox::information(this, "excel提示", "保存成功");
+    excelEngine.Close();
 
 }
 

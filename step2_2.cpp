@@ -12,7 +12,7 @@ Step2_2::Step2_2(QWidget *parent) :
     ui(new Ui::Step2_2)
 {
     ui->setupUi(this);
-
+    qDebug()<<"Step2_2:ui";
     int RowNum=5;
     int ColumnNum=2;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
