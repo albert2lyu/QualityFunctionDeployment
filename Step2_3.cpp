@@ -14,7 +14,15 @@ Step2_3::Step2_3(QWidget *parent) :
     ui(new Ui::Step2_3)
 {
         qDebug()<<"Step2_3::ui";
-        mingwwantcInitialize();
+
+        if(mingwwantcInitialize())
+        {
+            QMessageBox::information(this, "MATLAB", "matlab程序DLL初始化成功");
+        }
+        else
+        {
+            QMessageBox::information(this, "MATLAB", "matlab程序DLL初始化失败");
+        }
         ui->setupUi(this);
         Sqlite sqlite = * new Sqlite();
         sqlite.connect();

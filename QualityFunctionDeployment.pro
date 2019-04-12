@@ -180,19 +180,17 @@ INCLUDEPATH += $$PWD/include
 DEPENDPATH += $$PWD/include
 
 
-INCLUDEPATH += D:/MATLAB/extern/include
-INCLUDEPATH += D:/MATLAB/extern/include/Win64
+INCLUDEPATH +=$$quote(D:/MATLAB2016A/extern/include)
+INCLUDEPATH += $$quote(D:/MATLAB2016A/extern/include/Win64)
+INCLUDEPATH += $$quote(D:/MATLAB2016A/extern/lib/win64/microsoft)
+DEPENDPATH += $$quote(D:/MATLAB2016A/extern/lib/win64/microsoft)
 
-INCLUDEPATH += D:/MATLAB/extern/lib/win64/microsoft
-DEPENDPATH += D:/MATLAB/extern/lib/win64/microsoft
-
-win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -llibmex
-win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -llibmx
-win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -llibmat
-win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -llibeng
-win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -lmclmcr
-win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -lmclmcrrt
-
+LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -llibmex
+LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -llibmx
+LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -llibmat
+LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -llibeng
+LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -lmclmcr
+LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -lmclmcrrt
 
 win32: LIBS += -L$$PWD/include/ -lmingwwantc
 
