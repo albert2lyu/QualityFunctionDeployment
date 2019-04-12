@@ -8,10 +8,13 @@
 #include <QFileDialog>
 #include "sqlite.h"
 #include "entity_step1.h"
+#include "mingwwantc.h"
 Step2_3::Step2_3(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step2_3)
 {
+        qDebug()<<"Step2_3::ui";
+        mingwwantcInitialize();
         ui->setupUi(this);
         Sqlite sqlite = * new Sqlite();
         sqlite.connect();

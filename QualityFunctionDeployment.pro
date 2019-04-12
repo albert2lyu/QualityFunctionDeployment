@@ -119,7 +119,8 @@ HEADERS += \
     sqlite.h \
     entity_step1.h \
     entity_step2.h \
-    entity_step2_2.h
+    entity_step2_2.h \
+    include/mingwwantc.h
 
 FORMS += \
     mainwindow.ui \
@@ -173,3 +174,27 @@ QMAKE_CXXFLAGS += -std=c++0x
     README.md
 QT       += core gui sql
 
+
+
+INCLUDEPATH += $$PWD/include
+DEPENDPATH += $$PWD/include
+
+
+INCLUDEPATH += D:/MATLAB/extern/include
+INCLUDEPATH += D:/MATLAB/extern/include/Win64
+
+INCLUDEPATH += D:/MATLAB/extern/lib/win64/microsoft
+DEPENDPATH += D:/MATLAB/extern/lib/win64/microsoft
+
+win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -llibmex
+win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -llibmx
+win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -llibmat
+win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -llibeng
+win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -lmclmcr
+win32: LIBS += -LD:/MATLAB/extern/lib/win64/microsoft/ -lmclmcrrt
+
+
+win32: LIBS += -L$$PWD/include/ -lmingwwantc
+
+INCLUDEPATH += $$PWD/include
+DEPENDPATH += $$PWD/include
