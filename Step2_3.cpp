@@ -1,6 +1,6 @@
 #include "Step2_3.h"
 #include "ui_Step2_3.h"
-//#include "excelengine.h"
+
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QDebug>
@@ -8,21 +8,16 @@
 #include <QFileDialog>
 #include "sqlite.h"
 #include "entity_step1.h"
-#include "mingwwantc.h"
+#include "matlabfunction.h"
+#include "matBasic.h"
+#include "engine.h"
+#include <QLibrary>
+
 Step2_3::Step2_3(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step2_3)
 {
         qDebug()<<"Step2_3::ui";
-
-        if(mingwwantcInitialize())
-        {
-            QMessageBox::information(this, "MATLAB", "matlab程序DLL初始化成功");
-        }
-        else
-        {
-            QMessageBox::information(this, "MATLAB", "matlab程序DLL初始化失败");
-        }
         ui->setupUi(this);
         Sqlite sqlite = * new Sqlite();
         sqlite.connect();
@@ -162,6 +157,9 @@ void Step2_3::on_pushButton_4_clicked()
     }
 
 }
+typedef void  (*Pcom_matFahp)(int , mxArray**,  mxArray*);
+typedef bool  (*Pcom_matBasicsssInitialize)(void);
+
 void Step2_3::on_pushButton_5_clicked()
 {
     qDebug()<<"Step2_3::on_pushButton_5_clicked";
@@ -169,10 +167,58 @@ void Step2_3::on_pushButton_5_clicked()
     //清空表格之前的所有内容
     excelEngine.ClearAllData("");
     //打开数据库，并保存数据
-    excelEngine.Step2SaveData2(ui->qTableWidget);
-    QMessageBox::information(this, "excel提示", "保存成功");
-    excelEngine.Close();
+    //excelEngine.Step2SaveData2(ui->qTableWidget);
+     QLibrary mylib("matBasic.DLL");
+     if(mylib.load())
+     {
+         QMessageBox::information(this, "matlab程序DLL初始化成功", "matlab程序DLL初始化成功");
+     }
+     Pcom_matBasicsssInitialize pcom_matBasicsssInitialize =
+            (Pcom_matBasicsssInitialize)mylib.resolve("matBasicInitialize");
+     if(pcom_matBasicsssInitialize)
+     {
+         //QMessageBox::information(this, "Initialize", "Initialize");
+         pcom_matBasicsssInitialize();
+     }
+     int rowCntA = ui->qTableWidget->rowCount();
+
+     int colCntA = ui->qTableWidget->columnCount();
+
+     if(rowCntA != colCntA)
+     {
+         QMessageBox::information(this,"error","矩阵A行列不一致，不能计算");
+     }
+     double arrayA [rowCntA][colCntA];
+       for(int i=0;i<rowCntA;i++) //逐列读取，序列化存储到一维数组
+          for (int j=0; j<colCntA;j++)
+         {
+            arrayA[i][j]=ui->qTableWidget->item(j,i)->text().toDouble();
+         }
+
+     mxArray *matrixA = mxCreateDoubleMatrix(rowCntA,colCntA,mxREAL);//定义数组，行，列，double类型
+     memcpy((void *)mxGetPr(matrixA),(void *)arrayA,sizeof(arrayA));
+
+     int   rowCntC=rowCntA;
+     int   colCntC=1;
+     mxArray *matrixC = mxCreateDoubleMatrix(rowCntC,colCntC,mxREAL);
+     int nargout=1;//输出变量个数
+     Pcom_matFahp pcom_matFahp = (Pcom_matFahp) mylib.resolve("mlfMatFahp");
+     if(pcom_matFahp)
+     {
+
+               QMessageBox::information(this, "matFahp", "matFahp");
+               pcom_matFahp(nargout,&matrixC,matrixA);
+               double * pr = mxGetPr(matrixC);
+               QMessageBox::information(this,"",QString::number(mxGetM(matrixC)));
+               QMessageBox::information(this,"",QString::number(pr[0]));
+               QMessageBox::information(this,"",QString::number(pr[1]));
+     }
+     QMessageBox::information(this, "end", "end");
+     excelEngine.Close();
 
 }
-
+//int mxGetM(const mxArray *array_ptr); //返回array_ptr对应数组第一维的元素个数（行数）
+//int mxGetN(const mxArray *array_ptr); //返回array_ptr对应数组其它维的元素个数，对于矩阵来说是列数。
+//double * mxGetPr(const mxArray *array_ptr); //返回数组array_ptr的实部指针
+//double * mxGetPi(const mxArray *array_ptr); //返回数组array_ptr的虚部指针
 

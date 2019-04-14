@@ -71,7 +71,8 @@ SOURCES += \
     sqlite.cpp \
     entity_step1.cpp \
     entity_step2.cpp \
-    entity_step2_2.cpp
+    entity_step2_2.cpp \
+    matlabfunction.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -120,7 +121,9 @@ HEADERS += \
     entity_step1.h \
     entity_step2.h \
     entity_step2_2.h \
-    include/mingwwantc.h
+    include/matBasicsss.h \
+    matlabfunction.h \
+    include/matBasic.h
 
 FORMS += \
     mainwindow.ui \
@@ -192,7 +195,9 @@ LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -llibeng
 LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -lmclmcr
 LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -lmclmcrrt
 
-win32: LIBS += -L$$PWD/include/ -lmingwwantc
+
+
+win32: LIBS += -L$$PWD/include/ -lmatBasic
 
 INCLUDEPATH += $$PWD/include
 DEPENDPATH += $$PWD/include

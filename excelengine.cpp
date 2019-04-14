@@ -484,6 +484,10 @@ bool QExcelEngine::Step2SaveData2(QTableWidget *tableWidget)
 
     return true;
 }
+bool QExcelEngine::Step2MatBasicsss(QTableWidget *tableWidget)
+{
+
+}
 
 /**
   *@brief 从指定的xls文件中把数据导入到tableWidget中
