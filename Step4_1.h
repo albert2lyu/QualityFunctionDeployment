@@ -10,6 +10,10 @@
 #include<QAxObject>
 #include <QDesktopServices>
 #include <excelengine.h>
+#include<QVBoxLayout>
+#include<QButtonGroup>
+#include<QRadioButton>
+#include<QCheckBox>
 namespace Ui {
 class Step4_1;
 }

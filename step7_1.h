@@ -11,6 +11,10 @@
 #include<QAxObject>
 #include <QDesktopServices>
 #include "excelengine.h"
+#include<QVBoxLayout>
+#include<QRadioButton>
+#include<QButtonGroup>
+#include<QLineEdit>
 namespace Ui {
 class Step7_1;
 }
