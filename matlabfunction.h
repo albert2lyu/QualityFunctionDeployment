@@ -12,6 +12,7 @@ class MatlabFunction
 public:
     MatlabFunction();
     bool matBasi(QTableWidget *tableWidget);
+    bool mlfStep3(QTableWidget *tableWidget);
 };
 
 #endif // MATLABFUNCTION_H

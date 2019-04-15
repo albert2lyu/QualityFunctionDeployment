@@ -452,9 +452,9 @@ bool QExcelEngine::Step2QueryData1(QTableWidget *tableWidget)
     tableWidget->setHorizontalHeaderLabels(header);
     for(int i =0;i<returnList.size();i++)
     {
-
         tableWidget->setItem(i,0,new QTableWidgetItem(returnList[i].valueExpectation));
-        tableWidget->setItem(i,1,new QTableWidgetItem(returnList[i].relativeImportanceRating));
+        double retuC =returnList[i].relativeImportanceRating.toDouble();
+        tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(retuC,'d',3)));
     }
     return true;
 }
@@ -484,9 +484,51 @@ bool QExcelEngine::Step2SaveData2(QTableWidget *tableWidget)
 
     return true;
 }
-bool QExcelEngine::Step2MatBasicsss(QTableWidget *tableWidget)
+bool QExcelEngine::Step3_2SaveData(QTableWidget *tableWidget)
 {
-
+    qDebug()<<"QExcelEngine::Step3_2SaveData";
+    Sqlite sqlite = * new Sqlite();
+    sqlite.connect();
+    sqlite.deleteStep3_2Data();
+    int tableR = tableWidget->rowCount();
+    int tableC = tableWidget->columnCount();
+    for(int i=0;i<tableR;i++)
+    {
+        for(int j=1; j<tableC; j++)
+        {
+            QString competitiveEvaluation = tableWidget->item(i,j)->data(Qt::DisplayRole).toString();
+            qDebug()<<"QExcelEngine::Step3_2SaveData::competitiveEvaluation"<<competitiveEvaluation;
+            if(competitiveEvaluation != nullptr)
+            {
+                 sqlite.saveStep3_2Table(QString::number(i),QString::number(j-1),competitiveEvaluation);
+            }
+        }
+    }
+    return true;
+}
+bool QExcelEngine::Step3_3SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step3_3SaveData";
+    Sqlite sqlite = * new Sqlite();
+    sqlite.connect();
+    sqlite.deleteStep3_3Data();
+    int tableR = tableWidget->rowCount();
+    qDebug()<<"QExcelEngine::Step3_3SaveData::tableR"<<tableR;
+    int tableC = tableWidget->columnCount();
+    qDebug()<<"QExcelEngine::Step3_3SaveData::tableC"<<tableC;
+    for(int i=0;i<tableR;i++)
+    {
+        for(int j=1; j<tableC; j++)
+        {
+            QString expectedRank = tableWidget->item(i,j)->data(Qt::DisplayRole).toString();
+            qDebug()<<"QExcelEngine::Step3_3SaveData::expectedRank"<<expectedRank;
+            if(expectedRank != nullptr)
+            {
+                 sqlite.saveStep3_3Table(QString::number(i),QString::number(j-1),expectedRank);
+            }
+        }
+    }
+    return true;
 }
 
 /**

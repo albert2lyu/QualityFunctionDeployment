@@ -72,7 +72,9 @@ SOURCES += \
     entity_step1.cpp \
     entity_step2.cpp \
     entity_step2_2.cpp \
-    matlabfunction.cpp
+    matlabfunction.cpp \
+    entity_step3_2.cpp \
+    entity_step3_3.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -123,7 +125,10 @@ HEADERS += \
     entity_step2_2.h \
     include/matBasicsss.h \
     matlabfunction.h \
-    include/matBasic.h
+    include/matBasic.h \
+    entity_step3_2.h \
+    include/step3.h \
+    entity_step3_3.h
 
 FORMS += \
     mainwindow.ui \
@@ -198,6 +203,11 @@ LIBS += -LD:/MATLAB2016A/extern/lib/win64/microsoft/ -lmclmcrrt
 
 
 win32: LIBS += -L$$PWD/include/ -lmatBasic
+
+INCLUDEPATH += $$PWD/include
+DEPENDPATH += $$PWD/include
+
+win32: LIBS += -L$$PWD/include/ -lstep3
 
 INCLUDEPATH += $$PWD/include
 DEPENDPATH += $$PWD/include

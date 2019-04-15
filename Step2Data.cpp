@@ -12,7 +12,6 @@ Step2Data::Step2Data(QWidget *parent) :
         int RowNum=10;
         int ColumnNum=4;
         //设置列标签
-
         QStringList HStrList;
         HStrList.push_back(QString("价值期望名称"));
         HStrList.push_back(QString("相对重要评级"));

@@ -2,6 +2,7 @@
 #include <QtSql>
 #include <QString>
 #include "entity_step1.h"
+#include "entity_step3_3.h"
 Sqlite::Sqlite()
 {
 
@@ -51,6 +52,18 @@ bool Sqlite::createStep2_2Table()
     }
     return true;
 }
+bool Sqlite::createStep3_2Table()
+{
+    qDebug()<<"Sqlite::createStep3_2Table";
+    QSqlQuery query;
+    if(!query.exec("CREATE TABLE `Step3_2` ( `row` varchar(255), `rank` varchar(255), `competitiveEvaluation` double )"))
+    {
+        qDebug() << "Create createStep3_2 Failed!";
+        return false;
+    }
+    return true;
+}
+
 bool Sqlite::saveStep1Table(QString valueExpectation, QString valueOperator, QString expectations, QString stakeholders)
 {
     qDebug()<<"saveStep1Table";
@@ -76,13 +89,34 @@ bool Sqlite::saveStep1Table(QString valueExpectation, QString valueOperator, QSt
 }
 bool Sqlite::saveStep2Table(QString valueIndexName, QString relativeImportanceRating)
 {
-    qDebug()<<"Sqlite::saveStep2Table";
+    qDebug()<<"Sqlite::saveStep2TableQString";
     if(valueIndexName != nullptr && relativeImportanceRating != nullptr )
     {
             QSqlQuery query;
             query.prepare("INSERT INTO Step2 (价值指标名称, 相对重要评级) VALUES (:valueIndexName, :relativeImportanceRating)");
             query.bindValue(":valueIndexName", valueIndexName.trimmed());
             query.bindValue(":relativeImportanceRating", relativeImportanceRating.trimmed());
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool Sqlite::saveStep2TableDouble(QString valueIndexName, double relativeImportanceRating)
+{
+    qDebug()<<"Sqlite::saveStep2Tabledouble";
+    if(valueIndexName != nullptr )
+    {
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step2 (价值指标名称, 相对重要评级) VALUES (:valueIndexName, :relativeImportanceRating)");
+            query.bindValue(":valueIndexName", valueIndexName.trimmed());
+            query.bindValue(":relativeImportanceRating", relativeImportanceRating);
             if(!query.exec())
             {
                 return false;
@@ -106,6 +140,50 @@ bool Sqlite::saveStep2_2Table(QString valueExpectationRow, QString valueExpectat
             query.bindValue(":valueExpectationRow", valueExpectationRow.trimmed());
             query.bindValue(":valueExpectationRank", valueExpectationRank.trimmed());
             query.bindValue(":relativeImportanceRating", relativeImportanceRating.trimmed());
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool Sqlite::saveStep3_2Table(QString valueExpectationRow, QString valueExpectationRank, QString competitiveEvaluation)
+{
+    qDebug()<<"Sqlite::saveStep2_2Table";
+    if(valueExpectationRow != nullptr && valueExpectationRank != nullptr && competitiveEvaluation != nullptr)
+    {
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step3_2 (row, rank,competitiveEvaluation) VALUES (:valueExpectationRow, :valueExpectationRank,:competitiveEvaluation)");
+            query.bindValue(":valueExpectationRow", valueExpectationRow.trimmed());
+            query.bindValue(":valueExpectationRank", valueExpectationRank.trimmed());
+            query.bindValue(":competitiveEvaluation", competitiveEvaluation.trimmed());
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool Sqlite::saveStep3_3Table(QString valueExpectationRow, QString valueExpectationRank, QString expectedRank)
+{
+    qDebug()<<"Sqlite::saveStep3_3Table";
+    if(valueExpectationRow != nullptr && valueExpectationRank != nullptr && expectedRank != nullptr)
+    {
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step3_3 (row, rank,expectedRank) VALUES (:valueExpectationRow, :valueExpectationRank,:expectedRank)");
+            query.bindValue(":valueExpectationRow", valueExpectationRow.trimmed());
+            query.bindValue(":valueExpectationRank", valueExpectationRank.trimmed());
+            query.bindValue(":expectedRank", expectedRank.trimmed());
             if(!query.exec())
             {
                 return false;
@@ -152,6 +230,39 @@ vector<Entity_Step2> Sqlite::queryStep2Data()
     }
     return returnList;
 }
+vector<Entity_Step3_2> Sqlite::queryStep3_2Data()
+{
+    qDebug()<<"Sqlite::queryStep3_2Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step3_2");
+    vector<Entity_Step3_2>returnList;
+    while(query.next())
+    {
+        Entity_Step3_2 entity_Step3_2;
+        entity_Step3_2.valueExpectationRow = query.value(0).toString();
+        entity_Step3_2.valueExpectationRank = query.value(1).toString();
+        entity_Step3_2.competitiveEvaluation = query.value(2).toString();
+        returnList.push_back(entity_Step3_2);
+    }
+    return returnList;
+}
+
+vector<Entity_Step3_3> Sqlite::queryStep3_3Data()
+{
+    qDebug()<<"Sqlite::queryStep3_2Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step3_2");
+    vector<Entity_Step3_3>returnList;
+    while(query.next())
+    {
+        Entity_Step3_3 entity_Step3_3;
+        entity_Step3_3.valueExpectationRow = query.value(0).toString();
+        entity_Step3_3.valueExpectationRank = query.value(1).toString();
+        entity_Step3_3.expectedRank = query.value(2).toString();
+        returnList.push_back(entity_Step3_3);
+    }
+    return returnList;
+}
 
 bool Sqlite::deleteStep2Table()
 {
@@ -165,5 +276,28 @@ bool Sqlite::deleteStep2Table()
     query.finish();
     return true;
 }
-
+bool Sqlite::deleteStep3_2Data()
+{
+    qDebug()<<"Sqlite::deleteStep3_2Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step3_2");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+bool Sqlite::deleteStep3_3Data()
+{
+    qDebug()<<"Sqlite::deleteStep3_3Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step3_3");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
 

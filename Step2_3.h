@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QTableWidget>
 #include <QPainter>
-#include<QAxObject>
+#include <QAxObject>
 #include <QDesktopServices>
 #include <excelengine.h>
 namespace Ui {
