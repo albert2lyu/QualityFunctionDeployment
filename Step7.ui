@@ -43,7 +43,7 @@
       <x>210</x>
       <y>163</y>
       <width>297</width>
-      <height>154</height>
+      <height>77</height>
      </rect>
     </property>
     <property name="font">
@@ -54,7 +54,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Step7 确定价值指标与全局质量参数间的定量关系</string>
+     <string>输入数据</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -73,14 +73,14 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>330</y>
-      <width>75</width>
-      <height>23</height>
+      <x>210</x>
+      <y>240</y>
+      <width>297</width>
+      <height>77</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>确定单一对应关系</string>
     </property>
    </widget>
   </widget>

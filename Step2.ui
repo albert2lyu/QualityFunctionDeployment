@@ -43,7 +43,7 @@
       <x>107</x>
       <y>163</y>
       <width>95</width>
-      <height>154</height>
+      <height>77</height>
      </rect>
     </property>
     <property name="font">
@@ -54,9 +54,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Step2
-确定价值指标的
-相对重要性评级</string>
+     <string>1.直接输入</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -75,14 +73,14 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>350</y>
-      <width>75</width>
-      <height>23</height>
+      <x>107</x>
+      <y>240</y>
+      <width>95</width>
+      <height>77</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>2.FAHP计算</string>
     </property>
    </widget>
   </widget>

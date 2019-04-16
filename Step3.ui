@@ -43,7 +43,7 @@
       <x>518</x>
       <y>163</y>
       <width>198</width>
-      <height>154</height>
+      <height>50</height>
      </rect>
     </property>
     <property name="font">
@@ -75,27 +75,27 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>330</y>
-      <width>75</width>
-      <height>23</height>
+      <x>518</x>
+      <y>213</y>
+      <width>198</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="text">
-     <string>2</string>
+     <string>竞争性矩阵</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>330</y>
-      <width>75</width>
-      <height>23</height>
+      <x>518</x>
+      <y>263</y>
+      <width>198</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>期望位次与关键度</string>
     </property>
    </widget>
   </widget>
