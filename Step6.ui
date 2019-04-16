@@ -42,7 +42,7 @@
      <rect>
       <x>280</x>
       <y>30</y>
-      <width>151</width>
+      <width>75</width>
       <height>21</height>
      </rect>
     </property>
@@ -54,7 +54,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Step6 确定相关性矩阵</string>
+     <string>输入数据</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -73,14 +73,22 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>330</y>
-      <width>75</width>
-      <height>23</height>
+      <x>356</x>
+      <y>30</y>
+      <width>81</width>
+      <height>21</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>5</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>确定单一对应关系</string>
     </property>
    </widget>
   </widget>

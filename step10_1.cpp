@@ -22,11 +22,11 @@ Step10_1::Step10_1(QWidget *parent) :
         //ui->qTableWidget->setRowCount(row_count+1); ;//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
         QStringList m_Header;
-        m_Header<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
-        ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
-        ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
+        m_Header<<QString("价值期望名称")<<QString("期望值");
+        ui->qTableWidget->setVerticalHeaderLabels(m_Header);//添加横向表头
+        ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
         //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
-       ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
+       ui->qTableWidget->horizontalHeader()->setVisible(false);//横向表头可视化
         //ui->tableWidget->setShowGrid(false);//隐藏栅格
         //ui->qTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//设置编辑方式：禁止编辑表格
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
