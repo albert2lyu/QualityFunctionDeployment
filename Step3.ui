@@ -82,20 +82,33 @@
      </rect>
     </property>
     <property name="text">
-     <string>2</string>
+     <string>竞争性矩阵</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>330</y>
+      <x>10</x>
+      <y>360</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>期望位次</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>390</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>关键度</string>
     </property>
    </widget>
   </widget>

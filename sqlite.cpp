@@ -196,6 +196,29 @@ bool Sqlite::saveStep3_3Table(QString valueExpectationRow, QString valueExpectat
         return false;
     }
 }
+//CREATE TABLE `Step3_4` ( `Row` varchar(255), `rank` varchar(255), `criticality` double )
+bool Sqlite::saveStep3_4Table(QString valueExpectationRow, QString valueExpectationRank, QString criticality)
+{
+    qDebug()<<"Sqlite::saveStep3_4Table";
+    if(valueExpectationRow != nullptr && valueExpectationRank != nullptr && criticality != nullptr)
+    {
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step3_4 (Row, rank,criticality) VALUES (:Row, :rank,:criticality)");
+            query.bindValue(":Row", valueExpectationRow.trimmed());
+            query.bindValue(":rank", valueExpectationRank.trimmed());
+            query.bindValue(":criticality", criticality.trimmed());
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 vector<Entity_Step1> Sqlite::queryStep1Data()
 {
@@ -249,9 +272,9 @@ vector<Entity_Step3_2> Sqlite::queryStep3_2Data()
 
 vector<Entity_Step3_3> Sqlite::queryStep3_3Data()
 {
-    qDebug()<<"Sqlite::queryStep3_2Data";
+    qDebug()<<"Sqlite::queryStep3_3Data";
     QSqlQuery query;
-    query.exec("SELECT * FROM Step3_2");
+    query.exec("SELECT * FROM Step3_3");
     vector<Entity_Step3_3>returnList;
     while(query.next())
     {
@@ -260,6 +283,22 @@ vector<Entity_Step3_3> Sqlite::queryStep3_3Data()
         entity_Step3_3.valueExpectationRank = query.value(1).toString();
         entity_Step3_3.expectedRank = query.value(2).toString();
         returnList.push_back(entity_Step3_3);
+    }
+    return returnList;
+}
+vector<Entity_Step3_4> Sqlite::queryStep3_4Data()
+{
+    qDebug()<<"Sqlite::queryStep3_4Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step3_4");
+    vector<Entity_Step3_4>returnList;
+    while(query.next())
+    {
+        Entity_Step3_4 entity_Step3_4;
+        entity_Step3_4.valueExpectationRow = query.value(0).toString();
+        entity_Step3_4.valueExpectationRank = query.value(1).toString();
+        entity_Step3_4.criticality = query.value(2).toString();
+        returnList.push_back(entity_Step3_4);
     }
     return returnList;
 }
@@ -293,6 +332,18 @@ bool Sqlite::deleteStep3_3Data()
     qDebug()<<"Sqlite::deleteStep3_3Data";
     QSqlQuery query;
     query.exec("DELETE FROM Step3_3");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+bool Sqlite::deleteStep3_4Data()
+{
+    qDebug()<<"Sqlite::deleteStep3_4Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step3_4");
     if(!query.exec())
     {
         return false;

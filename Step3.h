@@ -8,6 +8,7 @@
 #include "Step3_2.h"
 #include "Step3_3.h"
 #include "Step3Data.h"
+#include "step3_4.h"
 namespace Ui {
 class Step3;
 }
@@ -25,11 +26,13 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
+    void on_pushButton_5_clicked();
 private:
     Ui::Step3 *ui;
     Step3_1 *Step3_1_Page;//创建窗口页面指针
     Step3_2 *Step3_2_Page;
     Step3_3 *Step3_3_Page;
+    Step3_4 *Step3_4_Page;
     Step3Data *Step3Data_Page;
 };
 

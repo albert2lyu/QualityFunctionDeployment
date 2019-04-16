@@ -74,7 +74,9 @@ SOURCES += \
     entity_step2_2.cpp \
     matlabfunction.cpp \
     entity_step3_2.cpp \
-    entity_step3_3.cpp
+    entity_step3_3.cpp \
+    step3_4.cpp \
+    entity_step3_4.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -128,7 +130,9 @@ HEADERS += \
     include/matBasic.h \
     entity_step3_2.h \
     include/step3.h \
-    entity_step3_3.h
+    entity_step3_3.h \
+    step3_4.h \
+    entity_step3_4.h
 
 FORMS += \
     mainwindow.ui \
@@ -170,7 +174,8 @@ FORMS += \
     Step9_2.ui \
     Step9_3.ui \
     Step3_3.ui \
-    Step2_3.ui
+    Step2_3.ui \
+    step3_4.ui
 
 
 

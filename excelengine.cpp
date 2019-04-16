@@ -530,6 +530,31 @@ bool QExcelEngine::Step3_3SaveData(QTableWidget *tableWidget)
     }
     return true;
 }
+bool QExcelEngine::Step3_4SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step3_4SaveData";
+    Sqlite sqlite = * new Sqlite();
+    sqlite.connect();
+    sqlite.deleteStep3_4Data();
+    int tableR = tableWidget->rowCount();
+    qDebug()<<"QExcelEngine::Step3_4SaveData::tableR"<<tableR;
+    int tableC = tableWidget->columnCount();
+    qDebug()<<"QExcelEngine::Step3_4SaveData::tableC"<<tableC;
+    for(int i=0;i<tableR;i++)
+    {
+        for(int j=1; j<tableC; j++)
+        {
+            QString criticality = tableWidget->item(i,j)->data(Qt::DisplayRole).toString();
+            qDebug()<<"QExcelEngine::Step3_3SaveData::expectedRank"<<criticality;
+            if(criticality != nullptr)
+            {
+                 sqlite.saveStep3_4Table(QString::number(i),QString::number(j-1),criticality);
+            }
+        }
+    }
+    return true;
+}
+
 
 /**
   *@brief 从指定的xls文件中把数据导入到tableWidget中
