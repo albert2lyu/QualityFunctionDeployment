@@ -88,29 +88,6 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-<<<<<<< HEAD
-      <x>10</x>
-      <y>360</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>期望位次</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_5">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>390</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>关键度</string>
-=======
       <x>518</x>
       <y>263</y>
       <width>198</width>
@@ -119,7 +96,6 @@
     </property>
     <property name="text">
      <string>期望位次与关键度</string>
->>>>>>> origin/master
     </property>
    </widget>
   </widget>

@@ -12,7 +12,6 @@ Step4_1::Step4_1(QWidget *parent) :
     ui(new Ui::Step4_1)
 {
     ui->setupUi(this);
-
     int RowNum=6;
     int ColumnNum=5;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
@@ -62,7 +61,7 @@ Step4_1::Step4_1(QWidget *parent) :
     {
         for(int columns=0;columns<ColumnNum;columns++)
         {
-            ui->qTableWidget->setColumnWidth(columns,705/ColumnNum);//hangkuan
+            ui->qTableWidget->setColumnWidth(columns,360/ColumnNum);//hangkuan
             ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
             //ui->qTableWidget->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
             ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
@@ -108,7 +107,7 @@ Step4_1::Step4_1(QWidget *parent) :
         tmp->addItem("同样重要于");
         Combox.append(tmp);
     }
-    QVector<QWidget*> RadioButton;
+    QVector<QWidget*> CheckBox;
     for(int i=0;i<ColumnNum*RowNum;i++)
     {
         QWidget *widget1 = new QWidget();
@@ -120,65 +119,88 @@ Step4_1::Step4_1(QWidget *parent) :
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         // 设置互斥
-
-       /* for (int i = 0; i < 3; ++i)
-        {
-            QRadioButton *pButton = new QRadioButton(this);
-            // 设置文本
-            pButton->setText(QString::fromUtf8("切换%1").arg(i + 1));
-            pButton->setStyleSheet("QPushButton{color:white; background-color:transparent;}");
-            verticalLayout->addWidget(pButton);
-            m_pButtonGroup->addButton(pButton);
-        }*/
         QCheckBox *pButton = new QCheckBox(this);
         pButton->setText(QString::fromUtf8("切换1"));
         pButton->setStyleSheet("QPushButton{color:white; background-color:transparent;}");
         verticalLayout->addWidget(pButton);
-        RadioButton.append(widget1);
-    }
-    QVector<QWidget*> ThreeCombox;
-    int ss=0;
-    for(int i=0;i<ColumnNum*RowNum;i++)
-    {
-        QWidget *widget1 = new QWidget();
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(10, 8, 101, 31));
-        QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
-        verticalLayout->setSpacing(0);
-        //verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        for (int i=0;i<3;i++) {
-            verticalLayout->addWidget(Combox.at(ss));ss++;
-        }
-        ThreeCombox.append(widget1);
+        CheckBox.append(widget1);
     }
     int x=0;
     for (int i=0;i<RowNum;i++) {
         for(int j=0;j<ColumnNum;j++)
         {
-          //  ui->qTableWidget->setCellWidget(i,j,Combox.at(x));
-            ui->qTableWidget->setCellWidget(i,j,RadioButton.at(x));
-           // ui->qTableWidget->setCellWidget(i,j,ThreeCombox.at(x));
+            ui->qTableWidget->setCellWidget(i,j,CheckBox.at(x));
             x++;
         }
     }
     x=0;
-    //QWidget *widget = ui->qTableWidget->cellWidget(0,1);
-    /* QList<QRadioButton*> rad = widget->findChildren<QRadioButton *>();
-    for(int i = 0; i<rad.count();i++)
+    int RowNum_2=6;
+    int ColumnNum_2=5;
+    ui->qTableWidget_2->setColumnCount(ColumnNum_2);//设置列数
+    ui->qTableWidget_2->setRowCount(RowNum_2);//设置行数
+    ui->qTableWidget_2->setWindowTitle("qTableWidget_2");
+    QStringList m_Header_2;
+    m_Header_2<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
+    ui->qTableWidget_2->setVerticalHeaderLabels(m_Header_2);//添加横向表头
+    ui->qTableWidget_2->verticalHeader()->setVisible(false);//纵向表头可视化
+    ui->qTableWidget_2->horizontalHeader()->setVisible(false);//横向表头可视化
+
+    ui->qTableWidget_2->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
+    for(int rows=0;rows<RowNum_2;rows++)
     {
-        if(rad.at(i)->isChecked())
+        for(int columns=0;columns<ColumnNum_2;columns++)
         {
-            qDebug()<<rad.at(i)->objectName();
+            if(columns==0)
+            {
+                ui->qTableWidget_2->setItem(rows,columns,new QTableWidgetItem(""));
+            }
+            else if(columns==1)
+            {
+                ui->qTableWidget_2->setItem(rows,columns,new QTableWidgetItem(""));
+            }
+            else if(columns==2)
+            {
+                ui->qTableWidget_2->setItem(rows,columns,new QTableWidgetItem(""));
+            }
+            else
+            {
+                ui->qTableWidget_2->setItem(rows,columns,new QTableWidgetItem(""));
+            }
         }
-    }*/
+    }
+    for(int rows=0;rows<RowNum_2;rows++)
+    {
+        for(int columns=0;columns<ColumnNum_2;columns++)
+        {
+            ui->qTableWidget_2->setColumnWidth(columns,360/ColumnNum_2);//hangkuan
+            ui->qTableWidget_2->setRowHeight(rows,335/RowNum_2);//列宽
+            //ui->qTableWidget_2->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
+            ui->qTableWidget_2->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
+            ui->qTableWidget_2->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
+            ui->qTableWidget_2->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
+            ui->qTableWidget_2->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
+        }
+    }
+    ui->qTableWidget_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
+    ui->qTableWidget_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
+    //设置行和列的大小设为与内容相匹配（如果设置了宽高就不要用了）
 
 
-    //ui->qTableWidget->removeColumn(0);//删除列
-    //ui->qTableWidget->removeRow(0);//删除行
-    //ui->qTableWidget->clear();//清空掉表格内所有内容，包括标题头
-    //ui->qTableWidget->clearContents();//这个清空所有内容不包括标题头
+    QString strText_2 = ui->qTableWidget_2->item(1, 1)->text();//获取单元格的内容
+    qDebug()<<"单元格内容："<<strText_2;//输出单元格内容
+
+    //设置列标签
+    QStringList HStrList_2;
+    HStrList_2.push_back(QString("质量参数1"));
+    HStrList_2.push_back(QString("质量参数2"));
+    HStrList_2.push_back(QString("价值指标1"));
+    HStrList_2.push_back(QString("价值指标2"));
+    int HlableCnt_2 = HStrList_2.count();
+    ui->qTableWidget_2->setRowCount(RowNum_2);//
+    ui->qTableWidget_2->setColumnCount(HlableCnt_2);
+
+    ui->qTableWidget_2->setHorizontalHeaderLabels(HStrList_2);
+
     }
 
 Step4_1::~Step4_1()
@@ -200,23 +222,23 @@ void Step4_1::on_pushButton_clicked()
 {
 //    QAbstractItemModel *model = ui->tableWidget->model();
 //     model->insertRow(model->rowCount());
-    int cols=ui->qTableWidget->columnCount();
-    int rows=ui->qTableWidget->rowCount();
+    int cols=ui->qTableWidget_2->columnCount();
+    int rows=ui->qTableWidget_2->rowCount();
     qDebug()<<rows;
-    ui->qTableWidget->insertRow(rows);
+    ui->qTableWidget_2->insertRow(rows);
     for(int i=0;i<cols;i++)
     {
        // ui->qTableWidget->setItem(rows,i,new QTableWidgetItem("new"+QString::number(rows)));
-        ui->qTableWidget->setItem(rows,i,new QTableWidgetItem(""));
+        ui->qTableWidget_2->setItem(rows,i,new QTableWidgetItem(""));
     }
-    ui->qTableWidget->selectRow(rows);
+    ui->qTableWidget_2->selectRow(rows);
 }
 
 void Step4_1::on_pushButton_2_clicked()
 {
-    QTableWidgetItem * item = ui->qTableWidget->currentItem();
+    QTableWidgetItem * item = ui->qTableWidget_2->currentItem();
     if(item==Q_NULLPTR)return;
-    ui->qTableWidget->removeRow(item->row());
+    ui->qTableWidget_2->removeRow(item->row());
 }
 //将表格数据写入文件
 void Step4_1::on_pushButton_3_clicked()
@@ -240,7 +262,7 @@ void Step4_1::on_pushButton_3_clicked()
     excelEngine.Close();
     //打开数据库，并保存数据
     excelEngine.Open(filename, 1, false);
-    excelEngine.SaveDataFrTable(ui->qTableWidget);
+    excelEngine.SaveDataFrTable(ui->qTableWidget_2);
     excelEngine.Close();
 
     QMessageBox::information(this, "excel提示", "导出成功");
@@ -266,7 +288,7 @@ void Step4_1::on_pushButton_4_clicked()
             QMessageBox::information(this, "excel提示", "文件打开失败");
             return;
         }
-        excelEngine.ReadDataToTable(ui->qTableWidget);
+        excelEngine.ReadDataToTable(ui->qTableWidget_2);
         excelEngine.Close();
    QMessageBox::information(this, "excel提示", "导入成功");
 }
@@ -304,7 +326,7 @@ void Step4_1::on_pushButton_5_clicked()
   excelEngine.Close();
   //打开数据库，并保存数据
   excelEngine.Open(filename, 1, false);
-  excelEngine.SaveDataFrTable(ui->qTableWidget);
+  excelEngine.SaveDataFrTable(ui->qTableWidget_2);
   excelEngine.Close();
 
   QMessageBox::information(this, "excel提示", "保存成功");
