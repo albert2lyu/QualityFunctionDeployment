@@ -10,11 +10,11 @@ Step3::Step3(QWidget *parent) :
     Step3_2_Page=new Step3_2(this);
     Step3_3_Page=new Step3_3(this);
     Step3_4_Page=new Step3_4(this);
+    Step3Data_Page = new Step3Data(this);
     ui->stackedWidget->addWidget(Step3_1_Page);
     ui->stackedWidget->addWidget(Step3_2_Page);
     ui->stackedWidget->addWidget(Step3_3_Page);
     ui->stackedWidget->addWidget(Step3_4_Page);
-    Step3Data_Page = new Step3Data(this);
     ui->stackedWidget_2->addWidget(Step3Data_Page);
 
 }

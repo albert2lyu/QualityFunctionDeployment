@@ -8,16 +8,11 @@ Step4::Step4(QWidget *parent) :
     ui->setupUi(this);
     Step4_1_Page = new Step4_1(this);//实例化窗口页面
     ui->stackedWidget->addWidget(Step4_1_Page);
-   // Step4_2_Page = new Step4_2(this);//实例化窗口页面
-   // ui->stackedWidget->addWidget(Step4_2_Page);
     Step4Data_Page = new Step4Data(this);
     ui->stackedWidget_2->addWidget(Step4Data_Page);
-   // setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 void Step4::paintEvent(QPaintEvent *)
 {
-
-
     QPainter painter(this);
     painter.setRenderHint(QPainter::TextAntialiasing, true) ;
     painter.setRenderHint(QPainter::Antialiasing,true);
@@ -36,11 +31,9 @@ void Step4::paintEvent(QPaintEvent *)
     painter.drawLine(QPoint(width*2/7,up+height*8/9),QPoint(width*5/7,up+height*8/9));
     painter.drawLine(QPoint(width*2/7,up+height*7/9),QPoint(width*5/7,up+height*7/9));
     painter.drawLine(QPoint(width*1/7+left,height/3),QPoint(width*1/7+left,height*2/3));
-   // painter.drawLine(QPoint(left+height*5/3+width/2,up),QPoint(left+height/3*5+width,up+height));
     QFont font;
     font.setFamily("微软雅黑");
     font.setPointSize(9);
-    // font.setBold(true);
     painter.setFont(font);
     painter.drawText(QPoint(width*6/14-5,height*3/36+5),"Step6 确定相关性矩阵");
     painter.drawText(QPoint(width*5/14+5,height/6+5),"Step5 识别关于全局质量参数的约束");

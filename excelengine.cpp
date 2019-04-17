@@ -3,6 +3,16 @@
 #include "sqlite.h"
 #include "entity_step1.h"
 #include <QHeaderView>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QDebug>
+#include <QComboBox>
+#include <QFileDialog>
+#include <QVBoxLayout>
+#include <QButtonGroup>
+#include <QRadioButton>
+#include <QCheckBox>
+
 QExcelEngine::QExcelEngine()
 {
     pExcel     = nullptr;
@@ -554,7 +564,35 @@ bool QExcelEngine::Step3_4SaveData(QTableWidget *tableWidget)
     }
     return true;
 }
+bool QExcelEngine::Step4_1SaveData(QTableWidget *tableWidget)
+{
+     qDebug()<<"QExcelEngine::Step4_1SaveData";
+     int row = tableWidget->rowCount();
+     qDebug()<<"row::"<<row;
+     int col = tableWidget->columnCount();
+     qDebug()<<"col::"<<col;
+     Sqlite sqlite;
+     sqlite.connect();
+     for(int i =0;i<row;i++)
+     {
+         for(int j =0;j<col;j++)
+         {
+             QWidget *widget = tableWidget->cellWidget(i,j);
+             QList<QCheckBox *> rad = widget->findChildren<QCheckBox *>();
+             if(rad.count()!=0)
+             {
+                 if(rad.at(0)->isChecked())
+                 {
+                    qDebug()<<"QExcelEngine::Step4_1SaveData::rad"<<rad.at(0)->objectName();
+                    QString valueIndexName = rad.at(0)->objectName();
+                    sqlite.saveStep4_1Table(valueIndexName);
+                 }
+             }
+         }
+     }
 
+     return true;
+}
 
 /**
   *@brief 从指定的xls文件中把数据导入到tableWidget中

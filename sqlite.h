@@ -29,6 +29,7 @@ public:
     bool saveStep3_2Table(QString valueExpectationRow,QString valueExpectationRank,QString competitiveEvaluation);
     bool saveStep3_3Table(QString valueExpectationRow,QString valueExpectationRank,QString expectedRank);
     bool saveStep3_4Table(QString valueExpectationRow,QString valueExpectationRank,QString criticality);
+    bool saveStep4_1Table(QString valueExpectationRow);
 
     vector<Entity_Step1>  queryStep1Data();
     vector<Entity_Step2>  queryStep2Data();

@@ -219,6 +219,27 @@ bool Sqlite::saveStep3_4Table(QString valueExpectationRow, QString valueExpectat
         return false;
     }
 }
+bool Sqlite::saveStep4_1Table(QString valueExpectationRow)
+{
+    //CREATE TABLE `Step4_1` ( `valueIndexName` varchar(255) )
+    qDebug()<<"Sqlite::saveStep4_1Table";
+    if(valueExpectationRow != nullptr)
+    {
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step4_1 (valueIndexName) VALUES (:valueIndexName)");
+            query.bindValue(":valueIndexName", valueExpectationRow.trimmed());
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 vector<Entity_Step1> Sqlite::queryStep1Data()
 {

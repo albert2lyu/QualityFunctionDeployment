@@ -12,19 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-       //ui->listWidget->insertItem(0,tr("Step1_Page"));  //此处可以自己通过代码添加行，左边为行号，右边为名称
-       //ui->listWidget->insertItem(1,tr("Step2_Page"));
-       //ui->listWidget->insertItem(2,tr("Step3_Page"));
-       //ui->listWidget->insertItem(3,tr("Step4_Page"));
-       //ui->listWidget->insertItem(4,tr("Step5_Page"));
-       //ui->listWidget->insertItem(5,tr("Step6_Page"));
-       //ui->listWidget->insertItem(6,tr("Step7_Page"));
-       //ui->listWidget->insertItem(7,tr("Step8_Page"));
-       //ui->listWidget->insertItem(8,tr("Step9_Page"));
-       //ui->listWidget->insertItem(9,tr("Step10_Page"));
-
-       //QObject::connect(ui->listWidget,SIGNAL(currentRowChanged(int)),ui->listWidget,SLOT(on_listWidget_clicked()));//信号与槽
-  //  ui->setupUi(this);
     mainWidget = new QWidget;
     rightWidget = new QWidget;
     rightLayout = new QVBoxLayout(rightWidget);

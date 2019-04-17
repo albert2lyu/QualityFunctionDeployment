@@ -76,7 +76,8 @@ SOURCES += \
     entity_step3_2.cpp \
     entity_step3_3.cpp \
     step3_4.cpp \
-    entity_step3_4.cpp
+    entity_step3_4.cpp \
+    entity_step4_1.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -132,7 +133,8 @@ HEADERS += \
     include/step3.h \
     entity_step3_3.h \
     step3_4.h \
-    entity_step3_4.h
+    entity_step3_4.h \
+    entity_step4_1.h
 
 FORMS += \
     mainwindow.ui \
