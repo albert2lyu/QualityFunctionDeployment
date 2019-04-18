@@ -64,29 +64,12 @@ Step4_1::Step4_1(QWidget *parent) :
                 qDebug()<<"Step4_1::ui::i::"<<i<<"-----j::"<<j;
                 x++;
             }
+
+
         }
         qDebug()<<"Step4_1::ui::QCheckBox end";
     }
 
-    /*
-    QVector<QWidget*> ThreeCombox;
-    int ss=0;
-    for(int i=0;i<ColumnNum*RowNum;i++)
-    {
-        QWidget *widget1 = new QWidget();
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(10, 8, 101, 31));
-        QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
-        verticalLayout->setSpacing(0);
-        //verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        for (int i=0;i<3;i++) {
-            verticalLayout->addWidget(Combox.at(ss));ss++;
-        }
-        ThreeCombox.append(widget1);
-    }
-    */
 
 }
 
@@ -100,19 +83,19 @@ void Step4_1::on_pushButton_clicked()
     int cols=ui->qTableWidget->columnCount();
     int rows=ui->qTableWidget->rowCount();
     qDebug()<<rows;
-    ui->qTableWidget->insertRow(rows);
+    ui->qTableWidget_2->insertRow(rows);
     for(int i=0;i<cols;i++)
     {
         ui->qTableWidget->setItem(rows,i,new QTableWidgetItem(""));
     }
-    ui->qTableWidget->selectRow(rows);
+    ui->qTableWidget_2->selectRow(rows);
 }
 
 void Step4_1::on_pushButton_2_clicked()
 {
-    QTableWidgetItem * item = ui->qTableWidget->currentItem();
+    QTableWidgetItem * item = ui->qTableWidget_2->currentItem();
     if(item==Q_NULLPTR)return;
-    ui->qTableWidget->removeRow(item->row());
+    ui->qTableWidget_2->removeRow(item->row());
 }
 //将表格数据写入文件
 void Step4_1::on_pushButton_3_clicked()
@@ -133,7 +116,7 @@ void Step4_1::on_pushButton_3_clicked()
     excelEngine.Close();
     //打开数据库，并保存数据
     excelEngine.Open(filename, 1, false);
-    excelEngine.SaveDataFrTable(ui->qTableWidget);
+    excelEngine.SaveDataFrTable(ui->qTableWidget_2);
     excelEngine.Close();
 
     QMessageBox::information(this, "excel提示", "导出成功");
@@ -163,7 +146,6 @@ void Step4_1::on_pushButton_4_clicked()
             excelEngine.Close();
             QMessageBox::information(this, "excel提示", "导入成功");
         }
-
 }
 
 
@@ -171,7 +153,6 @@ void Step4_1::on_pushButton_5_clicked()
 {
 
    QExcelEngine excelEngine=*new QExcelEngine();
-
    //清空表格之前的所有内容
    excelEngine.ClearAllData(" ");
 
@@ -180,15 +161,4 @@ void Step4_1::on_pushButton_5_clicked()
    QMessageBox::information(this, "excel提示", "保存成功");
 
 }
-/*
-QVector<QComboBox*> Combox;
-for(int i=0;i<ColumnNum*RowNum*3;i++)
-{
-    QComboBox *tmp= new QComboBox();
-    tmp->addItem("极其重要于");
-    tmp->addItem("强烈重要于");
-    tmp->addItem("同样重要于");
-    Combox.append(tmp);
-}
-*/
 

@@ -573,6 +573,7 @@ bool QExcelEngine::Step4_1SaveData(QTableWidget *tableWidget)
      qDebug()<<"col::"<<col;
      Sqlite sqlite;
      sqlite.connect();
+     sqlite.deleteStep4_1Data();
      for(int i =0;i<row;i++)
      {
          for(int j =0;j<col;j++)

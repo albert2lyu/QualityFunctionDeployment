@@ -10,6 +10,7 @@
 #include <QHeaderView>
 #include "sqlite.h"
 #include "entity_step3_3.h"
+#include "engine.h"
 MatlabFunction::MatlabFunction()
 {
 
@@ -196,8 +197,6 @@ bool MatlabFunction::mlfStep3(QTableWidget *tableWidget)
 
 
     }
-
-
 }
 
 

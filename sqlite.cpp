@@ -323,6 +323,20 @@ vector<Entity_Step3_4> Sqlite::queryStep3_4Data()
     }
     return returnList;
 }
+vector<Entity_Step4_1> Sqlite::queryStep4_1Data()
+{
+    qDebug()<<"Sqlite::queryStep4_1Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step4_1");
+    vector<Entity_Step4_1>returnList;
+    while(query.next())
+    {
+        Entity_Step4_1 Entity_Step4_1;
+        Entity_Step4_1.valueIndexName = query.value(0).toString();
+        returnList.push_back(Entity_Step4_1);
+    }
+    return returnList;
+}
 
 bool Sqlite::deleteStep2Table()
 {
@@ -372,4 +386,15 @@ bool Sqlite::deleteStep3_4Data()
     query.finish();
     return true;
 }
-
+bool Sqlite::deleteStep4_1Data()
+{
+    qDebug()<<"Sqlite::deleteStep3_4Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step4_1");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}

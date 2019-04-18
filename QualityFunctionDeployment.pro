@@ -126,7 +126,6 @@ HEADERS += \
     entity_step1.h \
     entity_step2.h \
     entity_step2_2.h \
-    include/matBasicsss.h \
     matlabfunction.h \
     include/matBasic.h \
     entity_step3_2.h \

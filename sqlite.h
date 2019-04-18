@@ -9,6 +9,7 @@
 #include "entity_step3_2.h"
 #include "entity_step3_3.h"
 #include "entity_step3_4.h"
+#include "entity_step4_1.h"
 using namespace std;
 
 class Sqlite
@@ -36,11 +37,13 @@ public:
     vector<Entity_Step3_2>queryStep3_2Data();
     vector<Entity_Step3_3>queryStep3_3Data();
     vector<Entity_Step3_4>queryStep3_4Data();
+    vector<Entity_Step4_1>queryStep4_1Data();
 
     bool deleteStep2Table();
     bool deleteStep3_2Data();
     bool deleteStep3_3Data();
     bool deleteStep3_4Data();
+    bool deleteStep4_1Data();
 
 };
 
