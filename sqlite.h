@@ -44,7 +44,7 @@ public:
     bool saveStep6_3Table(QString row,QString rank,double  autocorrelationResult);
     bool saveStep7_1Table(QString valueExpectation,QString QualityParameterName,double  valuequalityResult,double Evalue);
     bool saveStep7_2Table(QString qualityParameterNameRow,QString qualityParameterNameRank,QString valueQualityType,double BValue);
-
+ bool saveStep7_3Table(QString valueExpectation,QString QualityParameterName,double  valuequalityResult);
 
     vector<Entity_Step1>  queryStep1Data();
     vector<Entity_Step2>  queryStep2Data();
@@ -70,7 +70,7 @@ public:
     bool deleteStep6_2Data();
     bool deleteStep7_1Data();
     bool deleteStep7_2Data();
-
+    bool deleteStep7_3Data();
 };
 
 #endif // SQLITE_H

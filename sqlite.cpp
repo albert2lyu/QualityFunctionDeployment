@@ -380,7 +380,29 @@ bool Sqlite::saveStep6_3Table(QString row, QString rank, double autocorrelationR
         return false;
     }
 }
-
+bool Sqlite::saveStep7_3Table(QString valueExpectation, QString QualityParameterName, double valuequalityResult)
+{
+    qDebug()<<"Sqlite::saveStep7_3Table";
+    //CREATE TABLE `Step7_3` ( `valueExpectation` varchar(255), `QualityParameterName` varchar(255), `valuequalityResult` double )
+    if(valueExpectation != nullptr && QualityParameterName != nullptr && valuequalityResult != 0 )
+    {
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step7_3 (valueExpectation,QualityParameterName,valuequalityResult) VALUES (:valueExpectation,:QualityParameterName,:valuequalityResult)");
+            query.bindValue(":valueExpectation", valueExpectation.trimmed());
+            query.bindValue(":QualityParameterName", QualityParameterName.trimmed());
+            query.bindValue(":valuequalityResult", valuequalityResult);
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 bool Sqlite::saveStep7_2Table(QString qualityParameterNameRow, QString qualityParameterNameRank, QString valueQualityType, double BValue)
 {
     qDebug()<<"Sqlite::saveStep7_2Table";
@@ -720,6 +742,18 @@ bool Sqlite::deleteStep6_2Data()
     return true;
 }
 bool Sqlite::deleteStep7_2Data()
+{
+    qDebug()<<"Sqlite::deleteStep7_2Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step7_2");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+bool Sqlite::deleteStep7_3Data()
 {
     qDebug()<<"Sqlite::deleteStep7_2Data";
     QSqlQuery query;

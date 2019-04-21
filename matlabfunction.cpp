@@ -551,6 +551,28 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
                     if(pcom_mlfStep7)
                     {
                            pcom_mlfStep7(1,&matrixResult,matrixA,matrixB,matrixC,matrixD,matrixE,matrixF);
+                           double * pr = mxGetPr(matrixResult);
+                           double result [returnList71col][returnList5Row*2+2];
+                           int rowFlag =0;
+                           int colFlag =0;
+
+                           for(int i=0;i<returnList71col*(returnList5Row*2+2);i++)
+                           {
+                               result[rowFlag][colFlag] = pr[i];
+                               rowFlag++;
+                               if(rowFlag == returnList71col)
+                               {
+                                   colFlag++;
+                                   rowFlag=0;
+                               }
+                           }
+
+                           for(int i =0;i<returnList71col;i++)
+                           {
+                               for(int j=0;j<returnList5Row*2+2;j++)
+                               {                             sqlite.saveStep7_3Table(QString::number(i),QString::number(j),result[i][j]);                            qDebug()<<"result::"<<result[i][j];
+                               }
+                           }
 
                     }
                     qDebug()<<"Finish Step7"<<endl;
