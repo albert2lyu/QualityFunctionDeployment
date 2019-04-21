@@ -77,7 +77,12 @@ SOURCES += \
     entity_step3_3.cpp \
     step3_4.cpp \
     entity_step3_4.cpp \
-    entity_step4_1.cpp
+    entity_step4_1.cpp \
+    entity_step5.cpp \
+    entity_step4_2.cpp \
+    entity_step6_1.cpp \
+    entity_step6_2.cpp \
+    entity_step6_3.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -133,7 +138,13 @@ HEADERS += \
     entity_step3_3.h \
     step3_4.h \
     entity_step3_4.h \
-    entity_step4_1.h
+    entity_step4_1.h \
+    entity_step5.h \
+    include/matStep67810.h \
+    entity_step4_2.h \
+    entity_step6_1.h \
+    entity_step6_2.h \
+    entity_step6_3.h
 
 FORMS += \
     mainwindow.ui \
@@ -214,6 +225,11 @@ INCLUDEPATH += $$PWD/include
 DEPENDPATH += $$PWD/include
 
 win32: LIBS += -L$$PWD/include/ -lstep3
+
+INCLUDEPATH += $$PWD/include
+DEPENDPATH += $$PWD/include
+
+win32: LIBS += -L$$PWD/include/ -lmatStep67810
 
 INCLUDEPATH += $$PWD/include
 DEPENDPATH += $$PWD/include

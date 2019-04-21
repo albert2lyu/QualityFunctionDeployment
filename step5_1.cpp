@@ -13,7 +13,7 @@ Step5_1::Step5_1(QWidget *parent) :
     ui(new Ui::Step5_1)
 {
         ui->setupUi(this);
-
+        ui->qTableWidget->repaint();
         ui->qTableWidget->setWindowTitle("QTableWidget");
         ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
         ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
@@ -26,21 +26,22 @@ Step5_1::Step5_1(QWidget *parent) :
 
         Sqlite sqlite;
         sqlite.connect();
-        vector<Entity_Step4_1>returnList = sqlite.queryStep4_1Data();
+        vector<Entity_Step4_2>returnList = sqlite.queryStep4_2Data();
         int RowNum = returnList.size();
         qDebug()<<"Step5_1::ui::RowNum::"<<RowNum;
         //设置列标签
         QStringList HStrList;
         HStrList.push_back(QString("质量参数名称"));
         HStrList.push_back(QString("数据类型"));
-        HStrList.push_back(QString("取值范围"));
+        HStrList.push_back(QString("取值上界"));
+        HStrList.push_back(QString("取值下界"));
         int HlableCnt = HStrList.count();
         ui->qTableWidget->setRowCount(RowNum);//
         ui->qTableWidget->setColumnCount(HlableCnt);
         ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
         for(int i=0;i<returnList.size();i++)
         {
-            QString  valueIndexName = returnList[i].valueIndexName;
+            QString  valueIndexName = returnList[i].chooseQualityParameterName;
             ui->qTableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
         }
 
@@ -131,6 +132,7 @@ void Step5_1::on_pushButton_5_clicked()
    QExcelEngine excelEngine=*new QExcelEngine();
   //清空表格之前的所有内容
   excelEngine.ClearAllData(" ");
+  excelEngine.Step5SaveData(ui->qTableWidget);
   excelEngine.Close();
 
   QMessageBox::information(this, "excel提示", "保存成功");

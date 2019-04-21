@@ -16,6 +16,9 @@ Step2::Step2(QWidget *parent) :
     Step2Data_Page = new Step2Data(this);
     ui->stackedWidget_2->addWidget(Step2Data_Page);
     //setStyleSheet(QString::fromUtf8("border:1px solid black"));
+    ui->stackedWidget->setVisible(false);
+     ui->stackedWidget_2->setVisible(false);
+
 }
 void Step2::paintEvent(QPaintEvent *)
 {
@@ -69,19 +72,23 @@ Step2::~Step2()
 void Step2::on_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step2_1_Page);
+    ui->stackedWidget->show();
 }
 
 void Step2::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step2_2_Page);
+    ui->stackedWidget->show();
 }
 
 void Step2::on_pushButton_3_clicked()
 {
     ui->stackedWidget_2->setCurrentWidget(Step2Data_Page);
+    ui->stackedWidget_2->show();
 }
 
 void Step2::on_pushButton_4_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step2_3_Page);
+    ui->stackedWidget->show();
 }

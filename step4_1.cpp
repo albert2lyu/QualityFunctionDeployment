@@ -21,7 +21,7 @@ Step4_1::Step4_1(QWidget *parent) :
 
     Sqlite sqlite;
     sqlite.connect();
-    vector<Entity_Step2>returnList = sqlite.queryStep2Data();
+    vector<Entity_Step4_1>returnList = sqlite.queryStep4_1Data();
     qDebug()<<"Step4_1::ui::returnList.size()::"<<returnList.size();
     if(returnList.size()!= 0 )
     {
@@ -32,7 +32,7 @@ Step4_1::Step4_1(QWidget *parent) :
         QVector<QWidget*> RadioButton;
         for(int i=0 ; i<(int)returnList.size();i++)
         {
-            QString valueExpectation = returnList[i].valueExpectation;
+            QString valueExpectation = returnList[i].QualityParameterName;
             QWidget *widget1 = new QWidget();
             widget1->setObjectName(valueExpectation);
             widget1->setGeometry(QRect(10, 8, 101, 31));
@@ -156,7 +156,7 @@ void Step4_1::on_pushButton_5_clicked()
    //清空表格之前的所有内容
    excelEngine.ClearAllData(" ");
 
-   excelEngine.Step4_1SaveData(ui->qTableWidget);
+   excelEngine.Step4_2SaveData(ui->qTableWidget);
    excelEngine.Close();
    QMessageBox::information(this, "excel提示", "保存成功");
 

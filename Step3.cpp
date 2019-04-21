@@ -16,6 +16,8 @@ Step3::Step3(QWidget *parent) :
     ui->stackedWidget->addWidget(Step3_3_Page);
     ui->stackedWidget->addWidget(Step3_4_Page);
     ui->stackedWidget_2->addWidget(Step3Data_Page);
+    ui->stackedWidget->setVisible(false);
+    ui->stackedWidget_2->setVisible(false);
 
 }
 
@@ -70,23 +72,28 @@ Step3::~Step3()
 void Step3::on_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step3_1_Page);
+     ui->stackedWidget->show();
 }
 
 void Step3::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step3_2_Page);
+    ui->stackedWidget->show();
 }
 
 void Step3::on_pushButton_3_clicked()
 {
     ui->stackedWidget_2->setCurrentWidget(Step3Data_Page);
+    ui->stackedWidget_2->show();
 }
 void Step3::on_pushButton_4_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step3_3_Page);
+    ui->stackedWidget->show();
 }
 void Step3::on_pushButton_5_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step3_4_Page);
+    ui->stackedWidget->show();
 }
 

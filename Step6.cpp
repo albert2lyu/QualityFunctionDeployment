@@ -12,7 +12,8 @@ Step6::Step6(QWidget *parent) :
     ui->stackedWidget->addWidget(Step6_2_Page);
     Step6Data_Page = new Step6Data(this);
     ui->stackedWidget_2->addWidget(Step6Data_Page);
-   // setStyleSheet(QString::fromUtf8("border:1px solid black"));
+    ui->stackedWidget->setVisible(false);
+    ui->stackedWidget_2->setVisible(false);
 }
 void Step6::paintEvent(QPaintEvent *)
 {
@@ -35,13 +36,11 @@ void Step6::paintEvent(QPaintEvent *)
     painter.drawLine(QPoint(width*2/7,up+height*8/9),QPoint(width*5/7,up+height*8/9));
     painter.drawLine(QPoint(width*2/7,up+height*7/9),QPoint(width*5/7,up+height*7/9));
     painter.drawLine(QPoint(width*1/7+left,height/3),QPoint(width*1/7+left,height*2/3));
-   // painter.drawLine(QPoint(left+height*5/3+width/2,up),QPoint(left+height/3*5+width,up+height));
     QFont font;
     font.setFamily("微软雅黑");
     font.setPointSize(9);
-    // font.setBold(true);
     painter.setFont(font);
-        painter.drawText(QPoint(width*6/14-5,height*3/36+5),"Step6 确定相关性矩阵");
+    painter.drawText(QPoint(width*6/14-5,height*3/36+5),"Step6 确定相关性矩阵");
     painter.drawText(QPoint(width*5/14+5,height/6+5),"Step5 识别关于全局质量参数的约束");
     painter.drawText(QPoint(width*11/28+5,height*5/18+5),"Step4 生成全局质量参数");
     painter.drawText(QPoint(width*17/56+5,height*9/18+5),"Step7 确定价值指标与全局质量参数间的定量关系");
@@ -65,14 +64,17 @@ Step6::~Step6()
 void Step6::on_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step6_1_Page);
+    ui->stackedWidget->show();
 }
 
 void Step6::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentWidget(Step6_2_Page);
+    ui->stackedWidget->show();
 }
 
 void Step6::on_pushButton_3_clicked()
 {
     ui->stackedWidget_2->setCurrentWidget(Step6Data_Page);
+    ui->stackedWidget_2->show();
 }

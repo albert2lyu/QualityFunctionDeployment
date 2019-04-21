@@ -10,6 +10,10 @@
 #include "entity_step3_3.h"
 #include "entity_step3_4.h"
 #include "entity_step4_1.h"
+#include "entity_step4_2.h"
+#include "entity_step5.h"
+#include "entity_step6_1.h"
+#include "entity_step6_2.h"
 using namespace std;
 
 class Sqlite
@@ -30,7 +34,13 @@ public:
     bool saveStep3_2Table(QString valueExpectationRow,QString valueExpectationRank,QString competitiveEvaluation);
     bool saveStep3_3Table(QString valueExpectationRow,QString valueExpectationRank,QString expectedRank);
     bool saveStep3_4Table(QString valueExpectationRow,QString valueExpectationRank,QString criticality);
-    bool saveStep4_1Table(QString valueExpectationRow);
+    bool saveStep4_1Table(QString qualityParameterName);//所有质量参数
+    bool saveStep4_2Table(QString chooseQualityParameterName);//选中的质量参数
+    bool saveStep5Table(QString chooseQualityParameterName,QString dataType,double  upperBoundValue,double  lowerBoundValue);
+    bool saveStep6_1Table(QString row,QString qualityParameterName,double value);
+    bool saveStep6_2Table(QString qualityParameterNameRow,QString qualityParameterNameRank,QString valueQualityType,double BValue);
+    bool saveStep6_3Table(QString row,QString rank,double  autocorrelationResult);
+
 
     vector<Entity_Step1>  queryStep1Data();
     vector<Entity_Step2>  queryStep2Data();
@@ -38,12 +48,21 @@ public:
     vector<Entity_Step3_3>queryStep3_3Data();
     vector<Entity_Step3_4>queryStep3_4Data();
     vector<Entity_Step4_1>queryStep4_1Data();
+    vector<Entity_Step4_2>queryStep4_2Data();
+    vector<Entity_Step5>  queryStep5Data();
+    vector<Entity_Step6_1>queryStep6_1Data();
+    vector<Entity_Step6_2>queryStep6_2Data();
+
 
     bool deleteStep2Table();
     bool deleteStep3_2Data();
     bool deleteStep3_3Data();
     bool deleteStep3_4Data();
     bool deleteStep4_1Data();
+    bool deleteStep4_2Data();
+    bool deleteStep5Data();
+    bool deleteStep6_1Data();
+    bool deleteStep6_2Data();
 
 };
 

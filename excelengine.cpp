@@ -594,13 +594,111 @@ bool QExcelEngine::Step4_1SaveData(QTableWidget *tableWidget)
 
      return true;
 }
+bool QExcelEngine::Step4_2SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step4_2SaveData";
+    int row = tableWidget->rowCount();
+    int col = tableWidget->columnCount();
+    Sqlite sqlite;
+    sqlite.connect();
+    sqlite.deleteStep4_2Data();
+    for(int i =0;i<row;i++)
+    {
+        for(int j =0;j<col;j++)
+        {
+            QWidget *widget = tableWidget->cellWidget(i,j);
+            QList<QCheckBox *> rad = widget->findChildren<QCheckBox *>();
+            if(rad.count()!=0)
+            {
+                if(rad.at(0)->isChecked())
+                {
+                   qDebug()<<"QExcelEngine::Step4_1SaveData::rad"<<rad.at(0)->objectName();
+                   QString chooseQualityParameterName = rad.at(0)->objectName();
+                   sqlite.saveStep4_2Table(chooseQualityParameterName);
+                }
+            }
+        }
+    }
 
-/**
-  *@brief 从指定的xls文件中把数据导入到tableWidget中
-  *@param tableWidget : 执行要导入到的tablewidget指针
-  *@return 导入成功与否 true : 成功
-  *                   false: 失败
-  */
+    return true;
+}
+bool QExcelEngine::Step5SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step5SaveData";
+    int row = tableWidget->rowCount();
+    Sqlite sqlite;
+    sqlite.connect();
+    sqlite.deleteStep5Data();
+    /*
+    QString qualityParameterName;
+    QString dataType;
+    double  upperBoundValue;
+    double  lowerBoundValue;
+    */
+    for(int i=0;i<row;i++)
+    {
+            QString qualityParameterName = tableWidget->item(i,0)->data(Qt::DisplayRole).toString();
+            QString dataType =  tableWidget->item(i,1)->data(Qt::DisplayRole).toString();
+            double  upperBoundValue = tableWidget->item(i,2)->data(Qt::DisplayRole).toString().toDouble();
+            double  lowerBoundValue = tableWidget->item(i,3)->data(Qt::DisplayRole).toString().toDouble();
+            if(qualityParameterName != nullptr && dataType != nullptr && upperBoundValue!=0 && lowerBoundValue!=0)
+            {
+                 sqlite.saveStep5Table(qualityParameterName,dataType,upperBoundValue,lowerBoundValue);
+            }
+    }
+     return true;
+
+}
+bool QExcelEngine::Step6_1SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step6_1SaveData";
+    int row = tableWidget->rowCount();
+    Sqlite sqlite;
+    sqlite.connect();
+    sqlite.deleteStep6_1Data();
+    for(int i=0;i<tableWidget->horizontalHeader()->count();i++)
+    {
+        QString valueExpectationRow = tableWidget->horizontalHeaderItem(i)->data(Qt::DisplayRole).toString();
+        for(int j=0;j<row;j++)
+        {
+            double value = tableWidget->item(j,i)->data(Qt::DisplayRole).toString().toDouble();
+            if(valueExpectationRow != nullptr && value !=0)
+            {
+                sqlite.saveStep6_1Table(QString::number(j),QString::number(i),value);
+            }
+        }
+    }
+    return true;
+}
+bool QExcelEngine::Step6_2SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step6_2SaveData";
+    Sqlite sqlite;
+    sqlite.connect();
+    sqlite.deleteStep6_2Data();
+    int row = tableWidget->rowCount();
+    int col = tableWidget->columnCount();
+    qDebug()<<"QExcelEngine::Step6_2SaveData::row"<<row;
+    qDebug()<<"QExcelEngine::Step6_2SaveData::col"<<col;
+    for(int i =0;i<row;i++)
+    {
+        for(int j =0;j<col;j++)
+        {
+            QWidget *widget = tableWidget->cellWidget(i,j);
+            QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
+            if(rad.count() !=0)
+            {
+                     QString valueQualityType = rad.at(0)->currentText();
+                     double BValue = rad.at(1)->currentText().toDouble();
+                     sqlite.saveStep6_2Table(QString::number(i),QString::number(j),valueQualityType,BValue);
+            }
+
+        }
+    }
+
+    return true;
+}
+
 bool QExcelEngine::ReadDataToTable(QTableWidget *tableWidget)
 {
     if ( nullptr == tableWidget )
