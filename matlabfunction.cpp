@@ -11,6 +11,7 @@
 #include "sqlite.h"
 #include "entity_step3_3.h"
 #include "engine.h"
+#include<entity_step7_2.h>
 MatlabFunction::MatlabFunction()
 {
 
@@ -339,12 +340,11 @@ Q：step6的输出，行数等于质量参数数目，列数等于质量参数�
                             rowFlag=0;
                         }
                     }
+
                     for(int i =0;i<returnList5Row;i++)
                     {
                         for(int j=0;j<returnList5Row+1;j++)
-                        {
-                             sqlite.saveStep6_3Table(QString::number(i),QString::number(j),result[i][j]);
-                             qDebug()<<"result::"<<result[i][j];
+                        {                             sqlite.saveStep6_3Table(QString::number(i),QString::number(j),result[i][j]);                            qDebug()<<"result::"<<result[i][j];
                         }
                     }
 
@@ -395,7 +395,283 @@ Q：step6的输出，行数等于质量参数数目，列数等于质量参数�
                 qDebug()<<prtest1[5];*/
 
 
+typedef void (*Pcom_mlfStep7)(int, mxArray** , mxArray* , mxArray*, mxArray* , mxArray* , mxArray* , mxArray*);
+bool MatlabFunction::matStep7(QTableWidget *tableWidget)
+{
+    qDebug()<<"MatlabFunction::matStep7";
+    QLibrary mylib("matStep67810.DLL");
+    if(mylib.load())
+    {
+        qDebug()<<"MatlabFunction::matStep7";
+    }
+    Pcom_matStep67810Initialize pcom_matStep67810Initialize =
+            (Pcom_matStep67810Initialize)mylib.resolve("matStep67810Initialize");
+    if(pcom_matStep67810Initialize)
+    {
+        pcom_matStep67810Initialize();
+        qDebug()<<"MatlabFunction::pcom_matStep67810Initialize";
+    }
+    Sqlite sqlite ;
+    sqlite.connect();
 
+    vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
+    if(returnList5.size() != 0)
+    {
+        int returnList5Row = (int)returnList5.size();
+        double Matrix51 [returnList5Row][2];
+        for(int i =0;i<returnList5Row;i++)
+        {
+             Matrix51[i][0] = returnList5[i].lowerBoundValue;
+             Matrix51[i][1] = returnList5[i].upperBoundValue;
+        }
+        double Matrix51_OVER [returnList5Row*2];
+        int Matrix51_row_flag=0;
+        int Matrix51_col_flag=0;
+        for(int i =0;i<returnList5Row*2;i++)
+        {
+            Matrix51_OVER[i]=Matrix51[Matrix51_row_flag][Matrix51_col_flag];
+            Matrix51_row_flag++;
+            if(Matrix51_row_flag == returnList5Row)
+            {
+                Matrix51_row_flag=0;
+                Matrix51_col_flag++;
+            }
+        }
+        vector<Entity_Step6_1> returnList61 = sqlite.queryStep6_1Data();
+        if(returnList61.size()!=0)
+        {
+            int  returnList61Row = (int)returnList61[(returnList61.size()-1)].row.toInt()+1;
+            int  returnList61col = (int)returnList61[(returnList61.size()-1)].qualityParameterName.toInt()+1;
+            double Matrix61 [returnList61Row][returnList61col];
+            for(int i =0;i<returnList61.size();i++)
+            {
+                Matrix61[returnList61[i].row.toInt()][returnList61[i].qualityParameterName.toInt()] = returnList61[i].value;
+            }
+            double Matrix61_OVER[returnList61Row*returnList61col];
+            int Matrix61_row_flag=0;
+            int Matrix61_col_flag=0;
+            for(int i=0;i<returnList61Row*returnList61col;i++)
+            {
+                Matrix61_OVER[i]=Matrix61[Matrix61_row_flag][Matrix61_col_flag];
+                Matrix61_row_flag++;
+                if(Matrix61_row_flag == returnList61Row)
+                {
+                    Matrix61_row_flag=0;
+                    Matrix61_col_flag++;
+                }
+            }
+            vector<Entity_Step7_1> returnList71 = sqlite.queryStep7_1Data();
+            if(returnList71.size()!=0)
+            {
+                int  returnList71Row = (int)returnList71[(returnList71.size()-1)].QualityParameterName.toInt()+1;
+                qDebug()<<"row"<<returnList71Row;
+                int  returnList71col = (int)returnList71[(returnList71.size()-1)].valueExpectation.toInt()+1;
+                 qDebug()<<"column"<<returnList71col;
+                double Matrix711 [returnList71Row][returnList71col],Matrix7111 [returnList71.size()];
+                double Matrix712 [returnList71Row][returnList71col],Matrix7121 [returnList71.size()];
+                int x=0,y=0;
+                for(int i =0;i<returnList71.size();i++)
+                {
+                     Matrix711[returnList71[i].QualityParameterName.toInt()][returnList71[i].valueExpectation.toInt()] = returnList71[i].valuequalityResult;
+                      Matrix712[returnList71[i].QualityParameterName.toInt()][returnList71[i].valueExpectation.toInt()] = returnList71[i].Evalue;
+            Matrix7111[i]=returnList71[i].valuequalityResult;
+             Matrix7121[i]=returnList71[i].Evalue;
+                }
+                double Matrix711_OVER[returnList71Row*returnList71col];
+                double Matrix712_OVER[returnList71Row*returnList71col];
+                int Matrix71_row_flag=0;
+                int Matrix71_col_flag=0;
+                for(int i=0;i<returnList71Row*returnList71col;i++)
+                {
+                    Matrix711_OVER[i]=Matrix711[Matrix71_row_flag][Matrix71_col_flag];
+                    Matrix712_OVER[i]=Matrix712[Matrix71_row_flag][Matrix71_col_flag];
+                    Matrix71_row_flag++;
+                    if(Matrix71_row_flag == returnList71Row)
+                    {
+                        Matrix71_row_flag=0;
+                        Matrix71_col_flag++;
+                    }
+                }
+                x=0;y=0;
+                // Matrix61 over
+                vector<Entity_Step7_2> returnList72 = sqlite.queryStep7_2Data();
+                if(returnList72.size()!=0)
+                {
+                    int  returnList72Row = (int)returnList72[(returnList72.size()-1)].qualityParameterNameRow.toInt()+1;
+                    int  returnList72col = (int)returnList72[(returnList72.size()-1)].qualityParameterNameRank.toInt()+1;
+                    double Matrix721[returnList72Row][returnList72col];
+                    double Matrix722[returnList72Row][returnList72col];
+                    for(int i =0;i<returnList72.size();i++)
+                    {
+                        Matrix721[returnList72[i].qualityParameterNameRow.toInt()][returnList72[i].qualityParameterNameRank.toInt()]
+                                 = returnList72[i].valueQualityType.toDouble();
+                        Matrix722[returnList72[i].qualityParameterNameRow.toInt()][returnList72[i].qualityParameterNameRank.toInt()]
+                                 = returnList72[i].BValue;
+                    }
+                    double Matrix721_OVER[returnList72Row*returnList72col];
+                    double Matrix722_OVER[returnList72Row*returnList72col];
+                    int Matrix72_row_flag=0;
+                    int Matrix72_col_flag=0;
+                    for(int i=0;i<returnList72Row*returnList72col;i++)
+                    {
+                        Matrix721_OVER[i]=Matrix721[Matrix72_row_flag][Matrix72_col_flag];
+                        Matrix722_OVER[i]=Matrix722[Matrix72_row_flag][Matrix72_col_flag];
+                        Matrix72_row_flag++;
+                        if(Matrix72_row_flag == returnList72Row)
+                        {
+                            Matrix72_row_flag=0;
+                            Matrix72_col_flag++;
+                        }
+                    }
+                    //Matrix721_OVER ==>step721
+                    //Matrix722_OVER ==>step722
+                    mxArray *matrixA = mxCreateDoubleMatrix(returnList5Row,2,mxREAL);//定义数组，行，列，double类型
+                    memcpy((void *)mxGetPr(matrixA),(void *)Matrix51_OVER,sizeof(Matrix51_OVER));
+
+                    mxArray *matrixB = mxCreateDoubleMatrix(returnList61Row,returnList61col,mxREAL);//定义数组，行，列，double类型
+                    memcpy((void *)mxGetPr(matrixB),(void *)Matrix61_OVER,sizeof(Matrix61_OVER));
+
+                    mxArray *matrixE = mxCreateDoubleMatrix(returnList72Row,returnList72col,mxREAL);//定义数组，行，列，double类型
+                    memcpy((void *)mxGetPr(matrixE),(void *)Matrix721_OVER,sizeof(Matrix721_OVER));
+
+                    mxArray *matrixF = mxCreateDoubleMatrix(returnList72Row,returnList72col,mxREAL);//定义数组，行，列，double类型
+                    memcpy((void *)mxGetPr(matrixF),(void *)Matrix722_OVER,sizeof(Matrix722_OVER));
+
+
+                    qDebug()<<"start"<<endl;
+
+                    mxArray *matrixC = mxCreateDoubleMatrix(returnList71Row,returnList71col,mxREAL);//定义数组，行，列，double类型
+                    memcpy((void *)mxGetPr(matrixC),(void *)Matrix711_OVER,sizeof(Matrix711_OVER));
+                    mxArray *matrixD = mxCreateDoubleMatrix(returnList71Row,returnList71col,mxREAL);//定义数组，行，列，double类型
+                    memcpy((void *)mxGetPr(matrixD),(void *)Matrix712_OVER,sizeof(Matrix712_OVER));
+
+                    mxArray *matrixResult = mxCreateDoubleMatrix(returnList71Row*2,(returnList5Row*2+2),mxREAL);//定义数组，行，列，double类型
+
+                    Pcom_mlfStep7 pcom_mlfStep7 = (Pcom_mlfStep7)mylib.resolve("mlfMatStep7");
+                    if(pcom_mlfStep7)
+                    {
+                           pcom_mlfStep7(1,&matrixResult,matrixA,matrixB,matrixC,matrixD,matrixE,matrixF);
+
+                    }
+                    qDebug()<<"Finish Step7"<<endl;
+                size_t M,N;int aNOE;double* p;double i;
+                   qDebug() << "  Step7out" << endl;
+
+                    M = mxGetM(matrixResult);                   //M为矩阵行数   （size_t == unsigned int64）
+                     N = mxGetN(matrixResult);                   //N为矩阵列数
+                     aNOE = mxGetNumberOfElements(matrixResult);   //统计矩阵元素个数
+                    qDebug() << "矩阵a的行列值分别是: " << M << "和" << N << endl;
+                    qDebug() << "矩阵a的元素个数是: " << aNOE << endl;
+                     i= 1;
+                     p = mxGetPr(matrixResult);              //实部指针
+                    while (p != nullptr && i <= aNOE)       //打印各个元素
+                    {
+                        qDebug() << "第" << i << "个是：" << *p++ << endl;
+                        i++;
+                    }
+
+
+
+
+                    qDebug() << "step51" << endl;
+                     M = mxGetM(matrixA);                   //M为矩阵行数   （size_t == unsigned int64）
+                     N = mxGetN(matrixA);                   //N为矩阵列数
+                     aNOE = mxGetNumberOfElements(matrixA);   //统计矩阵元素个数
+                    qDebug() << "矩阵a的行列值分别是: " << M << "和" << N << endl;
+                    qDebug() << "矩阵a的元素个数是: " << aNOE << endl;
+                     i = 1;
+                    p = mxGetPr(matrixA);              //实部指针
+                    while (p != nullptr && i <= aNOE)       //打印各个元素
+                    {
+                        qDebug() << "第" << i << "个是：" << *p++ << endl;
+                        i++;
+                    }
+
+
+
+                    qDebug() << "step61" << endl;
+                     M = mxGetM(matrixB);                   //M为矩阵行数   （size_t == unsigned int64）
+                     N = mxGetN(matrixB);                   //N为矩阵列数
+                     aNOE = mxGetNumberOfElements(matrixB);   //统计矩阵元素个数
+                    qDebug() << "矩阵a的行列值分别是: " << M << "和" << N << endl;
+                    qDebug() << "矩阵a的元素个数是: " << aNOE << endl;
+                     i = 1;
+                    p = mxGetPr(matrixB);              //实部指针
+                    while (p != nullptr && i <= aNOE)       //打印各个元素
+                    {
+                        qDebug() << "第" << i << "个是：" << *p++ << endl;
+                        i++;
+                    }
+
+                    qDebug() << "step711" << endl;
+                     M = mxGetM(matrixC);                   //M为矩阵行数   （size_t == unsigned int64）
+                     N = mxGetN(matrixC);                   //N为矩阵列数
+                     aNOE = mxGetNumberOfElements(matrixC);   //统计矩阵元素个数
+                    qDebug() << "矩阵a的行列值分别是: " << M << "和" << N << endl;
+                    qDebug() << "矩阵a的元素个数是: " << aNOE << endl;
+                     i = 1;
+                    p = mxGetPr(matrixC);              //实部指针
+                    while (p != nullptr && i <= aNOE)       //打印各个元素
+                    {
+                        qDebug() << "第" << i << "个是：" << *p++ << endl;
+                        i++;
+                    }
+
+                    qDebug() << "step712" << endl;
+                     M = mxGetM(matrixD);                   //M为矩阵行数   （size_t == unsigned int64）
+                     N = mxGetN(matrixD);                   //N为矩阵列数
+                     aNOE = mxGetNumberOfElements(matrixD);   //统计矩阵元素个数
+                    qDebug() << "矩阵a的行列值分别是: " << M << "和" << N << endl;
+                    qDebug() << "矩阵a的元素个数是: " << aNOE << endl;
+                     i = 1;
+                    p = mxGetPr(matrixD);              //实部指针
+                    while (p != nullptr && i <= aNOE)       //打印各个元素
+                    {
+                        qDebug() << "第" << i << "个是：" << *p++ << endl;
+                        i++;
+                    }
+
+                    qDebug() << "step721" << endl;
+                     M = mxGetM(matrixE);                   //M为矩阵行数   （size_t == unsigned int64）
+                     N = mxGetN(matrixE);                   //N为矩阵列数
+                     aNOE = mxGetNumberOfElements(matrixE);   //统计矩阵元素个数
+                    qDebug() << "矩阵a的行列值分别是: " << M << "和" << N << endl;
+                    qDebug() << "矩阵a的元素个数是: " << aNOE << endl;
+                     i = 1;
+                    p = mxGetPr(matrixE);              //实部指针
+                    while (p != nullptr && i <= aNOE)       //打印各个元素
+                    {
+                        qDebug() << "第" << i << "个是：" << *p++ << endl;
+                        i++;
+                    }
+
+                    qDebug() << "step722" << endl;
+                     M = mxGetM(matrixF);                   //M为矩阵行数   （size_t == unsigned int64）
+                     N = mxGetN(matrixF);                   //N为矩阵列数
+                     aNOE = mxGetNumberOfElements(matrixF);   //统计矩阵元素个数
+                    qDebug() << "矩阵a的行列值分别是: " << M << "和" << N << endl;
+                    qDebug() << "矩阵a的元素个数是: " << aNOE << endl;
+                     i = 1;
+                    p = mxGetPr(matrixF);              //实部指针
+                    while (p != nullptr && i <= aNOE)       //打印各个元素
+                    {
+                        qDebug() << "第" << i << "个是：" << *p++ << endl;
+                        i++;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+
+
+
+    return true;
+
+}
 
 
 

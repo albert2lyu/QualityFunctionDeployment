@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
         case 4:ui->stackedWidget->setCurrentWidget(Step4_Page);break;
         case 5:{Step5_Page = new Step5(this);ui->stackedWidget->addWidget(Step5_Page);ui->stackedWidget->setCurrentWidget(Step5_Page);break;};
         case 6:{Step6_Page = new Step6(this);ui->stackedWidget->addWidget(Step6_Page);ui->stackedWidget->setCurrentWidget(Step6_Page);break;}
-        case 7:ui->stackedWidget->setCurrentWidget(Step7_Page);break;
+        case 7:{Step7_Page = new Step7(this);ui->stackedWidget->addWidget(Step7_Page);ui->stackedWidget->setCurrentWidget(Step7_Page);break;}
         case 8:ui->stackedWidget->setCurrentWidget(Step8_Page);break;
         case 9:ui->stackedWidget->setCurrentWidget(Step9_Page);break;
         case 10:ui->stackedWidget->setCurrentWidget(Step10_Page);break;

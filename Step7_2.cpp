@@ -6,34 +6,48 @@
 #include <QDebug>
 #include <QComboBox>
 #include <QFileDialog>
-
+#include<matlabfunction.h>
+#include <sqlite.h>
 Step7_2::Step7_2(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step7_2)
 {
-    ui->setupUi(this);
+ui->setupUi(this);
+Sqlite sqlite;
+sqlite.connect();
+vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();
+vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
+qDebug()<<"Step2::ui::returnList.size()::"<<returnList1.size();qDebug()<<"Step5::ui::returnList.size()::"<<returnList5.size();
+int tableColumn =returnList1.size();
+int tableColumn2 =returnList5.size();
+int ColumnNum=tableColumn2;
+int RowNum=tableColumn;
+QStringList HStrList,HStrList2;
+for(int i=0;i<ColumnNum;i++){
+HStrList.push_back(returnList5[i].qualityParameterName);
+}
+for(int i=0;i<RowNum;i++){
+HStrList2.push_back(returnList1[i].valueExpectation);
+}
+ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
+ui->qTableWidget->setRowCount(RowNum);//设置行数
 
-    int RowNum=6;
-    int ColumnNum=4;
-    setWindowTitle(tr("TableWidget"));//设置对话框的标题
-        ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
-       ui->qTableWidget->setRowCount(RowNum);//设置行数
-       //table->setRowCount(RowCount+1);
-        //ui->qTableWidget->setRowCount(row_count+1); ;//设置行数
-        ui->qTableWidget->setWindowTitle("QTableWidget");
-        QStringList m_Header;
-        m_Header<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
-        ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
-        ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
-        //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
-       ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
-        //ui->tableWidget->setShowGrid(false);//隐藏栅格
-        //ui->qTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//设置编辑方式：禁止编辑表格
-        ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
-        //ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);//设置表格选择方式：设置表格为整列选中
-        ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
-        ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
-        setStyleSheet(QString::fromUtf8("border:1px solid black"));
+ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
+ui->qTableWidget->setVerticalHeaderLabels(HStrList2);
+setWindowTitle(tr("TableWidget"));//设置对话框的标题
+
+ui->qTableWidget->setWindowTitle("QTableWidget");
+
+ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
+//ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
+ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
+//ui->tableWidget->setShowGrid(false);//隐藏栅格
+//ui->qTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);//设置编辑方式：禁止编辑表格
+ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
+//ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);//设置表格选择方式：设置表格为整列选中
+ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
+ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
+// setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
         for(int rows=0;rows<RowNum;rows++)
         {
@@ -78,31 +92,66 @@ Step7_2::Step7_2(QWidget *parent) :
         //ui->qTableWidget->resizeColumnsToContents();
         //ui->qTableWidget->resizeRowsToContents();
 
-        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        qDebug()<<"单元格内容："<<strText;//输出单元格内容
 
-        //设置列标签
-        QStringList HStrList;
-        HStrList.push_back(QString("质量参数1"));
-        HStrList.push_back(QString("质量参数2"));
-        HStrList.push_back(QString("价值指标1"));
-        HStrList.push_back(QString("价值指标2"));
-        //HStrList.push_back(QString("other"));
-        //设置行列数(只有列存在的前提下，才可以设置列标签)
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
-        //设置列标签
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
-       //把QTableWidgetItem对象内容转换为QString
-        //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
+QVector<QComboBox*> Combox;
+for(int i=0;i<ColumnNum*RowNum*2;i++)
+{
+    if(i%2==0)
+    {
+        QComboBox *tmp= new QComboBox();
+        tmp->addItem("1");
+        tmp->addItem("2");
+        tmp->addItem("3");
+        tmp->addItem("4");
+        tmp->addItem("5");
+        tmp->addItem("6");
+        Combox.append(tmp);}
+    else if(i%2==1)
+    {
+        QComboBox *tmp= new QComboBox();
+        tmp->addItem("1");
+        tmp->addItem("2");
+        tmp->addItem("3");
+        tmp->addItem("4");
+        tmp->addItem("5");
+        tmp->addItem("6");
+        tmp->addItem("7");
+        tmp->addItem("8");
+        tmp->addItem("9");
+        tmp->addItem("10");
+        tmp->setCurrentIndex(4) ;
+        Combox.append(tmp);
+    }
+}
 
-        //具体单元格中添加ComboBox控件，下拉列表
-        QComboBox *comBox = new QComboBox();
-        comBox->addItem("");
-        comBox->addItem("");
-        //ui->qTableWidget->setCellWidget(0,3,comBox);
+QVector<QWidget*> ThreeCombox;
+int ss=0;
+for(int i=0;i<ColumnNum*RowNum;i++)
+{
+    QWidget *widget1 = new QWidget();
+    widget1->setObjectName(QString::fromUtf8("widget1"));
+    widget1->setGeometry(QRect(10, 8, 101, 31));
+    QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
+    verticalLayout->setSpacing(0);
+    verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+    verticalLayout->setContentsMargins(0, 0, 0, 0);
+    for (int i=0;i<2;i++) {
+        verticalLayout->addWidget(Combox.at(ss));ss++;
+    }
+    ThreeCombox.append(widget1);
+}
+int x=0;
+for (int i=0;i<RowNum;i++) {
+    for(int j=0;j<ColumnNum;j++)
+    {
+        ui->qTableWidget->setCellWidget(i,j,ThreeCombox.at(x));
+        x++;
+    }
+}
+x=0;
+
+//ui->qTableWidget->setCellWidget(0,3,comBox);
 
         //ui->qTableWidget->removeColumn(0);//删除列
         //ui->qTableWidget->removeRow(0);//删除行
@@ -206,7 +255,7 @@ void Step7_2::on_pushButton_4_clicked()
 void Step7_2::on_pushButton_5_clicked()
 {
 
-   QExcelEngine excelEngine=*new QExcelEngine();
+ /*  QExcelEngine excelEngine=*new QExcelEngine();
 
   QString filename =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step4_1_temp" + "xls";
   if(filename.isEmpty())
@@ -237,6 +286,16 @@ void Step7_2::on_pushButton_5_clicked()
   excelEngine.Close();
 
   QMessageBox::information(this, "excel提示", "保存成功");
+*/
+    QExcelEngine excelEngine=*new QExcelEngine();
+
+    excelEngine.Step7_2SaveData(ui->qTableWidget);
+
+
+    MatlabFunction matlabFunction = *new MatlabFunction();
+    matlabFunction.matStep7(ui->qTableWidget);
+
+    excelEngine.Close();
 
 }
 

@@ -14,6 +14,8 @@
 #include "entity_step5.h"
 #include "entity_step6_1.h"
 #include "entity_step6_2.h"
+#include "entity_step7_1.h"
+#include "entity_step7_2.h"
 using namespace std;
 
 class Sqlite
@@ -40,6 +42,8 @@ public:
     bool saveStep6_1Table(QString row,QString qualityParameterName,double value);
     bool saveStep6_2Table(QString qualityParameterNameRow,QString qualityParameterNameRank,QString valueQualityType,double BValue);
     bool saveStep6_3Table(QString row,QString rank,double  autocorrelationResult);
+    bool saveStep7_1Table(QString valueExpectation,QString QualityParameterName,double  valuequalityResult,double Evalue);
+    bool saveStep7_2Table(QString qualityParameterNameRow,QString qualityParameterNameRank,QString valueQualityType,double BValue);
 
 
     vector<Entity_Step1>  queryStep1Data();
@@ -52,7 +56,8 @@ public:
     vector<Entity_Step5>  queryStep5Data();
     vector<Entity_Step6_1>queryStep6_1Data();
     vector<Entity_Step6_2>queryStep6_2Data();
-
+    vector<Entity_Step7_1>queryStep7_1Data();
+    vector<Entity_Step7_2>queryStep7_2Data();
 
     bool deleteStep2Table();
     bool deleteStep3_2Data();
@@ -63,6 +68,8 @@ public:
     bool deleteStep5Data();
     bool deleteStep6_1Data();
     bool deleteStep6_2Data();
+    bool deleteStep7_1Data();
+    bool deleteStep7_2Data();
 
 };
 

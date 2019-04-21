@@ -45,8 +45,8 @@ public:
     bool Step5SaveData(QTableWidget *tableWidget);
     bool Step6_1SaveData(QTableWidget *tableWidget);
     bool Step6_2SaveData(QTableWidget *tableWidget);
-
-
+    bool Step7_1SaveData(QTableWidget *tableWidget);
+    bool Step7_2SaveData(QTableWidget *tableWidget);
 
 private:
     QAxObject *pExcel;

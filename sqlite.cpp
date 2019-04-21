@@ -306,6 +306,30 @@ bool Sqlite::saveStep6_1Table(QString row, QString qualityParameterName, double 
         return false;
     }
 }
+bool Sqlite::saveStep7_1Table(QString valueExpectation, QString QualityParameterName, double valuequalityResult,double Evalue)
+{
+
+    qDebug()<<"Sqlite::saveStep7_1Table";
+    if(valueExpectation != nullptr && QualityParameterName != nullptr && valuequalityResult != 0 && Evalue!=0)
+    {
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step7_1 (valueExpectation,QualityParameterName,valuequalityResult,Evalue) VALUES (:valueExpectation,:QualityParameterName,:valuequalityResult,:Evalue)");
+            query.bindValue(":valueExpectation", valueExpectation.trimmed());
+            query.bindValue(":QualityParameterName", QualityParameterName.trimmed());
+            query.bindValue(":valuequalityResult", valuequalityResult);
+            query.bindValue(":Evalue", Evalue);
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 bool Sqlite::saveStep6_2Table(QString qualityParameterNameRow, QString qualityParameterNameRank, QString valueQualityType, double BValue)
 {
     qDebug()<<"Sqlite::saveStep6_2Table";
@@ -330,6 +354,9 @@ bool Sqlite::saveStep6_2Table(QString qualityParameterNameRow, QString qualityPa
         return false;
     }
 }
+
+
+
 bool Sqlite::saveStep6_3Table(QString row, QString rank, double autocorrelationResult)
 {
     qDebug()<<"Sqlite::saveStep6_3Table";
@@ -354,7 +381,29 @@ bool Sqlite::saveStep6_3Table(QString row, QString rank, double autocorrelationR
     }
 }
 
-
+bool Sqlite::saveStep7_2Table(QString qualityParameterNameRow, QString qualityParameterNameRank, QString valueQualityType, double BValue)
+{
+    qDebug()<<"Sqlite::saveStep7_2Table";
+    if(qualityParameterNameRow != nullptr && qualityParameterNameRank != nullptr && valueQualityType != nullptr && BValue !=0)
+    {
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step7_2 (qualityParameterNameRow,qualityParameterNameRank,valueQualityType,BValue) VALUES (:qualityParameterNameRow,:qualityParameterNameRank,:valueQualityType,:BValue)");
+            query.bindValue(":qualityParameterNameRow", qualityParameterNameRow.trimmed());
+            query.bindValue(":qualityParameterNameRank", qualityParameterNameRank.trimmed());
+            query.bindValue(":valueQualityType", valueQualityType);
+            query.bindValue(":BValue", BValue);
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 vector<Entity_Step1> Sqlite::queryStep1Data()
 {
       qDebug()<<"Sqlite::queryStep1Data";
@@ -516,7 +565,41 @@ vector<Entity_Step6_2> Sqlite::queryStep6_2Data()
     }
     return returnList;
 }
-
+vector<Entity_Step7_1> Sqlite::queryStep7_1Data()
+{
+    //CREATE TABLE `Ste7_1` ( `row` varchar(255), `column` varchar(255), `value` double )
+    qDebug()<<"Sqlite::queryStep7_1Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step7_1");
+    vector<Entity_Step7_1>returnList;
+    while(query.next())
+    {
+        Entity_Step7_1 entity_Step7_1;
+        entity_Step7_1.QualityParameterName = query.value(0).toString();
+        entity_Step7_1.valueExpectation  = query.value(1).toString();
+        entity_Step7_1.valuequalityResult = query.value(2).toString().toDouble();
+        entity_Step7_1.Evalue = query.value(3).toString().toDouble();
+        returnList.push_back(entity_Step7_1);
+    }
+    return returnList;
+}
+vector<Entity_Step7_2> Sqlite::queryStep7_2Data()
+{
+    qDebug()<<"Sqlite::queryStep7_2Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step7_2");
+    vector<Entity_Step7_2>returnList;
+    while(query.next())
+    {
+        Entity_Step7_2 entity_Step7_2;
+        entity_Step7_2.qualityParameterNameRow = query.value(0).toString();
+        entity_Step7_2.qualityParameterNameRank = query.value(1).toString();
+        entity_Step7_2.valueQualityType = query.value(2).toString();
+        entity_Step7_2.BValue = query.value(3).toString().toDouble();
+        returnList.push_back(entity_Step7_2);
+    }
+    return returnList;
+}
 bool Sqlite::deleteStep2Table()
 {
     qDebug()<<"Sqlite::deleteStep2Table";
@@ -618,6 +701,29 @@ bool Sqlite::deleteStep6_2Data()
     qDebug()<<"Sqlite::deleteStep6_2Data";
     QSqlQuery query;
     query.exec("DELETE FROM Step6_2");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}bool Sqlite::deleteStep7_1Data()
+{
+    qDebug()<<"Sqlite::deleteStep7_1Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step7_1");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+bool Sqlite::deleteStep7_2Data()
+{
+    qDebug()<<"Sqlite::deleteStep7_2Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step7_2");
     if(!query.exec())
     {
         return false;

@@ -695,10 +695,74 @@ bool QExcelEngine::Step6_2SaveData(QTableWidget *tableWidget)
 
         }
     }
+    return true;
+}
+bool QExcelEngine::Step7_1SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step7_1SaveData";
+    int row = tableWidget->verticalHeader()->count();
+    int column = tableWidget->horizontalHeader()->count();
+    qDebug()<<row<<column;
+    Sqlite sqlite;
+    sqlite.connect();
+    sqlite.deleteStep7_1Data();
+    vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();//价值
+    vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();//质量
+    int Cvalue[row][column],Evalue[row][column];
+    int start=returnList5.size();
+int x=0;
+for(int j=0;j<row;j++)
+{
+    for(int i=start;i<column;i+=2)
+    {
+         // QString valueExpectationColumn = tableWidget->verticalHeaderItem(i)->data(Qt::DisplayRole).toString();
+          qDebug()<<"QExcelEngine::Step7_1SaveData222";
+          Cvalue[j][i]=tableWidget->item(j,i)->data(Qt::DisplayRole).toString().toDouble();
+          Evalue[j][i]=tableWidget->item(j,i+1)->data(Qt::DisplayRole).toString().toDouble();
+        qDebug()<<"QExcelEngine::Step7_1SaveData222";
+        sqlite.saveStep7_1Table(QString::number(j),QString::number(x),Cvalue[j][i],Evalue[j][i]);
+
+        qDebug()<<"QExcelEngine::Step7_1SaveData333";
+        x++;
+        }
+x=0;
+    }
 
     return true;
 }
+bool QExcelEngine::Step7_2SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step7_2SaveData";
+    Sqlite sqlite;
+    sqlite.connect();
+    sqlite.deleteStep7_2Data();
+    int row = tableWidget->rowCount();
+    int col = tableWidget->columnCount();
+    qDebug()<<"QExcelEngine::Step7_2SaveData::row"<<row;
+    qDebug()<<"QExcelEngine::Step7_2SaveData::col"<<col;
+    for(int i =0;i<row;i++)
+    {
+        for(int j =0;j<col;j++)
+        {
+            QWidget *widget = tableWidget->cellWidget(i,j);
+            QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
+            if(rad.count() !=0)
+            {
+                QString valueQualityType = rad.at(0)->currentText();
+                double BValue = rad.at(1)->currentText().toDouble();
+                sqlite.saveStep7_2Table(QString::number(i),QString::number(j),QString::number(1),BValue);
 
+            }
+        }
+    }
+    return true;
+}
+/**
+  *@brief 从指定的xls文件中把数据导入到tableWidget中
+  *@param tableWidget : 执行要导入到的tablewidget指针
+  *@return 导入成功与否 true : 成功
+  *                   false: 失败
+  */
 bool QExcelEngine::ReadDataToTable(QTableWidget *tableWidget)
 {
     if ( nullptr == tableWidget )
