@@ -34,7 +34,7 @@ public:
     bool Step1SaveData(QTableWidget *tableWidget);
     bool Step1QueryData(QTableWidget *tableWidget);
     bool Step2SaveData1(QTableWidget *tableWidget);
-    bool Step2QueryData1(QTableWidget *tableWidget);
+    bool Step2QueryData1(QTableWidget *tableWidget);bool Step7QueryData(QTableWidget *tableWidget);
     bool Step2SaveData2(QTableWidget *tableWidget);
     bool Step2MatBasicsss(QTableWidget *tableWidget);
     bool Step3_2SaveData(QTableWidget *tableWidget);

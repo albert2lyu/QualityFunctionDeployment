@@ -20,61 +20,61 @@ typedef void  (*Pcom_matFahp)(int , mxArray**,  mxArray*);
 typedef bool  (*Pcom_matBasicsssInitialize)(void);
 bool MatlabFunction::matBasi(QTableWidget *tableWidget)
 {
-     QLibrary mylib("matBasic.DLL");
-     if(mylib.load())
-     {
-         qDebug()<<"MatlabFunction::matBasi";
-     }
-     Pcom_matBasicsssInitialize pcom_matBasicsssInitialize =
+    QLibrary mylib("matBasic.DLL");
+    if(mylib.load())
+    {
+        qDebug()<<"MatlabFunction::matBasi";
+    }
+    Pcom_matBasicsssInitialize pcom_matBasicsssInitialize =
             (Pcom_matBasicsssInitialize)mylib.resolve("matBasicInitialize");
-     if(pcom_matBasicsssInitialize)
-     {
-         pcom_matBasicsssInitialize();
-         qDebug()<<"MatlabFunction::pcom_matBasicsssInitialize";
-     }
-     int rowCntA = tableWidget->rowCount();
-     qDebug()<<"MatlabFunction::rowCntA"<<rowCntA;
-     int colCntA = tableWidget->columnCount();
-     qDebug()<<"MatlabFunction::colCntA"<<colCntA;
-     if(rowCntA != colCntA)
-     {
-         qDebug()<<"MatlabFunction::矩阵A行列不一致，不能计算";
-     }
-     double arrayA [rowCntA][colCntA];
-       for(int i=0;i<rowCntA;i++)
-       {
-           for (int j=0; j<colCntA;j++)
-          {
-             arrayA[i][j]=tableWidget->item(j,i)->text().toDouble();
-          }
-       }
-     //初始化matrixA
-     mxArray *matrixA = mxCreateDoubleMatrix(rowCntA,colCntA,mxREAL);//定义数组，行，列，double类型
-     memcpy((void *)mxGetPr(matrixA),(void *)arrayA,sizeof(arrayA));
-     //初始化matrixC
-     int   rowCntC=rowCntA;
-     int   colCntC=1;
-     mxArray *matrixC = mxCreateDoubleMatrix(rowCntC,colCntC,mxREAL);
-     int nargout=1;//输出变量个数
-     Pcom_matFahp pcom_matFahp = (Pcom_matFahp) mylib.resolve("mlfMatFahp");
-     if(pcom_matFahp)
-     {
-         qDebug()<<"MatlabFunction::mlfMatFahp";
-         pcom_matFahp(nargout,&matrixC,matrixA);
-         double * pr = mxGetPr(matrixC);
-         qDebug()<<"MatlabFunction::mxGetM"<<mxGetM(matrixC);
-         Sqlite sqlite ;
-         sqlite.connect();
-         sqlite.deleteStep2Table();
-         for(int i = 0;i<tableWidget->horizontalHeader()->count();i++)
-         {
+    if(pcom_matBasicsssInitialize)
+    {
+        pcom_matBasicsssInitialize();
+        qDebug()<<"MatlabFunction::pcom_matBasicsssInitialize";
+    }
+    int rowCntA = tableWidget->rowCount();
+    qDebug()<<"MatlabFunction::rowCntA"<<rowCntA;
+    int colCntA = tableWidget->columnCount();
+    qDebug()<<"MatlabFunction::colCntA"<<colCntA;
+    if(rowCntA != colCntA)
+    {
+        qDebug()<<"MatlabFunction::矩阵A行列不一致，不能计算";
+    }
+    double arrayA [rowCntA][colCntA];
+    for(int i=0;i<rowCntA;i++)
+    {
+        for (int j=0; j<colCntA;j++)
+        {
+            arrayA[i][j]=tableWidget->item(j,i)->text().toDouble();
+        }
+    }
+    //初始化matrixA
+    mxArray *matrixA = mxCreateDoubleMatrix(rowCntA,colCntA,mxREAL);//定义数组，行，列，double类型
+    memcpy((void *)mxGetPr(matrixA),(void *)arrayA,sizeof(arrayA));
+    //初始化matrixC
+    int   rowCntC=rowCntA;
+    int   colCntC=1;
+    mxArray *matrixC = mxCreateDoubleMatrix(rowCntC,colCntC,mxREAL);
+    int nargout=1;//输出变量个数
+    Pcom_matFahp pcom_matFahp = (Pcom_matFahp) mylib.resolve("mlfMatFahp");
+    if(pcom_matFahp)
+    {
+        qDebug()<<"MatlabFunction::mlfMatFahp";
+        pcom_matFahp(nargout,&matrixC,matrixA);
+        double * pr = mxGetPr(matrixC);
+        qDebug()<<"MatlabFunction::mxGetM"<<mxGetM(matrixC);
+        Sqlite sqlite ;
+        sqlite.connect();
+        sqlite.deleteStep2Table();
+        for(int i = 0;i<tableWidget->horizontalHeader()->count();i++)
+        {
             QString valueExpectationRow = tableWidget->horizontalHeaderItem(i)->data(Qt::DisplayRole).toString();
             qDebug()<<"MatlabFunction::valueExpectationRow"<<valueExpectationRow;
             double  matrixCoutput = pr[i];
             qDebug()<<"MatlabFunction::"<<QString::number(matrixCoutput);
             sqlite.saveStep2TableDouble(valueExpectationRow,matrixCoutput);
-         }
-     }
+        }
+    }
 }
 typedef void  (*Pcom_mlfStep3)(int , mxArray**,  mxArray*, mxArray*, mxArray*, mxArray*);
 typedef bool  (*Pcom_step3Initialize)(void);
@@ -87,7 +87,7 @@ bool MatlabFunction::mlfStep3(QTableWidget *tableWidget)
         qDebug()<<"MatlabFunction::mlfStep3";
     }
     Pcom_step3Initialize pcom_step3Initialize =
-           (Pcom_step3Initialize)mylib.resolve("step3Initialize");
+            (Pcom_step3Initialize)mylib.resolve("step3Initialize");
     if(pcom_step3Initialize)
     {
         pcom_step3Initialize();
@@ -178,17 +178,17 @@ bool MatlabFunction::mlfStep3(QTableWidget *tableWidget)
                 Pcom_mlfStep3 pcom_mlfStep3 = (Pcom_mlfStep3)mylib.resolve("mlfStep3");
                 if(pcom_mlfStep3)
                 {
-                     qDebug()<<"MatlabFunction::mlfStep3";
-                     pcom_mlfStep3(1,&matrixResult,matrixA,matrixB,matrixC,matrixD);
-                     double * pr = mxGetPr(matrixResult);
-                     sqlite.deleteStep2Table();
-                     for(int i =0;i<rowCntResult;i++)
-                     {
-                            double  matrixResultOutput = pr[i];
-                            QString resultExpectation = returnList3_1[i].valueExpectation;
-                            sqlite.saveStep2Table(resultExpectation,QString::number(matrixResultOutput));
-                            qDebug()<<"MatlabFunction::mlfStep3::matrixResultOutput"<<QString::number(matrixResultOutput);
-                     }
+                    qDebug()<<"MatlabFunction::mlfStep3";
+                    pcom_mlfStep3(1,&matrixResult,matrixA,matrixB,matrixC,matrixD);
+                    double * pr = mxGetPr(matrixResult);
+                    sqlite.deleteStep2Table();
+                    for(int i =0;i<rowCntResult;i++)
+                    {
+                        double  matrixResultOutput = pr[i];
+                        QString resultExpectation = returnList3_1[i].valueExpectation;
+                        sqlite.saveStep2Table(resultExpectation,QString::number(matrixResultOutput));
+                        qDebug()<<"MatlabFunction::mlfStep3::matrixResultOutput"<<QString::number(matrixResultOutput);
+                    }
 
                 }
 
@@ -210,7 +210,7 @@ bool MatlabFunction::matStep6(QTableWidget *tableWidget)
         qDebug()<<"MatlabFunction::matStep6";
     }
     Pcom_matStep67810Initialize pcom_matStep67810Initialize =
-           (Pcom_matStep67810Initialize)mylib.resolve("matStep67810Initialize");
+            (Pcom_matStep67810Initialize)mylib.resolve("matStep67810Initialize");
     if(pcom_matStep67810Initialize)
     {
         pcom_matStep67810Initialize();
@@ -218,7 +218,7 @@ bool MatlabFunction::matStep6(QTableWidget *tableWidget)
     }
     Sqlite sqlite ;
     sqlite.connect();
-/*
+    /*
 函数：Q=matStep6(step51,step61,step621,step622)
 其中：
 step51是step5中输入的质量输参数的取值范围，行数与质量参数的数目一致，两列·第一列是下限，第二列是上限。
@@ -234,8 +234,8 @@ Q：step6的输出，行数等于质量参数数目，列数等于质量参数�
         double Matrix51 [returnList5Row][2];
         for(int i =0;i<returnList5Row;i++)
         {
-             Matrix51[i][0] = returnList5[i].lowerBoundValue;
-             Matrix51[i][1] = returnList5[i].upperBoundValue;
+            Matrix51[i][0] = returnList5[i].lowerBoundValue;
+            Matrix51[i][1] = returnList5[i].upperBoundValue;
         }
         double Matrix51_OVER [returnList5Row*2];
         int Matrix51_row_flag=0;
@@ -285,9 +285,9 @@ Q：step6的输出，行数等于质量参数数目，列数等于质量参数�
                 for(int i =0;i<returnList62.size();i++)
                 {
                     Matrix621[returnList62[i].qualityParameterNameRow.toInt()][returnList62[i].qualityParameterNameRank.toInt()]
-                             = returnList62[i].valueQualityType.toDouble();
+                            = returnList62[i].valueQualityType.toDouble();
                     Matrix622[returnList62[i].qualityParameterNameRow.toInt()][returnList62[i].qualityParameterNameRank.toInt()]
-                             = returnList62[i].BValue;
+                            = returnList62[i].BValue;
                 }
                 double Matrix621_OVER[returnList62Row*returnList62col];
                 double Matrix622_OVER[returnList62Row*returnList62col];
@@ -340,7 +340,7 @@ Q：step6的输出，行数等于质量参数数目，列数等于质量参数�
                             rowFlag=0;
                         }
                     }
-
+                    sqlite.deleteStep6_3Data();
                     for(int i =0;i<returnList5Row;i++)
                     {
                         for(int j=0;j<returnList5Row+1;j++)
@@ -421,8 +421,8 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
         double Matrix51 [returnList5Row][2];
         for(int i =0;i<returnList5Row;i++)
         {
-             Matrix51[i][0] = returnList5[i].lowerBoundValue;
-             Matrix51[i][1] = returnList5[i].upperBoundValue;
+            Matrix51[i][0] = returnList5[i].lowerBoundValue;
+            Matrix51[i][1] = returnList5[i].upperBoundValue;
         }
         double Matrix51_OVER [returnList5Row*2];
         int Matrix51_row_flag=0;
@@ -466,16 +466,15 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
                 int  returnList71Row = (int)returnList71[(returnList71.size()-1)].QualityParameterName.toInt()+1;
                 qDebug()<<"row"<<returnList71Row;
                 int  returnList71col = (int)returnList71[(returnList71.size()-1)].valueExpectation.toInt()+1;
-                 qDebug()<<"column"<<returnList71col;
+                qDebug()<<"column"<<returnList71col;
                 double Matrix711 [returnList71Row][returnList71col],Matrix7111 [returnList71.size()];
                 double Matrix712 [returnList71Row][returnList71col],Matrix7121 [returnList71.size()];
-                int x=0,y=0;
                 for(int i =0;i<returnList71.size();i++)
                 {
-                     Matrix711[returnList71[i].QualityParameterName.toInt()][returnList71[i].valueExpectation.toInt()] = returnList71[i].valuequalityResult;
-                      Matrix712[returnList71[i].QualityParameterName.toInt()][returnList71[i].valueExpectation.toInt()] = returnList71[i].Evalue;
-            Matrix7111[i]=returnList71[i].valuequalityResult;
-             Matrix7121[i]=returnList71[i].Evalue;
+                    Matrix711[returnList71[i].QualityParameterName.toInt()][returnList71[i].valueExpectation.toInt()] = returnList71[i].valuequalityResult;
+                    Matrix712[returnList71[i].QualityParameterName.toInt()][returnList71[i].valueExpectation.toInt()] = returnList71[i].Evalue;
+                    Matrix7111[i]=returnList71[i].valuequalityResult;
+                    Matrix7121[i]=returnList71[i].Evalue;
                 }
                 double Matrix711_OVER[returnList71Row*returnList71col];
                 double Matrix712_OVER[returnList71Row*returnList71col];
@@ -492,7 +491,7 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
                         Matrix71_col_flag++;
                     }
                 }
-                x=0;y=0;
+
                 // Matrix61 over
                 vector<Entity_Step7_2> returnList72 = sqlite.queryStep7_2Data();
                 if(returnList72.size()!=0)
@@ -504,9 +503,9 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
                     for(int i =0;i<returnList72.size();i++)
                     {
                         Matrix721[returnList72[i].qualityParameterNameRow.toInt()][returnList72[i].qualityParameterNameRank.toInt()]
-                                 = returnList72[i].valueQualityType.toDouble();
+                                = returnList72[i].valueQualityType.toDouble();
                         Matrix722[returnList72[i].qualityParameterNameRow.toInt()][returnList72[i].qualityParameterNameRank.toInt()]
-                                 = returnList72[i].BValue;
+                                = returnList72[i].BValue;
                     }
                     double Matrix721_OVER[returnList72Row*returnList72col];
                     double Matrix722_OVER[returnList72Row*returnList72col];
@@ -550,32 +549,50 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
                     Pcom_mlfStep7 pcom_mlfStep7 = (Pcom_mlfStep7)mylib.resolve("mlfMatStep7");
                     if(pcom_mlfStep7)
                     {
-                           pcom_mlfStep7(1,&matrixResult,matrixA,matrixB,matrixC,matrixD,matrixE,matrixF);
-                           double * pr = mxGetPr(matrixResult);
-                           double result [returnList71col][returnList5Row*2+2];
-                           int rowFlag =0;
-                           int colFlag =0;
+                        pcom_mlfStep7(1,&matrixResult,matrixA,matrixB,matrixC,matrixD,matrixE,matrixF);
+                        double * pr = mxGetPr(matrixResult);
+                        double result [returnList71col][returnList5Row*2+2];
+                        int rowFlag =0;
+                        int colFlag =0;
 
-                           for(int i=0;i<returnList71col*(returnList5Row*2+2);i++)
-                           {
-                               result[rowFlag][colFlag] = pr[i];
-                               rowFlag++;
-                               if(rowFlag == returnList71col)
-                               {
-                                   colFlag++;
-                                   rowFlag=0;
-                               }
-                           }
+                        for(int i=0;i<returnList71col*(returnList5Row*2+2);i++)
+                        {
+                            result[rowFlag][colFlag] = pr[i];
+                            rowFlag++;
+                            if(rowFlag == returnList71col)
+                            {
+                                colFlag++;
+                                rowFlag=0;
+                            }
+                        }
+                        QString aa;
+                        sqlite.deleteStep7_3Data();
+                        vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();
+                        int xxx=0;
+                        QStringList StrList;
 
-                           for(int i =0;i<returnList71col;i++)
-                           {
-                               for(int j=0;j<returnList5Row*2+2;j++)
-                               {                             sqlite.saveStep7_3Table(QString::number(i),QString::number(j),result[i][j]);                            qDebug()<<"result::"<<result[i][j];
-                               }
-                           }
+                        for (int i=0;i<returnList5Row;i++) {
+                            StrList.push_back(returnList5[i].qualityParameterName+"主值");
+                        }
+                        StrList.push_back("常数主值");
+                        for (int i=0;i<returnList5Row;i++) {
+                            StrList.push_back(returnList5[i].qualityParameterName+"展值");
+                        }
+                        StrList.push_back("常数展值");
+                        for(int i =0;i<returnList71col;i++)
+                        {
+                            for(int j=0;j<returnList5Row*2+2;j++){
+
+                                QString valueExpectationColumn = returnList1[i].valueExpectation;
+                               // sqlite.saveStep7_3Table(valueExpectationRow,valueExpectationColumn,result[i][j]);
+                                 sqlite.saveStep7_3Table(QString::number(i),QString::number(j),result[i][j]);
+                            }
+                            xxx++;
+                        }
 
                     }
-                    qDebug()<<"Finish Step7"<<endl;
+                     qDebug()<<"Finish Step7"<<endl;
+                        qDebug()<<"Finish Step7"<<endl;
                 size_t M,N;int aNOE;double* p;double i;
                    qDebug() << "  Step7out" << endl;
 
@@ -686,13 +703,7 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
         }
 
     }
-
-
-
-
-
     return true;
-
 }
 
 

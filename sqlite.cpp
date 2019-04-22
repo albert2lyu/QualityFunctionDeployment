@@ -387,7 +387,7 @@ bool Sqlite::saveStep7_3Table(QString valueExpectation, QString QualityParameter
     if(valueExpectation != nullptr && QualityParameterName != nullptr && valuequalityResult != 0 )
     {
             QSqlQuery query;
-            query.prepare("INSERT INTO Step7_3 (valueExpectation,QualityParameterName,valuequalityResult) VALUES (:valueExpectation,:QualityParameterName,:valuequalityResult)");
+            query.prepare("INSERT INTO Step7out (valueExpectation,QualityParameterName,valuequalityResult) VALUES (:valueExpectation,:QualityParameterName,:valuequalityResult)");
             query.bindValue(":valueExpectation", valueExpectation.trimmed());
             query.bindValue(":QualityParameterName", QualityParameterName.trimmed());
             query.bindValue(":valuequalityResult", valuequalityResult);
@@ -622,6 +622,24 @@ vector<Entity_Step7_2> Sqlite::queryStep7_2Data()
     }
     return returnList;
 }
+
+vector<Entity_Step7_3> Sqlite::queryStep7_3Data()
+{
+    //CREATE TABLE `Ste7_1` ( `row` varchar(255), `column` varchar(255), `value` double )
+    qDebug()<<"Sqlite::queryStep7_3Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step7out");
+    vector<Entity_Step7_3>returnList;
+    while(query.next())
+    {
+        Entity_Step7_3 entity_Step7_3;
+        entity_Step7_3.valueExpectation = query.value(0).toString();
+        entity_Step7_3.QualityParameterName  = query.value(1).toString();
+        entity_Step7_3.valuequalityResult = query.value(2).toDouble();
+        returnList.push_back(entity_Step7_3);
+    }
+    return returnList;
+}
 bool Sqlite::deleteStep2Table()
 {
     qDebug()<<"Sqlite::deleteStep2Table";
@@ -729,7 +747,20 @@ bool Sqlite::deleteStep6_2Data()
     }
     query.finish();
     return true;
-}bool Sqlite::deleteStep7_1Data()
+}
+bool Sqlite::deleteStep6_3Data()
+{
+    qDebug()<<"Sqlite::deleteStep6_3Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step6_3");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+bool Sqlite::deleteStep7_1Data()
 {
     qDebug()<<"Sqlite::deleteStep7_1Data";
     QSqlQuery query;
@@ -755,9 +786,9 @@ bool Sqlite::deleteStep7_2Data()
 }
 bool Sqlite::deleteStep7_3Data()
 {
-    qDebug()<<"Sqlite::deleteStep7_2Data";
+    qDebug()<<"Sqlite::deleteStep7_3Data";
     QSqlQuery query;
-    query.exec("DELETE FROM Step7_2");
+    query.exec("DELETE FROM Step7out");
     if(!query.exec())
     {
         return false;

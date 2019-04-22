@@ -1,16 +1,15 @@
-#include "Step7data.h"
+#include "Step7Data.h"
 #include "ui_Step7Data.h"
 #include "Step7_1.h"
 #include<QPixmapCache>
-
+#include<sqlite.h>
+#include"entity_step7_3.h"
 Step7Data::Step7Data(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step7Data)
 {
     ui->setupUi(this);
-
-    int RowNum=10;
-    int ColumnNum=4;
+int RowNum=6,ColumnNum=3;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
        ui->qTableWidget->setRowCount(RowNum);//设置行数
@@ -20,7 +19,7 @@ Step7Data::Step7Data(QWidget *parent) :
         QStringList m_Header;
         m_Header<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
         ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
-        ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
+        ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
         //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
        ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
         //ui->tableWidget->setShowGrid(false);//隐藏栅格
@@ -78,18 +77,10 @@ Step7Data::Step7Data(QWidget *parent) :
         qDebug()<<"单元格内容："<<strText;//输出单元格内容
 
         //设置列标签
-        QStringList HStrList;
-        HStrList.push_back(QString("指标序号"));
-        HStrList.push_back(QString("价值指标"));
-        HStrList.push_back(QString("关系符号"));
-        HStrList.push_back(QString("期望值"));
+
         //HStrList.push_back(QString("other"));
         //设置行列数(只有列存在的前提下，才可以设置列标签)
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
         //设置列标签
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
        //把QTableWidgetItem对象内容转换为QString
         //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
@@ -113,17 +104,12 @@ Step7Data::~Step7Data()
 void Step7Data::on_pushButton_clicked(){
 
 
+    qDebug()<<"Step1Data on_pushButton_clicked";
+    ////从数据库中读取数据
+    QExcelEngine excelEngine=*new QExcelEngine();
+    excelEngine.Step7QueryData(ui->qTableWidget);
+    excelEngine.Close();
 
-        //从Excel中将表格导入到TableWidget
-       QExcelEngine excelEngine=*new QExcelEngine();
-         QString m_fileName =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step7_1_temp" + "xls";
-        bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
-        if(b == false)
-        {
-            QMessageBox::information(this, "excel提示", "文件打开失败");
-            return;
-        }
-        excelEngine.ReadDataToTable(ui->qTableWidget);
-        excelEngine.Close();
+
 
 }
