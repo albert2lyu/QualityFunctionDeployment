@@ -41,11 +41,25 @@ bool MatlabFunction::matBasi(QTableWidget *tableWidget)
         qDebug()<<"MatlabFunction::矩阵A行列不一致，不能计算";
     }
     double arrayA [rowCntA][colCntA];
+    QList<QComboBox *> rad = tableWidget->findChildren<QComboBox *>();
+
     for(int i=0;i<rowCntA;i++)
     {
         for (int j=0; j<colCntA;j++)
         {
-            arrayA[i][j]=tableWidget->item(j,i)->text().toDouble();
+            QString temp=rad.at(0)->currentText();
+            double temps;
+            if(temp=="关系一")
+            {
+
+                 temps =0.1;
+            } else  if(temp=="关系二"){ temps =0.2;}
+            else  if(temp=="关系三"){ temps =0.4;}
+            else  if(temp=="关系四"){ temps =0.5;}
+            else  if(temp=="关系五"){ temps =0.6;}
+            else  if(temp=="关系六"){ temps =0.8;}
+            else { temps =0.9;}
+            arrayA[i][j]=temps;
         }
     }
     //初始化matrixA

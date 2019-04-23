@@ -21,12 +21,12 @@ Step7_1::Step7_1(QWidget *parent) :
     qDebug()<<"Step2::ui::returnList.size()::"<<returnList1.size();qDebug()<<"Step5::ui::returnList.size()::"<<returnList5.size();
     int tableColumn =returnList1.size();
     int tableColumn2 =returnList5.size();
-    int ColumnNum=tableColumn*2+tableColumn2;
+    int ColumnNum=tableColumn*2;
     QStringList HStrList;
     QStringList VStrList;
     int RowNum=returnList5.size();
     for (int i=0;i<RowNum;i++) {
-        HStrList.push_back(returnList5[i].chooseQualityParameterName);
+
         VStrList.push_back(returnList5[i].chooseQualityParameterName);
     }
     for(int i=0;i<tableColumn;i++){

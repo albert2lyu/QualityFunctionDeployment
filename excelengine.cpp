@@ -673,7 +673,7 @@ bool QExcelEngine::Step4_2SaveData(QTableWidget *tableWidget,QTableWidget *table
             }
         }
     }
-qDebug()<<row2;
+    qDebug()<<row2;
     for(int i =0;i<row2;i++)
     {
         QString chooseQualityParameterName =  tableWidget2->item(i,0)->data(Qt::DisplayRole).toString();
@@ -749,8 +749,19 @@ bool QExcelEngine::Step6_2SaveData(QTableWidget *tableWidget)
             if(rad.count() !=0)
             {
                 QString valueQualityType = rad.at(0)->currentText();
+                QString valueQualityType2;
+                if(valueQualityType=="类型一")
+                {
+
+                    QString valueQualityType2 ="1";
+                } else  if(valueQualityType=="类型二"){ valueQualityType2 ="2";}
+                else  if(valueQualityType=="类型三"){ valueQualityType2 ="3";}
+                else  if(valueQualityType=="类型四"){ valueQualityType2 ="4";}
+                else  if(valueQualityType=="类型五"){ valueQualityType2 ="5";}
+                else  if(valueQualityType=="类型六"){ valueQualityType2 ="6";}
+                else { valueQualityType2 ="0";}
                 double BValue = rad.at(1)->currentText().toDouble();
-                sqlite.saveStep6_2Table(QString::number(i),QString::number(j),valueQualityType,BValue);
+                sqlite.saveStep6_2Table(QString::number(i),QString::number(j),valueQualityType2,BValue);
             }
 
         }
@@ -769,11 +780,10 @@ bool QExcelEngine::Step7_1SaveData(QTableWidget *tableWidget)
     vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();//价值
     vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();//质量
     int Cvalue[row][column],Evalue[row][column];
-    int start=returnList5.size();
     int x=0;
     for(int j=0;j<row;j++)
     {
-        for(int i=start;i<column;i+=2)
+        for(int i=0;i<column;i+=2)
         {
             // QString valueExpectationColumn = tableWidget->verticalHeaderItem(i)->data(Qt::DisplayRole).toString();
             qDebug()<<"QExcelEngine::Step7_1SaveData222";
@@ -808,9 +818,21 @@ bool QExcelEngine::Step7_2SaveData(QTableWidget *tableWidget)
             QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
             if(rad.count() !=0)
             {
+
                 QString valueQualityType = rad.at(0)->currentText();
+                QString valueQualityType2;
+                if(valueQualityType=="类型一")
+                {
+
+                    QString valueQualityType2 ="1";
+                } else  if(valueQualityType=="类型二"){ valueQualityType2 ="2";}
+                else  if(valueQualityType=="类型三"){ valueQualityType2 ="3";}
+                else  if(valueQualityType=="类型四"){ valueQualityType2 ="4";}
+                else  if(valueQualityType=="类型五"){ valueQualityType2 ="5";}
+                else  if(valueQualityType=="类型六"){ valueQualityType2 ="6";}
+                else { valueQualityType2 ="0";}
                 double BValue = rad.at(1)->currentText().toDouble();
-                sqlite.saveStep7_2Table(QString::number(i),QString::number(j),QString::number(1),BValue);
+                sqlite.saveStep7_2Table(QString::number(i),QString::number(j),valueQualityType2,BValue);
 
             }
         }

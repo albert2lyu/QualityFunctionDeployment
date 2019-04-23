@@ -12,7 +12,7 @@
 #include "matBasic.h"
 #include <QLibrary>
 #include "matlabfunction.h"
-
+#include<QVBoxLayout>
 Step2_3::Step2_3(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step2_3)
@@ -82,6 +82,50 @@ Step2_3::Step2_3(QWidget *parent) :
         }
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
+
+
+        QVector<QComboBox*> Combox;
+        for(int i=0;i<ColumnNum*RowNum*2;i++)
+        {
+
+                QComboBox *tmp= new QComboBox();
+                tmp->addItem("关系一");
+                tmp->addItem("关系二");
+                tmp->addItem("关系三");
+                tmp->addItem("关系四");
+                tmp->addItem("关系五");
+                tmp->addItem("关系六");
+                tmp->addItem("关系七");
+                tmp->setCurrentIndex(3) ;
+                Combox.append(tmp);
+
+        }
+
+        QVector<QWidget*> ThreeCombox;
+        int ss=0;
+        for(int i=0;i<ColumnNum*RowNum;i++)
+        {
+            QWidget *widget1 = new QWidget();
+            widget1->setObjectName(QString::fromUtf8("widget1"));
+            widget1->setGeometry(QRect(10, 8, 101, 31));
+            QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
+            verticalLayout->setSpacing(0);
+            verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+            verticalLayout->setContentsMargins(0, 0, 0, 0);
+            for (int i=0;i<2;i++) {
+                verticalLayout->addWidget(Combox.at(ss));ss++;
+            }
+            ThreeCombox.append(widget1);
+        }
+        int x=0;
+        for (int i=0;i<RowNum;i++) {
+            for(int j=0;j<ColumnNum;j++)
+            {
+                ui->qTableWidget->setCellWidget(i,j,Combox.at(x));
+                x++;
+            }
+        }
+        x=0;
 }
 
 Step2_3::~Step2_3()

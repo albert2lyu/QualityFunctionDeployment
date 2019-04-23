@@ -100,12 +100,14 @@ for(int i=0;i<ColumnNum*RowNum*2;i++)
     if(i%2==0)
     {
         QComboBox *tmp= new QComboBox();
-        tmp->addItem("1");
-        tmp->addItem("2");
-        tmp->addItem("3");
-        tmp->addItem("4");
-        tmp->addItem("5");
-        tmp->addItem("6");
+        tmp->addItem("类型一");
+        tmp->addItem("类型二");
+        tmp->addItem("类型三");
+        tmp->addItem("类型四");
+        tmp->addItem("类型五");
+        tmp->addItem("类型六");
+        tmp->addItem("无关");
+        tmp->setCurrentIndex(6) ;
         Combox.append(tmp);}
     else if(i%2==1)
     {

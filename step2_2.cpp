@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QComboBox>
 #include <QFileDialog>
-
+#include<QVBoxLayout>
 Step2_2::Step2_2(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step2_2)
@@ -92,13 +92,6 @@ Step2_2::Step2_2(QWidget *parent) :
         //设置列标签
         ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
-       //把QTableWidgetItem对象内容转换为QString
-        //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
-
-        //具体单元格中添加ComboBox控件，下拉列表
-        QComboBox *comBox = new QComboBox();
-        comBox->addItem("");
-        comBox->addItem("");
         //ui->qTableWidget->setCellWidget(0,3,comBox);
 
         //ui->qTableWidget->removeColumn(0);//删除列
