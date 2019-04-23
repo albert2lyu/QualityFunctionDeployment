@@ -7,6 +7,7 @@
 #include <QComboBox>
 #include <QFileDialog>
 #include "sqlite.h"
+#include<QVBoxLayout>
 
 Step5_1::Step5_1(QWidget *parent) :
     QWidget(parent),
@@ -52,6 +53,23 @@ Step5_1::Step5_1(QWidget *parent) :
                 tmp->addItem("连续型");
                 Combox.append(tmp);
         }
+        QVector<QWidget*> ThreeCombox;
+        int ss=0;
+        for(int i=0;i<HlableCnt*RowNum;i++)
+        {
+            QWidget *widget1 = new QWidget();
+            widget1->setObjectName(QString::fromUtf8("widget1"));
+            widget1->setGeometry(QRect(10, 8, 101, 31));
+            QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
+            verticalLayout->setSpacing(0);
+            verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+            verticalLayout->setContentsMargins(0, 0, 0, 0);
+           
+                verticalLayout->addWidget(Combox.at(ss));ss++;
+            
+            ThreeCombox.append(widget1);
+        }
+        ss=0;
 
         int x=0;
         for (int i=0;i<RowNum;i++) {
