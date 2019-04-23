@@ -6,16 +6,10 @@ Step3::Step3(QWidget *parent) :
     ui(new Ui::Step3)
 {
     ui->setupUi(this);
-    Step3_1_Page=new Step3_1(this);
-    Step3_2_Page=new Step3_2(this);
-    Step3_3_Page=new Step3_3(this);
-    Step3_4_Page=new Step3_4(this);
-    Step3Data_Page = new Step3Data(this);
-    ui->stackedWidget->addWidget(Step3_1_Page);
-    ui->stackedWidget->addWidget(Step3_2_Page);
-    ui->stackedWidget->addWidget(Step3_3_Page);
-    ui->stackedWidget->addWidget(Step3_4_Page);
-    ui->stackedWidget_2->addWidget(Step3Data_Page);
+
+
+
+
     ui->stackedWidget->setVisible(false);
     ui->stackedWidget_2->setVisible(false);
 
@@ -71,28 +65,43 @@ Step3::~Step3()
 }
 void Step3::on_pushButton_clicked()
 {
+    Step3_1_Page=new Step3_1(this);   ui->stackedWidget->addWidget(Step3_1_Page);
+
+
+
     ui->stackedWidget->setCurrentWidget(Step3_1_Page);
      ui->stackedWidget->show();
 }
 
 void Step3::on_pushButton_2_clicked()
 {
+    Step3_2_Page=new Step3_2(this);ui->stackedWidget->addWidget(Step3_2_Page);
+
     ui->stackedWidget->setCurrentWidget(Step3_2_Page);
     ui->stackedWidget->show();
 }
 
 void Step3::on_pushButton_3_clicked()
 {
+
+    Step3Data_Page = new Step3Data(this); ui->stackedWidget_2->addWidget(Step3Data_Page);
     ui->stackedWidget_2->setCurrentWidget(Step3Data_Page);
     ui->stackedWidget_2->show();
+
 }
 void Step3::on_pushButton_4_clicked()
 {
+
+    Step3_3_Page=new Step3_3(this); ui->stackedWidget->addWidget(Step3_3_Page);
+
     ui->stackedWidget->setCurrentWidget(Step3_3_Page);
     ui->stackedWidget->show();
 }
 void Step3::on_pushButton_5_clicked()
 {
+
+    Step3_4_Page=new Step3_4(this); ui->stackedWidget->addWidget(Step3_4_Page);
+
     ui->stackedWidget->setCurrentWidget(Step3_4_Page);
     ui->stackedWidget->show();
 }

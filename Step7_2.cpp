@@ -16,7 +16,7 @@ ui->setupUi(this);
 Sqlite sqlite;
 sqlite.connect();
 vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();
-vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
+vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();
 qDebug()<<"Step2::ui::returnList.size()::"<<returnList1.size();qDebug()<<"Step5::ui::returnList.size()::"<<returnList5.size();
 int tableColumn =returnList1.size();
 int tableColumn2 =returnList5.size();
@@ -24,7 +24,7 @@ int ColumnNum=tableColumn2;
 int RowNum=tableColumn;
 QStringList HStrList,HStrList2;
 for(int i=0;i<ColumnNum;i++){
-HStrList.push_back(returnList5[i].qualityParameterName);
+HStrList.push_back(returnList5[i].chooseQualityParameterName);
 }
 for(int i=0;i<RowNum;i++){
 HStrList2.push_back(returnList1[i].valueExpectation);

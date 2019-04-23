@@ -70,7 +70,15 @@ Step4_1::Step4_1(QWidget *parent) :
         qDebug()<<"Step4_1::ui::QCheckBox end";
     }
 
-
+    int RowNum_2=0;
+    int ColumnNum_2=1;
+    ui->qTableWidget_2->setColumnCount(ColumnNum_2);//设置列数
+    ui->qTableWidget_2->setRowCount(RowNum_2);//设置行数
+    //设置列标签
+    QStringList HStrList_2;
+    HStrList_2.push_back(QString("质量参数"));
+    qDebug()<<"11"<<endl;
+    ui->qTableWidget_2->setHorizontalHeaderLabels(HStrList_2);
 }
 
 Step4_1::~Step4_1()
@@ -80,13 +88,13 @@ Step4_1::~Step4_1()
 
 void Step4_1::on_pushButton_clicked()
 {
-    int cols=ui->qTableWidget->columnCount();
-    int rows=ui->qTableWidget->rowCount();
+    int cols=ui->qTableWidget_2->columnCount();
+    int rows=ui->qTableWidget_2->rowCount();
     qDebug()<<rows;
     ui->qTableWidget_2->insertRow(rows);
     for(int i=0;i<cols;i++)
     {
-        ui->qTableWidget->setItem(rows,i,new QTableWidgetItem(""));
+        ui->qTableWidget_2->setItem(rows,i,new QTableWidgetItem(""));
     }
     ui->qTableWidget_2->selectRow(rows);
 }
@@ -100,7 +108,7 @@ void Step4_1::on_pushButton_2_clicked()
 //将表格数据写入文件
 void Step4_1::on_pushButton_3_clicked()
 {
-     QExcelEngine excelEngine=*new QExcelEngine();
+    QExcelEngine excelEngine=*new QExcelEngine();
 
     QString filename="0";
     if(filename.isEmpty())
@@ -125,40 +133,40 @@ void Step4_1::on_pushButton_3_clicked()
 void Step4_1::on_pushButton_4_clicked()
 {
     QMessageBox::StandardButton rb = QMessageBox::information(this, "warning", "从excel文件中导入数据将会覆盖之前所有内容，\n确定导入吗？",
-                             QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
-        if(rb == QMessageBox::Yes)
-        {
+    if(rb == QMessageBox::Yes)
+    {
         //从Excel中将表格导入到TableWidget
-            QExcelEngine excelEngine=*new QExcelEngine();
+        QExcelEngine excelEngine=*new QExcelEngine();
 
-            QString m_fileName = QFileDialog::getOpenFileName(this, tr("select file"), "../datafile/", tr("*.xls *.xlsx"));
-            if(m_fileName.isEmpty())
+        QString m_fileName = QFileDialog::getOpenFileName(this, tr("select file"), "../datafile/", tr("*.xls *.xlsx"));
+        if(m_fileName.isEmpty())
             return;
 
-            bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
-            if(b == false)
-            {
-                QMessageBox::information(this, "excel提示", "文件打开失败");
-                return;
-            }
-            excelEngine.ReadDataToTable(ui->qTableWidget);
-            excelEngine.Close();
-            QMessageBox::information(this, "excel提示", "导入成功");
+        bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
+        if(b == false)
+        {
+            QMessageBox::information(this, "excel提示", "文件打开失败");
+            return;
         }
+        excelEngine.ReadDataToTable(ui->qTableWidget);
+        excelEngine.Close();
+        QMessageBox::information(this, "excel提示", "导入成功");
+    }
 }
 
 
 void Step4_1::on_pushButton_5_clicked()
 {
 
-   QExcelEngine excelEngine=*new QExcelEngine();
-   //清空表格之前的所有内容
-   excelEngine.ClearAllData(" ");
+    QExcelEngine excelEngine=*new QExcelEngine();
+    //清空表格之前的所有内容
+    excelEngine.ClearAllData(" ");
 
-   excelEngine.Step4_2SaveData(ui->qTableWidget);
-   excelEngine.Close();
-   QMessageBox::information(this, "excel提示", "保存成功");
+    excelEngine.Step4_2SaveData(ui->qTableWidget,ui->qTableWidget_2);
+    excelEngine.Close();
+    QMessageBox::information(this, "excel提示", "保存成功");
 
 }
 

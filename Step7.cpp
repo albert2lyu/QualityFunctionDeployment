@@ -6,12 +6,10 @@ Step7::Step7(QWidget *parent) :
     ui(new Ui::Step7)
 {
     ui->setupUi(this);
-    Step7_1_Page = new Step7_1(this);//实例化窗口页面
-    ui->stackedWidget->addWidget(Step7_1_Page);
-    Step7_2_Page = new Step7_2(this);//实例化窗口页面
-    ui->stackedWidget->addWidget(Step7_2_Page);
-    Step7Data_Page = new Step7Data(this);
-    ui->stackedWidget_2->addWidget(Step7Data_Page);
+    ui->stackedWidget->setVisible(false);
+    ui->stackedWidget_2->setVisible(false);
+
+
 //    setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 void Step7::paintEvent(QPaintEvent *)
@@ -63,15 +61,24 @@ Step7::~Step7()
 }
 void Step7::on_pushButton_clicked()
 {
+    Step7_1_Page = new Step7_1(this);
+        ui->stackedWidget->addWidget(Step7_1_Page);
     ui->stackedWidget->setCurrentWidget(Step7_1_Page);
+        ui->stackedWidget->show();
 }
 
 void Step7::on_pushButton_2_clicked()
 {
+    Step7_2_Page = new Step7_2(this);
+        ui->stackedWidget->addWidget(Step7_2_Page);
     ui->stackedWidget->setCurrentWidget(Step7_2_Page);
+        ui->stackedWidget->show();
 }
 
 void Step7::on_pushButton_3_clicked()
 {
+    Step7Data_Page = new Step7Data(this);
+        ui->stackedWidget_2->addWidget(Step7Data_Page);
     ui->stackedWidget_2->setCurrentWidget(Step7Data_Page);
+        ui->stackedWidget_2->show();
 }

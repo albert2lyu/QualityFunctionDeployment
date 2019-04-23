@@ -8,12 +8,6 @@ Step1::Step1(QWidget *parent) :
     ui(new Ui::Step1)
 {
     ui->setupUi(this);
-    Step1_1_Page = new Step1_1(this);//实例化窗口页面
-    Step1_2_Page = new Step1_2(this);
-    ui->stackedWidget->addWidget(Step1_1_Page);
-    ui->stackedWidget->addWidget(Step1_2_Page);
-    Step1Data_Page = new Step1Data(this);
-    ui->stackedWidget_2->addWidget(Step1Data_Page);
     ui->stackedWidget->setVisible(false);
     ui->stackedWidget_2->setVisible(false);
 }
@@ -69,18 +63,25 @@ Step1::~Step1()
 }
 void Step1::on_pushButton_clicked()
 {
+        Step1_1_Page = new Step1_1(this);
+        ui->stackedWidget->addWidget(Step1_1_Page);
+
     ui->stackedWidget->setCurrentWidget(Step1_1_Page);
     ui->stackedWidget->show();
 }
 
 void Step1::on_pushButton_2_clicked()
 {
+        Step1_2_Page = new Step1_2(this);
+                ui->stackedWidget->addWidget(Step1_2_Page);
     ui->stackedWidget->setCurrentWidget(Step1_2_Page);
      ui->stackedWidget->show();
 }
 
 void Step1::on_pushButton_3_clicked()
 {
+        Step1Data_Page = new Step1Data(this);
+            ui->stackedWidget_2->addWidget(Step1Data_Page);
     ui->stackedWidget_2->setCurrentWidget(Step1Data_Page);
     ui->stackedWidget_2->show();
 }

@@ -30,12 +30,12 @@ Step6_2::Step6_2(QWidget *parent) :
 
         Sqlite sqlite;
         sqlite.connect();
-        vector<Entity_Step5>returnList = sqlite.queryStep5Data();
+        vector<Entity_Step4_2>returnList = sqlite.queryStep4_2Data();
         int RowNum = (int)returnList.size();
         QStringList HStrList;
         for(int i =0;i<RowNum;i++)
         {
-            QString qualityParameterName = returnList[i].qualityParameterName;
+            QString qualityParameterName = returnList[i].chooseQualityParameterName;
             HStrList.push_back(qualityParameterName);
         }
         int HlableCnt = HStrList.count();

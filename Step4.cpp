@@ -6,10 +6,9 @@ Step4::Step4(QWidget *parent) :
     ui(new Ui::Step4)
 {
     ui->setupUi(this);
-    Step4_1_Page = new Step4_1(this);//实例化窗口页面
-    ui->stackedWidget->addWidget(Step4_1_Page);
-    Step4Data_Page = new Step4Data(this);
-    ui->stackedWidget_2->addWidget(Step4Data_Page);
+    ui->stackedWidget->setVisible(false);
+    ui->stackedWidget_2->setVisible(false);
+
 }
 void Step4::paintEvent(QPaintEvent *)
 {
@@ -58,15 +57,29 @@ Step4::~Step4()
 }
 void Step4::on_pushButton_clicked()
 {
+    Step4_1_Page = new Step4_1(this);//实例化窗口页面
+    ui->stackedWidget->addWidget(Step4_1_Page);
     ui->stackedWidget->setCurrentWidget(Step4_1_Page);
+
+     ui->stackedWidget->show();
 }
 
 void Step4::on_pushButton_2_clicked()
 {
+    Step4_1_Page = new Step4_1(this);//实例化窗口页面
+    ui->stackedWidget->addWidget(Step4_1_Page);
+
     ui->stackedWidget->setCurrentWidget(Step4_1_Page);
+
+     ui->stackedWidget->show();
 }
 
 void Step4::on_pushButton_3_clicked()
 {
+
+    Step4Data_Page = new Step4Data(this);
+    ui->stackedWidget_2->addWidget(Step4Data_Page);
     ui->stackedWidget_2->setCurrentWidget(Step4Data_Page);
+    ui->stackedWidget_2->show();
+
 }

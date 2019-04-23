@@ -647,11 +647,12 @@ bool QExcelEngine::Step4_1SaveData(QTableWidget *tableWidget)
 
     return true;
 }
-bool QExcelEngine::Step4_2SaveData(QTableWidget *tableWidget)
+bool QExcelEngine::Step4_2SaveData(QTableWidget *tableWidget,QTableWidget *tableWidget2)
 {
     qDebug()<<"QExcelEngine::Step4_2SaveData";
     int row = tableWidget->rowCount();
     int col = tableWidget->columnCount();
+    int row2 = tableWidget2->rowCount();
     Sqlite sqlite;
     sqlite.connect();
     sqlite.deleteStep4_2Data();
@@ -672,7 +673,13 @@ bool QExcelEngine::Step4_2SaveData(QTableWidget *tableWidget)
             }
         }
     }
+qDebug()<<row2;
+    for(int i =0;i<row2;i++)
+    {
+        QString chooseQualityParameterName =  tableWidget2->item(i,0)->data(Qt::DisplayRole).toString();
+        sqlite.saveStep4_2Table(chooseQualityParameterName);
 
+    }
     return true;
 }
 bool QExcelEngine::Step5SaveData(QTableWidget *tableWidget)

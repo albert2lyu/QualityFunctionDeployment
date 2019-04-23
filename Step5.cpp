@@ -6,10 +6,7 @@ Step5::Step5(QWidget *parent) :
     ui(new Ui::Step5)
 {
     ui->setupUi(this);
-    Step5_1_Page = new Step5_1(this);//实例化窗口页面
-    ui->stackedWidget->addWidget(Step5_1_Page);
-    Step5Data_Page = new Step5Data(this);
-    ui->stackedWidget_2->addWidget(Step5Data_Page);
+
     ui->stackedWidget->setVisible(false);
     ui->stackedWidget_2->setVisible(false);
 }
@@ -62,18 +59,26 @@ Step5::~Step5()
 }
 void Step5::on_pushButton_clicked()
 {
+    Step5_1_Page = new Step5_1(this);//实例化窗口页面
+    ui->stackedWidget->addWidget(Step5_1_Page);
+
     ui->stackedWidget->setCurrentWidget(Step5_1_Page);
     ui->stackedWidget->show();
 }
 
 void Step5::on_pushButton_2_clicked()
-{
+{  Step5_1_Page = new Step5_1(this);//实例化窗口页面
+    ui->stackedWidget->addWidget(Step5_1_Page);
+
     ui->stackedWidget->setCurrentWidget(Step5_1_Page);
      ui->stackedWidget->show();
 }
 
 void Step5::on_pushButton_3_clicked()
 {
+
+    Step5Data_Page = new Step5Data(this);
+    ui->stackedWidget_2->addWidget(Step5Data_Page);
     ui->stackedWidget_2->setCurrentWidget(Step5Data_Page);
      ui->stackedWidget_2->show();
 }

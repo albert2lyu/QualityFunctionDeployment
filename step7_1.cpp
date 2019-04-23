@@ -17,7 +17,7 @@ Step7_1::Step7_1(QWidget *parent) :
     Sqlite sqlite;
     sqlite.connect();
     vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();
-    vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
+    vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();
     qDebug()<<"Step2::ui::returnList.size()::"<<returnList1.size();qDebug()<<"Step5::ui::returnList.size()::"<<returnList5.size();
     int tableColumn =returnList1.size();
     int tableColumn2 =returnList5.size();
@@ -26,8 +26,8 @@ Step7_1::Step7_1(QWidget *parent) :
     QStringList VStrList;
     int RowNum=returnList5.size();
     for (int i=0;i<RowNum;i++) {
-        HStrList.push_back(returnList5[i].qualityParameterName);
-        VStrList.push_back(returnList5[i].qualityParameterName);
+        HStrList.push_back(returnList5[i].chooseQualityParameterName);
+        VStrList.push_back(returnList5[i].chooseQualityParameterName);
     }
     for(int i=0;i<tableColumn;i++){
     HStrList.push_back(returnList1[i].valueExpectation+"中心值");

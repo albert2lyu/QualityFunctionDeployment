@@ -14,6 +14,8 @@ Step9::Step9(QWidget *parent) :
     ui->stackedWidget->addWidget(Step9_3_Page);
     Step9Data_Page = new Step9Data(this);
     ui->stackedWidget_2->addWidget(Step9Data_Page);
+    ui->stackedWidget->setVisible(false);
+    ui->stackedWidget_2->setVisible(false);
   //  setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 void Step9::paintEvent(QPaintEvent *)

@@ -34,39 +34,20 @@ MainWindow::MainWindow(QWidget *parent) :
     mainLayout->addWidget(rightWidget);
     rightLayout->addWidget(ui->stackedWidget);
     setCentralWidget(mainWidget);
-    Step1_Page = new Step1(this);//实例化窗口页面
-    Step2_Page = new Step2(this);
-    Step3_Page = new Step3(this);
-    Step4_Page = new Step4(this);
-    Step5_Page = new Step5(this);
-    Step6_Page = new Step6(this);
-    Step7_Page = new Step7(this);
-    Step8_Page = new Step8(this);
-    Step9_Page = new Step9(this);
-    Step10_Page = new Step10(this);
-    ui->stackedWidget->addWidget(Step1_Page);
-    ui->stackedWidget->addWidget(Step2_Page);
-    ui->stackedWidget->addWidget(Step3_Page);
-    ui->stackedWidget->addWidget(Step4_Page);
-    ui->stackedWidget->addWidget(Step5_Page);
-    ui->stackedWidget->addWidget(Step6_Page);
-    ui->stackedWidget->addWidget(Step7_Page);
-    ui->stackedWidget->addWidget(Step8_Page);
-    ui->stackedWidget->addWidget(Step9_Page);
-    ui->stackedWidget->addWidget(Step10_Page);
+
 
     connect(navigationWidget, &QNavigationWidget::currentItemChanged, this, [=](const int &current){
         switch (current+1) {
         case 1:{Step1_Page = new Step1(this);ui->stackedWidget->addWidget(Step1_Page);ui->stackedWidget->setCurrentWidget(Step1_Page);break;};
         case 2:{Step2_Page = new Step2(this);ui->stackedWidget->addWidget(Step2_Page);ui->stackedWidget->setCurrentWidget(Step2_Page);break;};
         case 3:{Step3_Page = new Step3(this);ui->stackedWidget->addWidget(Step3_Page);ui->stackedWidget->setCurrentWidget(Step3_Page);break;};
-        case 4:ui->stackedWidget->setCurrentWidget(Step4_Page);break;
+        case 4:{Step4_Page = new Step4(this);ui->stackedWidget->addWidget(Step4_Page);ui->stackedWidget->setCurrentWidget(Step4_Page);break;};
         case 5:{Step5_Page = new Step5(this);ui->stackedWidget->addWidget(Step5_Page);ui->stackedWidget->setCurrentWidget(Step5_Page);break;};
-        case 6:{Step6_Page = new Step6(this);ui->stackedWidget->addWidget(Step6_Page);ui->stackedWidget->setCurrentWidget(Step6_Page);break;}
-        case 7:{Step7_Page = new Step7(this);ui->stackedWidget->addWidget(Step7_Page);ui->stackedWidget->setCurrentWidget(Step7_Page);break;}
-        case 8:ui->stackedWidget->setCurrentWidget(Step8_Page);break;
-        case 9:ui->stackedWidget->setCurrentWidget(Step9_Page);break;
-        case 10:ui->stackedWidget->setCurrentWidget(Step10_Page);break;
+        case 6:{Step6_Page = new Step6(this);ui->stackedWidget->addWidget(Step6_Page);ui->stackedWidget->setCurrentWidget(Step6_Page);break;};
+        case 7:{Step7_Page = new Step7(this);ui->stackedWidget->addWidget(Step7_Page);ui->stackedWidget->setCurrentWidget(Step7_Page);break;};
+        case 8:{Step8_Page = new Step8(this);ui->stackedWidget->addWidget(Step8_Page);ui->stackedWidget->setCurrentWidget(Step8_Page);break;};
+        case 9:{Step9_Page = new Step9(this);ui->stackedWidget->addWidget(Step9_Page);ui->stackedWidget->setCurrentWidget(Step9_Page);break;};
+        case 10:{Step10_Page = new Step10(this);ui->stackedWidget->addWidget(Step10_Page);ui->stackedWidget->setCurrentWidget(Step10_Page);break;};
         default:break;
         }
     });

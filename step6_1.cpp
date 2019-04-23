@@ -25,14 +25,14 @@ Step6_1::Step6_1(QWidget *parent) :
 
     Sqlite sqlite;
     sqlite.connect();
-    vector<Entity_Step5>returnList = sqlite.queryStep5Data();
+    vector<Entity_Step4_2>returnList = sqlite.queryStep4_2Data();
     int RowNum = returnList.size();
     qDebug()<<"Step5_1::ui::RowNum::"<<RowNum;
     //设置列标签
     QStringList HStrList;
     for(int i =0;i<RowNum;i++)
     {
-        QString qualityParameterName = returnList[i].qualityParameterName;
+        QString qualityParameterName = returnList[i].chooseQualityParameterName;
         HStrList.push_back(qualityParameterName);
     }
     int HlableCnt = HStrList.count();

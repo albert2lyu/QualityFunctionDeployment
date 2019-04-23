@@ -41,7 +41,7 @@ public:
     bool Step3_3SaveData(QTableWidget *tableWidget);
     bool Step3_4SaveData(QTableWidget *tableWidget);
     bool Step4_1SaveData(QTableWidget *tableWidget);
-    bool Step4_2SaveData(QTableWidget *tableWidget);
+    bool Step4_2SaveData(QTableWidget *tableWidget,QTableWidget *tableWidget2);
     bool Step5SaveData(QTableWidget *tableWidget);
     bool Step6_1SaveData(QTableWidget *tableWidget);
     bool Step6_2SaveData(QTableWidget *tableWidget);
