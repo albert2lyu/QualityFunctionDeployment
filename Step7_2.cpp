@@ -292,13 +292,22 @@ void Step7_2::on_pushButton_5_clicked()
     QExcelEngine excelEngine=*new QExcelEngine();
 
     excelEngine.Step7_2SaveData(ui->qTableWidget);
+    QMessageBox::information(this, "excel提示", "保存成功");
 
-
-    MatlabFunction matlabFunction = *new MatlabFunction();
-    matlabFunction.matStep7(ui->qTableWidget);
 
     excelEngine.Close();
 
 }
 
+void Step7_2::on_pushButton_6_clicked()
+{
 
+
+
+    MatlabFunction matlabFunction = *new MatlabFunction();
+    matlabFunction.matStep7(ui->qTableWidget);
+
+
+    QMessageBox::information(this, "提示", "计算完毕");
+
+}

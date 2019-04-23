@@ -85,7 +85,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>保存</string>
+    <string>计算</string>
    </property>
   </widget>
  </widget>

@@ -187,8 +187,7 @@ void Step6_2::on_pushButton_5_clicked()
     excelEngine.Step6_2SaveData(ui->qTableWidget);
 
 
-    MatlabFunction matlabFunction = *new MatlabFunction();
-    matlabFunction.matStep6(ui->qTableWidget);
+
 
     excelEngine.Close();
 
@@ -196,4 +195,15 @@ void Step6_2::on_pushButton_5_clicked()
 
 }
 
+void Step6_2::on_pushButton_6_clicked()
+{
 
+
+
+    MatlabFunction matlabFunction = *new MatlabFunction();
+    matlabFunction.matStep6(ui->qTableWidget);
+
+
+    QMessageBox::information(this, "提示", "计算完毕");
+
+}

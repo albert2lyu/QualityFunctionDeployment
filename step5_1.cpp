@@ -55,7 +55,7 @@ Step5_1::Step5_1(QWidget *parent) :
         }
         QVector<QWidget*> ThreeCombox;
         int ss=0;
-        for(int i=0;i<HlableCnt*RowNum;i++)
+        for(int i=0;i<RowNum;i++)
         {
             QWidget *widget1 = new QWidget();
             widget1->setObjectName(QString::fromUtf8("widget1"));
@@ -74,7 +74,7 @@ Step5_1::Step5_1(QWidget *parent) :
         int x=0;
         for (int i=0;i<RowNum;i++) {
 
-                ui->qTableWidget->setCellWidget(i,1,Combox.at(x));
+                ui->qTableWidget->setCellWidget(i,1,ThreeCombox.at(x));
                 x++;
 
         }

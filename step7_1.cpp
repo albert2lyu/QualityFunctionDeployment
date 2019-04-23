@@ -202,7 +202,7 @@ void Step7_1::on_pushButton_5_clicked()
     QExcelEngine excelEngine=*new QExcelEngine();
 
     excelEngine.Step7_1SaveData(ui->qTableWidget);
-
+    QMessageBox::information(this, "excel提示", "保存成功");
 
     excelEngine.Close();
 
