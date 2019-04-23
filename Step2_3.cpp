@@ -101,22 +101,6 @@ Step2_3::Step2_3(QWidget *parent) :
 
         }
 
-        QVector<QWidget*> ThreeCombox;
-        int ss=0;
-        for(int i=0;i<ColumnNum*RowNum;i++)
-        {
-            QWidget *widget1 = new QWidget();
-            widget1->setObjectName(QString::fromUtf8("widget1"));
-            widget1->setGeometry(QRect(10, 8, 101, 31));
-            QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
-            verticalLayout->setSpacing(0);
-            verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-            verticalLayout->setContentsMargins(0, 0, 0, 0);
-            for (int i=0;i<2;i++) {
-                verticalLayout->addWidget(Combox.at(ss));ss++;
-            }
-            ThreeCombox.append(widget1);
-        }
         int x=0;
         for (int i=0;i<RowNum;i++) {
             for(int j=0;j<ColumnNum;j++)

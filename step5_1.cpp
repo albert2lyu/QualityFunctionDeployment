@@ -44,7 +44,23 @@ Step5_1::Step5_1(QWidget *parent) :
             QString  valueIndexName = returnList[i].chooseQualityParameterName;
             ui->qTableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
         }
+        QVector<QComboBox*> Combox;
+        for(int i=0;i<RowNum;i++)
+        {
+                QComboBox *tmp= new QComboBox();
+                tmp->addItem("离散型");
+                tmp->addItem("连续型");
+                Combox.append(tmp);
+        }
 
+        int x=0;
+        for (int i=0;i<RowNum;i++) {
+
+                ui->qTableWidget->setCellWidget(i,1,Combox.at(x));
+                x++;
+
+        }
+        x=0;
 
     }
 

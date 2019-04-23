@@ -427,6 +427,7 @@ bool QExcelEngine::Step7QueryData(QTableWidget *tableWidget)
     int  RowNum=returnList5.size()*2+2;
     int ColumnNum=returnList1.size();
     vector<Entity_Step7_3>returnList = sqlite.queryStep7_3Data();
+    qDebug()<<returnList.size();
     QStringList HStrList;
     QStringList VStrList;
     for (int i=0;i<returnList5.size();i++) {
@@ -453,15 +454,56 @@ bool QExcelEngine::Step7QueryData(QTableWidget *tableWidget)
     tableWidget->setHorizontalHeaderLabels(HStrList);
     tableWidget->setVerticalHeaderLabels(VStrList);
     int x=0;
-    for(int i =0;i<returnList.size();i++)
+    for(int i =0;i<RowNum;i++)
     {
         for(int j=0;j<ColumnNum;j++){
-            tableWidget->setItem(i,j,new QTableWidgetItem(QString::number(returnList[x].valuequalityResult)));x++;
+            qDebug()<<returnList[x].valuequalityResult<<endl;
+            tableWidget->setItem(j,i,new QTableWidgetItem(QString::number(returnList[x].valuequalityResult)));x++;
         }
     }
     x=0;
     return true;
 }
+
+bool QExcelEngine::Step6QueryData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step1QueryData";
+    Sqlite sqlite;
+    sqlite.connect();
+
+    vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();
+    int  RowNum=returnList5.size(),ColumnNum=returnList5.size()+1;
+    vector<Entity_Step6_3>returnList = sqlite.queryStep6_3Data();
+    qDebug()<<returnList.size();
+    QStringList HStrList,VStrList;
+    for (int i=0;i<returnList5.size();i++) {
+        HStrList.push_back(returnList5[i].chooseQualityParameterName);
+        VStrList.push_back(returnList5[i].chooseQualityParameterName);
+    }
+     VStrList.push_back("常数值");
+    //先把table的内容清空
+    int tableColumn = tableWidget->columnCount();
+    tableWidget->clear();
+    for (int n=0; n<tableColumn; n++)
+    {
+        tableWidget->removeColumn(0);
+    }
+    tableWidget->setColumnCount(ColumnNum); //设置列数
+    tableWidget->setRowCount(RowNum);
+    tableWidget->setHorizontalHeaderLabels(VStrList);
+    tableWidget->setVerticalHeaderLabels(HStrList);
+    int x=0;
+    for(int i =0;i<RowNum;i++)
+    {
+        for(int j=0;j<ColumnNum;j++){
+            tableWidget->setItem(i,j,new QTableWidgetItem(QString::number(returnList[x].autocorrelationResult)));x++;
+        }
+    }
+    x=0;
+    return true;
+}
+
+
 ///////////////
 /// \brief QExcelEngine::Step2SaveData1
 /// \param tableWidget
@@ -695,13 +737,17 @@ bool QExcelEngine::Step5SaveData(QTableWidget *tableWidget)
     double  upperBoundValue;
     double  lowerBoundValue;
     */
+
     for(int i=0;i<row;i++)
     {
+        QWidget *widget = tableWidget->cellWidget(i,1);
+        QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
+        qDebug()<<rad.count();
         QString qualityParameterName = tableWidget->item(i,0)->data(Qt::DisplayRole).toString();
-        QString dataType =  tableWidget->item(i,1)->data(Qt::DisplayRole).toString();
+        QString dataType =  rad.at(0)->currentText();
         double  upperBoundValue = tableWidget->item(i,2)->data(Qt::DisplayRole).toString().toDouble();
         double  lowerBoundValue = tableWidget->item(i,3)->data(Qt::DisplayRole).toString().toDouble();
-        if(qualityParameterName != nullptr && dataType != nullptr && upperBoundValue!=0 && lowerBoundValue!=0)
+        if(qualityParameterName != nullptr && dataType != nullptr)
         {
             sqlite.saveStep5Table(qualityParameterName,dataType,upperBoundValue,lowerBoundValue);
         }
@@ -752,7 +798,6 @@ bool QExcelEngine::Step6_2SaveData(QTableWidget *tableWidget)
                 QString valueQualityType2;
                 if(valueQualityType=="类型一")
                 {
-
                     QString valueQualityType2 ="1";
                 } else  if(valueQualityType=="类型二"){ valueQualityType2 ="2";}
                 else  if(valueQualityType=="类型三"){ valueQualityType2 ="3";}
@@ -791,11 +836,10 @@ bool QExcelEngine::Step7_1SaveData(QTableWidget *tableWidget)
             Evalue[j][i]=tableWidget->item(j,i+1)->data(Qt::DisplayRole).toString().toDouble();
             qDebug()<<"QExcelEngine::Step7_1SaveData222";
             sqlite.saveStep7_1Table(QString::number(j),QString::number(x),Cvalue[j][i],Evalue[j][i]);
-
             qDebug()<<"QExcelEngine::Step7_1SaveData333";
             x++;
         }
-        x=0;
+         x=0;
     }
 
     return true;

@@ -384,7 +384,7 @@ bool Sqlite::saveStep7_3Table(QString valueExpectation, QString QualityParameter
 {
     qDebug()<<"Sqlite::saveStep7_3Table";
     //CREATE TABLE `Step7_3` ( `valueExpectation` varchar(255), `QualityParameterName` varchar(255), `valuequalityResult` double )
-    if(valueExpectation != nullptr && QualityParameterName != nullptr && valuequalityResult != 0 )
+    if(valueExpectation != nullptr && QualityParameterName != nullptr  )
     {
             QSqlQuery query;
             query.prepare("INSERT INTO Step7out (valueExpectation,QualityParameterName,valuequalityResult) VALUES (:valueExpectation,:QualityParameterName,:valuequalityResult)");
@@ -587,6 +587,23 @@ vector<Entity_Step6_2> Sqlite::queryStep6_2Data()
     }
     return returnList;
 }
+vector<Entity_Step6_3> Sqlite::queryStep6_3Data()
+{
+    //CREATE TABLE `Step6_3` ( `row` varchar(255), `qualityParameterName` varchar(255), `value` double )
+    qDebug()<<"Sqlite::queryStep6_3Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step6_3");
+    vector<Entity_Step6_3>returnList;
+    while(query.next())
+    {
+        Entity_Step6_3 entity_Step6_3;
+        entity_Step6_3.row = query.value(0).toString();
+        entity_Step6_3.rank = query.value(1).toString();
+        entity_Step6_3.autocorrelationResult = query.value(2).toString().toDouble();
+        returnList.push_back(entity_Step6_3);
+    }
+    return returnList;
+}
 vector<Entity_Step7_1> Sqlite::queryStep7_1Data()
 {
     //CREATE TABLE `Ste7_1` ( `row` varchar(255), `column` varchar(255), `value` double )
@@ -625,7 +642,6 @@ vector<Entity_Step7_2> Sqlite::queryStep7_2Data()
 
 vector<Entity_Step7_3> Sqlite::queryStep7_3Data()
 {
-    //CREATE TABLE `Ste7_1` ( `row` varchar(255), `column` varchar(255), `value` double )
     qDebug()<<"Sqlite::queryStep7_3Data";
     QSqlQuery query;
     query.exec("SELECT * FROM Step7out");

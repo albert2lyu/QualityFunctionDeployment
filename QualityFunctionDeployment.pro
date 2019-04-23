@@ -84,7 +84,8 @@ SOURCES += \
     entity_step6_2.cpp \
     entity_step7_2.cpp \
     entity_step7_1.cpp \
-    entity_step7_3.cpp
+    entity_step7_3.cpp \
+    entity_step6_3.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -148,7 +149,8 @@ HEADERS += \
     entity_step6_2.h \
     entity_step7_2.h \
     entity_step7_1.h \
-    entity_step7_3.h
+    entity_step7_3.h \
+    entity_step6_3.h
 
 FORMS += \
     mainwindow.ui \

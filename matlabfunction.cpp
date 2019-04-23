@@ -41,12 +41,13 @@ bool MatlabFunction::matBasi(QTableWidget *tableWidget)
         qDebug()<<"MatlabFunction::矩阵A行列不一致，不能计算";
     }
     double arrayA [rowCntA][colCntA];
-    QList<QComboBox *> rad = tableWidget->findChildren<QComboBox *>();
 
     for(int i=0;i<rowCntA;i++)
     {
         for (int j=0; j<colCntA;j++)
         {
+            QWidget *widget = tableWidget->cellWidget(i,j);
+            QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
             QString temp=rad.at(0)->currentText();
             double temps;
             if(temp=="关系一")
@@ -572,6 +573,7 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
                         for(int i=0;i<returnList71col*(returnList5Row*2+2);i++)
                         {
                             result[rowFlag][colFlag] = pr[i];
+                             qDebug()<<result[rowFlag][colFlag];
                             rowFlag++;
                             if(rowFlag == returnList71col)
                             {

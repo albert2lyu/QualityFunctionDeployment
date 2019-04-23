@@ -9,7 +9,7 @@ Step6Data::Step6Data(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    int RowNum=10;
+    int RowNum=3;
     int ColumnNum=4;
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
@@ -20,7 +20,7 @@ Step6Data::Step6Data(QWidget *parent) :
         QStringList m_Header;
         m_Header<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
         ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
-        ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
+        ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
         //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
        ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
         //ui->tableWidget->setShowGrid(false);//隐藏栅格
@@ -114,16 +114,9 @@ void Step6Data::on_pushButton_clicked(){
 
 
 
-        //从Excel中将表格导入到TableWidget
-       QExcelEngine excelEngine=*new QExcelEngine();
-         QString m_fileName =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step6_1_temp" + "xls";
-        bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
-        if(b == false)
-        {
-            QMessageBox::information(this, "excel提示", "文件打开失败");
-            return;
-        }
-        excelEngine.ReadDataToTable(ui->qTableWidget);
-        excelEngine.Close();
-
+    qDebug()<<"Step1Data on_pushButton_clicked";
+    ////从数据库中读取数据
+    QExcelEngine excelEngine=*new QExcelEngine();
+    excelEngine.Step6QueryData(ui->qTableWidget);
+    excelEngine.Close();
 }
