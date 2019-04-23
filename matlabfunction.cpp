@@ -567,23 +567,24 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
                         }
                         QString aa;
                         sqlite.deleteStep7_3Data();
-                        vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();
+                        vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();
+                         vector<Entity_Step4_2>returnList4_2 = sqlite.queryStep4_2Data();
                         int xxx=0;
                         QStringList StrList;
 
                         for (int i=0;i<returnList5Row;i++) {
-                            StrList.push_back(returnList5[i].qualityParameterName+"主值");
+                            StrList.push_back(returnList4_2[i].chooseQualityParameterName+"主值");
                         }
                         StrList.push_back("常数主值");
                         for (int i=0;i<returnList5Row;i++) {
-                            StrList.push_back(returnList5[i].qualityParameterName+"展值");
+                            StrList.push_back(returnList4_2[i].chooseQualityParameterName+"展值");
                         }
                         StrList.push_back("常数展值");
                         for(int i =0;i<returnList71col;i++)
                         {
                             for(int j=0;j<returnList5Row*2+2;j++){
 
-                                QString valueExpectationColumn = returnList1[i].valueExpectation;
+                                QString valueExpectationColumn = returnList1[i].valueIndexName;
                                // sqlite.saveStep7_3Table(valueExpectationRow,valueExpectationColumn,result[i][j]);
                                  sqlite.saveStep7_3Table(QString::number(i),QString::number(j),result[i][j]);
                             }

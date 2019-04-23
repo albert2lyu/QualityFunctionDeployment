@@ -16,7 +16,7 @@ Step7_1::Step7_1(QWidget *parent) :
 
     Sqlite sqlite;
     sqlite.connect();
-    vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();
+    vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();
     vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();
     qDebug()<<"Step2::ui::returnList.size()::"<<returnList1.size();qDebug()<<"Step5::ui::returnList.size()::"<<returnList5.size();
     int tableColumn =returnList1.size();
@@ -30,13 +30,13 @@ Step7_1::Step7_1(QWidget *parent) :
         VStrList.push_back(returnList5[i].chooseQualityParameterName);
     }
     for(int i=0;i<tableColumn;i++){
-    HStrList.push_back(returnList1[i].valueExpectation+"中心值");
-    HStrList.push_back(returnList1[i].valueExpectation+"展值");
+    HStrList.push_back(returnList1[i].valueIndexName+"中心值");
+    HStrList.push_back(returnList1[i].valueIndexName+"展值");
     }
 
      for(int i=0;i<tableColumn;i++){
-     HStrList.push_back(returnList1[i].valueExpectation+"中心值");
-     HStrList.push_back(returnList1[i].valueExpectation+"展值");
+     HStrList.push_back(returnList1[i].valueIndexName+"中心值");
+     HStrList.push_back(returnList1[i].valueIndexName+"展值");
      }
 
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
@@ -199,37 +199,12 @@ void Step7_1::on_pushButton_4_clicked()
 void Step7_1::on_pushButton_5_clicked()
 {
 
-   QExcelEngine excelEngine=*new QExcelEngine();
+    QExcelEngine excelEngine=*new QExcelEngine();
 
-  QString filename =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step7_1_temp" + "xls";
-  if(filename.isEmpty())
-      return;
-  QFile file(filename);
-       if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
-       {
-        QMessageBox::critical(nullptr,"提示","无法创建文件");
-        return;
+    excelEngine.Step7_1SaveData(ui->qTableWidget);
 
-        }
-       QTextStream out(&file);
-       out.flush();
-       file.close();
-  bool b = excelEngine.Open(filename, 1, false); //flase为不显示窗体
-  if(b == false)
-  {
-      QMessageBox::information(this, "excel提示", "文件打开失败");
-      return;
-  }
 
-  //清空表格之前的所有内容
-  excelEngine.ClearAllData(" ");
-  excelEngine.Close();
-  //打开数据库，并保存数据
-  excelEngine.Open(filename, 1, false);
-  excelEngine.SaveDataFrTable(ui->qTableWidget);
-  excelEngine.Close();
-
-  QMessageBox::information(this, "excel提示", "保存成功");
+    excelEngine.Close();
 
 }
 

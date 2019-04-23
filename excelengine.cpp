@@ -422,24 +422,24 @@ bool QExcelEngine::Step7QueryData(QTableWidget *tableWidget)
     qDebug()<<"QExcelEngine::Step1QueryData";
     Sqlite sqlite;
     sqlite.connect();
-    vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();
-    vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
+    vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();
+    vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();
     int  RowNum=returnList5.size()*2+2;
     int ColumnNum=returnList1.size();
     vector<Entity_Step7_3>returnList = sqlite.queryStep7_3Data();
     QStringList HStrList;
     QStringList VStrList;
     for (int i=0;i<returnList5.size();i++) {
-        HStrList.push_back(returnList5[i].qualityParameterName+"主值");
+        HStrList.push_back(returnList5[i].chooseQualityParameterName+"主值");
     }
 
     HStrList.push_back("常数主值");
     for (int i=0;i<returnList5.size();i++) {
-        HStrList.push_back(returnList5[i].qualityParameterName+"展值");
+        HStrList.push_back(returnList5[i].chooseQualityParameterName+"展值");
     }
     HStrList.push_back("常数展值");
     for(int i=0;i<ColumnNum;i++){
-        VStrList.push_back(returnList1[i].valueExpectation);
+        VStrList.push_back(returnList1[i].valueIndexName);
     }
     //先把table的内容清空
     int tableColumn = tableWidget->columnCount();
@@ -766,8 +766,8 @@ bool QExcelEngine::Step7_1SaveData(QTableWidget *tableWidget)
     Sqlite sqlite;
     sqlite.connect();
     sqlite.deleteStep7_1Data();
-    vector<Entity_Step2>returnList1 = sqlite.queryStep2Data();//价值
-    vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();//质量
+    vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();//价值
+    vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();//质量
     int Cvalue[row][column],Evalue[row][column];
     int start=returnList5.size();
     int x=0;
