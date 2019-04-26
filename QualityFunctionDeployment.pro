@@ -87,7 +87,8 @@ SOURCES += \
     entity_step7_3.cpp \
     entity_step6_3.cpp \
     entity_step8.cpp \
-    entity_step10.cpp
+    entity_step10.cpp \
+    initialize_db.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -154,7 +155,8 @@ HEADERS += \
     entity_step7_3.h \
     entity_step6_3.h \
     entity_step8.h \
-    entity_step10.h
+    entity_step10.h \
+    initialize_db.h
 
 FORMS += \
     mainwindow.ui \
@@ -216,20 +218,20 @@ DEPENDPATH += $$PWD/include
 
 
 # .h文件搜索路径D:\gitqfd\test1\includex
-INCLUDEPATH+=$$quote(D:/Program Files/MATLAB/R2016a/extern/include)
-INCLUDEPATH+=$$quote(D:/Program Files/MATLAB/R2016a/extern/include/Win64)
+INCLUDEPATH+=$$quote(D:/MATLAB2016A/extern/include)
+INCLUDEPATH+=$$quote(D:/MATLAB2016A/extern/include/Win64)
 
 
 # 用到的MATLAB 的.lib库文件 及其搜索路径
-INCLUDEPATH+=$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft)
-DEPENDPATH +=$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft)
+INCLUDEPATH+=$$quote(D:/MATLAB2016A/extern/lib/win64/microsoft)
+DEPENDPATH +=$$quote(D:/MATLAB2016A/extern/lib/win64/microsoft)
 
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -llibmex
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -llibmx
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -llibmat
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -llibeng
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -lmclmcr
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -lmclmcrrt
+LIBS+=-L$$quote(D:/MATLAB2016A/extern/lib/win64/microsoft) -llibmex
+LIBS+=-L$$quote(D:/MATLAB2016A/extern/lib/win64/microsoft) -llibmx
+LIBS+=-L$$quote(D:/MATLAB2016A/extern/lib/win64/microsoft) -llibmat
+LIBS+=-L$$quote(D:/MATLAB2016A/extern/lib/win64/microsoft) -llibeng
+LIBS+=-L$$quote(D:/MATLAB2016A/extern/lib/win64/microsoft) -lmclmcr
+LIBS+=-L$$quote(D:/MATLAB2016A/extern/lib/win64/microsoft) -lmclmcrrt
 
 
 
