@@ -34,7 +34,9 @@ public:
     bool Step1SaveData(QTableWidget *tableWidget);
     bool Step1QueryData(QTableWidget *tableWidget);
     bool Step2SaveData1(QTableWidget *tableWidget);
-    bool Step2QueryData1(QTableWidget *tableWidget);bool Step7QueryData(QTableWidget *tableWidget);bool Step6QueryData(QTableWidget *tableWidget);
+    bool Step2QueryData1(QTableWidget *tableWidget);
+    bool Step7QueryData(QTableWidget *tableWidget);
+    bool Step6QueryData(QTableWidget *tableWidget);
     bool Step2SaveData2(QTableWidget *tableWidget);
     bool Step2MatBasicsss(QTableWidget *tableWidget);
     bool Step3_2SaveData(QTableWidget *tableWidget);
@@ -42,11 +44,16 @@ public:
     bool Step3_4SaveData(QTableWidget *tableWidget);
     bool Step4_1SaveData(QTableWidget *tableWidget);
     bool Step4_2SaveData(QTableWidget *tableWidget,QTableWidget *tableWidget2);
-    bool Step5SaveData(QTableWidget *tableWidget);bool Step6SaveData(QTableWidget *tableWidget);
+    bool Step5SaveData(QTableWidget *tableWidget);
+    bool Step6SaveData(QTableWidget *tableWidget);
     bool Step6_1SaveData(QTableWidget *tableWidget);
     bool Step6_2SaveData(QTableWidget *tableWidget);
     bool Step7_1SaveData(QTableWidget *tableWidget);
     bool Step7_2SaveData(QTableWidget *tableWidget);
+    bool Step10SaveData(QTableWidget *tableWidget);
+    bool Step8SaveData(QTableWidget *tableWidget);
+    bool Step8QueryData(QTableWidget *tableWidget);
+    bool Step10QueryData(QTableWidget *tableWidget);
 
 private:
     QAxObject *pExcel;

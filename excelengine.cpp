@@ -364,6 +364,7 @@ bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
     qDebug()<<"QExcelEngine::Step1SaveData";
     Sqlite sqlite;
     sqlite.connect();
+    sqlite.deleteStep1Data();
     int tableR = tableWidget->rowCount();
     QString valueExpectation;
     QString valueOperator;
@@ -880,6 +881,61 @@ bool QExcelEngine::Step7_2SaveData(QTableWidget *tableWidget)
 
             }
         }
+    }
+    return true;
+}
+bool QExcelEngine::Step8QueryData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step8QueryData";
+    Sqlite sqlite;
+    sqlite.connect();
+    vector<Entity_Step8>returnList8 = sqlite.queryStep8Data();
+    //先把table的内容清空
+    int tableColumn = tableWidget->columnCount();
+    tableWidget->clear();
+    for (int n=0; n<tableColumn; n++)
+    {
+        tableWidget->removeColumn(0);
+    }
+    tableWidget->setColumnCount(2); //设置列数
+    QStringList header;
+    header<<"质量参数名称"<<"相对重要评级";
+    tableWidget->setHorizontalHeaderLabels(header);
+    for(int i =0;i<returnList8.size();i++)
+    {
+        tableWidget->setItem(i,0,new QTableWidgetItem(returnList8[i].QualityParameters));
+        double retuC =returnList8[i].relativeImportanceRating;
+        tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(retuC,'d',3)));
+    }
+    return true;
+}
+bool QExcelEngine::Step10QueryData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step10QueryData";
+    Sqlite sqlite;
+    sqlite.connect();
+    vector<Entity_Step10>returnList10 = sqlite.queryStep10Data();
+    //先把table的内容清空
+    int  returnList10Row = (int)returnList10[(returnList10.size()-1)].QualityParameterName.toInt()+1;
+ //   int  returnList62col = (int)returnList10[(returnList10.size()-1)].qualityParameterNameRank.toInt()+1;
+    int tableColumn = tableWidget->columnCount();
+    tableWidget->clear();
+    for (int n=0; n<tableColumn; n++)
+    {
+        tableWidget->removeColumn(0);
+    }
+    tableWidget->setColumnCount(2); //设置列数
+    QStringList header;
+    header<<"lower"<<"upper";
+    tableWidget->setHorizontalHeaderLabels(header);
+
+    for(int i =0;i<returnList10Row;i++)
+    {
+
+        double retuC =returnList10[2*i+1].outputValue;
+        double retuD =returnList10[2*i].outputValue;
+        tableWidget->setItem(i,0,new QTableWidgetItem(QString::number(retuC,'d',3)));
+        tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(retuD,'d',3)));
     }
     return true;
 }

@@ -18,6 +18,8 @@
 #include "entity_step7_2.h"
 #include "entity_step7_3.h"
 #include "entity_step6_3.h"
+#include "entity_step8.h"
+#include "entity_step10.h"
 using namespace std;
 
 class Sqlite
@@ -47,6 +49,8 @@ public:
     bool saveStep7_1Table(QString valueExpectation,QString QualityParameterName,double  valuequalityResult,double Evalue);
     bool saveStep7_2Table(QString qualityParameterNameRow,QString qualityParameterNameRank,QString valueQualityType,double BValue);
     bool saveStep7_3Table(QString valueExpectation,QString QualityParameterName,double  valuequalityResult);
+    bool saveStep8Table(QString QualityParameters,double relativeImportanceRating);
+    bool saveStep10Table(QString QualityParameterName,QString upLow,double outputValue);
 
     vector<Entity_Step1>  queryStep1Data();
     vector<Entity_Step2>  queryStep2Data();
@@ -62,6 +66,11 @@ public:
     vector<Entity_Step7_1>queryStep7_1Data();
     vector<Entity_Step7_2>queryStep7_2Data();
     vector<Entity_Step7_3>queryStep7_3Data();
+    vector<Entity_Step8>queryStep8Data();
+
+ vector<Entity_Step10>queryStep10Data();
+    bool deleteStep1Table();
+    bool deleteStep1Data();
     bool deleteStep2Table();
     bool deleteStep3_2Data();
     bool deleteStep3_3Data();
@@ -75,6 +84,8 @@ public:
     bool deleteStep7_1Data();
     bool deleteStep7_2Data();
     bool deleteStep7_3Data();
+    bool deleteStep8Data();
+    bool deleteStep10Data();
 };
 
 #endif // SQLITE_H

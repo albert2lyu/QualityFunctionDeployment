@@ -96,7 +96,9 @@ Step2_3::Step2_3(QWidget *parent) :
                 tmp->addItem("关系五");
                 tmp->addItem("关系六");
                 tmp->addItem("关系七");
-                tmp->setCurrentIndex(3) ;
+                tmp->addItem("关系八");
+                tmp->addItem("关系九");
+                tmp->setCurrentIndex(5) ;
                 Combox.append(tmp);
 
         }

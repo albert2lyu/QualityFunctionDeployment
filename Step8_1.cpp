@@ -1,5 +1,7 @@
 #include "Step8_1.h"
 #include "ui_Step8_1.h"
+#include "matlabfunction.h"
+#include "sqlite.h"
 //#include "excelengine.h"
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -207,37 +209,61 @@ void Step8_1::on_pushButton_4_clicked()
 void Step8_1::on_pushButton_5_clicked()
 {
 
-   QExcelEngine excelEngine=*new QExcelEngine();
+    QExcelEngine excelEngine=*new QExcelEngine();
 
-  QString filename =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step8_1_temp" + "xls";
-  if(filename.isEmpty())
-      return;
-  QFile file(filename);
-       if(!file.open(QIODevice::WriteOnly|QIODevice::Text))
-       {
-        QMessageBox::critical(nullptr,"提示","无法创建文件");
-        return;
+    //excelEngine.Step6_2SaveData(ui->qTableWidget);
 
-        }
-       QTextStream out(&file);
-       out.flush();
-       file.close();
-  bool b = excelEngine.Open(filename, 1, false); //flase为不显示窗体
-  if(b == false)
-  {
-      QMessageBox::information(this, "excel提示", "文件打开失败");
-      return;
-  }
 
-  //清空表格之前的所有内容
-  excelEngine.ClearAllData(" ");
-  excelEngine.Close();
-  //打开数据库，并保存数据
-  excelEngine.Open(filename, 1, false);
-  excelEngine.SaveDataFrTable(ui->qTableWidget);
+    MatlabFunction matlabFunction = *new MatlabFunction();
+    matlabFunction.matStep8(ui->qTableWidget);
+
   excelEngine.Close();
 
-  QMessageBox::information(this, "excel提示", "保存成功");
+  ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
+   ui->qTableWidget->horizontalHeader()->setVisible(false);//横向表头可视化
+  Sqlite sqlite;
+  sqlite.connect();
+  vector<Entity_Step8>returnList = sqlite.queryStep8Data();
+            int tableColumn =returnList.size();
+            int RowNum=2;
+            int ColumnNum=tableColumn;
+            qDebug()<<"Step8::tableColumn"<<tableColumn;
+            //先把table的内容清空
+            QStringList header;
+            header<<"质量参数名称"<<"相对重要评级";
+            ui->qTableWidget->setColumnCount(tableColumn);//设置列数
+            ui->qTableWidget->setRowCount(2);//设置行数
+            ui->qTableWidget->setHorizontalHeaderLabels(header);
+            for(int i =0;i<returnList.size();i++)
+            {
+                QString vExpectation = returnList[i].QualityParameters;
+                ui->qTableWidget->setItem(0,i,new QTableWidgetItem(vExpectation));
+                double retuC =returnList[i].relativeImportanceRating;
+                ui->qTableWidget->setItem(1,i,new QTableWidgetItem(QString::number(retuC,'d',3)));
+            }
+            qDebug()<<"Step3_1:ui";
+            ui->qTableWidget->setWindowTitle("QTableWidget");
+            ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
+            ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
+            ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
+            setStyleSheet(QString::fromUtf8("border:1px solid black"));
+            for(int rows=0;rows<RowNum;rows++)
+            {
+                for(int columns=0;columns<ColumnNum;columns++)
+                {
+                    ui->qTableWidget->setColumnWidth(columns,705/ColumnNum);//hangkuan
+                    ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
+                    ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
+                    ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
+                    ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
+                    ui->qTableWidget->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
+                }
+            }
+            ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
+            ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
+
+
+    QMessageBox::information(this, "excel提示", "保存成功");
 
 }
 

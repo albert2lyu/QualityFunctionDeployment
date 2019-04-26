@@ -114,16 +114,9 @@ void Step8Data::on_pushButton_clicked(){
 
 
 
-        //从Excel中将表格导入到TableWidget
-       QExcelEngine excelEngine=*new QExcelEngine();
-         QString m_fileName =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step8_1_temp" + "xls";
-        bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
-        if(b == false)
-        {
-            QMessageBox::information(this, "excel提示", "文件打开失败");
-            return;
-        }
-        excelEngine.ReadDataToTable(ui->qTableWidget);
-        excelEngine.Close();
-
+    qDebug()<<"Step8Data:: on_pushButton_clicked";
+    ////从数据库中读取数据
+    QExcelEngine excelEngine=*new QExcelEngine();
+    excelEngine.Step8QueryData(ui->qTableWidget);
+    excelEngine.Close();
 }

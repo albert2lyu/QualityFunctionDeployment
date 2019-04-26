@@ -54,11 +54,13 @@ bool MatlabFunction::matBasi(QTableWidget *tableWidget)
             {
 
                  temps =0.1;
-            } else  if(temp=="关系二"){ temps =0.2;}
-            else  if(temp=="关系三"){ temps =0.4;}
-            else  if(temp=="关系四"){ temps =0.5;}
-            else  if(temp=="关系五"){ temps =0.6;}
-            else  if(temp=="关系六"){ temps =0.8;}
+            } else  if(temp=="关系二"){ temps =0.138;}
+            else  if(temp=="关系三"){ temps =0.325;}
+            else  if(temp=="关系四"){ temps =0.439;}
+            else  if(temp=="关系五"){ temps =0.5;}
+            else  if(temp=="关系六"){ temps =0.561;}
+            else  if(temp=="关系七"){ temps =0.675;}
+            else  if(temp=="关系八"){ temps =0.862;}
             else { temps =0.9;}
             arrayA[i][j]=temps;
         }
@@ -722,7 +724,480 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
     }
     return true;
 }
+typedef bool (*Pcom_matStep67810Initialize)(void);
+typedef void (*Pcom_mlfStep8)(int, mxArray** , mxArray* , mxArray* );
+bool MatlabFunction::matStep8(QTableWidget *tableWidget)
+{
+    qDebug()<<"MatlabFunction::matStep8";
+    QLibrary mylib("matStep67810.DLL");
+    if(mylib.load())
+    {
+        qDebug()<<"MatlabFunction::matStep8";
+    }
+    Pcom_matStep67810Initialize pcom_matStep67810Initialize =
+           (Pcom_matStep67810Initialize)mylib.resolve("matStep67810Initialize");
+    if(pcom_matStep67810Initialize)
+    {
+        pcom_matStep67810Initialize();
+        qDebug()<<"MatlabFunction::pcom_matStep67810Initialize";
+    }
+    Sqlite sqlite ;
+    sqlite.connect();
+/*
+step8
+step8:
+函数：Q=matStep8(step3out,step7out)
+step3out：step3的输出结果，一行，列数与价值指标数相同
+step7out：step7的输出结果，行数等于价值指标数目，列数等于质量参数数目的二倍再加2
+Q：一行，列数等于质量参数的数目
+*/
 
+        vector<Entity_Step2>returnList3out = sqlite.queryStep2Data();
+        vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
+        int   rowCntResult=1;
+        int   colCntResult=returnList3out.size();
+        double   step3outMatrix[rowCntResult][colCntResult];
+        for(int i =0;i<returnList3out.size();i++)
+        {
+            qDebug()<<"returnList3out[i].relativeImportanceRating::"<<returnList3out[i].relativeImportanceRating.toDouble();
+            step3outMatrix[0][i]=returnList3out[i].relativeImportanceRating.toDouble();
+            qDebug()<<"step3outMatrix[0][i]"<<step3outMatrix[0][i];
+        }
+        // Matrix3out_OVER ==>  step3out
+    vector<Entity_Step7_3>returnList7_3 = sqlite.queryStep7_3Data();
+    if(returnList7_3.size() != 0)
+    {
+
+        int  returnList7_3Row = (int)returnList7_3[(returnList7_3.size()-1)].valueExpectation.toInt()+1;
+        int  returnList7_3col = (int)returnList7_3[(returnList7_3.size()-1)].QualityParameterName.toInt()+1;
+        double Matrix7_3 [returnList7_3Row][returnList7_3col];
+        for(int i =0;i<returnList7_3.size();i++)
+        {
+            Matrix7_3[returnList7_3[i].valueExpectation.toInt()][returnList7_3[i].QualityParameterName.toInt()] = returnList7_3[i].valuequalityResult;
+        }
+        double Matrix7_3_OVER[returnList7_3Row*returnList7_3col];
+        int Matrix7_3_row_flag=0;
+        int Matrix7_3_col_flag=0;
+        for(int i=0;i<returnList7_3Row*returnList7_3col;i++)
+        {
+            Matrix7_3_OVER[i]=Matrix7_3[Matrix7_3_row_flag][Matrix7_3_col_flag];
+            Matrix7_3_row_flag++;
+            if(Matrix7_3_row_flag == returnList7_3Row)
+            {
+                Matrix7_3_row_flag=0;
+                Matrix7_3_col_flag++;
+            }
+        }
+        for(int i =0;i<returnList7_3Row*returnList7_3col;i++)
+        {  qDebug()<<"di73ge::"<<Matrix7_3_OVER[i];
+        }
+        // Matrix7_3_OVER ==>  step7_3
+
+
+
+
+//step3outMatrix[rowCntResult][colCntResult];
+                mxArray *matrixB = mxCreateDoubleMatrix(rowCntResult,colCntResult,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixB),(void *)step3outMatrix,sizeof(step3outMatrix));
+
+//Matrix7_3_OVER[returnList7_3Row*returnList7_3col]
+                mxArray *matrixH = mxCreateDoubleMatrix(returnList7_3Row,returnList7_3col,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixH),(void *)Matrix7_3_OVER,sizeof(Matrix7_3_OVER));
+
+
+
+
+
+
+                mxArray *matrixResult = mxCreateDoubleMatrix(1,returnList7_3col/2-1,mxREAL);//定义数组，行，列，double类型
+
+                Pcom_mlfStep8 pcom_mlfStep8 = (Pcom_mlfStep8)mylib.resolve("mlfMatStep8");
+                if(pcom_mlfStep8)
+                {
+                    pcom_mlfStep8(1,&matrixResult,matrixB,matrixH);
+
+                    double * pr = mxGetPr(matrixResult);
+
+
+                    qDebug()<<"MatlabFunction::mxGetM"<<mxGetM(matrixResult);
+                    Sqlite sqlite ;
+                    sqlite.connect();
+                    sqlite.deleteStep8Data();
+                    for(int i = 0;i<returnList7_3col/2-1;i++)
+                    {
+                       QString QualityParametersRow =returnList5[i].qualityParameterName ;
+                       qDebug()<<"MatlabFunction::QualityParametersRow"<<QualityParametersRow;
+                       double  matrixCoutput = pr[i];
+                       qDebug()<<"MatlabFunction::"<<QString::number(matrixCoutput);
+                       sqlite.saveStep8Table(QualityParametersRow,matrixCoutput);
+                    }
+                }
+           }
+                    }
+
+
+typedef bool (*Pcom_matStep67810Initialize)(void);
+typedef void (*Pcom_mlfStep10)(int, mxArray** , mxArray* , mxArray* , mxArray* , mxArray*, mxArray* , mxArray* , mxArray* , mxArray* , mxArray*, mxArray*);
+bool MatlabFunction::matStep10(QTableWidget *tableWidget)
+{
+    qDebug()<<"MatlabFunction::matStep10";
+    QLibrary mylib("matStep67810.DLL");
+    if(mylib.load())
+    {
+        qDebug()<<"MatlabFunction::matStep10";
+    }
+    Pcom_matStep67810Initialize pcom_matStep67810Initialize =
+           (Pcom_matStep67810Initialize)mylib.resolve("matStep67810Initialize");
+    if(pcom_matStep67810Initialize)
+    {
+        pcom_matStep67810Initialize();
+        qDebug()<<"MatlabFunction::pcom_matStep67810Initialize";
+    }
+    Sqlite sqlite ;
+    sqlite.connect();
+/*
+step10
+函数：Q=matStep10(step11，step3out，step51,step52,step621，step622，step6out，step7out，step721，step722)
+step11：step1输入的表格输入，两列，行数与价值指标数目相同，第一列代表操作符，第二列代表期望值
+>或=>表示为1，<或<=表示为2
+step52：一行，若干列，列数与离散型的质量参数数目相同
+里面存储离散型的质量参数的序号，例如六个质量参数，第四个和第五个参数为离散型，则表示step52位[4,5]
+输出：两列，行数等于质量参数的数目，第一列代表质量参数下限，第二列代表上限。若某列全为0，代表配置失败，自动清零。
+*/
+    vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();
+    if(returnList1.size() != 0)
+    {
+        int returnList1Row = (int)returnList1.size();
+        double Matrix1 [returnList1Row][2];
+        for(int i =0;i<returnList1Row;i++)
+        {
+            Matrix1[i][1] = returnList1[i].expectations.toDouble();
+           if (returnList1[i].valueOperator == ">")
+            {
+               Matrix1[i][0] =1;
+            }
+           else
+            {
+               Matrix1[i][0] =2;
+            }
+        }
+        double Matrix1_OVER [returnList1Row*2];
+        int Matrix1_row_flag=0;
+        int Matrix1_col_flag=0;
+        for(int i =0;i<returnList1Row*2;i++)
+        {
+            Matrix1_OVER[i]=Matrix1[Matrix1_row_flag][Matrix1_col_flag];
+            Matrix1_row_flag++;
+            if(Matrix1_row_flag == returnList1Row)
+            {
+                Matrix1_row_flag=0;
+                Matrix1_col_flag++;
+            }
+        }
+        for(int i =0;i<returnList1Row*2;i++)
+        {
+         qDebug()<<"diyige1::"<<Matrix1_OVER[i];
+        }
+        // Matrix1_OVER ==>  step1
+        vector<Entity_Step2>returnList3out = sqlite.queryStep2Data();
+        int   rowCntResult=1;
+        int   colCntResult=returnList3out.size();
+        double   step3outMatrix[rowCntResult][colCntResult];
+        for(int i =0;i<returnList3out.size();i++)
+        {
+            qDebug()<<"returnList3out[i].relativeImportanceRating::"<<returnList3out[i].relativeImportanceRating.toDouble();
+            step3outMatrix[0][i]=returnList3out[i].relativeImportanceRating.toDouble();
+            qDebug()<<"step3outMatrix[0][i]"<<step3outMatrix[0][i];
+        }
+        // Matrix3out_OVER ==>  step3out
+        vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
+        if(returnList5.size() != 0)
+        {
+
+            int returnList5Row = (int)returnList5.size();
+            double Matrix51 [returnList5Row][2];
+            for(int i =0;i<returnList5Row;i++)
+            {
+                 Matrix51[i][0] = returnList5[i].lowerBoundValue;
+                 Matrix51[i][1] = returnList5[i].upperBoundValue;
+            }
+            double Matrix51_OVER [returnList5Row*2];
+            int Matrix51_row_flag=0;
+            int Matrix51_col_flag=0;
+            for(int i =0;i<returnList5Row*2;i++)
+            {
+                Matrix51_OVER[i]=Matrix51[Matrix51_row_flag][Matrix51_col_flag];
+                Matrix51_row_flag++;
+                if(Matrix51_row_flag == returnList5Row)
+                {
+                    Matrix51_row_flag=0;
+                    Matrix51_col_flag++;
+                }
+            }
+            for(int i =0;i<returnList5Row*2;i++)
+            {  qDebug()<<"di51ge::"<<Matrix51_OVER[i];
+            }
+            // Matrix51_OVER ==>  step51
+            vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
+            if(returnList5.size() != 0)
+            {
+                int returnList5Row = (int)returnList5.size();
+                int number=0;
+               for(int i =0;i<returnList5Row;i++)
+               {
+                 //  Matrix1[i][1] = returnList5[i].expectations;
+                  if (returnList5[i].dataType == "离散型")
+                   {
+
+                      number=number+1;
+                   }
+
+               }
+
+             double Matrix52 [1][number];
+                 int number52=0;
+                for(int i =0;i<returnList5Row;i++)
+                {
+
+                   if (returnList5[i].dataType == "离散型")
+                    {
+                       Matrix52[0][number52] =i;
+                       number52=number52+1;
+                    }
+
+                }
+
+                double Matrix52_OVER [1*number];
+                int Matrix52_row_flag=0;
+                int Matrix52_col_flag=0;
+                for(int i =0;i<1*number;i++)
+                {
+                    Matrix52_OVER[i]=Matrix52[Matrix52_row_flag][Matrix52_col_flag];
+                    Matrix52_row_flag++;
+                    if(Matrix52_row_flag == 1)
+                    {
+                        Matrix52_row_flag=0;
+                        Matrix52_col_flag++;
+                    }
+                }
+                // Matrix52_OVER ==>  step52
+                vector<Entity_Step6_2> returnList62 = sqlite.queryStep6_2Data();
+                if(returnList62.size()!=0)
+                {
+                    int  returnList62Row = (int)returnList62[(returnList62.size()-1)].qualityParameterNameRow.toInt()+1;
+                    int  returnList62col = (int)returnList62[(returnList62.size()-1)].qualityParameterNameRank.toInt()+1;
+                    double Matrix621[returnList62Row][returnList62col];
+                    double Matrix622[returnList62Row][returnList62col];
+                    for(int i =0;i<returnList62.size();i++)
+                    {
+                        Matrix621[returnList62[i].qualityParameterNameRow.toInt()][returnList62[i].qualityParameterNameRank.toInt()]
+                                 = returnList62[i].valueQualityType.toDouble();
+                        Matrix622[returnList62[i].qualityParameterNameRow.toInt()][returnList62[i].qualityParameterNameRank.toInt()]
+                                 = returnList62[i].BValue;
+                    }
+                    double Matrix621_OVER[returnList62Row*returnList62col];
+                    double Matrix622_OVER[returnList62Row*returnList62col];
+                    int Matrix62_row_flag=0;
+                    int Matrix62_col_flag=0;
+                    for(int i=0;i<returnList62Row*returnList62col;i++)
+                    {
+                        Matrix621_OVER[i]=Matrix621[Matrix62_row_flag][Matrix62_col_flag];
+                        Matrix622_OVER[i]=Matrix622[Matrix62_row_flag][Matrix62_col_flag];
+                        Matrix62_row_flag++;
+                        if(Matrix62_row_flag == returnList62Row)
+                        {
+                            Matrix62_row_flag=0;
+                            Matrix62_col_flag++;
+                        }
+                    }
+                    //Matrix621_OVER ==>step621
+                    //Matrix622_OVER ==>step622
+                    vector<Entity_Step6_3>returnList6_3 = sqlite.queryStep6_3Data();
+                    if(returnList6_3.size() != 0)
+                    {
+
+                        int  returnList6_3Row = (int)returnList6_3[(returnList6_3.size()-1)].row.toInt()+1;
+                        int  returnList6_3col = (int)returnList6_3[(returnList6_3.size()-1)].rank.toInt()+1;
+                        double Matrix6_3 [returnList6_3Row][returnList6_3col];
+                        for(int i =0;i<returnList6_3.size();i++)
+                        {
+                            Matrix6_3[returnList6_3[i].row.toInt()][returnList6_3[i].rank.toInt()] = returnList6_3[i].autocorrelationResult;
+                        }
+                        double Matrix6_3_OVER[returnList6_3Row*returnList6_3col];
+                        int Matrix6_3_row_flag=0;
+                        int Matrix6_3_col_flag=0;
+                        for(int i=0;i<returnList6_3Row*returnList6_3col;i++)
+                        {
+                            Matrix6_3_OVER[i]=Matrix6_3[Matrix6_3_row_flag][Matrix6_3_col_flag];
+                            Matrix6_3_row_flag++;
+                            if(Matrix6_3_row_flag == returnList6_3Row)
+                            {
+                                Matrix6_3_row_flag=0;
+                                Matrix6_3_col_flag++;
+                            }
+                        }
+                        for(int i=0;i<returnList6_3Row*returnList6_3col;i++)
+                        {  qDebug()<<"di63ge::"<<Matrix6_3_OVER[i];
+                            }
+                        // Matrix6_3_OVER ==>  step6_3
+    vector<Entity_Step7_3>returnList7_3 = sqlite.queryStep7_3Data();
+    if(returnList7_3.size() != 0)
+    {
+
+        int  returnList7_3Row = (int)returnList7_3[(returnList7_3.size()-1)].valueExpectation.toInt()+1;
+        int  returnList7_3col = (int)returnList7_3[(returnList7_3.size()-1)].QualityParameterName.toInt()+1;
+        double Matrix7_3 [returnList7_3Row][returnList7_3col];
+        for(int i =0;i<returnList7_3.size();i++)
+        {
+            Matrix7_3[returnList7_3[i].valueExpectation.toInt()][returnList7_3[i].QualityParameterName.toInt()] = returnList7_3[i].valuequalityResult;
+        }
+        double Matrix7_3_OVER[returnList7_3Row*returnList7_3col];
+        int Matrix7_3_row_flag=0;
+        int Matrix7_3_col_flag=0;
+        for(int i=0;i<returnList7_3Row*returnList7_3col;i++)
+        {
+            Matrix7_3_OVER[i]=Matrix7_3[Matrix7_3_row_flag][Matrix7_3_col_flag];
+            Matrix7_3_row_flag++;
+            if(Matrix7_3_row_flag == returnList7_3Row)
+            {
+                Matrix7_3_row_flag=0;
+                Matrix7_3_col_flag++;
+            }
+        }
+        for(int i =0;i<returnList7_3Row*returnList7_3col;i++)
+        {  qDebug()<<"di73ge::"<<Matrix7_3_OVER[i];
+        }
+        // Matrix7_3_OVER ==>  step7_3
+
+        vector<Entity_Step7_2> returnList72 = sqlite.queryStep7_2Data();
+        if(returnList72.size()!=0)
+        {
+            int  returnList72Row = (int)returnList72[(returnList72.size()-1)].qualityParameterNameRow.toInt()+1;
+            int  returnList72col = (int)returnList72[(returnList72.size()-1)].qualityParameterNameRank.toInt()+1;
+            double Matrix721[returnList72Row][returnList72col];
+            double Matrix722[returnList72Row][returnList72col];
+            for(int i =0;i<returnList72.size();i++)
+            {
+                Matrix721[returnList72[i].qualityParameterNameRow.toInt()][returnList72[i].qualityParameterNameRank.toInt()]
+                        = returnList72[i].valueQualityType.toDouble();
+                Matrix722[returnList72[i].qualityParameterNameRow.toInt()][returnList72[i].qualityParameterNameRank.toInt()]
+                        = returnList72[i].BValue;
+            }
+            double Matrix721_OVER[returnList72Row*returnList72col];
+            double Matrix722_OVER[returnList72Row*returnList72col];
+            int Matrix72_row_flag=0;
+            int Matrix72_col_flag=0;
+            for(int i=0;i<returnList72Row*returnList72col;i++)
+            {
+                Matrix721_OVER[i]=Matrix721[Matrix72_row_flag][Matrix72_col_flag];
+                Matrix722_OVER[i]=Matrix722[Matrix72_row_flag][Matrix72_col_flag];
+                Matrix72_row_flag++;
+                if(Matrix72_row_flag == returnList72Row)
+                {
+                    Matrix72_row_flag=0;
+                    Matrix72_col_flag++;
+                }
+            }
+            for(int i =0;i<returnList72Row*returnList72col;i++)
+            {  qDebug()<<"di721ge::"<<Matrix721_OVER[i];
+            }
+            for(int i =0;i<returnList72Row*returnList72col;i++)
+            {  qDebug()<<"di722ge::"<<Matrix722_OVER[i];
+            }
+            //Matrix721_OVER ==>step721
+            //Matrix722_OVER ==>step722
+//Matrix1_OVER [returnList1Row*2]
+
+
+                mxArray *matrixA = mxCreateDoubleMatrix(returnList1Row,2,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixA),(void *)Matrix1_OVER,sizeof(Matrix1_OVER));
+                double * dr = mxGetPr(matrixA);
+               for(int i=0;i<(returnList1Row)*(2);i++)
+                {qDebug()<<"matrixA::"<<dr[i];                    }
+
+//step3outMatrix[rowCntResult][colCntResult];
+                mxArray *matrixB = mxCreateDoubleMatrix(rowCntResult,colCntResult,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixB),(void *)step3outMatrix,sizeof(step3outMatrix));
+//Matrix51_OVER [returnList5Row*2]
+                mxArray *matrixC = mxCreateDoubleMatrix(returnList5Row,2,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixC),(void *)Matrix51_OVER,sizeof(Matrix51_OVER));
+//Matrix52_OVER [1*number]
+                mxArray *matrixD = mxCreateDoubleMatrix(1,number,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixD),(void *)Matrix52_OVER,sizeof(Matrix52_OVER));
+//double Matrix621_OVER[returnList62Row*returnList62col];
+
+                mxArray *matrixE = mxCreateDoubleMatrix(returnList62Row,returnList62col,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixE),(void *)Matrix621_OVER,sizeof(Matrix621_OVER));
+ //double Matrix622_OVER[returnList62Row*returnList62col];
+                mxArray *matrixF = mxCreateDoubleMatrix(returnList62Row,returnList62col,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixF),(void *)Matrix622_OVER,sizeof(Matrix622_OVER));
+//Matrix6_3_OVER[returnList6_3Row*returnList6_3col]
+                mxArray *matrixG = mxCreateDoubleMatrix(returnList6_3Row,returnList6_3col,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixG),(void *)Matrix6_3_OVER,sizeof(Matrix6_3_OVER));
+//Matrix7_3_OVER[returnList7_3Row*returnList7_3col]
+                mxArray *matrixH = mxCreateDoubleMatrix(returnList7_3Row,returnList7_3col,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixH),(void *)Matrix7_3_OVER,sizeof(Matrix7_3_OVER));
+ //double Matrix721_OVER[returnList72Row*returnList72col];
+
+                mxArray *matrixI = mxCreateDoubleMatrix(returnList72Row,returnList72col,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixI),(void *)Matrix721_OVER,sizeof(Matrix721_OVER));
+//double Matrix722_OVER[returnList72Row*returnList72col];
+                mxArray *matrixJ = mxCreateDoubleMatrix(returnList72Row,returnList72col,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixJ),(void *)Matrix722_OVER,sizeof(Matrix722_OVER));
+
+
+
+
+
+
+                mxArray *matrixResult = mxCreateDoubleMatrix(returnList5Row,2,mxREAL);//定义数组，行，列，double类型
+
+                Pcom_mlfStep10 pcom_mlfStep10 = (Pcom_mlfStep10)mylib.resolve("mlfMatStep10");
+                if(pcom_mlfStep10)
+                {
+                    pcom_mlfStep10(1,&matrixResult,matrixA,matrixB,matrixC,matrixD,matrixE,matrixF,matrixG,matrixH,matrixI,matrixJ);
+
+                    double * pr = mxGetPr(matrixResult);
+
+
+                    for(int i=0;i<(returnList5Row)*(2);i++)
+                     {qDebug()<<"matrixResult::"<<pr[i];                    }
+
+                  sqlite.deleteStep10Data();
+                    double result[returnList5Row][2];
+                    int rowFlag =0;
+                    int colFlag =0;
+
+                    for(int i=0;i<returnList5Row*(2);i++)
+                    {
+                        result[rowFlag][colFlag] = pr[i];
+                        rowFlag++;
+                        if(rowFlag == returnList5Row)
+                        {
+                            colFlag++;
+                            rowFlag=0;
+                        }
+                    }
+                    for(int i =0;i<returnList5Row;i++)
+                    {
+                        for(int j=0;j<2;j++)
+                        {
+                             sqlite.saveStep10Table(QString::number(i),QString::number(j),result[i][j]);
+                             qDebug()<<"result::"<<result[i][j];
+                        }
+                    }
+
+                }
+            }
+        }
+}
+                }
+            }
+    }
+
+}
+return true;
+}
 
 
 

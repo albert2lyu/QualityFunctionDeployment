@@ -426,6 +426,54 @@ bool Sqlite::saveStep7_2Table(QString qualityParameterNameRow, QString qualityPa
         return false;
     }
 }
+bool Sqlite::saveStep8Table(QString QualityParameters,double relativeImportanceRating)
+{
+    qDebug()<<"Sqlite::saveStep8Table";
+    //CREATE TABLE `Step8` ( `QualityParameterName` varchar(255),`upLow` varchar(255) `outputValue` double )
+    if(QualityParameters != nullptr  )
+    {//&& outputValue != 0
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step8 (QualityParameters,relativeImportanceRating) VALUES (:QualityParameters,:relativeImportanceRating)");
+            query.bindValue(":QualityParameters", QualityParameters.trimmed());
+            query.bindValue(":relativeImportanceRating", relativeImportanceRating);
+
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Sqlite::saveStep10Table(QString QualityParameterName,QString upLow, double outputValue)
+{
+    qDebug()<<"Sqlite::saveStep10Table";
+    //CREATE TABLE `Step10` ( `QualityParameterName` varchar(255),`upLow` varchar(255) `outputValue` double )
+    if(QualityParameterName != nullptr && upLow != nullptr )
+    {//&& outputValue != 0
+            QSqlQuery query;
+            query.prepare("INSERT INTO Step10 (QualityParameterName,upLow,outputValue) VALUES (:QualityParameterName,:upLow,:outputValue)");
+            query.bindValue(":QualityParameterName", QualityParameterName.trimmed());
+            query.bindValue(":upLow", upLow.trimmed());
+            query.bindValue(":outputValue", outputValue);
+            if(!query.exec())
+            {
+                return false;
+            }
+            query.finish();
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 vector<Entity_Step1> Sqlite::queryStep1Data()
 {
       qDebug()<<"Sqlite::queryStep1Data";
@@ -655,6 +703,66 @@ vector<Entity_Step7_3> Sqlite::queryStep7_3Data()
         returnList.push_back(entity_Step7_3);
     }
     return returnList;
+
+}
+vector<Entity_Step8> Sqlite::queryStep8Data()
+{
+    //CREATE TABLE `Ste8` ( `row` varchar(255), `column` varchar(255), `value` double )
+    qDebug()<<"Sqlite::queryStep8Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step8");
+    vector<Entity_Step8>returnList;
+    while(query.next())
+    {
+        Entity_Step8 entity_Step8;
+        entity_Step8.QualityParameters = query.value(0).toString();
+        entity_Step8.relativeImportanceRating  = query.value(1).toDouble();
+        //QString QualityParameters;//价值指标名称
+       // QString relativeImportanceRating;//相对重要评级
+        returnList.push_back(entity_Step8);
+    }
+    return returnList;
+}
+vector<Entity_Step10> Sqlite::queryStep10Data()
+{
+    //CREATE TABLE `Ste7_1` ( `row` varchar(255), `column` varchar(255), `value` double )
+    qDebug()<<"Sqlite::queryStep10Data";
+    QSqlQuery query;
+    query.exec("SELECT * FROM Step10");
+    vector<Entity_Step10>returnList;
+    while(query.next())
+    {
+        Entity_Step10 entity_Step10;
+        entity_Step10.QualityParameterName = query.value(0).toString();
+        entity_Step10.upLow  = query.value(1).toString();
+        entity_Step10.outputValue = query.value(2).toDouble();
+        returnList.push_back(entity_Step10);
+    }
+    return returnList;
+}
+bool Sqlite::deleteStep1Table()
+{
+    qDebug()<<"Sqlite::deleteStep1Table";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step1");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+bool Sqlite::deleteStep1Data()
+{
+    qDebug()<<"Sqlite::deleteStep1Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step1");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
 }
 bool Sqlite::deleteStep2Table()
 {
@@ -805,6 +913,30 @@ bool Sqlite::deleteStep7_3Data()
     qDebug()<<"Sqlite::deleteStep7_3Data";
     QSqlQuery query;
     query.exec("DELETE FROM Step7out");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+bool Sqlite::deleteStep8Data()
+{
+    qDebug()<<"Sqlite::deleteStep8Table";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step8");
+    if(!query.exec())
+    {
+        return false;
+    }
+    query.finish();
+    return true;
+}
+bool Sqlite::deleteStep10Data()
+{
+    qDebug()<<"Sqlite::deleteStep10Data";
+    QSqlQuery query;
+    query.exec("DELETE FROM Step10");
     if(!query.exec())
     {
         return false;
