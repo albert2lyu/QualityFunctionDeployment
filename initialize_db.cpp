@@ -3,6 +3,8 @@
 #include <QtSql>
 #include <QFileDialog>
 #include <QAxObject>
+#include "sqlite.h"
+#include "entity_step1.h"
 Initialize_DB::Initialize_DB()
 {
 
@@ -128,12 +130,38 @@ bool Initialize_DB::exportDatabase(QString xxx)
              work_books->dynamicCall("Add");
              work_book = excel.querySubObject("ActiveWorkBook");
        }
+
        QAxObject *work_sheets = work_book->querySubObject("Sheets");
        QAxObject *first_sheet = work_sheets->querySubObject("Item(int)", 1);
-       QAxObject *cell = first_sheet->querySubObject("Cells(int,int)", 1, 1);
-       cell->setProperty("Value", "单元格内容");
+
+       Sqlite sqlite ;
+       vector<Entity_Step1> returnlist = sqlite.queryStep1Data();
+       qDebug()<<"returnlist.size()"<<returnlist.size();
+       for(int i =0;i<returnlist.size();i++)
+       {
+           QAxObject *cell = first_sheet->querySubObject("Cells(int,int)",  i+1,1 );
+           cell->setProperty("Value", returnlist[i].valueIndexName);
+           QAxObject *cell2 = first_sheet->querySubObject("Cells(int,int)", i+1, 2);
+           cell2->setProperty("Value", returnlist[i].valueOperator);
+           QAxObject *cell3 = first_sheet->querySubObject("Cells(int,int)", i+1, 3);
+           cell3->setProperty("Value", returnlist[i].expectations);
+           QAxObject *cell4 = first_sheet->querySubObject("Cells(int,int)", i+1, 4);
+           cell4->setProperty("Value", returnlist[i].stakeholders);
+       }
+       QAxObject *sheet2 = work_sheets->querySubObject("Item(int)", 2);
+       vector<Entity_Step2> returnlist2 = sqlite.queryStep2Data();
+       qDebug()<<"returnlist2.size()"<<returnlist2.size();
+       for(int i=0;i<returnlist2.size();i++)
+       {
+             QAxObject *cell = sheet2->querySubObject("Cells(int,int)",  i+1,1 );
+             cell->setProperty("Value", returnlist2[i].valueExpectation);
+             QAxObject *cell2 = sheet2->querySubObject("Cells(int,int)",  i+1,2 );
+             cell2->setProperty("Value", returnlist2[i].relativeImportanceRating);
+       }
+
        work_book->dynamicCall("SaveAs(const QString &)", QDir::toNativeSeparators(filePath)); //转换路径不可少，否则会崩溃
        work_book->dynamicCall("Close(Boolean)", false);  //关闭文件
        excel.dynamicCall("Quit(void)");  //退出
+       return true;
 }
 

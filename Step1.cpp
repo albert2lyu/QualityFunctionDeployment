@@ -108,8 +108,8 @@ void Step1::on_pushButton_4_clicked()
     {
        fileNames = fileDialog->selectedFiles();
     }
-    for(auto tmp:fileNames)
-        qDebug()<<tmp<<endl;
+    QString chooseFileNames =fileNames.at(0);
+    qDebug()<<chooseFileNames<<endl;
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("D:/QT_workplace/build-QualityFunctionDeployment-Desktop_Qt_5_12_2_MinGW_64_bit-Debug/xxxxx.db");
@@ -117,8 +117,6 @@ void Step1::on_pushButton_4_clicked()
     {
         qDebug()<<"connect false";
     }
-    Sqlite sqlite ;
-    sqlite.saveStep1Table("aa","ss","ss","11");
 
 }
 void Step1::on_pushButton_5_clicked()

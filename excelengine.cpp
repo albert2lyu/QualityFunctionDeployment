@@ -363,7 +363,6 @@ bool QExcelEngine::Step1SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step1SaveData";
     Sqlite sqlite;
-    sqlite.connect();
     sqlite.deleteStep1Data();
     int tableR = tableWidget->rowCount();
     QString valueExpectation;
@@ -392,7 +391,6 @@ bool QExcelEngine::Step1QueryData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step1QueryData";
     Sqlite sqlite;
-    sqlite.connect();
     vector<Entity_Step1>returnList = sqlite.queryStep1Data();
     //先把table的内容清空
     int tableColumn = tableWidget->columnCount();
@@ -514,7 +512,6 @@ bool QExcelEngine::Step2SaveData1(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step2SaveData1";
     Sqlite sqlite;
-    sqlite.connect();
     int tableR  = tableWidget->rowCount();
     QString valueIndexName;
     QString relativeImportanceRating;
@@ -528,12 +525,6 @@ bool QExcelEngine::Step2SaveData1(QTableWidget *tableWidget)
     }
     return true;
 }
-
-
-
-
-
-
 /////////////
 /// \brief QExcelEngine::Step2QueryData1
 /// \param tableWidget
@@ -543,7 +534,6 @@ bool QExcelEngine::Step2QueryData1(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step2QueryData1";
     Sqlite sqlite;
-    sqlite.connect();
     vector<Entity_Step2>returnList = sqlite.queryStep2Data();
     //先把table的内容清空
     int tableColumn = tableWidget->columnCount();
