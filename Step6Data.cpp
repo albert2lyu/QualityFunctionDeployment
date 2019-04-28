@@ -104,6 +104,10 @@ Step6Data::Step6Data(QWidget *parent) :
         //ui->qTableWidget->removeRow(0);//删除行
         //ui->qTableWidget->clear();//清空掉表格内所有内容，包括标题头
         //ui->qTableWidget->clearContents();//这个清空所有内容不包括标题头
+        qDebug()<<"Step6Data on_pushButton_clicked";
+        QExcelEngine excelEngine=*new QExcelEngine();
+        excelEngine.Step6QueryData(ui->qTableWidget);
+        excelEngine.Close();
 }
 
 Step6Data::~Step6Data()

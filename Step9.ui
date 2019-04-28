@@ -80,7 +80,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>期望位次与关键度 </string>
+     <string> 竞争性矩阵</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
@@ -93,8 +93,76 @@
      </rect>
     </property>
     <property name="text">
-     <string>竞争性矩阵</string>
+     <string>期望位次</string>
     </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>372</y>
+      <width>75</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>关键度</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>450</y>
+      <width>69</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Step1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step6</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step7</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step8</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step9</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QStackedWidget" name="stackedWidget_2">

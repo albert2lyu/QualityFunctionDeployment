@@ -70,6 +70,126 @@
      <string>显示</string>
     </property>
    </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>450</y>
+      <width>69</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Step1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step6</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step7</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step8</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step9</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step10</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>69</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Step1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step6</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step7</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step8</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step9</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Step10</string>
+     </property>
+    </item>
+   </widget>
   </widget>
   <widget class="QStackedWidget" name="stackedWidget_2">
    <property name="geometry">
@@ -79,6 +199,9 @@
      <width>1445</width>
      <height>480</height>
     </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page_3"/>
    <widget class="QWidget" name="page_4"/>

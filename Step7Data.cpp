@@ -86,15 +86,19 @@ int RowNum=6,ColumnNum=3;
         //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
 
         //具体单元格中添加ComboBox控件，下拉列表
-        QComboBox *comBox = new QComboBox();
-        comBox->addItem("");
-        comBox->addItem("");
+//        QComboBox *comBox = new QComboBox();
+//        comBox->addItem("");
+//        comBox->addItem("");
         //ui->qTableWidget->setCellWidget(0,3,comBox);
 
         //ui->qTableWidget->removeColumn(0);//删除列
         //ui->qTableWidget->removeRow(0);//删除行
         //ui->qTableWidget->clear();//清空掉表格内所有内容，包括标题头
         //ui->qTableWidget->clearContents();//这个清空所有内容不包括标题头
+        qDebug()<<"Step7Data on_pushButton_clicked";
+        QExcelEngine excelEngine=*new QExcelEngine();
+        excelEngine.Step7QueryData(ui->qTableWidget);
+        excelEngine.Close();
 }
 
 Step7Data::~Step7Data()

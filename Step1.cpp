@@ -84,4 +84,5 @@ void Step1::on_pushButton_3_clicked()
             ui->stackedWidget_2->addWidget(Step1Data_Page);
     ui->stackedWidget_2->setCurrentWidget(Step1Data_Page);
     ui->stackedWidget_2->show();
+
 }

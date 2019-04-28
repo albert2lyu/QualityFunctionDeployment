@@ -83,3 +83,33 @@ void Step4::on_pushButton_3_clicked()
     ui->stackedWidget_2->show();
 
 }
+
+void Step4::on_comboBox_activated(const QString &arg1)
+{
+    if(arg1=="Step1")
+       { Step1Data_Page = new Step1Data(this);
+       ui->stackedWidget_2->addWidget(Step1Data_Page);
+      ui->stackedWidget_2->setCurrentWidget(Step1Data_Page);
+      ui->stackedWidget_2->show();}
+      else if (arg1=="Step2")
+      {
+          Step2Data_Page = new Step2Data(this);
+         ui->stackedWidget_2->addWidget(Step2Data_Page);
+        ui->stackedWidget_2->setCurrentWidget(Step2Data_Page);
+        ui->stackedWidget_2->show();
+      }
+    else if (arg1=="Step3")
+    {
+        Step3Data_Page = new Step3Data(this);
+       ui->stackedWidget_2->addWidget(Step3Data_Page);
+      ui->stackedWidget_2->setCurrentWidget(Step3Data_Page);
+      ui->stackedWidget_2->show();
+    }
+    else
+    {
+        Step4Data_Page = new Step4Data(this);
+       ui->stackedWidget_2->addWidget(Step4Data_Page);
+      ui->stackedWidget_2->setCurrentWidget(Step4Data_Page);
+      ui->stackedWidget_2->show();
+    }
+}

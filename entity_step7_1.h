@@ -8,7 +8,8 @@ public:
     Entity_Step7_1();
     QString valueExpectation;
     QString QualityParameterName;
-    double valuequalityResult;double Evalue;
+    double valuequalityResult;
+    double Evalue;
 };
 
 #endif // ENTITY_STEP7_1_H

@@ -104,6 +104,10 @@ Step9Data::Step9Data(QWidget *parent) :
         //ui->qTableWidget->removeRow(0);//删除行
         //ui->qTableWidget->clear();//清空掉表格内所有内容，包括标题头
         //ui->qTableWidget->clearContents();//这个清空所有内容不包括标题头
+        qDebug()<<"Step9Data:: on_pushButton_clicked";
+        QExcelEngine excelEngine=*new QExcelEngine();
+        excelEngine.Step8QueryData(ui->qTableWidget);
+        excelEngine.Close();
 }
 
 Step9Data::~Step9Data()
@@ -114,16 +118,9 @@ void Step9Data::on_pushButton_clicked(){
 
 
 
-        //从Excel中将表格导入到TableWidget
-       QExcelEngine excelEngine=*new QExcelEngine();
-         QString m_fileName =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step9_1_temp" + "xls";
-        bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
-        if(b == false)
-        {
-            QMessageBox::information(this, "excel提示", "文件打开失败");
-            return;
-        }
-        excelEngine.ReadDataToTable(ui->qTableWidget);
-        excelEngine.Close();
+    qDebug()<<"Step9Data:: on_pushButton_clicked";
+    QExcelEngine excelEngine=*new QExcelEngine();
+    excelEngine.Step8QueryData(ui->qTableWidget);
+    excelEngine.Close();
 
 }

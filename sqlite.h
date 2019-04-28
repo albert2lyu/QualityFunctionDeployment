@@ -19,6 +19,9 @@
 #include "entity_step7_3.h"
 #include "entity_step6_3.h"
 #include "entity_step8.h"
+#include "entity_step9_2.h"
+#include "entity_step9_3.h"
+#include "entity_step9_4.h"
 #include "entity_step10.h"
 using namespace std;
 
@@ -50,6 +53,9 @@ public:
     bool saveStep7_2Table(QString qualityParameterNameRow,QString qualityParameterNameRank,QString valueQualityType,double BValue);
     bool saveStep7_3Table(QString valueExpectation,QString QualityParameterName,double  valuequalityResult);
     bool saveStep8Table(QString QualityParameters,double relativeImportanceRating);
+    bool saveStep9_2Table(QString valueExpectationRow,QString valueExpectationRank,QString competitiveEvaluation);
+    bool saveStep9_3Table(QString valueExpectationRow,QString valueExpectationRank,QString expectedRank);
+    bool saveStep9_4Table(QString valueExpectationRow,QString valueExpectationRank,QString criticality);
     bool saveStep10Table(QString QualityParameterName,QString upLow,double outputValue);
 
     vector<Entity_Step1>  queryStep1Data();
@@ -67,6 +73,9 @@ public:
     vector<Entity_Step7_2>queryStep7_2Data();
     vector<Entity_Step7_3>queryStep7_3Data();
     vector<Entity_Step8>queryStep8Data();
+    vector<Entity_Step9_2>queryStep9_2Data();
+    vector<Entity_Step9_3>queryStep9_3Data();
+    vector<Entity_Step9_4>queryStep9_4Data();
 
  vector<Entity_Step10>queryStep10Data();
     bool deleteStep1Table();
@@ -85,6 +94,9 @@ public:
     bool deleteStep7_2Data();
     bool deleteStep7_3Data();
     bool deleteStep8Data();
+    bool deleteStep9_2Data();
+    bool deleteStep9_3Data();
+    bool deleteStep9_4Data();
     bool deleteStep10Data();
 };
 

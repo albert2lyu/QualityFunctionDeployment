@@ -18,21 +18,23 @@ Step7_1::Step7_1(QWidget *parent) :
     sqlite.connect();
     vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();
     vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();
+    vector<Entity_Step6_1>returnList6 = sqlite.queryStep6_1Data();
     qDebug()<<"Step2::ui::returnList.size()::"<<returnList1.size();qDebug()<<"Step5::ui::returnList.size()::"<<returnList5.size();
     int tableColumn =returnList1.size();
-    int tableColumn2 =returnList5.size();
+    //int tableColumn2 =returnList5.size();
     int ColumnNum=tableColumn*2;
     QStringList HStrList;
     QStringList VStrList;
-    int RowNum=returnList5.size();
-    for (int i=0;i<RowNum;i++) {
+    int RowNum= (int)returnList6[(returnList6.size()-1)].row.toInt()+1;
 
-        VStrList.push_back(returnList5[i].chooseQualityParameterName);
-    }
-    for(int i=0;i<tableColumn;i++){
-    HStrList.push_back(returnList1[i].valueIndexName+"中心值");
-    HStrList.push_back(returnList1[i].valueIndexName+"展值");
-    }
+//    for (int i=0;i<RowNum;i++) {
+
+//        VStrList.push_back(returnList5[i].chooseQualityParameterName);
+//    }
+//    for(int i=0;i<tableColumn;i++){
+//    HStrList.push_back(returnList1[i].valueIndexName+"中心值");
+//    HStrList.push_back(returnList1[i].valueIndexName+"展值");
+//    }
 
      for(int i=0;i<tableColumn;i++){
      HStrList.push_back(returnList1[i].valueIndexName+"中心值");
@@ -46,7 +48,7 @@ Step7_1::Step7_1(QWidget *parent) :
     ui->qTableWidget->setVerticalHeaderLabels(VStrList);
     ui->qTableWidget->setWindowTitle("QTableWidget");
 
-    ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
+    ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
     //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
     ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
     //ui->tableWidget->setShowGrid(false);//隐藏栅格

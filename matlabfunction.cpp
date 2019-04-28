@@ -568,6 +568,7 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
                     {
                         pcom_mlfStep7(1,&matrixResult,matrixA,matrixB,matrixC,matrixD,matrixE,matrixF);
                         double * pr = mxGetPr(matrixResult);
+
                         double result [returnList71col][returnList5Row*2+2];
                         int rowFlag =0;
                         int colFlag =0;
@@ -834,8 +835,169 @@ Q：一行，列数等于质量参数的数目
                 }
            }
                     }
+//MatlabFunction::matStep10
+//MatlabFunction::matStep10
+//SetThrowSegvLongjmpSEHFilter(): filter function installed
+//SetThrowSegvLongjmpSEHFilter(): filter function installed
+//MatlabFunction::pcom_matStep67810Initialize
+//typedef void  (*Pcom_mlfStep3)(int , mxArray**,  mxArray*, mxArray*, mxArray*, mxArray*);
+//typedef bool  (*Pcom_step3Initialize)(void);
+//bool MatlabFunction::mlfStep3(QTableWidget *tableWidget)
+//{
+//    qDebug()<<"MatlabFunction::mlfStep3";
+//    QLibrary mylib("step3.DLL");
+//    if(mylib.load())
+//    {
+//        qDebug()<<"MatlabFunction::mlfStep3";
+//    }
+//    Pcom_step3Initialize pcom_step3Initialize =
+//            (Pcom_step3Initialize)mylib.resolve("step3Initialize");
+//    if(pcom_step3Initialize)
+//    {
+//        pcom_step3Initialize();
+//        qDebug()<<"MatlabFunction::pcom_matBasicsssInitialize";
+//    }
+typedef void  (*Pcom_mlfStep3)(int , mxArray**,  mxArray*, mxArray*, mxArray*, mxArray*);
+typedef bool  (*Pcom_step3Initialize)(void);
+bool MatlabFunction::mlfStep9(QTableWidget *tableWidget)
+{
+    qDebug()<<"MatlabFunction::mlfStep9";
+    QLibrary mylib("step3.DLL");
+    if(mylib.load())
+    {
+        qDebug()<<"MatlabFunction::mlfStep9";
+    }
+    Pcom_step3Initialize pcom_step3Initialize =
+            (Pcom_step3Initialize)mylib.resolve("step3Initialize");
+    if(pcom_step3Initialize)
+    {
+        pcom_step3Initialize();
+        qDebug()<<"MatlabFunction::pcom_matBasicsssInitialize";
+    }
+
+    Sqlite sqlite ;
+    sqlite.connect();
+    ////////////
+    /// \brief Entity_Step3_2 returnList 竞争性分析矩::输入,n列,行数不确定C3:
+    ///
+    vector<Entity_Step9_2>returnList = sqlite.queryStep9_2Data();
+    if(returnList.size() != 0 )
+    {
+        int end_size = (int) returnList.size();
+        Entity_Step9_2  entity_Step9_2 = (Entity_Step9_2) returnList[(end_size-1)];
+        int row = (int) entity_Step9_2.valueExpectationRow.toInt()+1;
+        int col = (int) entity_Step9_2.valueExpectationRank.toInt()+1;
+        qDebug()<<"92::row"<<row;
+         qDebug()<<"92::col"<<col;
+        double step9_2Matrix[row][col];
+        for(int i =0;i<returnList.size();i++)
+        {
+            int step9_2MatrixRow = (int) returnList[i].valueExpectationRow.toInt();
+            int step9_2MatrixCol = (int) returnList[i].valueExpectationRank.toInt();
+            step9_2Matrix[step9_2MatrixRow][step9_2MatrixCol] = (double)returnList[i].competitiveEvaluation.toDouble();
+        }
+//        for(int i =0;i<returnList.size();i++)
+//        {qDebug()<<"step9_1Matrix[i][0]"<<step9_1Matrix[i][0];
 
 
+
+
+
+        //////
+        /// \brief Entity_Step3_3 returnList::目标等级,1*n矩阵
+        ///
+        vector<Entity_Step9_3>returnList9_3 = sqlite.queryStep9_3Data();
+        if(returnList9_3.size() != 0)
+        {
+            int returnList9_3_end_size = (int) returnList9_3.size();
+            Entity_Step9_3  entity_Step9_3 = (Entity_Step9_3) returnList9_3[(returnList9_3_end_size-1)];
+            int entity_Step9_3_row = 1;
+            int entity_Step9_3_col = (int) entity_Step9_3.valueExpectationRank.toInt()+1;
+            double step9_3Matrix[entity_Step9_3_row][entity_Step9_3_col];
+            for(int i =0;i<returnList9_3.size();i++)
+            {
+                int step9_3MatrixRow = (int) returnList9_3[i].valueExpectationRow.toInt();
+                int step9_3MatrixCol = (int) returnList9_3[i].valueExpectationRank.toInt();
+                step9_3Matrix[step9_3MatrixRow][step9_3MatrixCol] = (double)returnList9_3[i].expectedRank.toDouble();
+            }
+            /////////
+            /// \brief returnList3_4 销售点矩阵:1*n,D3数据填写时做成下拉框,三个选型对应1,1.5,1.25
+            ///
+            vector<Entity_Step9_4> returnList9_4 = sqlite.queryStep9_4Data();
+            if(returnList9_4.size()!=0)
+            {
+                int returnList9_4_end_size = (int) returnList9_4.size();
+                Entity_Step9_4  entity_Step9_4 = (Entity_Step9_4) returnList9_4[(returnList9_4_end_size-1)];
+                int entity_Step9_4_row = 1;
+                int entity_Step9_4_col = (int) entity_Step9_4.valueExpectationRank.toInt()+1;
+                double step9_4Matrix[entity_Step9_4_row][entity_Step9_4_col];
+                for(int i =0;i<returnList9_4.size();i++)
+                {
+                    int step9_4MatrixRow = (int) returnList9_4[i].valueExpectationRow.toInt();
+                    int step9_4MatrixCol = (int) returnList9_4[i].valueExpectationRank.toInt();
+                    step9_4Matrix[step9_4MatrixRow][step9_4MatrixCol] = (double)returnList9_4[i].criticality.toDouble();
+                }
+                ////////////
+                /// \brief returnList3_1  Step2得到的结果,n*1矩阵
+                ///
+                vector<Entity_Step8>returnList9_1 = sqlite.queryStep8Data();
+                int   rowCntResult=returnList9_1.size();
+                int   colCntResult=1;
+                double   step9_1Matrix[rowCntResult][colCntResult];
+                for(int i =0;i<returnList9_1.size();i++)
+                {
+                    qDebug()<<"returnList9_1[i].relativeImportanceRating::"<<returnList9_1[i].relativeImportanceRating;
+                    step9_1Matrix[i][0]=returnList9_1[i].relativeImportanceRating;
+                    qDebug()<<"step9_1Matrix[i][0]"<<step9_1Matrix[i][0];
+                }
+
+
+
+
+                mxArray *matrixA = mxCreateDoubleMatrix(rowCntResult,1,mxREAL);//定义数组，行，列，double类型
+                memcpy((void *)mxGetPr(matrixA),(void *)step9_1Matrix,sizeof(step9_1Matrix));
+                double * dr = mxGetPr(matrixA);
+               for(int i=0;i<(rowCntResult)*(1);i++)
+                {qDebug()<<"matrixA::"<<dr[i];}
+                mxArray *matrixB = mxCreateDoubleMatrix(row,col,mxREAL);
+                memcpy((void *)mxGetPr(matrixB),(void *)step9_2Matrix,sizeof(step9_2Matrix));
+                double * ar = mxGetPr(matrixB);
+               for(int i=0;i<(row)*(col);i++)
+                {qDebug()<<"matrixB::"<<ar[i];}
+                mxArray *matrixC = mxCreateDoubleMatrix(entity_Step9_3_row,entity_Step9_3_col,mxREAL);
+                memcpy((void *)mxGetPr(matrixC),(void *)step9_3Matrix,sizeof(step9_3Matrix));
+                double * cr = mxGetPr(matrixC);
+               for(int i=0;i<(entity_Step9_3_row)*(entity_Step9_3_col);i++)
+                {qDebug()<<"matrixC::"<<cr[i];}
+                mxArray *matrixD = mxCreateDoubleMatrix(entity_Step9_4_row,entity_Step9_4_col,mxREAL);
+                memcpy((void *)mxGetPr(matrixD),(void *)step9_4Matrix,sizeof(step9_4Matrix));
+
+                mxArray *matrixResult = mxCreateDoubleMatrix(1,rowCntResult,mxREAL);
+
+                Pcom_mlfStep3 pcom_mlfStep3 = (Pcom_mlfStep3)mylib.resolve("mlfStep3");
+                if(pcom_mlfStep3)
+                {
+                    qDebug()<<"MatlabFunction::mlfStep9";
+                    pcom_mlfStep3(1,&matrixResult,matrixA,matrixB,matrixC,matrixD);
+                    double * pr = mxGetPr(matrixResult);
+                    sqlite.deleteStep8Data();
+                    for(int i =0;i<rowCntResult;i++)
+                    {
+                        double  matrixResultOutput = pr[i];
+                        QString resultExpectation = returnList9_1[i].QualityParameters;
+                        sqlite.saveStep8Table(resultExpectation,matrixResultOutput);
+                        qDebug()<<"MatlabFunction::mlfStep9::matrixResultOutput"<<QString::number(matrixResultOutput);
+                    }
+
+                }
+
+            }
+
+        }
+
+
+    }
+}
 typedef bool (*Pcom_matStep67810Initialize)(void);
 typedef void (*Pcom_mlfStep10)(int, mxArray** , mxArray* , mxArray* , mxArray* , mxArray*, mxArray* , mxArray* , mxArray* , mxArray* , mxArray*, mxArray*);
 bool MatlabFunction::matStep10(QTableWidget *tableWidget)

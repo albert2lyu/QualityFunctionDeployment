@@ -16,6 +16,7 @@ public:
     bool matStep6(QTableWidget *tableWidget);
     bool matStep7(QTableWidget *tableWidget);
     bool matStep8(QTableWidget *tableWidget);
+    bool mlfStep9(QTableWidget *tableWidget);
     bool matStep10(QTableWidget *tableWidget);
 };
 

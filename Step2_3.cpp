@@ -85,8 +85,7 @@ Step2_3::Step2_3(QWidget *parent) :
 
 
         QVector<QComboBox*> Combox;
-        for(int i=0;i<ColumnNum*RowNum*2;i++)
-        {
+
 
                 QComboBox *tmp= new QComboBox();
                 tmp->addItem("关系一");
@@ -98,10 +97,10 @@ Step2_3::Step2_3(QWidget *parent) :
                 tmp->addItem("关系七");
                 tmp->addItem("关系八");
                 tmp->addItem("关系九");
-                tmp->setCurrentIndex(5) ;
+                tmp->setCurrentIndex(3) ;
                 Combox.append(tmp);
 
-        }
+
         QVector<QWidget*> ThreeCombox;
         int ss=0;
         for(int i=0;i<ColumnNum*RowNum;i++)

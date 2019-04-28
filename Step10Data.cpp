@@ -98,12 +98,11 @@ Step10Data::Step10Data(QWidget *parent) :
         QComboBox *comBox = new QComboBox();
         comBox->addItem("");
         comBox->addItem("");
-        //ui->qTableWidget->setCellWidget(0,3,comBox);
+        qDebug()<<"Step10Data:: on_pushButton_clicked";
+        QExcelEngine excelEngine=*new QExcelEngine();
+        excelEngine.Step10QueryData(ui->qTableWidget);
+        excelEngine.Close();
 
-        //ui->qTableWidget->removeColumn(0);//删除列
-        //ui->qTableWidget->removeRow(0);//删除行
-        //ui->qTableWidget->clear();//清空掉表格内所有内容，包括标题头
-        //ui->qTableWidget->clearContents();//这个清空所有内容不包括标题头
 }
 
 Step10Data::~Step10Data()

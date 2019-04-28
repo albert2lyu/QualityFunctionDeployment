@@ -72,6 +72,10 @@ Step3Data::Step3Data(QWidget *parent) :
         QComboBox *comBox = new QComboBox();
         comBox->addItem("");
         comBox->addItem("");
+        qDebug()<<"Step3Data:: on_pushButton_clicked";
+        QExcelEngine excelEngine=*new QExcelEngine();
+        excelEngine.Step2QueryData1(ui->qTableWidget);
+        excelEngine.Close();
 }
 
 Step3Data::~Step3Data()

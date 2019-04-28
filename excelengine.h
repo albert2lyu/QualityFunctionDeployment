@@ -53,6 +53,9 @@ public:
     bool Step10SaveData(QTableWidget *tableWidget);
     bool Step8SaveData(QTableWidget *tableWidget);
     bool Step8QueryData(QTableWidget *tableWidget);
+    bool Step9_2SaveData(QTableWidget *tableWidget);
+    bool Step9_3SaveData(QTableWidget *tableWidget);
+    bool Step9_4SaveData(QTableWidget *tableWidget);
     bool Step10QueryData(QTableWidget *tableWidget);
 
 private:

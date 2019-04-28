@@ -73,6 +73,13 @@ Step2Data::Step2Data(QWidget *parent) :
         }
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
+        qDebug()<<"Step2Data:: on_pushButton_clicked";
+        ////从数据库中读取数据
+        qDebug()<<"Step2Data:: on_pushButton_clicked";
+        QExcelEngine excelEngine=*new QExcelEngine();
+        excelEngine.Step2QueryData1(ui->qTableWidget);
+        excelEngine.Close();
+
 }
 
 Step2Data::~Step2Data()

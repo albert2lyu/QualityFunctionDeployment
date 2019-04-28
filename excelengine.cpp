@@ -769,7 +769,7 @@ bool QExcelEngine::Step6_1SaveData(QTableWidget *tableWidget)
         for(int j=0;j<row;j++)
         {
             double value = tableWidget->item(j,i)->data(Qt::DisplayRole).toString().toDouble();
-            if(valueExpectationRow != nullptr && value !=0)
+            if(valueExpectationRow != nullptr)
             {
                 sqlite.saveStep6_1Table(QString::number(j),QString::number(i),value);
             }
@@ -799,7 +799,7 @@ bool QExcelEngine::Step6_2SaveData(QTableWidget *tableWidget)
                 QString valueQualityType2;
                 if(valueQualityType=="类型一")
                 {
-                    QString valueQualityType2 ="1";
+                     valueQualityType2 ="1";
                 } else  if(valueQualityType=="类型二"){ valueQualityType2 ="2";}
                 else  if(valueQualityType=="类型三"){ valueQualityType2 ="3";}
                 else  if(valueQualityType=="类型四"){ valueQualityType2 ="4";}
@@ -814,10 +814,32 @@ bool QExcelEngine::Step6_2SaveData(QTableWidget *tableWidget)
     }
     return true;
 }
+//bool QExcelEngine::Step7_1SaveData(QTableWidget *tableWidget)
+//{
+//    qDebug()<<"QExcelEngine::Step7_1SaveData";
+//    int row = tableWidget->rowCount();
+//    Sqlite sqlite;
+//    sqlite.connect();
+//    sqlite.deleteStep7_1Data();
+//    for(int i=0;i<tableWidget->horizontalHeader()->count();i++)
+//    {
+//        QString valueExpectationRow = tableWidget->horizontalHeaderItem(i)->data(Qt::DisplayRole).toString();
+//        for(int j=0;j<row;j++)
+//        {
+//            double value = tableWidget->item(j,i)->data(Qt::DisplayRole).toString().toDouble();
+//             double value2 = tableWidget->item(j,i)->data(Qt::DisplayRole).toString().toDouble();
+//            if(valueExpectationRow != nullptr)
+//            {
+//                sqlite.saveStep6_1Table(QString::number(j),QString::number(i),value);
+//            }
+//        }
+//    }
+//    return true;
+//}
 bool QExcelEngine::Step7_1SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step7_1SaveData";
-    int row = tableWidget->verticalHeader()->count();
+    int row = tableWidget->rowCount();
     int column = tableWidget->horizontalHeader()->count();
     qDebug()<<row<<column;
     Sqlite sqlite;
@@ -825,22 +847,22 @@ bool QExcelEngine::Step7_1SaveData(QTableWidget *tableWidget)
     sqlite.deleteStep7_1Data();
     vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();//价值
     vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();//质量
-    int Cvalue[row][column],Evalue[row][column];
-    int x=0;
+    //int Cvalue[row][column],Evalue[row][column];
+    //int x=0;
     for(int j=0;j<row;j++)
     {
         for(int i=0;i<column;i+=2)
         {
             // QString valueExpectationColumn = tableWidget->verticalHeaderItem(i)->data(Qt::DisplayRole).toString();
             qDebug()<<"QExcelEngine::Step7_1SaveData222";
-            Cvalue[j][i]=tableWidget->item(j,i)->data(Qt::DisplayRole).toString().toDouble();
-            Evalue[j][i]=tableWidget->item(j,i+1)->data(Qt::DisplayRole).toString().toDouble();
+            double value=tableWidget->item(j,i)->data(Qt::DisplayRole).toString().toDouble();
+            double value2=tableWidget->item(j,i+1)->data(Qt::DisplayRole).toString().toDouble();
             qDebug()<<"QExcelEngine::Step7_1SaveData222";
-            sqlite.saveStep7_1Table(QString::number(j),QString::number(x),Cvalue[j][i],Evalue[j][i]);
+            sqlite.saveStep7_1Table(QString::number(j),QString::number(i/2),value,value2);
             qDebug()<<"QExcelEngine::Step7_1SaveData333";
-            x++;
+           // x++;
         }
-         x=0;
+      //   x=0;
     }
 
     return true;
@@ -869,7 +891,7 @@ bool QExcelEngine::Step7_2SaveData(QTableWidget *tableWidget)
                 if(valueQualityType=="类型一")
                 {
 
-                    QString valueQualityType2 ="1";
+                   valueQualityType2 ="1";
                 } else  if(valueQualityType=="类型二"){ valueQualityType2 ="2";}
                 else  if(valueQualityType=="类型三"){ valueQualityType2 ="3";}
                 else  if(valueQualityType=="类型四"){ valueQualityType2 ="4";}
@@ -906,6 +928,76 @@ bool QExcelEngine::Step8QueryData(QTableWidget *tableWidget)
         tableWidget->setItem(i,0,new QTableWidgetItem(returnList8[i].QualityParameters));
         double retuC =returnList8[i].relativeImportanceRating;
         tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(retuC,'d',3)));
+    }
+    return true;
+}
+bool QExcelEngine::Step9_2SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step9_2SaveData";
+    Sqlite sqlite = * new Sqlite();
+    sqlite.connect();
+    sqlite.deleteStep9_2Data();
+    int tableR = tableWidget->rowCount();
+    int tableC = tableWidget->columnCount();
+    for(int i=0;i<tableR;i++)
+    {
+        for(int j=1; j<tableC; j++)
+        {
+            QString competitiveEvaluation = tableWidget->item(i,j)->data(Qt::DisplayRole).toString();
+            qDebug()<<"QExcelEngine::Step9_2SaveData::competitiveEvaluation"<<competitiveEvaluation;
+            if(competitiveEvaluation != nullptr)
+            {
+                sqlite.saveStep9_2Table(QString::number(i),QString::number(j-1),competitiveEvaluation);
+            }
+        }
+    }
+    return true;
+}
+bool QExcelEngine::Step9_3SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step9_3SaveData";
+    Sqlite sqlite = * new Sqlite();
+    sqlite.connect();
+    sqlite.deleteStep9_3Data();
+    int tableR = tableWidget->rowCount();
+    qDebug()<<"QExcelEngine::Step9_3SaveData::tableR"<<tableR;
+    int tableC = tableWidget->columnCount();
+    qDebug()<<"QExcelEngine::Step9_3SaveData::tableC"<<tableC;
+    for(int i=0;i<tableR;i++)
+    {
+        for(int j=1; j<tableC; j++)
+        {
+            QString expectedRank = tableWidget->item(i,j)->data(Qt::DisplayRole).toString();
+            qDebug()<<"QExcelEngine::Step9_3SaveData::expectedRank"<<expectedRank;
+            if(expectedRank != nullptr)
+            {
+                sqlite.saveStep9_3Table(QString::number(i),QString::number(j-1),expectedRank);
+            }
+        }
+    }
+    return true;
+}
+bool QExcelEngine::Step9_4SaveData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step9_4SaveData";
+    Sqlite sqlite = * new Sqlite();
+    sqlite.connect();
+    sqlite.deleteStep9_4Data();
+    int tableR = tableWidget->rowCount();
+    qDebug()<<"QExcelEngine::Step9_4SaveData::tableR"<<tableR;
+    int tableC = tableWidget->columnCount();
+    qDebug()<<"QExcelEngine::Step9_4SaveData::tableC"<<tableC;
+    for(int i=0;i<tableR;i++)
+    {
+        for(int j=1; j<tableC; j++)
+        {
+            QString criticality = tableWidget->item(i,j)->data(Qt::DisplayRole).toString();
+            qDebug()<<"QExcelEngine::Step9_4SaveData::expectedRank"<<criticality;
+            if(criticality != nullptr)
+            {
+                sqlite.saveStep9_4Table(QString::number(i),QString::number(j-1),criticality);
+            }
+        }
     }
     return true;
 }
