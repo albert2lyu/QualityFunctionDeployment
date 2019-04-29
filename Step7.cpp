@@ -7,7 +7,7 @@ Step7::Step7(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setVisible(true);
-    ui->stackedWidget_2->setVisible(false);
+    ui->stackedWidget_2->setVisible(true);
 
 
 //    setStyleSheet(QString::fromUtf8("border:1px solid black"));

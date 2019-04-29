@@ -8,7 +8,10 @@ Step8::Step8(QWidget *parent) :
     ui->setupUi(this);
 
     ui->stackedWidget->setVisible(true);
-    ui->stackedWidget_2->setVisible(false);
+    ui->stackedWidget_2->setVisible(true);
+    Step8_1_Page = new Step8_1(this);
+    ui->stackedWidget->addWidget(Step8_1_Page);
+    ui->stackedWidget->setCurrentWidget(Step8_1_Page);
 //    setStyleSheet(QString::fromUtf8("border:1px solid black"));
 }
 

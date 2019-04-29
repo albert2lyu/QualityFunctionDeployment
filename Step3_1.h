@@ -34,8 +34,6 @@ private slots:
     void on_pushButton_5_clicked();
 
 
-
-
 private:
     Ui::Step3_1 *ui;
 };

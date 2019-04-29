@@ -11,7 +11,11 @@ Step1::Step1(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setVisible(true);
-    ui->stackedWidget_2->setVisible(false);
+    ui->stackedWidget_2->setVisible(true);
+    Step1_1_Page = new Step1_1(this);
+    ui->stackedWidget->addWidget(Step1_1_Page);
+    ui->stackedWidget->setCurrentWidget(Step1_1_Page);
+    ui->stackedWidget->show();
 }
 
 Step1::~Step1()

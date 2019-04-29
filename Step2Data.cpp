@@ -63,8 +63,8 @@ Step2Data::Step2Data(QWidget *parent) :
         {
             for(int columns=0;columns<ColumnNum;columns++)
             {
-                ui->qTableWidget->setColumnWidth(columns,705/ColumnNum);//hangkuan
-                ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
+                ui->qTableWidget->setColumnWidth(columns,306/ColumnNum);//hangkuan
+                ui->qTableWidget->setRowHeight(rows,227/RowNum);//列宽
                 ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
                 ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(85,170,255));//设置前景颜色
                 ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色

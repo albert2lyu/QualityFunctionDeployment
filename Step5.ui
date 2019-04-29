@@ -42,6 +42,9 @@
          <height>200</height>
         </size>
        </property>
+       <property name="styleSheet">
+        <string notr="true">#widget{border:1px solid black}</string>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <widget class="QWidget" name="widget_2" native="true">
@@ -58,7 +61,8 @@
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">image: url(:/image/back.png);</string>
+           <string notr="true">image: url(:/image/back.png);
+border-color: rgb(0, 0, 0);border:1px;</string>
           </property>
          </widget>
         </item>
@@ -101,6 +105,11 @@
               <string>Step4</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>Step5</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
@@ -129,56 +138,51 @@
       </widget>
      </item>
      <item>
-      <widget class="QStackedWidget" name="stackedWidget">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QWidget" name="widget_3" native="true">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>300</width>
          <height>0</height>
         </size>
        </property>
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="page">
-        <layout class="QGridLayout" name="gridLayout" rowstretch="3" columnstretch="2">
-         <item row="0" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <property name="leftMargin">
-            <number>120</number>
-           </property>
-           <property name="rightMargin">
-            <number>120</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="pushButton">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Step5</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="page_2"/>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QStackedWidget" name="stackedWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#stackedWidget{border:1px solid black}</string>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="page"/>
+          <widget class="QWidget" name="page_2"/>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>
@@ -196,6 +200,9 @@
        <width>0</width>
        <height>200</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#stackedWidget_2{border:1px solid black}</string>
      </property>
      <widget class="QWidget" name="page_3">
       <layout class="QGridLayout" name="gridLayout_2">

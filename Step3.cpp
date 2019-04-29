@@ -11,7 +11,7 @@ Step3::Step3(QWidget *parent) :
 
 
     ui->stackedWidget->setVisible(true);
-    ui->stackedWidget_2->setVisible(false);
+    ui->stackedWidget_2->setVisible(true);
 
 }
 
@@ -83,5 +83,7 @@ void Step3::comboBox_activated(const QString &arg1)
       ui->stackedWidget_2->setCurrentWidget(Step3Data_Page);
       ui->stackedWidget_2->show();
     }
+
+
 
 }

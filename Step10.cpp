@@ -15,8 +15,9 @@ Step10::Step10(QWidget *parent) :
 
    // setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
+    ui->stackedWidget->setCurrentWidget(Step10_1_Page);
     ui->stackedWidget->setVisible(true);
-    ui->stackedWidget_2->setVisible(false);
+    ui->stackedWidget_2->setVisible(true);
 }
 
 Step10::~Step10()

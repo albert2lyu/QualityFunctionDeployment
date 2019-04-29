@@ -51,6 +51,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="backButton">
+       <property name="text">
+        <string>返回</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

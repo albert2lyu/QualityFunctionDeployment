@@ -72,8 +72,8 @@ Step2_3::Step2_3(QWidget *parent) :
     {
         for(int columns=0;columns<ColumnNum;columns++)
         {
-            ui->qTableWidget->setColumnWidth(columns,705/ColumnNum);//hangkuan
-            ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
+            ui->qTableWidget->setColumnWidth(columns,288/ColumnNum);//hangkuan
+            ui->qTableWidget->setRowHeight(rows,209/RowNum);//列宽
             ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
             ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
             ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色

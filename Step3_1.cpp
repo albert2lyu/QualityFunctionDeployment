@@ -8,7 +8,9 @@
 #include <QFileDialog>
 #include "sqlite.h"
 #include "entity_step2.h"
-
+#include "Step3.h"
+#include "ui_Step3.h"
+#include"mainwindow.h"
 Step3_1::Step3_1(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step3_1)
@@ -48,8 +50,8 @@ Step3_1::Step3_1(QWidget *parent) :
         {
             for(int columns=0;columns<ColumnNum;columns++)
             {
-                ui->qTableWidget->setColumnWidth(columns,705/ColumnNum);//hangkuan
-                ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
+                ui->qTableWidget->setColumnWidth(columns,306/ColumnNum);//hangkuan
+                ui->qTableWidget->setRowHeight(rows,227/RowNum);//列宽
                 ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
                 ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
                 ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
@@ -156,5 +158,4 @@ void Step3_1::on_pushButton_5_clicked()
   QMessageBox::information(this, "excel提示", "保存成功");
 
 }
-
 

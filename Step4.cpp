@@ -7,7 +7,11 @@ Step4::Step4(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setVisible(true);
-    ui->stackedWidget_2->setVisible(false);
+    ui->stackedWidget_2->setVisible(true);
+    Step4_1_Page = new Step4_1(this);
+
+    ui->stackedWidget->addWidget(Step4_1_Page);
+    ui->stackedWidget->setCurrentWidget(Step4_1_Page);
 
 }
 
@@ -69,4 +73,6 @@ void Step4::comboBox_activated(const QString &arg1)
       ui->stackedWidget_2->setCurrentWidget(Step4Data_Page);
       ui->stackedWidget_2->show();
     }
+
+
 }

@@ -8,7 +8,10 @@ Step5::Step5(QWidget *parent) :
     ui->setupUi(this);
 
     ui->stackedWidget->setVisible(true);
-    ui->stackedWidget_2->setVisible(false);
+    ui->stackedWidget_2->setVisible(true);
+       Step5_1_Page = new Step5_1(this);
+    ui->stackedWidget->addWidget(Step5_1_Page);
+    ui->stackedWidget->setCurrentWidget(Step5_1_Page);
 }
 
 Step5::~Step5()

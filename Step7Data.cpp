@@ -56,8 +56,8 @@ int RowNum=6,ColumnNum=3;
         {
             for(int columns=0;columns<ColumnNum;columns++)
             {
-                ui->qTableWidget->setColumnWidth(columns,705/ColumnNum);//hangkuan
-            ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
+                ui->qTableWidget->setColumnWidth(columns,306/ColumnNum);//hangkuan
+            ui->qTableWidget->setRowHeight(rows,227/RowNum);//列宽
                 //ui->qTableWidget->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
                 ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
                 ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(85,170,255));//设置前景颜色
