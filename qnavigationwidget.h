@@ -22,8 +22,7 @@ protected:
     void paintEvent(QPaintEvent *);
     void mouseMoveEvent(QMouseEvent *);
     void mousePressEvent(QMouseEvent *);
-
-
+    void resizeEvent(QResizeEvent *event) ;
 private:
     QList<QString> listItems;
     QString backgroundColor;

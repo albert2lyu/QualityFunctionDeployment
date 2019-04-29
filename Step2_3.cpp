@@ -17,115 +17,115 @@ Step2_3::Step2_3(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step2_3)
 {
-        qDebug()<<"Step2_3::ui";
-        ui->setupUi(this);
-        Sqlite sqlite = * new Sqlite();
-        vector<Entity_Step1> returnlist = sqlite.queryStep1Data();
-        if( returnlist.size()!=0)
+    qDebug()<<"Step2_3::ui";
+    ui->setupUi(this);
+    Sqlite sqlite = * new Sqlite();
+    sqlite.connect();
+    vector<Entity_Step1> returnlist = sqlite.queryStep1Data();
+    if( returnlist.size()!=0)
+    {
+        QStringList HStrList;
+        for(int i=0;i<returnlist.size();i++)
         {
-            QStringList HStrList;
-            for(int i=0;i<returnlist.size();i++)
-            {
-                QString valueIndexName = returnlist[i].valueIndexName;
-                HStrList.push_back(valueIndexName);
-            }
-            int HlableCnt = HStrList.count();
-            ui->qTableWidget->setRowCount(HlableCnt);//
-            ui->qTableWidget->setColumnCount(HlableCnt);
-            ui->qTableWidget->setHorizontalHeaderLabels(HStrList);//设置列标签
-            ui->qTableWidget->setVerticalHeaderLabels(HStrList); //设置行标签
+            QString valueIndexName = returnlist[i].valueIndexName;
+            HStrList.push_back(valueIndexName);
         }
-        int RowNum = returnlist.size();
-        int ColumnNum = returnlist.size();
-        setWindowTitle(tr("TableWidget"));//设置对话框的标题
-        ui->qTableWidget->setWindowTitle("QTableWidget");
-        ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
-        ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
-        ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
-        ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
-        ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
-        setStyleSheet(QString::fromUtf8("border:1px solid black"));
-        for(int rows=0;rows<RowNum;rows++)
+        int HlableCnt = HStrList.count();
+        ui->qTableWidget->setRowCount(HlableCnt);//
+        ui->qTableWidget->setColumnCount(HlableCnt);
+        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);//设置列标签
+        ui->qTableWidget->setVerticalHeaderLabels(HStrList); //设置行标签
+    }
+    int RowNum = returnlist.size();
+    int ColumnNum = returnlist.size();
+    setWindowTitle(tr("TableWidget"));//设置对话框的标题
+    ui->qTableWidget->setWindowTitle("QTableWidget");
+    ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
+    ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
+    ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
+    ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
+    ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
+ //   setStyleSheet(QString::fromUtf8("border:1px solid black"));
+    for(int rows=0;rows<RowNum;rows++)
+    {
+        for(int columns=0;columns<ColumnNum;columns++)
         {
-            for(int columns=0;columns<ColumnNum;columns++)
+            if(columns==0)
             {
-                if(columns==0)
-                {
-                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-                }
-                else if(columns==1)
-                {
-                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-                }
-                else if(columns==2)
-                {
-                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-                }
-                else
-                {
-                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-                }
+                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
             }
-        }
-        for(int rows=0;rows<RowNum;rows++)
-        {
-            for(int columns=0;columns<ColumnNum;columns++)
+            else if(columns==1)
             {
-                ui->qTableWidget->setColumnWidth(columns,705/ColumnNum);//hangkuan
-                ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
-                ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
-                ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
-                ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
-                ui->qTableWidget->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
+                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+            }
+            else if(columns==2)
+            {
+                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+            }
+            else
+            {
+                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
             }
         }
-        ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
-        ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
-
-
-        QVector<QComboBox*> Combox;
-
-
-                QComboBox *tmp= new QComboBox();
-                tmp->addItem("关系一");
-                tmp->addItem("关系二");
-                tmp->addItem("关系三");
-                tmp->addItem("关系四");
-                tmp->addItem("关系五");
-                tmp->addItem("关系六");
-                tmp->addItem("关系七");
-                tmp->addItem("关系八");
-                tmp->addItem("关系九");
-                tmp->setCurrentIndex(3) ;
-                Combox.append(tmp);
-
-
-        QVector<QWidget*> ThreeCombox;
-        int ss=0;
-        for(int i=0;i<ColumnNum*RowNum;i++)
+    }
+    for(int rows=0;rows<RowNum;rows++)
+    {
+        for(int columns=0;columns<ColumnNum;columns++)
         {
-            QWidget *widget1 = new QWidget();
-            widget1->setObjectName(QString::fromUtf8("widget1"));
-            widget1->setGeometry(QRect(10, 8, 101, 31));
-            QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
-            verticalLayout->setSpacing(0);
-            verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-            verticalLayout->setContentsMargins(0, 0, 0, 0);
-           
-                verticalLayout->addWidget(Combox.at(ss));ss++;
-            
-            ThreeCombox.append(widget1);
-        }ss=0;
-
-        int x=0;
-        for (int i=0;i<RowNum;i++) {
-            for(int j=0;j<ColumnNum;j++)
-            {
-                ui->qTableWidget->setCellWidget(i,j,ThreeCombox.at(x));
-                x++;
-            }
+            ui->qTableWidget->setColumnWidth(columns,705/ColumnNum);//hangkuan
+            ui->qTableWidget->setRowHeight(rows,335/RowNum);//列宽
+            ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
+            ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
+            ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
+            ui->qTableWidget->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
         }
-        x=0;
+    }
+    ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
+    ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
+
+
+    QVector<QComboBox*> Combox;
+    for(int i=0;i<ColumnNum*RowNum*2;i++)
+    {
+
+            QComboBox *tmp= new QComboBox();
+            tmp->addItem("关系一");
+            tmp->addItem("关系二");
+            tmp->addItem("关系三");
+            tmp->addItem("关系四");
+            tmp->addItem("关系五");
+            tmp->addItem("关系六");
+            tmp->addItem("关系七");
+            tmp->setCurrentIndex(3) ;
+            Combox.append(tmp);
+
+    }
+    QVector<QWidget*> ThreeCombox;
+    int ss=0;
+    for(int i=0;i<ColumnNum*RowNum;i++)
+    {
+        QWidget *widget1 = new QWidget();
+        widget1->setObjectName(QString::fromUtf8("widget1"));
+        widget1->setGeometry(QRect(10, 8, 101, 31));
+        QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
+        verticalLayout->setSpacing(0);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+
+            verticalLayout->addWidget(Combox.at(ss));ss++;
+
+        ThreeCombox.append(widget1);
+    }ss=0;
+
+    int x=0;
+    for (int i=0;i<RowNum;i++) {
+        for(int j=0;j<ColumnNum;j++)
+        {
+            ui->qTableWidget->setCellWidget(i,j,ThreeCombox.at(x));
+            x++;
+        }
+    }
+    x=0;
 }
 
 Step2_3::~Step2_3()
@@ -179,7 +179,7 @@ void Step2_3::on_pushButton_3_clicked()
 void Step2_3::on_pushButton_4_clicked()
 {
     QMessageBox::StandardButton rb = QMessageBox::information(this, "warning", "从excel文件中导入数据将会覆盖之前所有内容，\n确定导入吗？",
-                             QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
     if(rb == QMessageBox::Yes)
     {

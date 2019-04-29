@@ -6,206 +6,236 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1445</width>
-    <height>965</height>
+    <width>700</width>
+    <height>500</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>500</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QStackedWidget" name="stackedWidget">
-   <property name="geometry">
-    <rect>
-     <x>725</x>
-     <y>0</y>
-     <width>720</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <widget class="QWidget" name="page"/>
-   <widget class="QWidget" name="page_2"/>
-  </widget>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>720</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>430</y>
-      <width>302</width>
-      <height>47</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei UI</family>
-      <pointsize>9</pointsize>
-      <stylestrategy>PreferAntialias</stylestrategy>
-     </font>
-    </property>
-    <property name="text">
-     <string>Step10 生成全局质量参数的配置方案</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>450</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>显示</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>450</y>
-      <width>69</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>Step1</string>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="6,5">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="6,5">
+     <item>
+      <widget class="QWidget" name="widget" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>200</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QWidget" name="widget_2" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">image: url(:/image/back.png);</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QComboBox" name="comboBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>Step1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Step2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Step3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Step4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Step5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Step6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Step7</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Step8</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Step9</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="text">
+             <string>显示</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QStackedWidget" name="stackedWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="page">
+        <layout class="QGridLayout" name="gridLayout" rowstretch="3" columnstretch="2">
+         <item row="0" column="0">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="leftMargin">
+            <number>120</number>
+           </property>
+           <property name="rightMargin">
+            <number>120</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Step10</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_2"/>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step2</string>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>200</height>
+      </size>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step3</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step4</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step5</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step6</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step7</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step8</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step9</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step10</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QComboBox" name="comboBox_2">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>69</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>Step1</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step2</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step3</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step4</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step5</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step6</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step7</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step8</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step9</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Step10</string>
-     </property>
-    </item>
-   </widget>
-  </widget>
-  <widget class="QStackedWidget" name="stackedWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>485</y>
-     <width>1445</width>
-     <height>480</height>
-    </rect>
-   </property>
-   <property name="currentIndex">
-    <number>1</number>
-   </property>
-   <widget class="QWidget" name="page_3"/>
-   <widget class="QWidget" name="page_4"/>
-  </widget>
+     <widget class="QWidget" name="page_3">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>90</number>
+       </property>
+       <property name="rightMargin">
+        <number>90</number>
+       </property>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_4"/>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

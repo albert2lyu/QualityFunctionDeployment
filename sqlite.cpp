@@ -10,7 +10,7 @@ Sqlite::Sqlite()
 
 bool  Sqlite::connect()
 {
-    /*
+
     qDebug()<<"Sqlite::connect";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("QFD.db");
@@ -18,7 +18,7 @@ bool  Sqlite::connect()
     {
         return false;
     }
-    */
+
     return true;
 }
 bool Sqlite::createStep1Table()

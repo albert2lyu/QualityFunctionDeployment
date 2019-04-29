@@ -27,7 +27,7 @@ class Step10 : public QWidget
 
 public:
     explicit Step10(QWidget *parent = nullptr);
-         void paintEvent(QPaintEvent *);
+
     ~Step10();
 private slots:
     void on_pushButton_clicked();
@@ -37,7 +37,7 @@ private slots:
 
 
 
-    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void comboBox_activated(const QString &arg1);
 
 private:
     Ui::Step10 *ui;

@@ -91,7 +91,8 @@ SOURCES += \
     step9_4.cpp \
     entity_step9_2.cpp \
     entity_step9_3.cpp \
-    entity_step9_4.cpp
+    entity_step9_4.cpp \
+    initialize_db.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -162,7 +163,8 @@ HEADERS += \
     step9_4.h \
     entity_step9_2.h \
     entity_step9_3.h \
-    entity_step9_4.h
+    entity_step9_4.h \
+    initialize_db.h
 
 FORMS += \
     mainwindow.ui \
@@ -225,20 +227,20 @@ DEPENDPATH += $$PWD/include
 
 
 # .h文件搜索路径D:\gitqfd\test1\includex
-INCLUDEPATH+=$$quote(D:/Program Files/MATLAB/R2016a/extern/include)
-INCLUDEPATH+=$$quote(D:/Program Files/MATLAB/R2016a/extern/include/Win64)
+INCLUDEPATH+=$$PWD/include/extern/include/
+INCLUDEPATH+=$$PWD/include/extern/include/
 
 
 # 用到的MATLAB 的.lib库文件 及其搜索路径
-INCLUDEPATH+=$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft)
-DEPENDPATH +=$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft)
+INCLUDEPATH+=$$PWD/include/extern/lib/win64/microsoft
+DEPENDPATH +=$$PWD/include/extern/lib/win64/microsoft
 
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -llibmex
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -llibmx
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -llibmat
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -llibeng
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -lmclmcr
-LIBS+=-L$$quote(D:/Program Files/MATLAB/R2016a/extern/lib/win64/microsoft) -lmclmcrrt
+LIBS+=-L$$PWD/include/extern/lib/win64/microsoft -llibmex
+LIBS+=-L$$PWD/include/extern/lib/win64/microsoft -llibmx
+LIBS+=-L$$PWD/include/extern/lib/win64/microsoft -llibmat
+LIBS+=-L$$PWD/include/extern/lib/win64/microsoft -llibeng
+LIBS+=-L$$PWD/include/extern/lib/win64/microsoft -lmclmcr
+LIBS+=-L$$PWD/include/extern/lib/win64/microsoft -lmclmcrrt
 
 
 
@@ -256,3 +258,6 @@ win32: LIBS += -L$$PWD/include/ -lmatStep67810
 
 INCLUDEPATH += $$PWD/include
 DEPENDPATH += $$PWD/include
+
+RESOURCES += \
+    qfd.qrc

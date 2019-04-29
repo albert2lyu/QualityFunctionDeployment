@@ -4,9 +4,10 @@
 #include <QWidget>
 #include "Step1_1.h"
 #include "Step1_2.h"
-#include "Step1Data.h"
+#include "step1data.h"
 #include<QPainter>
 #include<QPen>
+#include "initialize_db.h"
 namespace Ui {
 class Step1;
 }
@@ -17,7 +18,7 @@ class Step1 : public QWidget
 
 public:
     explicit Step1(QWidget *parent = nullptr);
-    void paintEvent(QPaintEvent *);
+    Initialize_DB initialize_DB;
     ~Step1();
 private slots:
     void on_pushButton_clicked();

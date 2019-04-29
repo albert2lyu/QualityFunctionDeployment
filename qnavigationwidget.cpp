@@ -11,7 +11,7 @@ QNavigationWidget::QNavigationWidget(QWidget *parent) : QWidget(parent)
     currentIndex2 = 0;
 
     setMouseTracking(true);
-    setFixedWidth(150);
+    setFixedWidth(80);
 }
 
 QNavigationWidget::~QNavigationWidget()
@@ -94,11 +94,9 @@ void QNavigationWidget::paintEvent(QPaintEvent *)
 
 void QNavigationWidget::mouseMoveEvent(QMouseEvent *e)
 {
-    QPainter painter(this);
+
     if (e->y() / rowHeight < listItems.count()) {
         currentIndex2 = e->y() / rowHeight;
-
-        qDebug("%d",currentIndex2);
         update();
     }
 }
@@ -114,5 +112,9 @@ void QNavigationWidget::mousePressEvent(QMouseEvent *e)
         update();
     }
 }
+void QNavigationWidget::resizeEvent(QResizeEvent *event)
+{
+    QWidget::resizeEvent(event);
 
+}
 

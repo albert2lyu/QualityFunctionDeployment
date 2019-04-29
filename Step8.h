@@ -25,13 +25,13 @@ class Step8 : public QWidget
 
 public:
     explicit Step8(QWidget *parent = nullptr);
-         void paintEvent(QPaintEvent *);
+
     ~Step8();
 private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
-    void on_comboBox_activated(const QString &arg1);
+    void comboBox_activated(const QString &arg1);
 
 private:
     Ui::Step8 *ui;

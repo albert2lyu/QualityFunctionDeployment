@@ -57,7 +57,7 @@ Step7_1::Step7_1(QWidget *parent) :
     //ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);//设置表格选择方式：设置表格为整列选中
     ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
     ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
-    setStyleSheet(QString::fromUtf8("border:1px solid black"));
+   // setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
     for(int rows=0;rows<RowNum;rows++)
     {

@@ -49,7 +49,8 @@ private:
     Step9 *Step9_Page;
     Step10 *Step10_Page;
     QStandardItemModel *standardItemModel;//声明model
-
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 };
 

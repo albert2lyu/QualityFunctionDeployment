@@ -28,7 +28,7 @@ class Step2 : public QWidget
 
 public:
     explicit Step2(QWidget *parent = nullptr);
-    void paintEvent(QPaintEvent *);
+
     ~Step2();
 
 private slots:
@@ -36,7 +36,7 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
         void on_pushButton_4_clicked();
-        void on_comboBox_activated(const QString &arg1);
+        void comboBox_activated(const QString &arg1);
 
 private:
     Ui::Step2 *ui;
