@@ -13,8 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
     QStackedWidget *stackedWidget=new QStackedWidget(this);
     navigationWidget = new QNavigationWidget;
   // navigationWidget->setFixedWidth(navigationWidget->width());

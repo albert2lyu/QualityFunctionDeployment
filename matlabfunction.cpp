@@ -81,7 +81,6 @@ bool MatlabFunction::matBasi(QTableWidget *tableWidget)
         double * pr = mxGetPr(matrixC);
         qDebug()<<"MatlabFunction::mxGetM"<<mxGetM(matrixC);
         Sqlite sqlite ;
-        sqlite.connect();
         sqlite.deleteStep2Table();
         for(int i = 0;i<tableWidget->horizontalHeader()->count();i++)
         {
@@ -112,7 +111,6 @@ bool MatlabFunction::mlfStep3(QTableWidget *tableWidget)
     }
 
     Sqlite sqlite ;
-    sqlite.connect();
     ////////////
     /// \brief Entity_Step3_2 returnList 竞争性分析矩::输入,n列,行数不确定C3:
     ///
@@ -234,7 +232,6 @@ bool MatlabFunction::matStep6(QTableWidget *tableWidget)
         qDebug()<<"MatlabFunction::pcom_matStep67810Initialize";
     }
     Sqlite sqlite ;
-    sqlite.connect();
     /*
 函数：Q=matStep6(step51,step61,step621,step622)
 其中：
@@ -429,7 +426,6 @@ bool MatlabFunction::matStep7(QTableWidget *tableWidget)
         qDebug()<<"MatlabFunction::pcom_matStep67810Initialize";
     }
     Sqlite sqlite ;
-    sqlite.connect();
 
     vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
     if(returnList5.size() != 0)
@@ -743,7 +739,6 @@ bool MatlabFunction::matStep8(QTableWidget *tableWidget)
         qDebug()<<"MatlabFunction::pcom_matStep67810Initialize";
     }
     Sqlite sqlite ;
-    sqlite.connect();
 /*
 step8
 step8:
@@ -822,7 +817,6 @@ Q：一行，列数等于质量参数的数目
 
                     qDebug()<<"MatlabFunction::mxGetM"<<mxGetM(matrixResult);
                     Sqlite sqlite ;
-                    sqlite.connect();
                     sqlite.deleteStep8Data();
                     for(int i = 0;i<returnList7_3col/2-1;i++)
                     {
@@ -876,7 +870,6 @@ bool MatlabFunction::mlfStep9(QTableWidget *tableWidget)
     }
 
     Sqlite sqlite ;
-    sqlite.connect();
     ////////////
     /// \brief Entity_Step3_2 returnList 竞争性分析矩::输入,n列,行数不确定C3:
     ///
@@ -1016,7 +1009,6 @@ bool MatlabFunction::matStep10(QTableWidget *tableWidget)
         qDebug()<<"MatlabFunction::pcom_matStep67810Initialize";
     }
     Sqlite sqlite ;
-    sqlite.connect();
 /*
 step10
 函数：Q=matStep10(step11，step3out，step51,step52,step621，step622，step6out，step7out，step721，step722)

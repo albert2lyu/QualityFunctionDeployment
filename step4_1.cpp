@@ -20,13 +20,12 @@ Step4_1::Step4_1(QWidget *parent) :
     ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
 
     Sqlite sqlite;
-    sqlite.connect();
     vector<Entity_Step4_1>returnList = sqlite.queryStep4_1Data();
     qDebug()<<"Step4_1::ui::returnList.size()::"<<returnList.size();
     if(returnList.size()!= 0 )
     {
-        int tableColumn = 4;
-        int RowNum= (int)(returnList.size()/4)+1;
+        int tableColumn = 2;
+        int RowNum= (int)(returnList.size()/2);
         ui->qTableWidget->setRowCount(RowNum);
         ui->qTableWidget->setColumnCount(tableColumn);
         QVector<QWidget*> RadioButton;

@@ -100,13 +100,27 @@ border-color: rgb(0, 0, 0);border:1px;</string>
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="text">
+             <string>加载数据库</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>初始化数据库</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>10</width>
               <height>20</height>
              </size>
             </property>

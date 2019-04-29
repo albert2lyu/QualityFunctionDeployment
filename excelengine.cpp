@@ -420,7 +420,6 @@ bool QExcelEngine::Step7QueryData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step1QueryData";
     Sqlite sqlite;
-    sqlite.connect();
     vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();
     vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();
     int  RowNum=returnList5.size()*2+2;
@@ -468,8 +467,6 @@ bool QExcelEngine::Step6QueryData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step1QueryData";
     Sqlite sqlite;
-    sqlite.connect();
-
     vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();
     int  RowNum=returnList5.size(),ColumnNum=returnList5.size()+1;
     vector<Entity_Step6_3>returnList = sqlite.queryStep6_3Data();
@@ -563,7 +560,6 @@ bool QExcelEngine::Step2SaveData2(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step2SaveData2";
     Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
     for(int i = 0;i<tableWidget->horizontalHeader()->count();i++)
     {
         for(int j =0;j<tableWidget->verticalHeader()->count();j++)
@@ -583,8 +579,7 @@ bool QExcelEngine::Step2SaveData2(QTableWidget *tableWidget)
 bool QExcelEngine::Step3_2SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step3_2SaveData";
-    Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
+    Sqlite sqlite = * new Sqlite();;
     sqlite.deleteStep3_2Data();
     int tableR = tableWidget->rowCount();
     int tableC = tableWidget->columnCount();
@@ -606,7 +601,6 @@ bool QExcelEngine::Step3_3SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step3_3SaveData";
     Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
     sqlite.deleteStep3_3Data();
     int tableR = tableWidget->rowCount();
     qDebug()<<"QExcelEngine::Step3_3SaveData::tableR"<<tableR;
@@ -630,7 +624,6 @@ bool QExcelEngine::Step3_4SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step3_4SaveData";
     Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
     sqlite.deleteStep3_4Data();
     int tableR = tableWidget->rowCount();
     qDebug()<<"QExcelEngine::Step3_4SaveData::tableR"<<tableR;
@@ -658,7 +651,6 @@ bool QExcelEngine::Step4_1SaveData(QTableWidget *tableWidget)
     int col = tableWidget->columnCount();
     qDebug()<<"col::"<<col;
     Sqlite sqlite;
-    sqlite.connect();
     sqlite.deleteStep4_1Data();
     for(int i =0;i<row;i++)
     {
@@ -687,7 +679,6 @@ bool QExcelEngine::Step4_2SaveData(QTableWidget *tableWidget,QTableWidget *table
     int col = tableWidget->columnCount();
     int row2 = tableWidget2->rowCount();
     Sqlite sqlite;
-    sqlite.connect();
     sqlite.deleteStep4_2Data();
     for(int i =0;i<row;i++)
     {
@@ -720,7 +711,6 @@ bool QExcelEngine::Step5SaveData(QTableWidget *tableWidget)
     qDebug()<<"QExcelEngine::Step5SaveData";
     int row = tableWidget->rowCount();
     Sqlite sqlite;
-    sqlite.connect();
     sqlite.deleteStep5Data();
     /*
     QString qualityParameterName;
@@ -751,7 +741,6 @@ bool QExcelEngine::Step6_1SaveData(QTableWidget *tableWidget)
     qDebug()<<"QExcelEngine::Step6_1SaveData";
     int row = tableWidget->rowCount();
     Sqlite sqlite;
-    sqlite.connect();
     sqlite.deleteStep6_1Data();
     for(int i=0;i<tableWidget->horizontalHeader()->count();i++)
     {
@@ -771,7 +760,6 @@ bool QExcelEngine::Step6_2SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step6_2SaveData";
     Sqlite sqlite;
-    sqlite.connect();
     sqlite.deleteStep6_2Data();
     int row = tableWidget->rowCount();
     int col = tableWidget->columnCount();
@@ -833,7 +821,6 @@ bool QExcelEngine::Step7_1SaveData(QTableWidget *tableWidget)
     int column = tableWidget->horizontalHeader()->count();
     qDebug()<<row<<column;
     Sqlite sqlite;
-    sqlite.connect();
     sqlite.deleteStep7_1Data();
     vector<Entity_Step1>returnList1 = sqlite.queryStep1Data();//价值
     vector<Entity_Step4_2>returnList5 = sqlite.queryStep4_2Data();//质量
@@ -861,7 +848,6 @@ bool QExcelEngine::Step7_2SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step7_2SaveData";
     Sqlite sqlite;
-    sqlite.connect();
     sqlite.deleteStep7_2Data();
     int row = tableWidget->rowCount();
     int col = tableWidget->columnCount();
@@ -900,7 +886,6 @@ bool QExcelEngine::Step8QueryData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step8QueryData";
     Sqlite sqlite;
-    sqlite.connect();
     vector<Entity_Step8>returnList8 = sqlite.queryStep8Data();
     //先把table的内容清空
     int tableColumn = tableWidget->columnCount();
@@ -925,7 +910,6 @@ bool QExcelEngine::Step9_2SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step9_2SaveData";
     Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
     sqlite.deleteStep9_2Data();
     int tableR = tableWidget->rowCount();
     int tableC = tableWidget->columnCount();
@@ -947,7 +931,6 @@ bool QExcelEngine::Step9_3SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step9_3SaveData";
     Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
     sqlite.deleteStep9_3Data();
     int tableR = tableWidget->rowCount();
     qDebug()<<"QExcelEngine::Step9_3SaveData::tableR"<<tableR;
@@ -971,7 +954,6 @@ bool QExcelEngine::Step9_4SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step9_4SaveData";
     Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
     sqlite.deleteStep9_4Data();
     int tableR = tableWidget->rowCount();
     qDebug()<<"QExcelEngine::Step9_4SaveData::tableR"<<tableR;
@@ -995,7 +977,6 @@ bool QExcelEngine::Step10QueryData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step10QueryData";
     Sqlite sqlite;
-    sqlite.connect();
     vector<Entity_Step10>returnList10 = sqlite.queryStep10Data();
     //先把table的内容清空
     int  returnList10Row = (int)returnList10[(returnList10.size()-1)].QualityParameterName.toInt()+1;

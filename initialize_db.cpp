@@ -4,19 +4,44 @@
 #include <QFileDialog>
 #include <QAxObject>
 #include "sqlite.h"
+#include <QDateTime>
 #include "entity_step1.h"
+#include "entity_step2.h"
+#include "entity_step3_2.h"
+#include "entity_step3_3.h"
+#include "entity_step3_4.h"
+#include "entity_step4_1.h"
+#include "entity_step4_2.h"
+#include "entity_step5.h"
+#include "entity_step6_1.h"
+#include "entity_step6_2.h"
+#include "entity_step7_1.h"
+#include "entity_step7_2.h"
+#include "entity_step7_3.h"
+#include "entity_step6_3.h"
+#include "entity_step8.h"
+#include "entity_step9_2.h"
+#include "entity_step9_3.h"
+#include "entity_step9_4.h"
+#include "entity_step10.h"
 Initialize_DB::Initialize_DB()
 {
 
 }
 bool Initialize_DB::Initialize_QFD(QString dbName)
 {
+    QDateTime current_date_time =QDateTime::currentDateTime();
+    QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd").
+                                trimmed().replace(".","").replace(" ","").replace(":","")+".db";
+    qDebug()<<"Initialize_QFD::currentDate"<<current_date;
+
     qDebug()<<"Initialize_DB::Initialize_QFD";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("xxxxx.db");
+    db.setDatabaseName(current_date);
     db.open();
     if(!db.open())
     {
+        qDebug() << "QSqlDatabase not open";
         return false;
     }
     QSqlQuery query;
@@ -113,55 +138,128 @@ bool Initialize_DB::Initialize_QFD(QString dbName)
 }
 bool Initialize_DB::exportDatabase(QString xxx)
 {
-       qDebug()<<"Initialize_DB::exportDatabase";
-       QString filePath ="C:/Users/Administrator/Desktop/xxxxxx.xlsx";
-       QAxObject *work_book = NULL;
-       QAxObject excel("Excel.Application");
-       excel.setProperty("Visible", false);
-       excel.setProperty("DisplayAlerts", false);//不显示任何警告信息
-       QAxObject *work_books = excel.querySubObject("WorkBooks");
-       QFile xlsFile(filePath);
-       if (xlsFile.exists())
-       {
-           work_book = work_books->querySubObject("Open(const QString &)", filePath);
-       }
-       else
-       {
-             work_books->dynamicCall("Add");
-             work_book = excel.querySubObject("ActiveWorkBook");
-       }
+    qDebug()<<"Initialize_DB::exportDatabase";
 
-       QAxObject *work_sheets = work_book->querySubObject("Sheets");
-       QAxObject *first_sheet = work_sheets->querySubObject("Item(int)", 1);
+    QAxObject *pApplication = nullptr;
+    QAxObject *pWorkBooks = nullptr;
+    QAxObject *pSheets = nullptr;
+    QAxObject *pSheet = nullptr;
+    QAxObject *pWorkBook = nullptr;
+    QString fileName = QFileDialog::getSaveFileName(NULL,"Save File",".","Excel File(*.xls)");
+    pApplication = new QAxObject();
+    pApplication->setControl("Excel.Application");//连接exl控件
+    pApplication->dynamicCall("SetVisible(bool)",false);//不显示窗体
+    pApplication->setProperty("DisplayAlerts",false);//不显示警告信息
+    pWorkBooks = pApplication->querySubObject("Workbooks");//获取工作薄合集
+    pWorkBooks->dynamicCall("Add");//新建
+    pWorkBook = pApplication->querySubObject("ActiveWorkBook");//获取当前工作薄合集
+    //pWorkBook->dynamicCall("SaveAs(const QString&)",fileName);
+    pSheets = pWorkBook->querySubObject("Sheets");//获取工作表集合
+    QAxObject* newSheet = pSheets->querySubObject("Add()");
+    pSheet = pSheets->querySubObject("Item(int)",1);//获取工作表集合的工作表1，即sheet1
+        Sqlite sqlite ;
+        vector<Entity_Step1> returnlist = sqlite.queryStep1Data();
+        for(int i =0;i<returnlist.size();i++)
+        {
+            QAxObject *cell = pSheet->querySubObject("Cells(int,int)",  i+1,1 );
+            cell->setProperty("Value", returnlist[i].valueIndexName);
+            QAxObject *cell2 = pSheet->querySubObject("Cells(int,int)", i+1, 2);
+            cell2->setProperty("Value", returnlist[i].valueOperator);
+            QAxObject *cell3 = pSheet->querySubObject("Cells(int,int)", i+1, 3);
+            cell3->setProperty("Value", returnlist[i].expectations);
+            QAxObject *cell4 = pSheet->querySubObject("Cells(int,int)", i+1, 4);
+            cell4->setProperty("Value", returnlist[i].stakeholders);
+        }
+        qDebug()<<"queryStep1Data over";
+        //////////////////////////
+        /// \brief sheet2
+        ///
+        QAxObject *sheet2 = pSheets->querySubObject("Item(int)", 2);
+        vector<Entity_Step2> returnlist2 = sqlite.queryStep2Data();
+        for(int i=0;i<returnlist2.size();i++)
+        {
+              QAxObject *cell = sheet2->querySubObject("Cells(int,int)",  i+1,1 );
+              cell->setProperty("Value", returnlist2[i].valueExpectation);
+              QAxObject *cell2 = sheet2->querySubObject("Cells(int,int)",  i+1,2 );
+              cell2->setProperty("Value", returnlist2[i].relativeImportanceRating);
+        }
+        qDebug()<<"queryStep2Data over";
+        ///////////////////////
+        /// \brief sheet3
+        ///
+        QAxObject *sheet3 = pSheets->querySubObject("Item(int)", 3);
+        vector<Entity_Step3_2> returnlist32 = sqlite.queryStep3_2Data();
+        for(int i=0;i<returnlist32.size();i++)
+        {
+              QAxObject *cell = sheet3->querySubObject("Cells(int,int)",  i+1,1 );
+              cell->setProperty("Value", returnlist32[i].valueExpectationRow);
+              QAxObject *cell2 = sheet3->querySubObject("Cells(int,int)",  i+1,2 );
+              cell2->setProperty("Value", returnlist32[i].valueExpectationRank);
+              QAxObject *cell3 = sheet3->querySubObject("Cells(int,int)",  i+1,3 );
+              cell2->setProperty("Value", returnlist32[i].competitiveEvaluation);
+        }
+         qDebug()<<"queryStep3_2Data over";
+         /*
+         //////////////////////
+         /// \brief sheet4
+         ///
+        QAxObject *sheet4 = pSheets->querySubObject("Item(int)", 4);
+        vector<Entity_Step3_3> returnlist33 = sqlite.queryStep3_3Data();
+        for(int i=0;i<returnlist33.size();i++)
+        {
+              QAxObject *cell = sheet4->querySubObject("Cells(int,int)",  i+1,1 );
+              cell->setProperty("Value", returnlist33[i].valueExpectationRow);
+              QAxObject *cell2 = sheet4->querySubObject("Cells(int,int)",  i+1,2 );
+              cell2->setProperty("Value", returnlist33[i].valueExpectationRank);
+              QAxObject *cell3 = sheet4->querySubObject("Cells(int,int)",  i+1,3 );
+              cell2->setProperty("Value", returnlist33[i].expectedRank);
+        }
+        qDebug()<<"queryStep3_3Data over";
+        ///////////////////////
+        /// \brief sheet5
+        ///
+        QAxObject *sheet5 = pSheets->querySubObject("Item(int)", 5);
+        vector<Entity_Step3_4> returnlist34 = sqlite.queryStep3_4Data();
+        for(int i=0;i<returnlist34.size();i++)
+        {
+              QAxObject *cell = sheet5->querySubObject("Cells(int,int)",  i+1,1 );
+              cell->setProperty("Value", returnlist34[i].valueExpectationRow);
+              QAxObject *cell2 = sheet5->querySubObject("Cells(int,int)",  i+1,2 );
+              cell2->setProperty("Value", returnlist34[i].valueExpectationRank);
+              QAxObject *cell3 = sheet5->querySubObject("Cells(int,int)",  i+1,3 );
+              cell2->setProperty("Value", returnlist34[i].criticality);
+        }
+         qDebug()<<"queryStep3_4Data over";
+         ////////////////////////
+         /// \brief sheet6
+         ///
+        QAxObject *sheet6 = pSheets->querySubObject("Item(int)", 6);
+        vector<Entity_Step4_1> returnlist41 = sqlite.queryStep4_1Data();
+        for(int i=0;i<returnlist41.size();i++)
+        {
+              QAxObject *cell = sheet6->querySubObject("Cells(int,int)",  i+1,1 );
+              cell->setProperty("Value", returnlist41[i].QualityParameterName);
+        }
+        qDebug()<<"queryStep4_1Data over";
+        //////////////////////////
+        /// \brief sheet7
+        ///
+        QAxObject *sheet7 = pSheets->querySubObject("Item(int)", 7);
+        vector<Entity_Step4_2> returnlist42= sqlite.queryStep4_2Data();
+        for(int i=0;i<returnlist41.size();i++)
+        {
+              QAxObject *cell = sheet7->querySubObject("Cells(int,int)",  i+1,1 );
+              cell->setProperty("Value", returnlist42[i].chooseQualityParameterName);
+        }
+        qDebug()<<"queryStep4_2Data over";
 
-       Sqlite sqlite ;
-       vector<Entity_Step1> returnlist = sqlite.queryStep1Data();
-       qDebug()<<"returnlist.size()"<<returnlist.size();
-       for(int i =0;i<returnlist.size();i++)
-       {
-           QAxObject *cell = first_sheet->querySubObject("Cells(int,int)",  i+1,1 );
-           cell->setProperty("Value", returnlist[i].valueIndexName);
-           QAxObject *cell2 = first_sheet->querySubObject("Cells(int,int)", i+1, 2);
-           cell2->setProperty("Value", returnlist[i].valueOperator);
-           QAxObject *cell3 = first_sheet->querySubObject("Cells(int,int)", i+1, 3);
-           cell3->setProperty("Value", returnlist[i].expectations);
-           QAxObject *cell4 = first_sheet->querySubObject("Cells(int,int)", i+1, 4);
-           cell4->setProperty("Value", returnlist[i].stakeholders);
-       }
-       QAxObject *sheet2 = work_sheets->querySubObject("Item(int)", 2);
-       vector<Entity_Step2> returnlist2 = sqlite.queryStep2Data();
-       qDebug()<<"returnlist2.size()"<<returnlist2.size();
-       for(int i=0;i<returnlist2.size();i++)
-       {
-             QAxObject *cell = sheet2->querySubObject("Cells(int,int)",  i+1,1 );
-             cell->setProperty("Value", returnlist2[i].valueExpectation);
-             QAxObject *cell2 = sheet2->querySubObject("Cells(int,int)",  i+1,2 );
-             cell2->setProperty("Value", returnlist2[i].relativeImportanceRating);
-       }
 
-       work_book->dynamicCall("SaveAs(const QString &)", QDir::toNativeSeparators(filePath)); //转换路径不可少，否则会崩溃
-       work_book->dynamicCall("Close(Boolean)", false);  //关闭文件
-       excel.dynamicCall("Quit(void)");  //退出
-       return true;
+*/
+    pWorkBook->dynamicCall("SaveAs(const QString&)",QDir::toNativeSeparators(fileName));//保存至filepath，注意一定要用QDir::toNativeSeparators将路径中的"/"转换为"\"，不然一定保存不了。
+    pWorkBook->dynamicCall("Close()");//关闭工作簿
+    pApplication->dynamicCall("Quit()");//关闭excel
+
+    return true;
 }
+
 
