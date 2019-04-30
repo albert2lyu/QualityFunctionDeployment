@@ -72,12 +72,11 @@ public:
     vector<Entity_Step7_1>queryStep7_1Data();
     vector<Entity_Step7_2>queryStep7_2Data();
     vector<Entity_Step7_3>queryStep7_3Data();
-    vector<Entity_Step8>queryStep8Data();
+    vector<Entity_Step8>  queryStep8Data();
     vector<Entity_Step9_2>queryStep9_2Data();
     vector<Entity_Step9_3>queryStep9_3Data();
     vector<Entity_Step9_4>queryStep9_4Data();
-
- vector<Entity_Step10>queryStep10Data();
+    vector<Entity_Step10> queryStep10Data();
     bool deleteStep1Table();
     bool deleteStep1Data();
     bool deleteStep2Table();
