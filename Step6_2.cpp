@@ -50,12 +50,12 @@ Step6_2::Step6_2(QWidget *parent) :
             if(i%2==0)
             {
                 QComboBox *tmp= new QComboBox();
-                tmp->addItem("类型一");
-                tmp->addItem("类型二");
-                tmp->addItem("类型三");
-                tmp->addItem("类型四");
-                tmp->addItem("类型五");
-                tmp->addItem("类型六");
+                tmp->addItem("积极正相关");
+                tmp->addItem("消极正相关");
+                tmp->addItem("积极负相关");
+                tmp->addItem("消极负相关");
+                tmp->addItem("正相关");
+                tmp->addItem("负相关");
                 tmp->addItem("无关");
                 tmp->setCurrentIndex(6) ;
                 Combox.append(tmp);}

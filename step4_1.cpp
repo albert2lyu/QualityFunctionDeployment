@@ -150,7 +150,7 @@ void Step4_1::on_pushButton_4_clicked()
             QMessageBox::information(this, "excel提示", "文件打开失败");
             return;
         }
-        excelEngine.ReadDataToTable(ui->qTableWidget);
+        excelEngine.ReadDataToTable(ui->qTableWidget_2);
         excelEngine.Close();
         QMessageBox::information(this, "excel提示", "导入成功");
     }

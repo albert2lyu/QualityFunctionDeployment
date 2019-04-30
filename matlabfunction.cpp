@@ -50,24 +50,38 @@ bool MatlabFunction::matBasi(QTableWidget *tableWidget)
             QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
             QString temp=rad.at(0)->currentText();
             double temps;
-            if(temp=="关系一")
+            if(temp=="远不如")
             {
 
                  temps =0.1;
-            } else  if(temp=="关系二"){ temps =0.138;}
-            else  if(temp=="关系三"){ temps =0.325;}
-            else  if(temp=="关系四"){ temps =0.439;}
-            else  if(temp=="关系五"){ temps =0.5;}
-            else  if(temp=="关系六"){ temps =0.561;}
-            else  if(temp=="关系七"){ temps =0.675;}
-            else  if(temp=="关系八"){ temps =0.862;}
+            } else  if(temp=="明显差于"){ temps =0.138;}
+            else  if(temp=="差于"){ temps =0.325;}
+            else  if(temp=="略差于"){ temps =0.439;}
+            else  if(temp=="同等重要"){ temps =0.5;}
+            else  if(temp=="略重要于"){ temps =0.561;}
+            else  if(temp=="重要于"){ temps =0.675;}
+            else  if(temp=="明显重要于"){ temps =0.862;}
             else { temps =0.9;}
             arrayA[i][j]=temps;
         }
     }
-    //初始化matrixA
+    double arrayA_OVER [rowCntA*colCntA];
+    int arrayA_row_flag=0;
+    int arrayA_col_flag=0;
+    for(int i =0;i<rowCntA*colCntA;i++)
+    {
+        arrayA_OVER[i]=arrayA[arrayA_row_flag][arrayA_col_flag];
+        arrayA_row_flag++;
+        if(arrayA_row_flag == rowCntA)
+        {
+            arrayA_row_flag=0;
+            arrayA_col_flag++;
+        }
+    }
+
+    //初始化matrixA  tmp->addItem("远不如");
     mxArray *matrixA = mxCreateDoubleMatrix(rowCntA,colCntA,mxREAL);//定义数组，行，列，double类型
-    memcpy((void *)mxGetPr(matrixA),(void *)arrayA,sizeof(arrayA));
+    memcpy((void *)mxGetPr(matrixA),(void *)arrayA_OVER,sizeof(arrayA_OVER));
     //初始化matrixC
     int   rowCntC=rowCntA;
     int   colCntC=1;
@@ -130,6 +144,19 @@ bool MatlabFunction::mlfStep3(QTableWidget *tableWidget)
             int step3_2MatrixCol = (int) returnList[i].valueExpectationRank.toInt();
             step3_2Matrix[step3_2MatrixRow][step3_2MatrixCol] = (double)returnList[i].competitiveEvaluation.toDouble();
         }
+        double step3_2_OVER [row*col];
+        int step3_2_row_flag=0;
+        int step3_2_col_flag=0;
+        for(int i =0;i<row*col;i++)
+        {
+            step3_2_OVER[i]=step3_2Matrix[step3_2_row_flag][step3_2_col_flag];
+            step3_2_row_flag++;
+            if(step3_2_row_flag == row)
+            {
+                step3_2_row_flag=0;
+                step3_2_col_flag++;
+            }
+        }
 
         //////
         /// \brief Entity_Step3_3 returnList::目标等级,1*n矩阵
@@ -182,7 +209,7 @@ bool MatlabFunction::mlfStep3(QTableWidget *tableWidget)
                 memcpy((void *)mxGetPr(matrixA),(void *)step3_1Matrix,sizeof(step3_1Matrix));
 
                 mxArray *matrixB = mxCreateDoubleMatrix(row,col,mxREAL);
-                memcpy((void *)mxGetPr(matrixB),(void *)step3_2Matrix,sizeof(step3_2Matrix));
+                memcpy((void *)mxGetPr(matrixB),(void *)step3_2_OVER,sizeof(step3_2_OVER));
 
                 mxArray *matrixC = mxCreateDoubleMatrix(entity_Step3_3_row,entity_Step3_3_col,mxREAL);
                 memcpy((void *)mxGetPr(matrixC),(void *)step3_3Matrix,sizeof(step3_3Matrix));
@@ -896,6 +923,19 @@ bool MatlabFunction::mlfStep9(QTableWidget *tableWidget)
             int step9_2MatrixCol = (int) returnList[i].valueExpectationRank.toInt();
             step9_2Matrix[step9_2MatrixRow][step9_2MatrixCol] = (double)returnList[i].competitiveEvaluation.toDouble();
         }
+        double step9_2_OVER [row*col];
+        int step9_2_row_flag=0;
+        int step9_2_col_flag=0;
+        for(int i =0;i<row*col;i++)
+        {
+            step9_2_OVER[i]=step9_2Matrix[step9_2_row_flag][step9_2_col_flag];
+            step9_2_row_flag++;
+            if(step9_2_row_flag == row)
+            {
+                step9_2_row_flag=0;
+                step9_2_col_flag++;
+            }
+        }
 //        for(int i =0;i<returnList.size();i++)
 //        {qDebug()<<"step9_1Matrix[i][0]"<<step9_1Matrix[i][0];
 
@@ -960,7 +1000,7 @@ bool MatlabFunction::mlfStep9(QTableWidget *tableWidget)
                for(int i=0;i<(rowCntResult)*(1);i++)
                 {qDebug()<<"matrixA::"<<dr[i];}
                 mxArray *matrixB = mxCreateDoubleMatrix(row,col,mxREAL);
-                memcpy((void *)mxGetPr(matrixB),(void *)step9_2Matrix,sizeof(step9_2Matrix));
+                memcpy((void *)mxGetPr(matrixB),(void *)step9_2_OVER,sizeof(step9_2_OVER));
                 double * ar = mxGetPr(matrixB);
                for(int i=0;i<(row)*(col);i++)
                 {qDebug()<<"matrixB::"<<ar[i];}
@@ -1172,6 +1212,10 @@ step52：一行，若干列，列数与离散型的质量参数数目相同
                             Matrix62_col_flag++;
                         }
                     }
+                    for(int i=0;i<returnList62Row*returnList62col;i++)
+                    {  qDebug()<<"di621ge::"<<Matrix621_OVER[i];
+                        qDebug()<<"di622ge::"<<Matrix622_OVER[i];
+                        }
                     //Matrix621_OVER ==>step621
                     //Matrix622_OVER ==>step622
                     vector<Entity_Step6_3>returnList6_3 = sqlite.queryStep6_3Data();

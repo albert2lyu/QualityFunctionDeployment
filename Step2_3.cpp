@@ -89,15 +89,26 @@ Step2_3::Step2_3(QWidget *parent) :
     {
 
             QComboBox *tmp= new QComboBox();
-            tmp->addItem("关系一");
-            tmp->addItem("关系二");
-            tmp->addItem("关系三");
-            tmp->addItem("关系四");
-            tmp->addItem("关系五");
-            tmp->addItem("关系六");
-            tmp->addItem("关系七");
-            tmp->setCurrentIndex(3) ;
+            tmp->addItem("远不如");
+            tmp->addItem("明显差于");
+            tmp->addItem("差于");
+            tmp->addItem("略差于");
+            tmp->addItem("同等重要");
+            tmp->addItem("略重要于");
+            tmp->addItem("重要于");
+            tmp->addItem("明显重要于");
+            tmp->addItem("远重要于");
+            tmp->setCurrentIndex(4) ;
             Combox.append(tmp);
+          connect(tmp, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=]( int )
+          {QWidget *widget = ui->qTableWidget->cellWidget(i%ui->qTableWidget->rowCount(),i/ui->qTableWidget->rowCount());
+              QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
+              rad.at(0)->setCurrentIndex(8-tmp->currentIndex());
+
+
+
+          });
+
 
     }
     QVector<QWidget*> ThreeCombox;

@@ -787,14 +787,14 @@ bool QExcelEngine::Step6_2SaveData(QTableWidget *tableWidget)
             {
                 QString valueQualityType = rad.at(0)->currentText();
                 QString valueQualityType2;
-                if(valueQualityType=="类型一")
+                if(valueQualityType=="积极正相关")
                 {
                      valueQualityType2 ="1";
-                } else  if(valueQualityType=="类型二"){ valueQualityType2 ="2";}
-                else  if(valueQualityType=="类型三"){ valueQualityType2 ="3";}
-                else  if(valueQualityType=="类型四"){ valueQualityType2 ="4";}
-                else  if(valueQualityType=="类型五"){ valueQualityType2 ="5";}
-                else  if(valueQualityType=="类型六"){ valueQualityType2 ="6";}
+                } else  if(valueQualityType=="消极正相关"){ valueQualityType2 ="2";}
+                else  if(valueQualityType=="消极负相关"){ valueQualityType2 ="3";}
+                else  if(valueQualityType=="积极负相关"){ valueQualityType2 ="4";}
+                else  if(valueQualityType=="正相关"){ valueQualityType2 ="5";}
+                else  if(valueQualityType=="负相关"){ valueQualityType2 ="6";}
                 else { valueQualityType2 ="0";}
                 double BValue = rad.at(1)->currentText().toDouble();
                 sqlite.saveStep6_2Table(QString::number(i),QString::number(j),valueQualityType2,BValue);
@@ -878,15 +878,15 @@ bool QExcelEngine::Step7_2SaveData(QTableWidget *tableWidget)
 
                 QString valueQualityType = rad.at(0)->currentText();
                 QString valueQualityType2;
-                if(valueQualityType=="类型一")
+                if(valueQualityType=="积极正相关")
                 {
 
                    valueQualityType2 ="1";
-                } else  if(valueQualityType=="类型二"){ valueQualityType2 ="2";}
-                else  if(valueQualityType=="类型三"){ valueQualityType2 ="3";}
-                else  if(valueQualityType=="类型四"){ valueQualityType2 ="4";}
-                else  if(valueQualityType=="类型五"){ valueQualityType2 ="5";}
-                else  if(valueQualityType=="类型六"){ valueQualityType2 ="6";}
+                } else  if(valueQualityType=="消极正相关"){ valueQualityType2 ="2";}
+                else  if(valueQualityType=="消极负相关"){ valueQualityType2 ="3";}
+                else  if(valueQualityType=="积极负相关"){ valueQualityType2 ="4";}
+                else  if(valueQualityType=="正相关"){ valueQualityType2 ="5";}
+                else  if(valueQualityType=="负相关"){ valueQualityType2 ="6";}
                 else { valueQualityType2 ="0";}
                 double BValue = rad.at(1)->currentText().toDouble();
                 sqlite.saveStep7_2Table(QString::number(i),QString::number(j),valueQualityType2,BValue);
