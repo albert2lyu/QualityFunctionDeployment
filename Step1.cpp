@@ -54,33 +54,30 @@ void Step1::on_pushButton_4_clicked()
 {
     qDebug()<<"Step1::on_pushButton_4_clicked";
     QFileDialog *fileDialog = new QFileDialog(this);
-    //定义文件对话框标题
-    fileDialog->setWindowTitle(tr("打开图片"));
-    //设置默认文件路径
+    fileDialog->setWindowTitle(tr("打开数据库文件"));
     fileDialog->setDirectory(".");
-    //设置可以选择多个文件,默认为只能选择一个文件QFileDialog::ExistingFiles
     fileDialog->setFileMode(QFileDialog::ExistingFiles);
-    //设置视图模式
     fileDialog->setViewMode(QFileDialog::Detail);
-    //打印所有选择的文件的路径
     QStringList fileNames;
     if(fileDialog->exec())
     {
         fileNames = fileDialog->selectedFiles();
     }
-    QString chooseFileNames =fileNames.at(0);
-    qDebug()<<chooseFileNames<<endl;
-
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("D:/QT_workplace/build-QualityFunctionDeployment-Desktop_Qt_5_12_2_MinGW_64_bit-Debug/xxxxx.db");
-    if(!db.open())
+    if(fileNames.size()!= 0)
     {
-        qDebug()<<"connect false";
+        QString chooseFileNames =fileNames.at(0);
+        qDebug()<<chooseFileNames<<endl;
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName(chooseFileNames);
+        if(!db.open())
+        {
+            qDebug()<<"connect false";
+        }
     }
-
 }
 void Step1::on_pushButton_5_clicked()
 {
     Initialize_DB initialize_DB;
-    initialize_DB.exportDatabase("ssss");
+    initialize_DB.Initialize_QFD("dbname");
+    //initialize_DB.exportDatabase("ssss");
 }

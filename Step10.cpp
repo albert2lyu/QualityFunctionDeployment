@@ -38,7 +38,11 @@ void Step10::on_pushButton_3_clicked()
 {
    comboBox_activated(ui->comboBox->currentText());
 }
-
+void Step10::on_pushButton_5_clicked()
+{
+    Initialize_DB initialize_DB;
+    initialize_DB.exportDatabase("ssss");
+}
 
 
 

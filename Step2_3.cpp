@@ -20,7 +20,6 @@ Step2_3::Step2_3(QWidget *parent) :
     qDebug()<<"Step2_3::ui";
     ui->setupUi(this);
     Sqlite sqlite = * new Sqlite();
-    sqlite.connect();
     vector<Entity_Step1> returnlist = sqlite.queryStep1Data();
     if( returnlist.size()!=0)
     {
