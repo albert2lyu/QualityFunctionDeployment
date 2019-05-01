@@ -191,6 +191,13 @@ border-color: rgb(0, 0, 0);border:1px;</string>
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="helpButton">
+            <property name="text">
+             <string>帮助</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>

@@ -16,6 +16,7 @@
 #include "Step8Data.h"
 #include "Step9Data.h"
 #include "Step10Data.h"
+#include"Step6Help.h"
 namespace Ui {
 class Step6;
 }
@@ -33,7 +34,7 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
     void comboBox_activated(const QString &arg1);
-
+ void on_helpButton_clicked();
 private:
     Ui::Step6 *ui;
     Step6_1 *Step6_1_Page;//创建窗口页面指针
