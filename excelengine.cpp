@@ -987,18 +987,29 @@ bool QExcelEngine::Step10QueryData(QTableWidget *tableWidget)
     {
         tableWidget->removeColumn(0);
     }
-    tableWidget->setColumnCount(2); //设置列数
+    tableWidget->setColumnCount(3); //设置列数
     QStringList header;
-    header<<"lower"<<"upper";
+    header<<"质量参数名称"<<"lower"<<"upper";
     tableWidget->setHorizontalHeaderLabels(header);
-
+   vector<Entity_Step5> returnlist = sqlite.queryStep5Data();
+//    if( returnlist.size()!=0)
+//    {
+//        QStringList HStrList;
+//        for(int i=0;i<returnlist.size();i++)
+//        {
+//            QString valueIndexName = returnlist[i].qualityParameterName;
+//            HStrList.push_back(valueIndexName);
+//        }
+//         tableWidget->setVerticalHeaderLabels(HStrList); //设置行标签
+//    }
     for(int i =0;i<returnList10Row;i++)
     {
-
+        QString valueIndexName = returnlist[i].qualityParameterName;
         double retuC =returnList10[2*i+1].outputValue;
         double retuD =returnList10[2*i].outputValue;
-        tableWidget->setItem(i,0,new QTableWidgetItem(QString::number(retuC,'d',3)));
-        tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(retuD,'d',3)));
+        tableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
+        tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(retuC,'d',3)));
+        tableWidget->setItem(i,2,new QTableWidgetItem(QString::number(retuD,'d',3)));
     }
     return true;
 }

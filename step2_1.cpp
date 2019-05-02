@@ -6,6 +6,13 @@
 #include <QDebug>
 #include <QComboBox>
 #include <QFileDialog>
+#include "sqlite.h"
+#include "entity_step1.h"
+#include "matlabfunction.h"
+#include "matBasic.h"
+#include <QLibrary>
+#include "matlabfunction.h"
+#include<QVBoxLayout>
 
 Step2_1::Step2_1(QWidget *parent) :
     QWidget(parent),
@@ -13,7 +20,10 @@ Step2_1::Step2_1(QWidget *parent) :
 {
         ui->setupUi(this);
         qDebug()<<"Step2_1:ui";
-        int RowNum=5;
+        Sqlite sqlite;
+        sqlite.connect();
+        vector<Entity_Step1>returnList = sqlite.queryStep1Data();
+        int RowNum=returnList.size();
         int ColumnNum=2;
         //设置列标签
         QStringList HStrList;
@@ -24,6 +34,7 @@ Step2_1::Step2_1(QWidget *parent) :
         ui->qTableWidget->setColumnCount(HlableCnt);
         //设置列标签
         ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
+
         setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setWindowTitle("QTableWidget");
         ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
@@ -31,6 +42,15 @@ Step2_1::Step2_1(QWidget *parent) :
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
         ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
         ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
+
+//        if( returnlist.size()!=0)
+//        {
+//            QStringList HStrList;
+//            for(int i=0;i<returnlist.size();i++)
+//            {
+//                QString valueIndexName = returnlist[i].valueIndexName;
+//                HStrList.push_back(valueIndexName);
+//            }
       //  setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
         for(int rows=0;rows<RowNum;rows++)
@@ -70,6 +90,13 @@ Step2_1::Step2_1(QWidget *parent) :
         }
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
+
+        for(int i=0;i<returnList.size();i++)
+        {
+            QString  valueIndexName = returnList[i].valueIndexName;
+            ui->qTableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
+        }
+
 
         qDebug()<<"Step2_1:ui::close";
     }

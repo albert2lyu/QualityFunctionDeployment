@@ -81,22 +81,22 @@ Step8_1::Step8_1(QWidget *parent) :
         //ui->qTableWidget->resizeColumnsToContents();
         //ui->qTableWidget->resizeRowsToContents();
 
-        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        qDebug()<<"单元格内容："<<strText;//输出单元格内容
+//        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
+//        qDebug()<<"单元格内容："<<strText;//输出单元格内容
 
-        //设置列标签
-        QStringList HStrList;
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
-        //HStrList.push_back(QString("other"));
-        //设置行列数(只有列存在的前提下，才可以设置列标签)
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
-        //设置列标签
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
+//        //设置列标签
+//        QStringList HStrList;
+//        HStrList.push_back(QString(" "));
+//        HStrList.push_back(QString(" "));
+//        HStrList.push_back(QString(" "));
+//        HStrList.push_back(QString(" "));
+//        //HStrList.push_back(QString("other"));
+//        //设置行列数(只有列存在的前提下，才可以设置列标签)
+//        int HlableCnt = HStrList.count();
+//        ui->qTableWidget->setRowCount(RowNum);//
+//        ui->qTableWidget->setColumnCount(HlableCnt);
+//        //设置列标签
+//        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
        //把QTableWidgetItem对象内容转换为QString
         //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();

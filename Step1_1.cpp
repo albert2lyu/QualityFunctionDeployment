@@ -13,11 +13,11 @@ Step1_1::Step1_1(QWidget *parent) :
 {
         ui->setupUi(this);
         qDebug()<<"Step1_1:ui";
-        int RowNum=6;
+        int RowNum=1;
         int ColumnNum=4;
         setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
-        ui->qTableWidget->setRowCount(RowNum);//设置行数
+        ui->qTableWidget->setRowCount(0);//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
         QStringList m_Header;
         m_Header<<QString("价值期望名称")<<QString("价值期望符号")<<QString("符号")<<QString("期望值");
@@ -30,41 +30,41 @@ Step1_1::Step1_1(QWidget *parent) :
         ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
        // setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
-        for(int rows=0;rows<RowNum;rows++)
-        {
-            for(int columns=0;columns<ColumnNum;columns++)
-            {
-                if(columns==0)
-                {
-                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-                }
-                else if(columns==1)
-                {
-                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-                }
-                else if(columns==2)
-                {
-                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-                }
-                else
-                {
-                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-                }
-            }
-        }
-        for(int rows=0;rows<RowNum;rows++)
-        {
-            for(int columns=0;columns<ColumnNum;columns++)
-            {
-                ui->qTableWidget->setColumnWidth(columns,306/ColumnNum);//hangkuan
-            ui->qTableWidget->setRowHeight(rows,227/RowNum);//列宽
-                //ui->qTableWidget->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
-                ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
-                ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
-                ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
-                ui->qTableWidget->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
-            }
-        }
+//        for(int rows=0;rows<RowNum;rows++)
+//        {
+//            for(int columns=0;columns<ColumnNum;columns++)
+//            {
+//                if(columns==0)
+//                {
+//                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+//                }
+//                else if(columns==1)
+//                {
+//                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+//                }
+//                else if(columns==2)
+//                {
+//                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+//                }
+//                else
+//                {
+//                    ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+//                }
+//            }
+//        }
+//        for(int rows=0;rows<RowNum;rows++)
+//        {
+//            for(int columns=0;columns<ColumnNum;columns++)
+//            {
+//                ui->qTableWidget->setColumnWidth(columns,306/ColumnNum);//hangkuan
+//            ui->qTableWidget->setRowHeight(rows,227/RowNum);//列宽
+//                //ui->qTableWidget->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
+//                ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
+//                ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
+//                ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
+//                ui->qTableWidget->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
+//            }
+//        }
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
         //设置列标签
@@ -74,7 +74,7 @@ Step1_1::Step1_1(QWidget *parent) :
         HStrList.push_back(QString("期望值"));
         HStrList.push_back(QString("利益相关者"));
         int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
+        ui->qTableWidget->setRowCount(0);//
         ui->qTableWidget->setColumnCount(HlableCnt);
         //设置列标签
         ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
@@ -129,6 +129,7 @@ void Step1_1::on_pushButton_2_clicked()
 void Step1_1::on_pushButton_3_clicked()
 {
     qDebug()<<"on_pushButton_3_clicked";
+      ui->qTableWidget->clear();
     QExcelEngine excelEngine=*new QExcelEngine();
 
     QString filename="0";// = QFileDialog::getSaveFileName(this, tr("Save as..."), "../datafile", tr("EXCEL files (*.xls *.xlsx);;HTML-Files (*.txt);;"));

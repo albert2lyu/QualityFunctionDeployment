@@ -25,7 +25,7 @@ Step7_1::Step7_1(QWidget *parent) :
     int ColumnNum=tableColumn*2;
     QStringList HStrList;
     QStringList VStrList;
-    int RowNum= (int)returnList6[(returnList6.size()-1)].row.toInt()+1;
+    //int RowNum= (int)returnList6[(returnList6.size()-1)].row.toInt()+1;
 
 //    for (int i=0;i<RowNum;i++) {
 
@@ -43,12 +43,12 @@ Step7_1::Step7_1(QWidget *parent) :
 
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
     ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
-    ui->qTableWidget->setRowCount(RowNum);//设置行数
+    ui->qTableWidget->setRowCount(0);//设置行数
     ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
-    ui->qTableWidget->setVerticalHeaderLabels(VStrList);
+    //ui->qTableWidget->setVerticalHeaderLabels(VStrList);
     ui->qTableWidget->setWindowTitle("QTableWidget");
 
-    ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
+    ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
     //ui->qTableWidget->horizontalHeader()->setVisible(false); //隐藏行表头
     ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
     //ui->tableWidget->setShowGrid(false);//隐藏栅格
@@ -59,41 +59,41 @@ Step7_1::Step7_1(QWidget *parent) :
     ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
    // setStyleSheet(QString::fromUtf8("border:1px solid black"));
 
-    for(int rows=0;rows<RowNum;rows++)
-    {
-        for(int columns=0;columns<ColumnNum;columns++)
-        {
-            if(columns==0)
-            {
-                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-            }
-            else if(columns==1)
-            {
-                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-            }
-            else if(columns==2)
-            {
-                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-            }
-            else
-            {
-                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
-            }
-        }
-    }
-    for(int rows=0;rows<RowNum;rows++)
-    {
-        for(int columns=0;columns<ColumnNum;columns++)
-        {
-            ui->qTableWidget->setColumnWidth(columns,306/ColumnNum);//hangkuan
-            ui->qTableWidget->setRowHeight(rows,227/RowNum);//列宽
-            //ui->qTableWidget->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
-            ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
-            ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
-            ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
-            ui->qTableWidget->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
-        }
-    }
+//    for(int rows=0;rows<RowNum;rows++)
+//    {
+//        for(int columns=0;columns<ColumnNum;columns++)
+//        {
+//            if(columns==0)
+//            {
+//                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+//            }
+//            else if(columns==1)
+//            {
+//                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+//            }
+//            else if(columns==2)
+//            {
+//                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+//            }
+//            else
+//            {
+//                ui->qTableWidget->setItem(rows,columns,new QTableWidgetItem(""));
+//            }
+//        }
+//    }
+//    for(int rows=0;rows<RowNum;rows++)
+//    {
+//        for(int columns=0;columns<ColumnNum;columns++)
+//        {
+//            ui->qTableWidget->setColumnWidth(columns,306/ColumnNum);//hangkuan
+//            ui->qTableWidget->setRowHeight(rows,227/RowNum);//列宽
+//            //ui->qTableWidget->horizontalHeader()->setResizeMode(QHeaderView::Strtch);  //使行列头自适应宽度，所有列平均分来填充空白部分
+//            ui->qTableWidget->item(rows,columns)->setTextAlignment(Qt::AlignCenter);//居中显示
+//            ui->qTableWidget->item(rows,columns)->setBackgroundColor(QColor(255,255,255));//设置前景颜色
+//            ui->qTableWidget->item(rows,columns)->setTextColor(QColor(0,0,0));//设置文本颜色
+//            ui->qTableWidget->item(rows,columns)->setFont(QFont("Helvetica"));//设置字体为黑体
+//        }
+//    }
     //ui->qTableWidget->setSpan(2, 2,2 ,1);//合并单元格
     //ui->qTableWidget->setItem(2, 2, new QTableWidgetItem(QIcon("E:\\Qt_Project\\QTableWidget\\1.jpg"), "路飞"));//插入图片
     ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
@@ -102,7 +102,7 @@ Step7_1::Step7_1(QWidget *parent) :
     //ui->qTableWidget->resizeColumnsToContents();
     //ui->qTableWidget->resizeRowsToContents();
 
-    QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
+    //QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
 
 }
 Step7_1::~Step7_1()

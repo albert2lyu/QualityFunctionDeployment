@@ -7,23 +7,28 @@
 #include <QComboBox>
 #include <QFileDialog>
 #include "matlabfunction.h"
+#include "sqlite.h"
+#include<QVBoxLayout>
 Step10_1::Step10_1(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Step10_1)
 {
     ui->setupUi(this);
 
-    int RowNum=2;
-    int ColumnNum=5;
+    Sqlite sqlite;
+    sqlite.connect();
+    vector<Entity_Step4_2>returnList42 = sqlite.queryStep4_2Data();
+    int ColumnNum =3;
+    int RowNum=returnList42.size();
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
        ui->qTableWidget->setRowCount(RowNum);//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
         QStringList m_Header;
-        m_Header<<QString("价值期望名称")<<QString("期望值");
-        ui->qTableWidget->setVerticalHeaderLabels(m_Header);//添加横向表头
+        m_Header<<QString("质量参数名称")<<QString("取值下界")<<QString("取值上界");
+        ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
         ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
-       ui->qTableWidget->horizontalHeader()->setVisible(false);//横向表头可视化
+       ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
         ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);//设置表格选择方式：设置表格为整行选中
         ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//选择目标方式
         ui->qTableWidget->setStyleSheet("selection-background-color:grey");//设置选中颜色：粉色
@@ -65,20 +70,7 @@ Step10_1::Step10_1(QWidget *parent) :
         }
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
-        QStringList HStrList;
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
-        HStrList.push_back(QString(" "));
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
-        //具体单元格中添加ComboBox控件，下拉列表
-        QComboBox *comBox = new QComboBox();
-        comBox->addItem("");
-        comBox->addItem("");
 
     }
 
@@ -211,6 +203,26 @@ void Step10_1::on_pushButton_5_clicked()
     matlabFunction.matStep10(ui->qTableWidget);
 
   excelEngine.Close();
+
+   //ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
+  Sqlite sqlite;
+  sqlite.connect();
+  vector<Entity_Step10>returnList = sqlite.queryStep10Data();
+            int tableColumn =returnList.size();
+            vector<Entity_Step4_2>returnList42 = sqlite.queryStep4_2Data();
+            int RowNum42 = returnList42.size();
+
+            for(int i =0;i<returnList.size()/2;i++)
+            {
+                QString  valueIndexName = returnList42[i].chooseQualityParameterName;
+                ui->qTableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
+                double vExpectation = returnList[i].outputValue;
+                ui->qTableWidget->setItem(i,1,new QTableWidgetItem(QString::number(vExpectation,'d',3)));
+                double retuC =returnList[i+returnList.size()/2].outputValue;
+                ui->qTableWidget->setItem(i,2,new QTableWidgetItem(QString::number(retuC,'d',3)));
+            }
+
+
 
     QMessageBox::information(this, "excel提示", "保存成功");
 

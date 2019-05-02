@@ -36,7 +36,7 @@ Step6_1::Step6_1(QWidget *parent) :
         HStrList.push_back(qualityParameterName);
     }
     int HlableCnt = HStrList.count();
-    ui->qTableWidget->setRowCount(RowNum);//
+    ui->qTableWidget->setRowCount(0);//
     ui->qTableWidget->setColumnCount(HlableCnt);
     ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 }
@@ -92,14 +92,16 @@ void Step6_1::on_pushButton_3_clicked()
 //将文件数据导入表格
 void Step6_1::on_pushButton_4_clicked()
 {
+    qDebug()<<"on_pushButton_4_clicked";
     QMessageBox::StandardButton rb = QMessageBox::information(this, "warning", "从excel文件中导入数据将会覆盖之前所有内容，\n确定导入吗？",
-                                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                             QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
     if(rb == QMessageBox::Yes)
     {
-        QExcelEngine excelEngine=*new QExcelEngine();
+        //从Excel中将表格导入到TableWidget
+       QExcelEngine excelEngine=*new QExcelEngine();
 
-        QString m_fileName = QFileDialog::getOpenFileName(this, tr("select file"), "../datafile/", tr("*.xls *.xlsx"));
+       QString m_fileName = QFileDialog::getOpenFileName(this, tr("select file"), "../datafile/", tr("*.xls *.xlsx"));
         if(m_fileName.isEmpty())
             return;
 
@@ -111,8 +113,9 @@ void Step6_1::on_pushButton_4_clicked()
         }
         excelEngine.ReadDataToTable(ui->qTableWidget);
         excelEngine.Close();
-        QMessageBox::information(this, "excel提示", "导入成功");
-    }
+   QMessageBox::information(this, "excel提示", "导入成功");
+}
+
 
 }
 

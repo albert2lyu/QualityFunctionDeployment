@@ -185,6 +185,7 @@ bool Initialize_DB::exportDatabase(QString xxx)
     QAxObject* newSheet17 = pSheets->querySubObject("Add()");
     QAxObject* newSheet18 = pSheets->querySubObject("Add()");
      QAxObject* newSheet19 = pSheets->querySubObject("Add()");
+ //    QAxObject* newSheet20 = pSheets->querySubObject("Add()");
         ////////////////////
         /// \brief pSheet
         /// ///
@@ -447,38 +448,38 @@ bool Initialize_DB::exportDatabase(QString xxx)
                cell3->setProperty("Value", returnlist93[i].expectedRank);
          }
           qDebug()<<"queryStep9_3Data over";
-         ///////////
-         /// \brief sheet18
-         ///
-         QAxObject *sheet18 = pSheets->querySubObject("Item(int)", 18);
-         sheet18->setProperty("Name", "step9_4");
-         vector<Entity_Step9_4> returnlist94= sqlite.queryStep9_4Data();
-         for(int i=0;i<(int)returnlist94.size();i++)
-         {
-               QAxObject *cell = sheet18->querySubObject("Cells(int,int)",  i+1,1 );
-               cell->setProperty("Value", returnlist94[i].valueExpectationRow);
-               QAxObject *cell2 = sheet18->querySubObject("Cells(int,int)", i+1, 2);
-               cell2->setProperty("Value", returnlist94[i].valueExpectationRank);
-               QAxObject *cell3 = sheet18->querySubObject("Cells(int,int)", i+1, 3);
-               cell3->setProperty("Value", returnlist94[i].criticality);
-         }
-         qDebug()<<"queryStep9_4Data over";
-         ////////////////
-         /// \brief sheet19
-         ///
-         QAxObject *sheet19 = pSheets->querySubObject("Item(int)", 19);
-         sheet19->setProperty("Name", "step10");
-         vector<Entity_Step10> returnlist10= sqlite.queryStep10Data();
-         for(int i=0;i<(int)returnlist10.size();i++)
-         {
-               QAxObject *cell = sheet19->querySubObject("Cells(int,int)",  i+1,1 );
-               cell->setProperty("Value", returnlist10[i].QualityParameterName);
-               QAxObject *cell2 = sheet19->querySubObject("Cells(int,int)", i+1, 2);
-               cell2->setProperty("Value", returnlist10[i].upLow);
-               QAxObject *cell3 = sheet19->querySubObject("Cells(int,int)", i+1, 3);
-               cell3->setProperty("Value", returnlist10[i].outputValue);
-         }
-         qDebug()<<"queryStep10Data over";
+//         ///////////
+//         /// \brief sheet18
+//         ///
+//         QAxObject *sheet18 = pSheets->querySubObject("Item(int)", 18);
+//         sheet18->setProperty("Name", "step9_4");
+//         vector<Entity_Step9_4> returnlist94= sqlite.queryStep9_4Data();
+//         for(int i=0;i<(int)returnlist94.size();i++)
+//         {
+//               QAxObject *cell = sheet18->querySubObject("Cells(int,int)",  i+1,1 );
+//               cell->setProperty("Value", returnlist94[i].valueExpectationRow);
+//               QAxObject *cell2 = sheet18->querySubObject("Cells(int,int)", i+1, 2);
+//               cell2->setProperty("Value", returnlist94[i].valueExpectationRank);
+//               QAxObject *cell3 = sheet18->querySubObject("Cells(int,int)", i+1, 3);
+//               cell3->setProperty("Value", returnlist94[i].criticality);
+//         }
+//         qDebug()<<"queryStep9_4Data over";
+//         ////////////////
+//         /// \brief sheet19
+//         ///
+//         QAxObject *sheet19 = pSheets->querySubObject("Item(int)", 19);
+//         sheet19->setProperty("Name", "step10");
+//         vector<Entity_Step10> returnlist10= sqlite.queryStep10Data();
+//         for(int i=0;i<(int)returnlist10.size();i++)
+//         {
+//               QAxObject *cell = sheet19->querySubObject("Cells(int,int)",  i+1,1 );
+//               cell->setProperty("Value", returnlist10[i].QualityParameterName);
+//               QAxObject *cell2 = sheet19->querySubObject("Cells(int,int)", i+1, 2);
+//               cell2->setProperty("Value", returnlist10[i].upLow);
+//               QAxObject *cell3 = sheet19->querySubObject("Cells(int,int)", i+1, 3);
+//               cell3->setProperty("Value", returnlist10[i].outputValue);
+//         }
+//         qDebug()<<"queryStep10Data over";
 
     pWorkBook->dynamicCall("SaveAs(const QString&)",QDir::toNativeSeparators(fileName));//保存至filepath，注意一定要用QDir::toNativeSeparators将路径中的"/"转换为"\"，不然一定保存不了。
     pWorkBook->dynamicCall("Close()");//关闭工作簿

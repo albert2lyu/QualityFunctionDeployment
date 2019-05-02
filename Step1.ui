@@ -102,14 +102,14 @@ border-color: rgb(0, 0, 0);border:1px;</string>
           <item>
            <widget class="QPushButton" name="pushButton_4">
             <property name="text">
-             <string>加载数据库</string>
+             <string>选择数据库</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_5">
             <property name="text">
-             <string>初始化数据库</string>
+             <string>新建数据库</string>
             </property>
            </widget>
           </item>

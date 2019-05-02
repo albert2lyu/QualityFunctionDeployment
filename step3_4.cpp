@@ -4,6 +4,7 @@
 #include <QString>
 #include "excelengine.h"
 #include "matlabfunction.h"
+#include <QFileDialog>
 
 Step3_4::Step3_4(QWidget *parent) :
     QWidget(parent),
@@ -29,7 +30,7 @@ Step3_4::Step3_4(QWidget *parent) :
         qDebug()<<"Step3_2::vExpectation"<<vExpectation;
         HStrList.push_back(vExpectation);
     }
-    ui->qTableWidget->setRowCount(RowNum);
+    ui->qTableWidget->setRowCount(0);
     ui->qTableWidget->setColumnCount(tableColumn);
     ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
     ui->qTableWidget->setWindowTitle("QTableWidget");
@@ -72,6 +73,28 @@ void Step3_4::on_pushButton_3_clicked()
 }
 void Step3_4::on_pushButton_4_clicked()
 {
+    QMessageBox::StandardButton rb = QMessageBox::information(this, "warning", "从excel文件中导入数据将会覆盖之前所有内容，\n确定导入吗？",
+                             QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+
+    if(rb == QMessageBox::Yes)
+    {
+        //从Excel中将表格导入到TableWidget
+       QExcelEngine excelEngine=*new QExcelEngine();
+
+       QString m_fileName = QFileDialog::getOpenFileName(this, tr("select file"), "../datafile/", tr("*.xls *.xlsx"));
+        if(m_fileName.isEmpty())
+            return;
+
+        bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
+        if(b == false)
+        {
+            QMessageBox::information(this, "excel提示", "文件打开失败");
+            return;
+        }
+        excelEngine.ReadDataToTable(ui->qTableWidget);
+        excelEngine.Close();
+   QMessageBox::information(this, "excel提示", "导入成功");
+}
 
 }
 void Step3_4::on_pushButton_5_clicked()

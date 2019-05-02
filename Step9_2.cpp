@@ -31,7 +31,7 @@ Step9_2::Step9_2(QWidget *parent) :
         HStrList.push_back(vExpectation);
     }
     ui->qTableWidget->setColumnCount((tableColumn+1));//设置列数
-    ui->qTableWidget->setRowCount(RowNum);//设置行数
+    ui->qTableWidget->setRowCount(0);//设置行数
     ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
     ui->qTableWidget->setWindowTitle("QTableWidget");

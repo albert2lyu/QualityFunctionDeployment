@@ -29,7 +29,7 @@ Step9_4::Step9_4(QWidget *parent) :
         qDebug()<<"Step9_2::vExpectation"<<vExpectation;
         HStrList.push_back(vExpectation);
     }
-    ui->qTableWidget->setRowCount(RowNum);
+    ui->qTableWidget->setRowCount(0);
     ui->qTableWidget->setColumnCount(tableColumn);
     ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
     ui->qTableWidget->setWindowTitle("QTableWidget");

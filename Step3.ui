@@ -172,14 +172,14 @@ border-color: rgb(0, 0, 0);border:1px;</string>
           <item>
            <widget class="QPushButton" name="pushButton_2">
             <property name="text">
-             <string>期望位次</string>
+             <string>竞争性矩阵</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_4">
             <property name="text">
-             <string>竞争性矩阵</string>
+             <string>期望位次</string>
             </property>
            </widget>
           </item>

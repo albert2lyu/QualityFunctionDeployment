@@ -31,7 +31,7 @@ Step9_3::Step9_3(QWidget *parent) :
         QString vExpectation = returnList[i].QualityParameters;
         HStrList.push_back(vExpectation);
     }
-    ui->qTableWidget->setRowCount(RowNum);
+    ui->qTableWidget->setRowCount(0);
     ui->qTableWidget->setColumnCount(tableColumn);
     ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
     ui->qTableWidget->setWindowTitle("QTableWidget");
