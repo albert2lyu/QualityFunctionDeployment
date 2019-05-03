@@ -84,3 +84,11 @@ void Step6::comboBox_activated(const QString &arg1)
     }
 
 }
+void Step6::on_helpButton_clicked(){
+    Step6Help *dialog=new Step6Help();
+    dialog->setWindowTitle(tr("帮助"));
+      dialog->setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
+    dialog->exec();
+
+    //dialog->show();
+}

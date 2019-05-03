@@ -92,7 +92,8 @@ SOURCES += \
     entity_step9_2.cpp \
     entity_step9_3.cpp \
     entity_step9_4.cpp \
-    initialize_db.cpp
+    initialize_db.cpp \
+    Step6Help.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -164,7 +165,8 @@ HEADERS += \
     entity_step9_2.h \
     entity_step9_3.h \
     entity_step9_4.h \
-    initialize_db.h
+    initialize_db.h \
+    Step6Help.h
 
 FORMS += \
     mainwindow.ui \
@@ -208,7 +210,8 @@ FORMS += \
     Step3_3.ui \
     Step2_3.ui \
     step3_4.ui \
-    step9_4.ui
+    step9_4.ui \
+    Step6Help.ui
 
 
 
