@@ -59,3 +59,5 @@ MainWindow::MainWindow(QWidget *parent) :
         //QWidget::resizeEvent(event);
 //  mainWidget->resize(frameGeometry().size());
     }
+
+

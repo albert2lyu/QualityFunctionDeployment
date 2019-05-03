@@ -1031,22 +1031,22 @@ bool MatlabFunction::mlfStep9(QTableWidget *tableWidget)
 
     }
 }
-typedef bool (*Pcom_matStep67810Initialize)(void);
+typedef bool (*Pcom_matQFDInitialize)(void);
 typedef void (*Pcom_mlfStep10)(int, mxArray** , mxArray* , mxArray* , mxArray* , mxArray*, mxArray* , mxArray* , mxArray* , mxArray* , mxArray*, mxArray*);
 bool MatlabFunction::matStep10(QTableWidget *tableWidget)
 {
     qDebug()<<"MatlabFunction::matStep10";
-    QLibrary mylib("matStep67810.DLL");
+    QLibrary mylib("matQFD.DLL");
     if(mylib.load())
     {
         qDebug()<<"MatlabFunction::matStep10";
     }
-    Pcom_matStep67810Initialize pcom_matStep67810Initialize =
-           (Pcom_matStep67810Initialize)mylib.resolve("matStep67810Initialize");
-    if(pcom_matStep67810Initialize)
+    Pcom_matQFDInitialize pcom_matQFDInitialize =
+           (Pcom_matQFDInitialize)mylib.resolve("matQFDInitialize");
+    if(pcom_matQFDInitialize)
     {
-        pcom_matStep67810Initialize();
-        qDebug()<<"MatlabFunction::pcom_matStep67810Initialize";
+        pcom_matQFDInitialize();
+        qDebug()<<"MatlabFunction::pcom_matQFDInitialize";
     }
     Sqlite sqlite ;
 /*
@@ -1155,7 +1155,7 @@ step52：一行，若干列，列数与离散型的质量参数数目相同
 
                    if (returnList5[i].dataType == "离散型")
                     {
-                       Matrix52[0][number52] =i;
+                       Matrix52[0][number52] =i+1;
                        number52=number52+1;
                     }
 
@@ -1174,6 +1174,9 @@ step52：一行，若干列，列数与离散型的质量参数数目相同
                         Matrix52_col_flag++;
                     }
                 }
+                 for(int i =0;i<1*number;i++)
+                 {  qDebug()<<"di52ge::"<<Matrix52_OVER[i];
+                 }
                 // Matrix52_OVER ==>  step52
                 vector<Entity_Step6_2> returnList62 = sqlite.queryStep6_2Data();
                 if(returnList62.size()!=0)
@@ -1376,12 +1379,21 @@ step52：一行，若干列，列数与离散型的质量参数数目相同
                             rowFlag=0;
                         }
                     }
+                    double resultover[returnList5Row][2];
+                    for(int i=0;i<returnList5Row;i++)
+                    {
+                        resultover[i][0]=qMin(result[i][0],result[i][1]);
+                        resultover[i][1]=qMax(result[i][0],result[i][1]);
+                    }
+                    Sqlite sqlite;
+                    sqlite.connect();
+                    vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
                     for(int i =0;i<returnList5Row;i++)
                     {
                         for(int j=0;j<2;j++)
                         {
-                             sqlite.saveStep10Table(QString::number(i),QString::number(j),result[i][j]);
-                             qDebug()<<"result::"<<result[i][j];
+                             sqlite.saveStep10Table(QString::number(i),QString::number(j),resultover[i][j],returnList5[i].Unit);
+                             qDebug()<<"result::"<<resultover[i][j];
                         }
                     }
 
@@ -1396,7 +1408,6 @@ step52：一行，若干列，列数与离散型的质量参数数目相同
 }
 return true;
 }
-
 
 
 

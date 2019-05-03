@@ -45,7 +45,7 @@ public:
     bool saveStep3_4Table(QString valueExpectationRow,QString valueExpectationRank,QString criticality);
     bool saveStep4_1Table(QString qualityParameterName);//所有质量参数
     bool saveStep4_2Table(QString chooseQualityParameterName);//选中的质量参数
-    bool saveStep5Table(QString chooseQualityParameterName,QString dataType,double  upperBoundValue,double  lowerBoundValue);
+    bool saveStep5Table(QString chooseQualityParameterName,QString dataType,double  upperBoundValue,double  lowerBoundValue,QString Unit);
     bool saveStep6_1Table(QString row,QString qualityParameterName,double value);
     bool saveStep6_2Table(QString qualityParameterNameRow,QString qualityParameterNameRank,QString valueQualityType,double BValue);
     bool saveStep6_3Table(QString row,QString rank,double  autocorrelationResult);
@@ -56,7 +56,7 @@ public:
     bool saveStep9_2Table(QString valueExpectationRow,QString valueExpectationRank,QString competitiveEvaluation);
     bool saveStep9_3Table(QString valueExpectationRow,QString valueExpectationRank,QString expectedRank);
     bool saveStep9_4Table(QString valueExpectationRow,QString valueExpectationRank,QString criticality);
-    bool saveStep10Table(QString QualityParameterName,QString upLow,double outputValue);
+    bool saveStep10Table(QString QualityParameterName,QString upLow,double outputValue,QString Unit);
 
     vector<Entity_Step1>  queryStep1Data();
     vector<Entity_Step2>  queryStep2Data();

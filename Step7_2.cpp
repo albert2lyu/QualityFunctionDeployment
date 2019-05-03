@@ -107,7 +107,7 @@ for(int i=0;i<ColumnNum*RowNum*2;i++)
         tmp->addItem("正相关");
         tmp->addItem("负相关");
         tmp->addItem("无关");
-        tmp->setCurrentIndex(6) ;
+        tmp->setCurrentIndex(4) ;
         Combox.append(tmp);}
     else if(i%2==1)
     {

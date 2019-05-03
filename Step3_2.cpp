@@ -16,7 +16,7 @@ Step3_2::Step3_2(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
+    ui->qTableWidget->verticalHeader()->setVisible(false);//纵向表头可视化
     ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
     Sqlite sqlite;
     sqlite.connect();
@@ -31,8 +31,9 @@ Step3_2::Step3_2(QWidget *parent) :
         qDebug()<<"Step3_2::vExpectation"<<vExpectation;
         HStrList.push_back(vExpectation);
     }
-    ui->qTableWidget->setColumnCount((tableColumn+1));//设置列数
     ui->qTableWidget->setRowCount(0);//设置行数
+    ui->qTableWidget->setColumnCount((tableColumn+1));//设置列数
+
     ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
     ui->qTableWidget->setWindowTitle("QTableWidget");
@@ -40,8 +41,10 @@ Step3_2::Step3_2(QWidget *parent) :
     ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);
     ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->qTableWidget->setStyleSheet("selection-background-color:grey");
-    ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//    ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//    ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
+    ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
 }
 
 

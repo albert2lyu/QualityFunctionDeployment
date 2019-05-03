@@ -263,18 +263,19 @@ bool Sqlite::saveStep4_2Table(QString chooseQualityParameterName)
         return false;
     }
 }
-bool Sqlite::saveStep5Table(QString qualityParameterName, QString dataType, double upperBoundValue, double lowerBoundValue)
+bool Sqlite::saveStep5Table(QString qualityParameterName, QString dataType,  double lowerBoundValue,double upperBoundValue,QString Unit)
 {
 
     qDebug()<<"Sqlite::saveStep5Table";
-    if(qualityParameterName != nullptr && dataType != nullptr && upperBoundValue != 0 && lowerBoundValue != 0 )
+    if(qualityParameterName != nullptr && dataType != nullptr &&Unit != nullptr )
     {
             QSqlQuery query;
-            query.prepare("INSERT INTO Step5_1 (qualityParameterName,dataType,upperBoundValue,lowerBoundValue) VALUES (:qualityParameterName,:dataType,:upperBoundValue,:lowerBoundValue)");
+            query.prepare("INSERT INTO Step5_1 (qualityParameterName,dataType,lowerBoundValue,upperBoundValue,Unit) VALUES (:qualityParameterName,:dataType,:lowerBoundValue,:upperBoundValue,:Unit)");
             query.bindValue(":qualityParameterName", qualityParameterName.trimmed());
             query.bindValue(":dataType", dataType.trimmed());
-            query.bindValue(":upperBoundValue", upperBoundValue);
             query.bindValue(":lowerBoundValue", lowerBoundValue);
+            query.bindValue(":upperBoundValue", upperBoundValue);
+            query.bindValue(":Unit", Unit.trimmed());
             if(!query.exec())
             {
                 return false;
@@ -519,17 +520,18 @@ bool Sqlite::saveStep9_4Table(QString valueExpectationRow, QString valueExpectat
         return false;
     }
 }
-bool Sqlite::saveStep10Table(QString QualityParameterName,QString upLow, double outputValue)
+bool Sqlite::saveStep10Table(QString QualityParameterName,QString upLow, double outputValue,QString Unit)
 {
     qDebug()<<"Sqlite::saveStep10Table";
     //CREATE TABLE `Step10` ( `QualityParameterName` varchar(255),`upLow` varchar(255) `outputValue` double )
-    if(QualityParameterName != nullptr && upLow != nullptr )
+    if(QualityParameterName != nullptr && upLow != nullptr  && Unit != nullptr )
     {//&& outputValue != 0
             QSqlQuery query;
-            query.prepare("INSERT INTO Step10 (QualityParameterName,upLow,outputValue) VALUES (:QualityParameterName,:upLow,:outputValue)");
+            query.prepare("INSERT INTO Step10 (QualityParameterName,upLow,outputValue,Unit) VALUES (:QualityParameterName,:upLow,:outputValue,:Unit)");
             query.bindValue(":QualityParameterName", QualityParameterName.trimmed());
             query.bindValue(":upLow", upLow.trimmed());
             query.bindValue(":outputValue", outputValue);
+            query.bindValue(":Unit", Unit.trimmed());
             if(!query.exec())
             {
                 return false;
@@ -664,8 +666,9 @@ vector<Entity_Step5> Sqlite::queryStep5Data()
         Entity_Step5 entity_Step5;
         entity_Step5.qualityParameterName = query.value(0).toString();
         entity_Step5.dataType = query.value(1).toString();
-        entity_Step5.upperBoundValue = query.value(2).toString().toDouble();
-        entity_Step5.lowerBoundValue = query.value(3).toString().toDouble();
+        entity_Step5.lowerBoundValue = query.value(2).toString().toDouble();
+        entity_Step5.upperBoundValue = query.value(3).toString().toDouble();
+        entity_Step5.Unit = query.value(4).toString();
         returnList.push_back(entity_Step5);
     }
     return returnList;
@@ -854,6 +857,7 @@ vector<Entity_Step10> Sqlite::queryStep10Data()
         entity_Step10.QualityParameterName = query.value(0).toString();
         entity_Step10.upLow  = query.value(1).toString();
         entity_Step10.outputValue = query.value(2).toDouble();
+        entity_Step10.Unit = query.value(3).toString();
         returnList.push_back(entity_Step10);
     }
     return returnList;

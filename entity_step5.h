@@ -10,8 +10,11 @@ public:
     //CREATE TABLE "Step5_1" ( `qualityParameterName` varchar ( 255 ), `dataType` varchar ( 255 ), `upperBoundValue` double, `lowerBoundValue` double )
     QString qualityParameterName;
     QString dataType;
-    double  upperBoundValue;
     double  lowerBoundValue;
+    double  upperBoundValue;
+    QString Unit;
+
+
 };
 
 #endif // ENTITY_STEP5_H

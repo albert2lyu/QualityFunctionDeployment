@@ -57,6 +57,8 @@ public:
     bool Step9_3SaveData(QTableWidget *tableWidget);
     bool Step9_4SaveData(QTableWidget *tableWidget);
     bool Step10QueryData(QTableWidget *tableWidget);
+    bool Step4QueryData(QTableWidget *tableWidget);
+    bool Step5QueryData(QTableWidget *tableWidget);
 
 private:
     QAxObject *pExcel;

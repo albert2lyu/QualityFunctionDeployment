@@ -74,30 +74,30 @@ Step9Data::Step9Data(QWidget *parent) :
         //ui->qTableWidget->resizeColumnsToContents();
         //ui->qTableWidget->resizeRowsToContents();
 
-        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        qDebug()<<"单元格内容："<<strText;//输出单元格内容
+//        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
+//        qDebug()<<"单元格内容："<<strText;//输出单元格内容
 
-        //设置列标签
-        QStringList HStrList;
-        HStrList.push_back(QString("指标序号"));
-        HStrList.push_back(QString("价值指标"));
-        HStrList.push_back(QString("关系符号"));
-        HStrList.push_back(QString("期望值"));
-        //HStrList.push_back(QString("other"));
-        //设置行列数(只有列存在的前提下，才可以设置列标签)
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
-        //设置列标签
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
+//        //设置列标签
+//        QStringList HStrList;
+//        HStrList.push_back(QString("指标序号"));
+//        HStrList.push_back(QString("价值指标"));
+//        HStrList.push_back(QString("关系符号"));
+//        HStrList.push_back(QString("期望值"));
+//        //HStrList.push_back(QString("other"));
+//        //设置行列数(只有列存在的前提下，才可以设置列标签)
+//        int HlableCnt = HStrList.count();
+//        ui->qTableWidget->setRowCount(RowNum);//
+//        ui->qTableWidget->setColumnCount(HlableCnt);
+//        //设置列标签
+//        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
-       //把QTableWidgetItem对象内容转换为QString
-        //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
+//       //把QTableWidgetItem对象内容转换为QString
+//        //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
 
-        //具体单元格中添加ComboBox控件，下拉列表
-        QComboBox *comBox = new QComboBox();
-        comBox->addItem("");
-        comBox->addItem("");
+//        //具体单元格中添加ComboBox控件，下拉列表
+//        QComboBox *comBox = new QComboBox();
+//        comBox->addItem("");
+//        comBox->addItem("");
         //ui->qTableWidget->setCellWidget(0,3,comBox);
 
         //ui->qTableWidget->removeColumn(0);//删除列

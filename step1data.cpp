@@ -18,7 +18,7 @@ Step1Data::Step1Data(QWidget *parent) :
     HStrList.push_back(QString("价值期望名称"));
     HStrList.push_back(QString("操作符"));
     HStrList.push_back(QString("期望值"));
-    HStrList.push_back(QString("利益相关者"));
+    HStrList.push_back(QString("单位"));
     int HlableCnt = HStrList.count();
     ui->qTableWidget->setRowCount(RowNum);//
     ui->qTableWidget->setColumnCount(HlableCnt);

@@ -61,17 +61,17 @@ Step3Data::Step3Data(QWidget *parent) :
         ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
         ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
         QStringList HStrList;
-        HStrList.push_back(QString("指标序号"));
-        HStrList.push_back(QString("价值指标"));
-        HStrList.push_back(QString("关系符号"));
-        HStrList.push_back(QString("期望值"));
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
-        QComboBox *comBox = new QComboBox();
-        comBox->addItem("");
-        comBox->addItem("");
+//        HStrList.push_back(QString("指标序号"));
+//        HStrList.push_back(QString("价值指标"));
+//        HStrList.push_back(QString("关系符号"));
+//        HStrList.push_back(QString("期望值"));
+//        int HlableCnt = HStrList.count();
+//        ui->qTableWidget->setRowCount(RowNum);//
+//        ui->qTableWidget->setColumnCount(HlableCnt);
+//        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
+//        QComboBox *comBox = new QComboBox();
+//        comBox->addItem("");
+//        comBox->addItem("");
         qDebug()<<"Step3Data:: on_pushButton_clicked";
         QExcelEngine excelEngine=*new QExcelEngine();
         excelEngine.Step2QueryData1(ui->qTableWidget);

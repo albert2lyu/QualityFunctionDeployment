@@ -9,7 +9,7 @@ public:
     QString valueIndexName;//价值期望名称
     QString valueOperator;//操作符
     QString expectations;//期望值
-    QString stakeholders;//利益相关者
+    QString stakeholders;//单位
 };
 
 #endif // ENTITY_STEP1_H

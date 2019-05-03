@@ -9,6 +9,7 @@ public:
     QString QualityParameterName;//全局质量参数
     QString upLow;//全局质量参数
     double   outputValue;
+    QString Unit;//danwei
 };
 
 #endif // ENTITY_STEP10_H

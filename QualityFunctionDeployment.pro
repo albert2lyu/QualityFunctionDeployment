@@ -38,7 +38,6 @@ SOURCES += \
     Step9.cpp \
     Step10.cpp \
     Step1_1.cpp \
-    Step1_2.cpp \
     Step3_2.cpp \
     Step3_1.cpp \
     Step2_2.cpp \
@@ -93,7 +92,8 @@ SOURCES += \
     entity_step9_3.cpp \
     entity_step9_4.cpp \
     initialize_db.cpp \
-    Step6Help.cpp
+    Step6Help.cpp \
+    Step1_2.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -108,7 +108,6 @@ HEADERS += \
     Step9.h \
     Step10.h \
     Step1_1.h \
-    Step1_2.h \
     Step3_2.h \
     Step3_1.h \
     qnavigationwidget.h \
@@ -166,7 +165,9 @@ HEADERS += \
     entity_step9_3.h \
     entity_step9_4.h \
     initialize_db.h \
-    Step6Help.h
+    Step6Help.h \
+    Step1_2.h \
+    include/matQFD.h
 
 FORMS += \
     mainwindow.ui \
@@ -181,7 +182,6 @@ FORMS += \
     Step9.ui \
     Step10.ui \
     Step1_1.ui \
-    Step1_2.ui \
     Step3_2.ui \
     Step3_1.ui \
     Step2_1.ui \
@@ -211,7 +211,8 @@ FORMS += \
     Step2_3.ui \
     step3_4.ui \
     step9_4.ui \
-    Step6Help.ui
+    Step6Help.ui \
+    Step1_2.ui
 
 
 
@@ -264,3 +265,8 @@ DEPENDPATH += $$PWD/include
 
 RESOURCES += \
     qfd.qrc
+
+win32: LIBS += -L$$PWD/include/ -lmatQFD
+
+INCLUDEPATH += $$PWD/include
+DEPENDPATH += $$PWD/include

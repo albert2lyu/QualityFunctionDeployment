@@ -18,14 +18,14 @@ Step10_1::Step10_1(QWidget *parent) :
     Sqlite sqlite;
     sqlite.connect();
     vector<Entity_Step4_2>returnList42 = sqlite.queryStep4_2Data();
-    int ColumnNum =3;
+    int ColumnNum =4;
     int RowNum=returnList42.size();
     setWindowTitle(tr("TableWidget"));//设置对话框的标题
         ui->qTableWidget->setColumnCount(ColumnNum);//设置列数
        ui->qTableWidget->setRowCount(RowNum);//设置行数
         ui->qTableWidget->setWindowTitle("QTableWidget");
         QStringList m_Header;
-        m_Header<<QString("质量参数名称")<<QString("取值下界")<<QString("取值上界");
+        m_Header<<QString("质量参数名称")<<QString("取值下界")<<QString("取值上界")<<QString("质量参数单位");
         ui->qTableWidget->setHorizontalHeaderLabels(m_Header);//添加横向表头
         ui->qTableWidget->verticalHeader()->setVisible(true);//纵向表头可视化
        ui->qTableWidget->horizontalHeader()->setVisible(true);//横向表头可视化
@@ -208,18 +208,21 @@ void Step10_1::on_pushButton_5_clicked()
   Sqlite sqlite;
   sqlite.connect();
   vector<Entity_Step10>returnList = sqlite.queryStep10Data();
+  vector<Entity_Step5>returnList5 = sqlite.queryStep5Data();
             int tableColumn =returnList.size();
-            vector<Entity_Step4_2>returnList42 = sqlite.queryStep4_2Data();
+  vector<Entity_Step4_2>returnList42 = sqlite.queryStep4_2Data();
             int RowNum42 = returnList42.size();
 
             for(int i =0;i<returnList.size()/2;i++)
             {
                 QString  valueIndexName = returnList42[i].chooseQualityParameterName;
                 ui->qTableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
-                double vExpectation = returnList[i].outputValue;
+                double vExpectation = returnList[2*i].outputValue;
                 ui->qTableWidget->setItem(i,1,new QTableWidgetItem(QString::number(vExpectation,'d',3)));
-                double retuC =returnList[i+returnList.size()/2].outputValue;
+                double retuC =returnList[2*i+1].outputValue;
                 ui->qTableWidget->setItem(i,2,new QTableWidgetItem(QString::number(retuC,'d',3)));
+                QString  Unitsum = returnList5[i].Unit;
+                ui->qTableWidget->setItem(i,3,new QTableWidgetItem(Unitsum));
             }
 
 

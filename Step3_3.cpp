@@ -26,7 +26,7 @@ Step3_3::Step3_3(QWidget *parent) :
     int tableColumn = returnList.size()+1;
     int RowNum = 1;
     QStringList  HStrList;
-    HStrList<<"利益相关者";
+    HStrList<<"名称";
     for(int i =0;i<returnList.size();i++)
     {
         QString vExpectation = returnList[i].valueExpectation;
@@ -40,10 +40,9 @@ Step3_3::Step3_3(QWidget *parent) :
     ui->qTableWidget->setSelectionBehavior(QAbstractItemView::SelectColumns);
     ui->qTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->qTableWidget->setStyleSheet("selection-background-color:grey");
-    ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->qTableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置水平滚动条
+    ui->qTableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);//设置垂直滚动条
+
 
 }
 

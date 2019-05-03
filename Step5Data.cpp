@@ -74,36 +74,41 @@ Step5Data::Step5Data(QWidget *parent) :
         //ui->qTableWidget->resizeColumnsToContents();
         //ui->qTableWidget->resizeRowsToContents();
 
-        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
-        qDebug()<<"单元格内容："<<strText;//输出单元格内容
+//        QString strText = ui->qTableWidget->item(1, 1)->text();//获取单元格的内容
+//        qDebug()<<"单元格内容："<<strText;//输出单元格内容
 
         //设置列标签
-        QStringList HStrList;
-        HStrList.push_back(QString("指标序号"));
-        HStrList.push_back(QString("价值指标"));
-        HStrList.push_back(QString("关系符号"));
-        HStrList.push_back(QString("期望值"));
-        //HStrList.push_back(QString("other"));
-        //设置行列数(只有列存在的前提下，才可以设置列标签)
-        int HlableCnt = HStrList.count();
-        ui->qTableWidget->setRowCount(RowNum);//
-        ui->qTableWidget->setColumnCount(HlableCnt);
-        //设置列标签
-        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
+//        QStringList HStrList;
+//        HStrList.push_back(QString("指标序号"));
+//        HStrList.push_back(QString("价值指标"));
+//        HStrList.push_back(QString("关系符号"));
+//        HStrList.push_back(QString("期望值"));
+//        //HStrList.push_back(QString("other"));
+//        //设置行列数(只有列存在的前提下，才可以设置列标签)
+//        int HlableCnt = HStrList.count();
+//        ui->qTableWidget->setRowCount(RowNum);//
+//        ui->qTableWidget->setColumnCount(HlableCnt);
+//        //设置列标签
+//        ui->qTableWidget->setHorizontalHeaderLabels(HStrList);
 
-       //把QTableWidgetItem对象内容转换为QString
-        //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
+//       //把QTableWidgetItem对象内容转换为QString
+//        //QString str =ui->qTableWidget->item(0,0)->data(Qt::DisplayRole).toString();
 
-        //具体单元格中添加ComboBox控件，下拉列表
-        QComboBox *comBox = new QComboBox();
-        comBox->addItem("");
-        comBox->addItem("");
+//        //具体单元格中添加ComboBox控件，下拉列表
+//        QComboBox *comBox = new QComboBox();
+//        comBox->addItem("");
+//        comBox->addItem("");
         //ui->qTableWidget->setCellWidget(0,3,comBox);
 
         //ui->qTableWidget->removeColumn(0);//删除列
         //ui->qTableWidget->removeRow(0);//删除行
         //ui->qTableWidget->clear();//清空掉表格内所有内容，包括标题头
         //ui->qTableWidget->clearContents();//这个清空所有内容不包括标题头
+        qDebug()<<"Step5Data:: on_pushButton_clicked";
+         ////从数据库中读取数据
+         QExcelEngine excelEngine=*new QExcelEngine();
+         excelEngine.Step5QueryData(ui->qTableWidget);
+         excelEngine.Close();
 }
 
 Step5Data::~Step5Data()
@@ -115,15 +120,9 @@ void Step5Data::on_pushButton_clicked(){
 
 
         //从Excel中将表格导入到TableWidget
-       QExcelEngine excelEngine=*new QExcelEngine();
-         QString m_fileName =  QDir::tempPath() + QDir::separator() +QCoreApplication::applicationName() + "Step5_1_temp" + "xls";
-        bool b = excelEngine.Open(m_fileName, 1, false); //flase为不显示窗体
-        if(b == false)
-        {
-            QMessageBox::information(this, "excel提示", "文件打开失败");
-            return;
-        }
-        excelEngine.ReadDataToTable(ui->qTableWidget);
-        excelEngine.Close();
-
+   qDebug()<<"Step5Data:: on_pushButton_clicked";
+    ////从数据库中读取数据
+    QExcelEngine excelEngine=*new QExcelEngine();
+    excelEngine.Step5QueryData(ui->qTableWidget);
+    excelEngine.Close();
 }

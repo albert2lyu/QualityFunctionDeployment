@@ -401,7 +401,7 @@ bool QExcelEngine::Step1QueryData(QTableWidget *tableWidget)
     }
     tableWidget->setColumnCount(4); //设置列数
     QStringList header;
-    header<<"价值期望名称"<<"操作符"<<"期望值"<<"利益相关者";
+    header<<"价值期望名称"<<"操作符"<<"期望值"<<"单位";
     tableWidget->setHorizontalHeaderLabels(header);
 
     for(int i =0;i<returnList.size();i++)
@@ -548,6 +548,60 @@ bool QExcelEngine::Step2QueryData1(QTableWidget *tableWidget)
         tableWidget->setItem(i,0,new QTableWidgetItem(returnList[i].valueExpectation));
         double retuC =returnList[i].relativeImportanceRating.toDouble();
         tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(retuC,'d',3)));
+    }
+    return true;
+}
+bool QExcelEngine::Step4QueryData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step4QueryData";
+    Sqlite sqlite;
+    vector<Entity_Step4_2>returnList = sqlite.queryStep4_2Data();
+    //先把table的内容清空
+    int tableColumn = tableWidget->columnCount();
+    tableWidget->clear();
+    for (int n=0; n<tableColumn; n++)
+    {
+        tableWidget->removeColumn(0);
+    }
+    tableWidget->setColumnCount(1); //设置列数
+    QStringList header;
+    header<<"质量参数名称";
+    tableWidget->setHorizontalHeaderLabels(header);
+    for(int i =0;i<returnList.size();i++)
+    {    QString  valueIndexName = returnList[i].chooseQualityParameterName;
+        tableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
+
+    }
+    return true;
+}
+bool QExcelEngine::Step5QueryData(QTableWidget *tableWidget)
+{
+    qDebug()<<"QExcelEngine::Step5QueryData";
+    Sqlite sqlite;
+    vector<Entity_Step5>returnList = sqlite.queryStep5Data();
+    //先把table的内容清空
+    int tableColumn = tableWidget->columnCount();
+    tableWidget->clear();
+    for (int n=0; n<tableColumn; n++)
+    {
+        tableWidget->removeColumn(0);
+    }
+    tableWidget->setColumnCount(5); //设置列数
+    QStringList header;
+    header<<"质量参数名称"<<"数据类型"<<"取值下界"<<"取值上界"<<"质量参数单位";
+    tableWidget->setHorizontalHeaderLabels(header);
+    for(int i =0;i<returnList.size();i++)
+    {    QString  valueIndexName1 = returnList[i].qualityParameterName;
+        tableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName1));
+        QString  valueIndexName2 = returnList[i].dataType;
+        tableWidget->setItem(i,1,new QTableWidgetItem(valueIndexName2));
+      double  valueIndexName3 = returnList[i].lowerBoundValue;
+      tableWidget->setItem(i,2,new QTableWidgetItem(QString::number(valueIndexName3,'d',3)));
+       double  valueIndexName4 = returnList[i].upperBoundValue;
+      tableWidget->setItem(i,3,new QTableWidgetItem(QString::number(valueIndexName4,'d',3)));
+      QString  valueIndexName5 = returnList[i].Unit;
+      tableWidget->setItem(i,4,new QTableWidgetItem(valueIndexName5));
+
     }
     return true;
 }
@@ -712,30 +766,69 @@ bool QExcelEngine::Step5SaveData(QTableWidget *tableWidget)
     int row = tableWidget->rowCount();
     Sqlite sqlite;
     sqlite.deleteStep5Data();
-    /*
-    QString qualityParameterName;
-    QString dataType;
-    double  upperBoundValue;
-    double  lowerBoundValue;
-    */
-
-    for(int i=0;i<row;i++)
+ for(int i=0;i<row;i++)
     {
-        QWidget *widget = tableWidget->cellWidget(i,1);
-        QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
-        qDebug()<<rad.count();
         QString qualityParameterName = tableWidget->item(i,0)->data(Qt::DisplayRole).toString();
-        QString dataType =  rad.at(0)->currentText();
-        double  upperBoundValue = tableWidget->item(i,2)->data(Qt::DisplayRole).toString().toDouble();
-        double  lowerBoundValue = tableWidget->item(i,3)->data(Qt::DisplayRole).toString().toDouble();
-        if(qualityParameterName != nullptr && dataType != nullptr)
-        {
-            sqlite.saveStep5Table(qualityParameterName,dataType,upperBoundValue,lowerBoundValue);
+        QString Unit=tableWidget->item(i,2)->data(Qt::DisplayRole).toString();
+         qDebug()<<"QExcelEngine::Step5SaveData::{}"<<qualityParameterName;
+        QString w;
+         QString ww;
+          QString www;
+           w=tableWidget->item(i,1)->data(Qt::DisplayRole).toString();
+                 if (w.left(1) == "(")
+             qDebug()<<w.remove(0, 1);
+                 if (w.right(1) == ")")
+                     qDebug()<<w.remove(w.length() - 1, 1);
+                 if (w.left(1) == "{")
+             qDebug()<<w.remove(0, 1);
+                 if (w.right(1) == "}")
+                     qDebug()<<w.remove(w.length() - 1, 1);
+          ww= w.section(',', 0, 0);
+          www=w.section(',', -1,-1);
+
+//          qDebug()<<"QExcelEngine::ww"<<ww;
+//          qDebug()<<"QExcelEngine::www"<<www;
+
+         if (w[0]=="{")
+      {  QString dataType = "离散型";
+             double  lowerBoundValue = ww.toDouble();
+             double   upperBoundValue= www.toDouble();
+             if(qualityParameterName != nullptr && dataType != nullptr)
+             {
+                 sqlite.saveStep5Table(qualityParameterName,dataType,lowerBoundValue,upperBoundValue,Unit);
+             }
         }
+        else {
+             QString dataType = "连续型";
+             double  lowerBoundValue = ww.toDouble();
+             double   upperBoundValue= www.toDouble();
+             if(qualityParameterName != nullptr && dataType != nullptr)
+             {
+                 sqlite.saveStep5Table(qualityParameterName,dataType,lowerBoundValue,upperBoundValue,Unit);
+             }
+        }
+
+
     }
     return true;
-
 }
+//for(int i=0;i<row;i++)
+//{
+//    QWidget *widget = tableWidget->cellWidget(i,1);
+//    QList<QComboBox *> rad = widget->findChildren<QComboBox *>();
+//    qDebug()<<rad.count();
+//    QString qualityParameterName = tableWidget->item(i,0)->data(Qt::DisplayRole).toString();
+//    QString dataType =  rad.at(0)->currentText();
+//    double  upperBoundValue = tableWidget->item(i,2)->data(Qt::DisplayRole).toString().toDouble();
+//    double  lowerBoundValue = tableWidget->item(i,3)->data(Qt::DisplayRole).toString().toDouble();
+//    if(qualityParameterName != nullptr && dataType != nullptr)
+//    {
+//        sqlite.saveStep5Table(qualityParameterName,dataType,upperBoundValue,lowerBoundValue);
+//    }
+//}
+//return true;
+
+//}
 bool QExcelEngine::Step6_1SaveData(QTableWidget *tableWidget)
 {
     qDebug()<<"QExcelEngine::Step6_1SaveData";
@@ -987,9 +1080,9 @@ bool QExcelEngine::Step10QueryData(QTableWidget *tableWidget)
     {
         tableWidget->removeColumn(0);
     }
-    tableWidget->setColumnCount(3); //设置列数
+    tableWidget->setColumnCount(4); //设置列数
     QStringList header;
-    header<<"质量参数名称"<<"lower"<<"upper";
+    header<<"质量参数名称"<<"取值下界"<<"取值上界"<<"质量参数单位";
     tableWidget->setHorizontalHeaderLabels(header);
    vector<Entity_Step5> returnlist = sqlite.queryStep5Data();
 //    if( returnlist.size()!=0)
@@ -1005,11 +1098,13 @@ bool QExcelEngine::Step10QueryData(QTableWidget *tableWidget)
     for(int i =0;i<returnList10Row;i++)
     {
         QString valueIndexName = returnlist[i].qualityParameterName;
-        double retuC =returnList10[2*i+1].outputValue;
-        double retuD =returnList10[2*i].outputValue;
+        QString unitsum = returnlist[i].Unit;
+        double retuC =returnList10[2*i].outputValue;
+        double retuD =returnList10[2*i+1].outputValue;
         tableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
         tableWidget->setItem(i,1,new QTableWidgetItem(QString::number(retuC,'d',3)));
         tableWidget->setItem(i,2,new QTableWidgetItem(QString::number(retuD,'d',3)));
+        tableWidget->setItem(i,3,new QTableWidgetItem(unitsum));
     }
     return true;
 }

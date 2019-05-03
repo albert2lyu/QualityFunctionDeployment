@@ -18,6 +18,7 @@ public:
     ~Step4Data();
 private slots:
     void on_pushButton_clicked();
+
 private:
     Ui::Step4Data *ui;
 };

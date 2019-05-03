@@ -102,7 +102,7 @@ border-color: rgb(0, 0, 0);border:1px;</string>
           <item>
            <widget class="QPushButton" name="pushButton_4">
             <property name="text">
-             <string>选择数据库</string>
+             <string>打开数据库</string>
             </property>
            </widget>
           </item>

@@ -1,4 +1,4 @@
-#include "Step5_1.h"
+#include "step5_1.h"
 #include "ui_Step5_1.h"
 //#include "excelengine.h"
 #include <QTableWidget>
@@ -33,9 +33,11 @@ Step5_1::Step5_1(QWidget *parent) :
         //设置列标签
         QStringList HStrList;
         HStrList.push_back(QString("质量参数名称"));
-        HStrList.push_back(QString("数据类型"));
-        HStrList.push_back(QString("取值上界"));
-        HStrList.push_back(QString("取值下界"));
+         HStrList.push_back(QString("取值范围"));
+         HStrList.push_back(QString("质量参数单位"));
+//        HStrList.push_back(QString("数据类型"));
+//        HStrList.push_back(QString("取值下界"));
+//        HStrList.push_back(QString("取值上界"));
         int HlableCnt = HStrList.count();
         ui->qTableWidget->setRowCount(RowNum);//
         ui->qTableWidget->setColumnCount(HlableCnt);
@@ -45,40 +47,40 @@ Step5_1::Step5_1(QWidget *parent) :
             QString  valueIndexName = returnList[i].chooseQualityParameterName;
             ui->qTableWidget->setItem(i,0,new QTableWidgetItem(valueIndexName));
         }
-        QVector<QComboBox*> Combox;
-        for(int i=0;i<RowNum;i++)
-        {
-                QComboBox *tmp= new QComboBox();
-                tmp->addItem("离散型");
-                tmp->addItem("连续型");
-                Combox.append(tmp);
-        }
-        QVector<QWidget*> ThreeCombox;
-        int ss=0;
-        for(int i=0;i<RowNum;i++)
-        {
-            QWidget *widget1 = new QWidget();
-            widget1->setObjectName(QString::fromUtf8("widget1"));
-            widget1->setGeometry(QRect(10, 8, 101, 31));
-            QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
-            verticalLayout->setSpacing(0);
-            verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-            verticalLayout->setContentsMargins(0, 0, 0, 0);
+//        QVector<QComboBox*> Combox;
+//        for(int i=0;i<RowNum;i++)
+//        {
+//                QComboBox *tmp= new QComboBox();
+//                tmp->addItem("离散型");
+//                tmp->addItem("连续型");
+//                Combox.append(tmp);
+//        }
+//        QVector<QWidget*> ThreeCombox;
+//        int ss=0;
+//        for(int i=0;i<RowNum;i++)
+//        {
+//            QWidget *widget1 = new QWidget();
+//            widget1->setObjectName(QString::fromUtf8("widget1"));
+//            widget1->setGeometry(QRect(10, 8, 101, 31));
+//            QVBoxLayout  *verticalLayout = new QVBoxLayout(widget1) ;
+//            verticalLayout->setSpacing(0);
+//            verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+//            verticalLayout->setContentsMargins(0, 0, 0, 0);
            
-                verticalLayout->addWidget(Combox.at(ss));ss++;
+//                verticalLayout->addWidget(Combox.at(ss));ss++;
             
-            ThreeCombox.append(widget1);
-        }
-        ss=0;
+//            ThreeCombox.append(widget1);
+//        }
+//        ss=0;
 
-        int x=0;
-        for (int i=0;i<RowNum;i++) {
+//        int x=0;
+//        for (int i=0;i<RowNum;i++) {
 
-                ui->qTableWidget->setCellWidget(i,1,ThreeCombox.at(x));
-                x++;
+//                ui->qTableWidget->setCellWidget(i,1,ThreeCombox.at(x));
+//                x++;
 
-        }
-        x=0;
+//        }
+//        x=0;
 
     }
 

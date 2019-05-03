@@ -117,7 +117,10 @@ void Step10Data::on_pushButton_clicked(){
     qDebug()<<"Step10Data:: on_pushButton_clicked";
     QExcelEngine excelEngine=*new QExcelEngine();
     excelEngine.Step10QueryData(ui->qTableWidget);
+
+
     excelEngine.Close();
 
 
 }
+
